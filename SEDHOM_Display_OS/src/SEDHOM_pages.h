@@ -9,8 +9,16 @@ class SEDHOM_Pages
 {
   private:
     //
+    // make object to use icons functions
+    SEDHOM_Icons Icon;
+    // make object to use touch functions
+    SEDHOM_Touch Touch;
   public:
     //
+    void set_pages_mode(Color_t mode)
+    {
+      Icon.Set_Mode(mode);
+    }
 };
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 

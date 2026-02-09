@@ -31,20 +31,22 @@
 class SEDHOM_Display_OS
 {
   private:
+  // SEDHOM_Icons Icon;
+  Color_t OS_Mode;
     // my name is Mustafa SEDHOM i wrote this lib to make easy way to use TFT Display in embedded projects
   public:
-    SEDHOM_SD_Card SD_Card;
-    SEDHOM_Icons Icon;
-    SEDHOM_Touch Touch;
-    SEDHOM_Handlig_Pages Handle_page;
-    SEDHOM_Time Time;
-    SEDHOM_Pages Page;
-    SEDHOM_Windows Window;
-    SEDHOM_Comminucations_UART call;
+    // SEDHOM_SD_Card SD_Card;
+    // SEDHOM_Icons Icon;
+    // SEDHOM_Touch Touch;
+    // SEDHOM_Handlig_Pages Handle_page;
+    // SEDHOM_Time Time;
+    // SEDHOM_Pages Page;
+    // SEDHOM_Windows Window;
+    // SEDHOM_Comminucations_UART call;
     // STACK_DATA_TYPE int // -> defualt
-    Stack<int> Stack;
+    // Stack<int> Stack;
     // Queue_DATA_TYPE int // -> defualt
-    Queue<int> Queue;
+    // Queue<int> Queue;
     /// define all functions
     void Init_Screen(ROTATION_STASTUS_t Rotate,Color_t Mode);
     void Set_Device_Mode(Color_t Mode);
@@ -54,17 +56,101 @@ class SEDHOM_Display_OS
     Color_t Not_Mode();
     void Fill_Screen(Color_t color);
 };
+class SEDHOM_Icon_OS : public SEDHOM_Icons
+{
+private:
+  
+public:
+  SEDHOM_Icon_OS(SEDHOM_Display_OS & OS)
+  {
+    SEDHOM_Icons::Set_Mode(OS.Mode());
+  }
+};
+class SEDHOM_Windows_OS : public SEDHOM_Windows
+{
+private:
+public:
+  SEDHOM_Windows_OS(SEDHOM_Display_OS & OS)
+  {
+   SEDHOM_Windows::set_windows_mode(OS.Mode());
+  }
+
+};
+class SEDHOM_Pages_OS : public SEDHOM_Pages
+{
+private:
+public:
+  SEDHOM_Pages_OS(SEDHOM_Display_OS & OS)
+  {
+    SEDHOM_Pages::set_pages_mode(OS.Mode());
+  }
+};
+class SEDHOM_Communications_OS : public SEDHOM_Comminucations_UART
+{
+private:
+public:
+  SEDHOM_Communications_OS(SEDHOM_Display_OS & OS)
+  {
+
+  }
+};
+class SEDHOM_Time_OS : public SEDHOM_Time
+{
+private:
+public:
+  SEDHOM_Time_OS(SEDHOM_Display_OS & OS)
+  {
+    // Time.set_time_mode(OS.Mode());
+  }
+};
+class SEDHOM_Data_Structure_OS : public Stack<int>, public Queue<int>
+{
+private:
+public:
+  SEDHOM_Data_Structure_OS(SEDHOM_Display_OS & OS)
+  {
+    // Stack.set_stack_mode(OS.Mode());
+    // Queue.set_queue_mode(OS.Mode());
+  }
+};
+class SEDHOM_Touch_OS : public SEDHOM_Touch
+{
+private:
+public:
+  SEDHOM_Touch_OS(SEDHOM_Display_OS & OS)
+  {
+    // Touch.set_touch_mode(OS.Mode());
+  }
+};
+class SEDHOM_SD_Card_OS : public SEDHOM_SD_Card
+{
+private:
+public:
+  SEDHOM_SD_Card_OS(SEDHOM_Display_OS & OS)
+  {
+    // SD_Card.set_sd_card_mode(OS.Mode());
+  }
+};
+class SEDHOM_Handling_Pages_OS : public SEDHOM_Handlig_Pages
+{
+private:
+public:
+  SEDHOM_Handling_Pages_OS(SEDHOM_Display_OS & OS)
+  {
+    // Handle_page.set_handling_pages_mode(OS.Mode());
+  }
+};
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // define all functions
 void SEDHOM_Display_OS::Init_Screen(ROTATION_STASTUS_t Rotate,Color_t Mode)
 {
   init_Screen(Rotate);
-  Icon.Set_Mode(Mode);
-  Window.set_windows_mode(Mode);
+  OS_Mode = Mode;
+  FillScreen(OS_Mode);
 }
 void SEDHOM_Display_OS::Set_Device_Mode(Color_t Mode)
 {
-  Icon.Set_Mode(Mode);
+  OS_Mode = Mode;
 }
 int SEDHOM_Display_OS::Screen_Height()
 {
@@ -76,11 +162,13 @@ int SEDHOM_Display_OS::Screen_Width()
 }
 Color_t SEDHOM_Display_OS::Mode()
 {
-  return Icon.Mode();
+  return OS_Mode;
 }
 Color_t SEDHOM_Display_OS::Not_Mode()
 {
-  return Icon.Not_Mode();
+  if(OS_Mode == BLACK) return WHITE;
+  else return BLACK;
+
 }
 void SEDHOM_Display_OS::Fill_Screen(Color_t color)
 {

@@ -24,7 +24,7 @@
 /////////////////////////////end colors//////////////////////////////
 #define black       BLACK    
 #define navy        NAVY    
-#define darkgary    DARKGREEN   
+#define darkgary    DARKGREY   
 #define darkcyan    DARKCYAN  
 #define maroon      MAROON     
 #define purple      PURPLE    
@@ -44,7 +44,7 @@
 /////////////////////////////end colors//////////////////////////////
 #define Black       BLACK    
 #define Navy        NAVY    
-#define DarkGary    DARKGREEN   
+#define DarkGary    DARKGREY 
 #define DarkCyan    DARKCYAN  
 #define Maroon      MAROON     
 #define Purple      PURPLE    
@@ -64,7 +64,7 @@
 /////////////////////////////end colors//////////////////////////////
 #define Color_Black       BLACK    
 #define Color_Navy        NAVY    
-#define Color_DarkGary    DARKGREEN   
+#define Color_DarkGary    DARKGREY   
 #define Color_DarkCyan    DARKCYAN  
 #define Color_Maroon      MAROON     
 #define Color_Purple      PURPLE    

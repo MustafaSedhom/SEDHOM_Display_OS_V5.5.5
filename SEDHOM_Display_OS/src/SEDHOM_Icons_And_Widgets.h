@@ -38,6 +38,7 @@ class SEDHOM_Icons
         void Equilateral_Triangle_Left(int x, int y, int h,bool fill_or_draw, Color_t color); 
 
         void TEXT(int x,int y,const GFXfont* font,Color_t color,string_t txt);
+        void Text_cpp(int x,int y,const GFXfont* font,Color_t color,String txt);
         void Container(int x,int y,int h,int w,int raduis,Color_t color);
         void fill_rectangle_with_end(int x,int y,int h,int w,int end_volume,Color_t color,Color_t end_color);
         void Draw_Custom_int_shap(int x,int y,int h,int w,int color,int arr[]);
@@ -217,6 +218,10 @@ void SEDHOM_Icons::Equilateral_Triangle_Left(int x, int y, int h,bool fill_or_dr
     else draw_Triangle(x_0, y_0, x_1, y_1, x_2, y_2, color);
 }
 void SEDHOM_Icons::TEXT(int x,int y,const GFXfont* font,Color_t color,string_t txt) 
+{
+    Text(x,y,font,color,txt);
+}
+void SEDHOM_Icons::Text_cpp(int x,int y,const GFXfont* font,Color_t color,String txt) 
 {
     Text(x,y,font,color,txt);
 }
