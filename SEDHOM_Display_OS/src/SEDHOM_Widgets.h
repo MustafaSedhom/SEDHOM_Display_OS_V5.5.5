@@ -1,22 +1,19 @@
-#ifndef SEDHOM_PAGES_H_
-#define SEDHOM_PAGES_H_
+#ifndef SEDHOM_WIDGETS_H_
+#define SEDHOM_WIDGETS_H_
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 #include "SEDHOM_Icons.h"
 #include "SEDHOM_Widgets.h"
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-class SEDHOM_Pages
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+class SEDHOM_Widgets
 {
   private:
-    //
     // make object to use icons functions
     SEDHOM_Icons Icon;
-    // make object to use touch functions
-    SEDHOM_Touch Touch;
   public:
     //
-    void set_pages_mode(Color_t mode)
+    void set_widgets_mode(Color_t mode)
     {
       Icon.Set_Mode(mode);
     }
@@ -24,4 +21,4 @@ class SEDHOM_Pages
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-#endif // !SEDHOM_PAGES_H_
+#endif // !SEDHOM_WIDGETS_H_

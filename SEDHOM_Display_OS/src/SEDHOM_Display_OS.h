@@ -4,7 +4,9 @@
 // include data types file to make easy to change data types
 #include "SEDHOM_Data_Types.h"
 // include icons file to draw icon and widgets
-#include "SEDHOM_Icons_And_Widgets.h"
+#include "SEDHOM_Icons.h"
+// include widgets file to draw widgets
+#include "SEDHOM_Widgets.h"
 // include touch file
 #include "SEDHOM_Display_Touch.h"
 // include SD Lib
@@ -35,26 +37,20 @@ class SEDHOM_Display_OS
   Color_t OS_Mode;
     // my name is Mustafa SEDHOM i wrote this lib to make easy way to use TFT Display in embedded projects
   public:
-    // SEDHOM_SD_Card SD_Card;
-    // SEDHOM_Icons Icon;
-    // SEDHOM_Touch Touch;
-    // SEDHOM_Handlig_Pages Handle_page;
-    // SEDHOM_Time Time;
-    // SEDHOM_Pages Page;
-    // SEDHOM_Windows Window;
-    // SEDHOM_Comminucations_UART call;
-    // STACK_DATA_TYPE int // -> defualt
-    // Stack<int> Stack;
-    // Queue_DATA_TYPE int // -> defualt
-    // Queue<int> Queue;
     /// define all functions
-    void Init_Screen(ROTATION_STASTUS_t Rotate,Color_t Mode);
-    void Set_Device_Mode(Color_t Mode);
+    void Init_Screen(ROTATION_STASTUS_t Rotate,Color_t Mode = Night_Mode);
+    void Set_Device_Mode(Color_t Mode = Night_Mode);
     int Screen_Height();
     int Screen_Width();
     Color_t Mode();
     Color_t Not_Mode();
     void Fill_Screen(Color_t color);
+    Color_t Night_mode = Night_Mode ;
+    Color_t Light_mode = Light_Mode ;
+    ROTATION_STASTUS_t Rotate_0 = Rotate_0_Degree;
+    ROTATION_STASTUS_t Rotate_90 = Rotate_90_Degree;
+    ROTATION_STASTUS_t Rotate_180 = Rotate_180_Degree;
+    ROTATION_STASTUS_t Rotate_270 = Rotate_270_Degree;
 };
 class SEDHOM_Icon_OS : public SEDHOM_Icons
 {
@@ -138,6 +134,15 @@ public:
   SEDHOM_Handling_Pages_OS(SEDHOM_Display_OS & OS)
   {
     // Handle_page.set_handling_pages_mode(OS.Mode());
+  }
+};
+class SEDHOM_Widgets_OS : public SEDHOM_Widgets
+{
+private:
+public:
+  SEDHOM_Widgets_OS(SEDHOM_Display_OS & OS)
+  {
+    SEDHOM_Widgets::set_widgets_mode(OS.Mode());
   }
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

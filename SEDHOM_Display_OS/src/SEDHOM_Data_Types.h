@@ -26,7 +26,6 @@
 #define on               ON
 #define off              OFF
 #define byte_t         uint8_t
-#define Color_t        uint16_t
 #define string_t       char*
 #define word_t         char*
 #define SEDHOM_Display_OS_t    SEDHOM_Display_OS

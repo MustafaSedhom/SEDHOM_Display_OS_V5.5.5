@@ -1,7 +1,8 @@
 #ifndef SEDHOM_COLORS
 #define SEDHOM_COLORS
 //{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
-// New color definitions.  thanks to Bodmer
+// define data types of colors
+typedef uint16_t Color_t;
 #define BLACK       0x0000      /*   0,   0,   0 */
 #define NAVY        0x000F      /*   0,   0, 128 */
 #define DARKGREEN   0x03E0      /*   0, 128,   0 */

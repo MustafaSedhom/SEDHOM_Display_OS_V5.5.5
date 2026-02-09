@@ -1,7 +1,8 @@
 #ifndef SEDHOM_WINDOWS_H_
 #define SEDHOM_WINDOWS_H_
 //;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-#include "SEDHOM_Icons_And_Widgets.h"
+#include "SEDHOM_Icons.h"
+#include "SEDHOM_Widgets.h"
 #include "SEDHOM_Display_Touch.h"
 //;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -13,70 +14,83 @@ class SEDHOM_Windows
     SEDHOM_Icons Icon;
     // make object to use touch functions
     SEDHOM_Touch Touch;
+    // variables for windows handling
+
     //#########################################################################################################################################
-              // keyboard varbiles
-                // array of capital litters
-                word_t first_line_capital    [10] = { "!","@","#","$","%","^","&","*","(",")" };
-                word_t Second_line_capital   [10] = { "Q","W","E","R","T","Y","U","I","O","P" };
-                word_t third_line_capital    [10] = { "A","S","D","F","G","H","J","K","L", " " };
-                word_t fourth_line_capital   [10] = { " ","Z","X","C","V","B","N","M", " ", " " };
-                // array of small litters
-                word_t first_line_small      [10] = { "0","1","2","3","4","5","6","7","8","9" };
-                word_t Second_line_small     [10] = { "q","w","e","r","t","y","u","i","o","p" };
-                word_t third_line_small      [10] = { "a","s","d","f","g","h","j","k","l", " " };
-                word_t fourth_line_small     [10] = { " ","z","x","c","v","b","n","m", " ", " " };
-                // array of special character
-                word_t Second_line_special   [10] = { "`","~","-","_","=","+","[","]","{","}" };
-                word_t third_line_special    [10] = { "\\","|",":",";","\"","\"",",",".","/"  };
-                word_t fourth_line_speciial  [10] = { " " ," "," ","<",">","?"," "," "," "," "}; 
-                bool caps_or_not = true;
-                bool special_char_or_not = false;
-                Color_t Full_KeyBoard_window_color;
-                // variables for windows handling
-                char full_key_board_text[50] = "";
-                int index_char_in_text = 0;
-                void refresh_full_key_board_text(bool var_or_not = 0,string_t str = "")
-                {
-                  Icon.fill_Rectangle(85,8,50,380,20,Icon.Not_Mode());
-                  Icon.fill_Rectangle(85+3,8+3,50-6,380-6,20,Icon.Mode());
-                  // text input
-                  Icon.TEXT(92,40,FONT_BIG,Full_KeyBoard_window_color,var_or_not ? str : full_key_board_text);
-                }
-      public:
-                String Full_KeyBoard_window_user_input_TXT = "";
-                //drawing window functions 
-                void Full_Key_Board_Window(Color_t color,bool caps_or_not=true,bool special_char_or_not=false);
-                // handling touch functions for windows
-                bool Handling_Touch_Full_Key_Board_Window();
-                /////////////////////////////////////////////////////////////
-    void set_windows_mode(Color_t mode)
-    {
+    // keyboard varbiles
+      // array of capital litters
+      word_t first_line_capital    [10] = { "!","@","#","$","%","^","&","*","(",")" };
+      word_t Second_line_capital   [10] = { "Q","W","E","R","T","Y","U","I","O","P" };
+      word_t third_line_capital    [10] = { "A","S","D","F","G","H","J","K","L", " " };
+      word_t fourth_line_capital   [10] = { " ","Z","X","C","V","B","N","M", " ", " " };
+      // array of small litters
+      word_t first_line_small      [10] = { "0","1","2","3","4","5","6","7","8","9" };
+      word_t Second_line_small     [10] = { "q","w","e","r","t","y","u","i","o","p" };
+      word_t third_line_small      [10] = { "a","s","d","f","g","h","j","k","l", " " };
+      word_t fourth_line_small     [10] = { " ","z","x","c","v","b","n","m", " ", " " };
+      // array of special character
+      word_t Second_line_special   [10] = { "`","~","-","_","=","+","[","]","{","}" };
+      word_t third_line_special    [10] = { "\\","|",":",";","\"","\"",",",".","/"  };
+      word_t fourth_line_speciial  [10] = { " " ," "," ","<",">","?"," "," "," "," "}; 
+      bool caps_or_not = true;
+      bool special_char_or_not = false;
+      Color_t Full_KeyBoard_window_color = GREEN;
+      Color_t Full_KeyBoard_text_feild_color = RED;
+      Color_t Color_Blackground_full_keybard = BLACK;
+      Color_t Color_not_Blackground_full_keybard = White;
+      Color_t Color_char_full_keybard = Cyan;
+      // variables for windows handling
+      char full_key_board_text[50] = "";
+      int index_char_in_text = 0;
+      void refresh_full_key_board_text(bool var_or_not = 0,string_t str = "")
+      {
+        Icon.fill_Rectangle(85,8,50,380,20,Color_not_Blackground_full_keybard);
+        Icon.fill_Rectangle(85+3,8+3,50-6,380-6,20,Color_Blackground_full_keybard);
+        // text input
+        Icon.TEXT(92,40,FONT_BIG,Full_KeyBoard_text_feild_color,var_or_not ? str : full_key_board_text);
+      }
+public:
+      void set_windows_mode(Color_t mode)
+      {
       Icon.Set_Mode(mode);
-    }
+
+      }
+      String Full_KeyBoard_window_user_input_TXT = "";
+      //drawing window functions 
+      void Full_Key_Board_Window(Color_t color,Color_t Background,Color_t char_color = WHITE,Color_t text_feild_color = -1,bool caps_or_not=true,bool special_char_or_not=false);
+      bool Handling_Touch_Full_Key_Board_Window();
+
+      // handling touch functions for windows
+      /////////////////////////////////////////////////////////////
     //#########################################################################################################################################
 
     //#########################################################################################################################################
 };
 //;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 // define all functions for drawing windows
-void SEDHOM_Windows::Full_Key_Board_Window(Color_t color,bool caps_or_not=true,bool special_char_or_not=false)
+void SEDHOM_Windows::Full_Key_Board_Window(Color_t color,Color_t Background,Color_t char_color = WHITE,Color_t text_feild_color = -1,bool caps_or_not=true,bool special_char_or_not=false)
 {
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   // special_char_or_not = true;
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   // settings of window
   #define max_char_in_line      10
-  #define char_color            Icon.Not_Mode()
   #define first_line_special    first_line_capital    
+  if(text_feild_color == -1) text_feild_color = color;
+  if(Background == BLACK) Color_not_Blackground_full_keybard = WHITE;
+  else Color_not_Blackground_full_keybard = BLACK;
+  Color_Blackground_full_keybard = Background;
+  Full_KeyBoard_text_feild_color = text_feild_color;
+  Color_char_full_keybard = char_color;
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   Full_KeyBoard_window_color = color;
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   //Draw back arrow and text feild
-  Icon.Back_Arrow_Icon(20,30,RED,Icon.Not_Mode());
+  Icon.Back_Arrow_Icon(20,30,RED,Color_not_Blackground_full_keybard);
   if(index_char_in_text == 0)
   {
-    Icon.fill_Rectangle(85,8,50,380,20,Icon.Not_Mode());
-    Icon.fill_Rectangle(85+3,8+3,50-6,380-6,20,Icon.Mode());
+    Icon.fill_Rectangle(85,8,50,380,20,Color_not_Blackground_full_keybard);
+    Icon.fill_Rectangle(85+3,8+3,50-6,380-6,20,Background);
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   // draw rectangle of char
@@ -87,7 +101,7 @@ void SEDHOM_Windows::Full_Key_Board_Window(Color_t color,bool caps_or_not=true,b
     if(i==9)break;
     Icon.fill_Rectangle(11+(46*i),162,40,40,5,color); Icon.TEXT(11+(46*i)+10,162+27,FONT_BIG,char_color,special_char_or_not ? third_line_special[i] : (caps_or_not ? third_line_capital[i] : third_line_small[i]));
     Icon.fill_Rectangle(11+(46*i),208,40,40,5,color); Icon.TEXT(11+(46*i)+10,208+27,FONT_BIG,char_color,special_char_or_not ? fourth_line_speciial[i] : (caps_or_not ? fourth_line_capital[i] : fourth_line_small[i]));
-    if(special_char_or_not) { if(i==1||i==2||i==6||i==7) { Icon.fill_Rectangle(11+(46*i),208,40,40,5,Icon.Mode()); } }
+    if(special_char_or_not) { if(i==1||i==2||i==6||i==7) { Icon.fill_Rectangle(11+(46*i),208,40,40,5,Background); } }
   }
   // draw special buttons
       // caps button
@@ -126,13 +140,13 @@ bool SEDHOM_Windows::Handling_Touch_Full_Key_Board_Window()
       if(Touch.onTap(11,208,60,40)||Touch.onTap(11,255,80,40)) // caps lock
       {
         caps_or_not = !caps_or_not;
-        Full_Key_Board_Window(Full_KeyBoard_window_color,caps_or_not,special_char_or_not);
+        Full_Key_Board_Window(Full_KeyBoard_window_color,Color_Blackground_full_keybard,Color_char_full_keybard,Full_KeyBoard_text_feild_color,caps_or_not,special_char_or_not);
 
       }
       if(Touch.onTap(104,255,85,40)) // special char
       {
         special_char_or_not = !special_char_or_not;
-        Full_Key_Board_Window(Full_KeyBoard_window_color,caps_or_not,special_char_or_not);
+        Full_Key_Board_Window(Full_KeyBoard_window_color,Color_Blackground_full_keybard,Color_char_full_keybard,Full_KeyBoard_text_feild_color,caps_or_not,special_char_or_not);
       }
       if(Touch.onTap(195,255,135,40)) // space
       {
