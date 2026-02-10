@@ -1,5 +1,5 @@
-#ifndef SEDHOM_OS_ICONS_AND_WIDGETS_H_
-#define SEDHOM_OS_ICONS_AND_WIDGETS_H_
+#ifndef SEDHOM_OS_ICONS_H_
+#define SEDHOM_OS_ICONS_H_
 //////////////////////////////////////////////////////////////////////////////////////////
 #include "SEDHOM_Display_Settings.h"
 #include "SEDHOM_Data_Types.h"
@@ -88,6 +88,16 @@ class SEDHOM_Icons
         void Block_Icon(int x,int y,bool open_or_closed,Color_t color,Color_t Background);
         void Signal_Icon(int x,int y,SIGNAL_STATUS_t state,Color_t color_on,Color_t color_off,Color_t Background);
         void Bell_Icon(int x,int y,bool mute_or_not,bool filled_or_not,Color_t color,Color_t Background);
+        void Menu_Icon_1(int x,int y,Color_t color ,Color_t Background); // : : :
+        void Menu_Icon_2(int x,int y,Color_t color ,Color_t Background); // ...
+        void Menu_Icon_3(int x,int y,Color_t color ,Color_t Background); // :
+        void Menu_Icon_4(int x,int y,Color_t color ,Color_t Background); // : :
+        void Menu_Icon_5(int x,int y,Color_t color ,Color_t Background); // = 
+        void Moon_Icon(int x,int y,Color_t color,Color_t Background);
+        void Sun_Icon(int x,int y,Color_t color,Color_t Background);
+        void Check_Box_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t checked_fill_color,Color_t Background);
+        void Radio_Button_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t Background);
+       
 
 
 
@@ -906,9 +916,99 @@ void SEDHOM_Icons::Bell_Icon(int x,int y,bool mute_or_not,bool filled_or_not,Col
      draw_Line(x-10,y+8,x+35,y+33,Background);
    }
 }
+void SEDHOM_Icons::Menu_Icon_2(int x,int y,Color_t color ,Color_t Background) // ...
+{
+ for(int i=0;i<3;i++)
+  {
+    fill_Circle(x+(i*10),y,3,color);
+  }
+}
+void SEDHOM_Icons::Menu_Icon_3(int x,int y,Color_t color ,Color_t Background) // :
+{
+ for(int i=0;i<3;i++)
+  {
+    fill_Circle(x,y+(i*10),3,color);
+  }
+}
+void SEDHOM_Icons::Menu_Icon_1(int x,int y,Color_t color ,Color_t Background) // : : :
+{
+  for(int j=0;j<3;j++)
+  {
+    for(int i=0;i<3;i++)
+    {
+     fill_Circle(x+(j*10),y+(i*10),3,color);
+    }
+  }
+}
+void SEDHOM_Icons::Menu_Icon_4(int x,int y,Color_t color ,Color_t Background) // : :
+{
+  for(int j=0;j<2;j++)
+  {
+    for(int i=0;i<2;i++)
+    {
+     fill_Circle(x+(j*20),y+(i*20),3,color);
+    }
+  }
+}
+void SEDHOM_Icons::Menu_Icon_5(int x,int y,Color_t color ,Color_t Background) // =
+{
+  for(int j=0;j<3;j++)
+  {
+    Fill_Rectangle(x,y+(j*10),30,5,5,color);
+  }
+}
+void SEDHOM_Icons::Moon_Icon(int x,int y,Color_t color,Color_t Background)
+{
+   fill_Circle(x, y,20,color);
+   fill_Circle(x+10,y-10,20,Background);
+}
+void SEDHOM_Icons::Sun_Icon(int x,int y,Color_t color,Color_t Background)
+{
+  // master circle
+   fill_Circle(x, y,15,color);
+   // small circles
+   fill_Circle(x-25,y,3,color);
+   fill_Circle(x+25,y,3,color);
+   fill_Circle(x,y-25,3,color);
+   fill_Circle(x,y+25,3,color);
+   fill_Circle(x+20,y+20,3,color);
+   fill_Circle(x-20,y-20,3,color);
+   fill_Circle(x+20,y-20,3,color);
+   fill_Circle(x-20,y+20,3,color);
+}
+void SEDHOM_Icons::Check_Box_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t checked_fill_color,Color_t Background)
+{
+  fill_Rectangle(x,y,40,40,5,border_color);
+  fill_Rectangle(x+3,y+3,40-6,40-6,5,status ? checked_fill_color : Background);
+  if(status)
+  {
+    draw_Line(x+7,y+25,x+15,y+30,check_color);
+    draw_Line(x+7,y+25+1,x+15,y+30+1,check_color);
+    draw_Line(x+7,y+25+2,x+15,y+30+2,check_color);
+    draw_Line(x+7,y+25-1,x+15,y+30-1,check_color);
+    draw_Line(x+7,y+25+3,x+15,y+30+3,Background);
+    draw_Line(x+7,y+25-2,x+15,y+30-2,Background);
+    draw_Line(x+15,y+30,x+30,y+10,check_color);
+    draw_Line(x+15,y+30-1,x+30,y+10-1,check_color);
+    draw_Line(x+15,y+30+1,x+30,y+10+1,check_color);
+    draw_Line(x+15,y+30-2,x+30,y+10-2,check_color);
+    draw_Line(x+15,y+30+2,x+30,y+10+2,check_color);
+    draw_Line(x+15,y+30-3,x+30,y+10-3,check_color);
+    draw_Line(x+15,y+30+3,x+30,y+10+3,Background);
+  }
+}
+
+void SEDHOM_Icons::Radio_Button_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t Background)
+{
+  // border
+   fill_Circle(x,y,15,border_color);
+   fill_Circle(x,y,12,Background);
+   // status
+  if(status) fill_Circle(x,y,5,check_color);
+}
 
 
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 /////////////////////////////////////////////////////////////////////////////
-#endif // !SEDHOM_OS_ICONS_AND_WIDGETS_H_
+#endif // !SEDHOM_OS_ICONS_H_
