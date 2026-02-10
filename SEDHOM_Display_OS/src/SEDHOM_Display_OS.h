@@ -29,6 +29,8 @@
 #include "SEDHOM_Arabic_Font.h"
 // include communications file to use communication protocols in your projects
 #include "SEDHOM_Comminucations.h"
+// #include <QRCodeGFX.h>
+#include <QRCodeGFX.h>
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class SEDHOM_Display_OS
 {
@@ -45,6 +47,7 @@ class SEDHOM_Display_OS
     Color_t Mode();
     Color_t Not_Mode();
     void Fill_Screen(Color_t color);
+    // Display_t * my_Display = &Display; 
     Color_t Night_mode = Night_Mode ;
     Color_t Light_mode = Light_Mode ;
     ROTATION_STASTUS_t Rotate_0 = Rotate_0_Degree;

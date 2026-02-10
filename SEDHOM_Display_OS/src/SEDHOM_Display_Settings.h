@@ -24,7 +24,7 @@
 ///////////////////////////////////////
 #include <TouchScreen.h>
 //////////////////////////////////////
-#include <QRCodeGFX.h>
+// #include <QRCodeGFX.h>
 //////////////////////////////////////
 // SEDHOMs lib
 #include "SEDHOM_Colors.h"
@@ -35,6 +35,8 @@
 // define your object for you Display here but you should name Display Like a do  
 //*************************************************************************************************
 // static UTFTGLUE Display(0,A2,A1,A3,A4,A0); 
+#define Display_t MCUFRIEND_kbv
+#define my_display  Display
 MCUFRIEND_kbv Display;
 #define init_Display_variable()      extern MCUFRIEND_kbv Display;
 // #define LCD_CS A3 // Chip Select goes to Analog 3
@@ -45,7 +47,6 @@ MCUFRIEND_kbv Display;
 // static Adafruit_TFTLCD Display(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 ///////////////////////////////////////////////////
 // for Qrcode lib
-#define init_Qr_code()  extern MCUFRIEND_kbv Display;static QRCodeGFX qrcode(Display);
 //////////////////////////////////////////////////
 // for touch
 #define YP A3  // must be an analog pin, use "An" notation!

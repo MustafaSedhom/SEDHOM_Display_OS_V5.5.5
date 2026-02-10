@@ -47,7 +47,7 @@ class SEDHOM_Icons
         Color_t Blur(int x,int y,int h,int w,int r,int Blur_value,Color_t mode,bool circle_or_rectangle = 1);
         Color_t Color_Blur(int x,int y,int h,int w,int r,Color_t color,Color_t mode,bool circle_or_rectangle = 1);
         // Draw SEDhOM Icons
-        void QRCode_Icon(int x,int y,int size,int version,string_t content,Color_t color,Color_t Background);
+        // void QRCode_Icon(int x,int y,int size,int version,string_t content,Color_t color,Color_t Background);
         void WIFI_Icon(int x,int y,WIFI_STATUS_t state,Color_t color_on,Color_t color_off,Color_t Background);
         void Battary_Icon(int x,int y,int range,Color_t color,Color_t txt_color,Color_t Background,bool low_charge_red_color);
         void Home_Icon(int x,int y,Color_t color,Color_t Background);
@@ -97,8 +97,7 @@ class SEDHOM_Icons
         void Sun_Icon(int x,int y,Color_t color,Color_t Background);
         void Check_Box_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t checked_fill_color,Color_t Background);
         void Radio_Button_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t Background);
-       
-
+        void Text_Feild_Icon(int x,int y,int lenght,int max_char,Color_t Border_color,Color_t Text_color, GFXfont* font,Color_t Background , String str);
 
 
 
@@ -298,12 +297,7 @@ Color_t SEDHOM_Icons::Color_Blur(int x,int y,int h,int w,int r,Color_t color,Col
   }
   return color;
 }
-// icons and widgets
-void SEDHOM_Icons::QRCode_Icon(int x,int y,int size,int version,string_t content,Color_t color,Color_t Background)
-{
-    SEDHOM_QRCode(x,y,size,Background,color,version,content);
-    
-}
+// icons
 void SEDHOM_Icons::WIFI_Icon(int x,int y,WIFI_STATUS_t state,Color_t color_on,Color_t color_off,Color_t Background)
 {
     if(state != WIFI_Status_not_connected)
@@ -1006,7 +1000,23 @@ void SEDHOM_Icons::Radio_Button_Icon(int x,int y,bool status,Color_t border_colo
    // status
   if(status) fill_Circle(x,y,5,check_color);
 }
+void SEDHOM_Icons::Text_Feild_Icon(int x,int y,int lenght,int max_char,Color_t Border_color,Color_t Text_color, GFXfont* font,Color_t Background , String str)
+{
+   fill_Rectangle(x,y,40,lenght,20,Border_color);
+   fill_Rectangle(x+3,y+3,40-6,lenght-6,20,Background);
+   if( str.length() > max_char)
+   {
+      String word = "...";
+      String part = str.substring(0, max_char-3);
+      String all = part + word ;
+      Text_cpp(x+10,y+17,font,Text_color,all);
+   }
+   else
+   {
+    Text_cpp(x+10,y+17,font,Text_color,str);
+   }
 
+}
 
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
