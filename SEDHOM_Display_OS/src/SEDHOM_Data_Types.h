@@ -85,5 +85,14 @@ typedef struct
     string_t Born;
     string_t number;
 }User_ID_Data_t;
+
+typedef struct 
+{
+    int hour;
+    int minut;
+    int sec;
+    word_t time_name;
+}Time_t;
+
 //**********************************************************************************************************************
 #endif /* SEDHOM_DATA_TYPES_H_ */

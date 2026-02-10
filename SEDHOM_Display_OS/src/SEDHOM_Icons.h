@@ -59,7 +59,7 @@ class SEDHOM_Icons
         void Power_off_Icon(int x,int y,Color_t color,Color_t Background);
         void Bluetooth_Icon(int x , int y ,BLUETOOTH_STATUS_t connect_status,Color_t color,Color_t Background);
         void Button_Icon(int x,int y,Color_t Background=0,bool print_on_and_off = 0);
-        void Display_Time_Icon(int x,int y,int hour,int minut,int sec,word_t time_name,Color_t color,Color_t Background=0);
+        void Display_Time_Icon(int x,int y,Time_t time,Color_t color,Color_t Background=0);
         void Terminal_Icon(int x,int y,Color_t Background=0);
         void About_Icon(int x,int y ,Color_t color,Color_t Background);
         void Display_Date_Icon(int x,int y,Color_t color,Color_t text_color,int year,word_t month_name,int Day,word_t week_day_name,Color_t Background);
@@ -458,16 +458,16 @@ void SEDHOM_Icons::Button_Icon(int x,int y,Color_t Background=0,bool print_on_an
          Text(x+23, y+41,SmallFont,WHITE,"OFF");
     }
 }
-void SEDHOM_Icons::Display_Time_Icon(int x,int y,int hour,int minut,int sec,word_t time_name,Color_t color,Color_t Background=0)
+void SEDHOM_Icons::Display_Time_Icon(int x,int y,Time_t time,Color_t color,Color_t Background=0)
 {
     char Hour_as_str[3];
     char min_as_str[3];
     char sec_as_str[3];
-    sprintf(Hour_as_str,"%d",hour);
-    sprintf(min_as_str,"%d",minut);
-    sprintf(sec_as_str,"%d",sec);
+    sprintf(Hour_as_str,"%d",time.hour);
+    sprintf(min_as_str,"%d",time.minut);
+    sprintf(sec_as_str,"%d",time.sec);
     //hour
-    if(hour < 10)
+    if(time.hour < 10)
     {
        Text(x,y+35,FONT_SEVENSEGMENT,color,"0");
        Text_Add(Hour_as_str);       
@@ -477,7 +477,7 @@ void SEDHOM_Icons::Display_Time_Icon(int x,int y,int hour,int minut,int sec,word
        Text(x,y+35,FONT_SEVENSEGMENT,color,Hour_as_str);
     }
     // minutes
-    if(minut < 10)
+    if(time.minut < 10)
     {
        Text(x+83,y+35,FONT_SEVENSEGMENT,color,"0");
        Text_Add(min_as_str);       
@@ -492,7 +492,7 @@ void SEDHOM_Icons::Display_Time_Icon(int x,int y,int hour,int minut,int sec,word
     //sec
     Text(x+146,y,BigFont,color,sec_as_str);
     // time name
-    Text(x+146,y+38,BigFont,color,time_name);
+    Text(x+146,y+38,BigFont,color,time.time_name);
 }
 void SEDHOM_Icons::Terminal_Icon(int x,int y,Color_t Background=0)
 {
