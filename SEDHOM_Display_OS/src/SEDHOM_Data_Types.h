@@ -30,6 +30,7 @@
 #define word_t         char*
 #define SEDHOM_Display_OS_t    SEDHOM_Display_OS
 #define SEDHOM_Icons_t         SEDHOM_Icons
+typedef uint16_t Color_t;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef enum Rotate
 {
@@ -85,7 +86,8 @@ typedef struct
     string_t Born;
     string_t number;
 }User_ID_Data_t;
-
+///////////////////////////////////////////////////////////////////////////
+// data type of time icon
 typedef struct 
 {
     int hour;
@@ -93,6 +95,15 @@ typedef struct
     int sec;
     word_t time_name;
 }Time_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of all icon
+typedef struct 
+{
+    int x;
+    int y;
+    Color_t color;
+    Color_t Background;
+}Icon_t;
 
 //**********************************************************************************************************************
 #endif /* SEDHOM_DATA_TYPES_H_ */

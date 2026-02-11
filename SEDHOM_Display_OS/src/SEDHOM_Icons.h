@@ -99,7 +99,7 @@ class SEDHOM_Icons
         void Radio_Button_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t Background);
         void Text_Feild_Icon(int x,int y,int lenght,int max_char,Color_t Border_color,Color_t Text_color, GFXfont* font,Color_t Background , String str);
         void Warning_Icon(int x,int y,Color_t color,Color_t txt_color,Color_t Background,bool filled_or_not = Fill_shape);
-
+        void Chandelier_Icon(int x,int y,Color_t color,Color_t Background);
 
 };
 // define all functions and Draw all Widgets and icons
@@ -1022,7 +1022,17 @@ void SEDHOM_Icons::Warning_Icon(int x,int y,Color_t color,Color_t txt_color,Colo
   Equilateral_Triangle_Up(x,y,40,filled_or_not,color);
   Text_cpp(x-6,y+5,BigFont,txt_color,"!");
 }
-
+void SEDHOM_Icons::Chandelier_Icon(int x,int y,Color_t color,Color_t Background)
+{
+   fill_Circle(x,y,20,color);
+   fill_Circle(x,y,20-3,Background);
+   fill_Rectangle(x-23,y,25,46,0,Background);
+   fill_Circle(x,y+2,8,color);
+   fill_Circle(x,y+2,5,Background);
+   fill_Rectangle(x-10,y-10,10,20,0,Background);
+   fill_Rectangle(x-21,y,3,43,0,color);
+   fill_Rectangle(x-1,y-33,15,3,2,color);
+}
 
 
 
