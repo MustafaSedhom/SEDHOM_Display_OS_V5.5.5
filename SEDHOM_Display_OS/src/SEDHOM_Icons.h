@@ -98,7 +98,7 @@ class SEDHOM_Icons
         void Check_Box_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t checked_fill_color,Color_t Background);
         void Radio_Button_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t Background);
         void Text_Feild_Icon(int x,int y,int lenght,int max_char,Color_t Border_color,Color_t Text_color, GFXfont* font,Color_t Background , String str);
-
+        void Warning_Icon(int x,int y,Color_t color,Color_t txt_color,Color_t Background,bool filled_or_not = Fill_shape);
 
 
 };
@@ -1017,6 +1017,16 @@ void SEDHOM_Icons::Text_Feild_Icon(int x,int y,int lenght,int max_char,Color_t B
    }
 
 }
+void SEDHOM_Icons::Warning_Icon(int x,int y,Color_t color,Color_t txt_color,Color_t Background,bool filled_or_not = Fill_shape)
+{
+  Equilateral_Triangle_Up(x,y,40,filled_or_not,color);
+  Text_cpp(x-6,y+5,BigFont,txt_color,"!");
+}
+
+
+
+
+
 
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
