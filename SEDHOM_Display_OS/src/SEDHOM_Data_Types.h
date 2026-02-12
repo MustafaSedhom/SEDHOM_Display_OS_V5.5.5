@@ -104,6 +104,35 @@ typedef struct
     Color_t color;
     Color_t Background;
 }Icon_t;
-
+///////////////////////////////////////////////////////////////////////////
+// data type of positions
+typedef enum 
+{
+    Position_Center,
+    Position_Top,
+    Position_Bottom,
+    Position_Right,
+    Position_Left,
+    Position_Top_Left,
+    Position_Top_Right,
+    Position_Bottom_Left,
+    Position_Bottom_Right,
+    Position_Right_and_Left,
+    Position_Right_and_Top,
+    Position_Right_and_Bottom,
+    Position_Left_and_Top,
+    Position_Left_and_Bottom,
+    Position_Top_and_Bottom,
+    Position_All,
+}Position_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of Shapes
+typedef enum 
+{
+    Shape_Circle,
+    Shape_Rectangle,
+    Shape_Triangle,
+    Shape_Line,
+}Shapes_t;
 //**********************************************************************************************************************
 #endif /* SEDHOM_DATA_TYPES_H_ */

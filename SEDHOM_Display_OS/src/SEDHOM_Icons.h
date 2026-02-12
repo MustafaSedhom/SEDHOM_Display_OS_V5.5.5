@@ -40,12 +40,14 @@ class SEDHOM_Icons
         void TEXT(int x,int y,const GFXfont* font,Color_t color,string_t txt);
         void Text_cpp(int x,int y,const GFXfont* font,Color_t color,String txt);
         void Container(int x,int y,int h,int w,int raduis,Color_t color);
+        void Border_Rectangle(Icon_t Border_Rect,int h,int w,int Raduis,int Border_size);
         void fill_rectangle_with_end(int x,int y,int h,int w,int end_volume,Color_t color,Color_t end_color);
         void Draw_Custom_int_shap(int x,int y,int h,int w,int color,int arr[]);
         void Draw_Custom_Char(int x,int y,int h,int w,int color,char arr[]);
         // effects 
         Color_t Blur(int x,int y,int h,int w,int r,int Blur_value,Color_t mode,bool circle_or_rectangle = 1);
         Color_t Color_Blur(int x,int y,int h,int w,int r,Color_t color,Color_t mode,bool circle_or_rectangle = 1);
+        Color_t Shadow_effect(Icon_t shadow , Shapes_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Raduis = 20 , Position_t pos = Position_Right_and_Bottom, Color_t Shadow_color = Color_DarkGrey);
         // Draw SEDhOM Icons
         // void QRCode_Icon(int x,int y,int size,int version,string_t content,Color_t color,Color_t Background);
         void WIFI_Icon(int x,int y,WIFI_STATUS_t state,Color_t color_on,Color_t color_off,Color_t Background);
@@ -100,7 +102,8 @@ class SEDHOM_Icons
         void Text_Feild_Icon(int x,int y,int lenght,int max_char,Color_t Border_color,Color_t Text_color, GFXfont* font,Color_t Background , String str);
         void Warning_Icon(int x,int y,Color_t color,Color_t txt_color,Color_t Background,bool filled_or_not = Fill_shape);
         void Chandelier_Icon(int x,int y,Color_t color,Color_t Background);
-
+        void Smart_TV_Icon(Icon_t icon,Color_t WIFI_icon);
+        void Air_Conditioner_Icon(Icon_t Icon);
 };
 // define all functions and Draw all Widgets and icons
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -238,6 +241,11 @@ void SEDHOM_Icons::Container(int x,int y,int h,int w,int raduis,Color_t color)
 {
     Fill_Rectangle(x, y, h, w, raduis, color);
 }
+void SEDHOM_Icons::Border_Rectangle(Icon_t Border_Rect,int h,int w,int Raduis,int Border_size)
+{
+  fill_Rectangle(Border_Rect.x,Border_Rect.y,h,w,Raduis,Border_Rect.color);
+  fill_Rectangle(Border_Rect.x+Border_size,Border_Rect.y+Border_size,h-(2*Border_size),w-(2*Border_size),Raduis,Border_Rect.Background);
+}
 void SEDHOM_Icons::fill_rectangle_with_end(int x,int y,int h,int w,int end_volume,Color_t color,Color_t end_color)
 {
     Fill_Rectangle(x,y,h,w,5,end_color);
@@ -296,6 +304,101 @@ Color_t SEDHOM_Icons::Color_Blur(int x,int y,int h,int w,int r,Color_t color,Col
     fill_Circle(x,y,r,color);
   }
   return color;
+}
+Color_t SEDHOM_Icons::Shadow_effect(Icon_t shadow, Shapes_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Raduis = 20 , Position_t pos = Position_Right_and_Bottom , Color_t Shadow_color = Color_DarkGrey)
+{
+    int x = shadow.x;
+    int y = shadow.y;
+    int h = shadow_h;
+    int w = shadow_w;
+
+   switch (pos)
+    {
+    case Position_Center:
+        break;
+
+    case Position_Top:
+        y -= shadow_size;
+        break;
+
+    case Position_Bottom:
+        y += shadow_size;
+        break;
+
+    case Position_Right:
+        x += shadow_size;
+        break;
+
+    case Position_Left:
+        x -= shadow_size;
+        break;
+
+    case Position_Top_Left:
+        x -= shadow_size;
+        y -= shadow_size;
+        break;
+
+    case Position_Top_Right:
+        x += shadow_size;
+        y -= shadow_size;
+        break;
+
+    case Position_Bottom_Left:
+        x -= shadow_size;
+        y += shadow_size;
+        break;
+
+    case Position_Bottom_Right:
+        x += shadow_size;
+        y += shadow_size;
+        break;
+
+    case Position_Right_and_Left:
+        x -= shadow_size;
+        w += shadow_size * 2;
+        break;
+
+    case Position_Right_and_Top:
+        x += shadow_size;
+        y -= shadow_size;
+        break;
+
+    case Position_Right_and_Bottom:
+        x += shadow_size;
+        y += shadow_size;
+        break;
+
+    case Position_Left_and_Top:
+        x -= shadow_size;
+        y -= shadow_size;
+        break;
+
+    case Position_Left_and_Bottom:
+        x -= shadow_size;
+        y += shadow_size;
+        break;
+
+    case Position_Top_and_Bottom:
+        y -= shadow_size;
+        h += shadow_size * 2;
+        break;
+
+    case Position_All:
+        x -= shadow_size;
+        y -= shadow_size;
+        h += shadow_size * 2;
+        w += shadow_size * 2;
+        break;
+    }
+    if (shape == Shape_Circle)
+    {
+      fill_Circle(x , y , shadow_Raduis, Shadow_color);
+    }
+    else
+    {
+      fill_Rectangle(x, y, h, w, shadow_Raduis, Shadow_color);
+    }
+    return Shadow_color;
 }
 // icons
 void SEDHOM_Icons::WIFI_Icon(int x,int y,WIFI_STATUS_t state,Color_t color_on,Color_t color_off,Color_t Background)
@@ -1033,8 +1136,23 @@ void SEDHOM_Icons::Chandelier_Icon(int x,int y,Color_t color,Color_t Background)
    fill_Rectangle(x-21,y,3,43,0,color);
    fill_Rectangle(x-1,y-33,15,3,2,color);
 }
-
-
+void SEDHOM_Icons::Smart_TV_Icon(Icon_t icon,Color_t WIFI_icon)
+{
+  fill_Rectangle(icon.x,icon.y,50,60,7,icon.color);
+  fill_Rectangle(icon.x+3,icon.y+3,50-6,60-6,7,icon.Background);
+  WIFI_Icon(icon.x+30,icon.y+33,WIFI_Status_conected_level_4_full,WIFI_icon,WIFI_icon,icon.Background);
+  fill_Rectangle(icon.x+8,icon.y+50-3,3,50-6,5,icon.color);
+  fill_Rectangle(icon.x+22,icon.y+50-3,10,15,0,icon.color);
+  fill_Rectangle(icon.x+10,icon.y+50-3+10,5,40,5,icon.color);
+}
+void SEDHOM_Icons::Air_Conditioner_Icon(Icon_t Icon)
+{
+  Border_Rectangle(Icon,40,80,10,3);
+  fill_Rectangle(Icon.x+50,Icon.y+8,5,20,5,Icon.color);
+  Border_Rectangle({ .x = Icon.x +15 , .y = Icon.y +25 , .color = Icon.color , .Background = Icon.Background},20,50,10,3);
+  fill_Rectangle(Icon.x+12,Icon.y+37,3,53,5,Icon.color);
+  fill_Rectangle(Icon.x+12,Icon.y+40,8,55,5,Icon.Background);
+}
 
 
 
