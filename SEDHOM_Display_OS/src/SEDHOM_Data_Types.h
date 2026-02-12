@@ -134,5 +134,13 @@ typedef enum
     Shape_Triangle,
     Shape_Line,
 }Shapes_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of coordenate
+typedef struct 
+{
+    int x;
+    int y;
+}Coordenate_t;
+
 //**********************************************************************************************************************
 #endif /* SEDHOM_DATA_TYPES_H_ */

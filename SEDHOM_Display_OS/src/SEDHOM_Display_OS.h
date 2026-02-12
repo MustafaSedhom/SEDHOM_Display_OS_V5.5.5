@@ -47,7 +47,9 @@ class SEDHOM_Display_OS
     Color_t Mode();
     Color_t Not_Mode();
     void Fill_Screen(Color_t color);
-    // Display_t * my_Display = &Display; 
+    int Convert_Coordenates_to_Center_X_Point(int x);
+    int Convert_Coordenates_to_Center_Y_Point(int y);
+    Coordenate_t Convert_Coordenates_to_Center(Coordenate_t new_point);
     Color_t Night_mode = Night_Mode ;
     Color_t Light_mode = Light_Mode ;
     ROTATION_STASTUS_t Rotate_0 = Rotate_0_Degree;
@@ -181,6 +183,21 @@ Color_t SEDHOM_Display_OS::Not_Mode()
 void SEDHOM_Display_OS::Fill_Screen(Color_t color)
 {
    FillScreen(color);  
+}
+Coordenate_t SEDHOM_Display_OS::Convert_Coordenates_to_Center(Coordenate_t new_point)
+{
+  Coordenate_t old_coordinate ;
+  old_coordinate.x = Convert_Coordenates_to_Center_X_Point(new_point.x);
+  old_coordinate.y = Convert_Coordenates_to_Center_Y_Point(new_point.y);
+   return old_coordinate;
+}
+int SEDHOM_Display_OS::Convert_Coordenates_to_Center_X_Point(int x)
+{
+  return x + (Screen_Height()/2);
+}
+int SEDHOM_Display_OS::Convert_Coordenates_to_Center_Y_Point(int y)
+{
+  return (Screen_Width()/2) - y;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif /*SEDHOM_DISPLAY_OS_H_*/
