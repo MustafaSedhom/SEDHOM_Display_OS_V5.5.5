@@ -46,10 +46,9 @@ class SEDHOM_Icons
         void Draw_Custom_Char(int x,int y,int h,int w,int color,char arr[]);
         // effects 
         Color_t Blur(int x,int y,int h,int w,int r,int Blur_value,Color_t mode,bool circle_or_rectangle = 1);
-        Color_t Color_Blur(int x,int y,int h,int w,int r,Color_t color,Color_t mode,bool circle_or_rectangle = 1);
+        Color_t Color_Blur(int x,int y,int h,int w,int r,Color_t color,Color_t mode,bool circle_or_rectangle = 1,void (*shadow)(Icon_t shadow_icon, int shadow_h,int shadow_w,int shadow_r,Color_t shadow_color) = nullptr);
         Color_t Shadow_effect(Icon_t shadow , Shapes_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Raduis = 20 , Position_t pos = Position_Right_and_Bottom, Color_t Shadow_color = Color_DarkGrey);
         // Draw SEDhOM Icons
-        // void QRCode_Icon(int x,int y,int size,int version,string_t content,Color_t color,Color_t Background);
         void WIFI_Icon(int x,int y,WIFI_STATUS_t state,Color_t color_on,Color_t color_off,Color_t Background);
         void Battary_Icon(int x,int y,int range,Color_t color,Color_t txt_color,Color_t Background,bool low_charge_red_color);
         void Home_Icon(int x,int y,Color_t color,Color_t Background);
@@ -293,8 +292,17 @@ Color_t SEDHOM_Icons::Blur(int x,int y,int h,int w,int r,int Blur_value,Color_t 
   }
   return color;
 }
-Color_t SEDHOM_Icons::Color_Blur(int x,int y,int h,int w,int r,Color_t color,Color_t mode,bool circle_or_rectangle = 1)
+Color_t SEDHOM_Icons::Color_Blur(int x,int y,int h,int w,int r,Color_t color,Color_t mode,bool circle_or_rectangle = 1,void (*shadow)(Icon_t shadow_icon, int shadow_h,int shadow_w,int shadow_r,Color_t shadow_color) = nullptr)
 {
+  // if(shadow != nullptr)
+  // {
+  //   Shadow_effect({x,y,color,0},h,w,r,color);
+  // }
+  // else
+  // {
+  //   shadow({x,y,color,0},h,w,r,shadow_color);
+  // }
+  
   if(circle_or_rectangle)
   {
     fill_Rectangle(x,y,h,w,r,color);
