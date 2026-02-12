@@ -21,6 +21,7 @@ class SEDHOM_Icons
         void Set_Mode(Color_t Mode);
         // colors
         Color_t set_Color(int r,int g,int b);
+        Color_t Set_Hex_Color(uint16_t Hex_code); 
         // define Basic shapes
         void draw_Pixel(int x,int y,Color_t color);
         void draw_Line(int x0,int y0,int x1,int y1,Color_t color);    
@@ -126,6 +127,14 @@ Color_t SEDHOM_Icons::set_Color(int r,int g,int b)
 {
    return(Set_Color(r,g,b));
 }
+Color_t SEDHOM_Icons::Set_Hex_Color(uint16_t Hex_code)
+{
+    int r = ((Hex_code >> 11) & 0x1F) * 255 / 31; // 5-bit red
+    int g = ((Hex_code >> 5) & 0x3F) * 255 / 63;  // 6-bit green
+    int b = (Hex_code & 0x1F) * 255 / 31;         // 5-bit blue
+    return set_Color(r, g, b);
+}
+
 // Basic shapes function  
 void SEDHOM_Icons::draw_Pixel(int x,int y,Color_t color)
 {
