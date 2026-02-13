@@ -234,13 +234,13 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
 
     ```
 - Widgets
- ```cpp
-    void set_widgets_mode(Color_t mode);
-    void APP_Bar_Widget(bool show_back_arrow,WIFI_STATUS_t WIFI_state,BLUETOOTH_STATUS_t Bluetooth_state,int Battary_Value,Time_t time,Color_t Wifi_on,Color_t Wifi_off,Color_t BLE_color,Color_t Battary_color,Color_t Time_color,Color_t Reverse_color,Color_t Background);
-    void Big_frame_widget(Color_t color,Color_t Background);
-    void ERROR_Massage_Widget(String masseage,Color_t Background,Color_t color=MAGENTA,Color_t color_txt=WHITE,Color_t ERROR_Massage_color = RED,Color_t title_Massage_color = BLUE,String title="ERROR",bool filled_or_not = Fill_shape,int x = 100,int y = 70,int w = 160,int h = 240,int max_lines_of_masseage_error =5,int max_char_in_one_line = 20);
+    ```cpp
+        void set_widgets_mode(Color_t mode);
+        void APP_Bar_Widget(bool show_back_arrow,WIFI_STATUS_t WIFI_state,BLUETOOTH_STATUS_t Bluetooth_state,int Battary_Value,Time_t time,Color_t Wifi_on,Color_t Wifi_off,Color_t BLE_color,Color_t Battary_color,Color_t Time_color,Color_t Reverse_color,Color_t Background);
+        void Big_frame_widget(Color_t color,Color_t Background);
+        void ERROR_Massage_Widget(String masseage,Color_t Background,Color_t color=MAGENTA,Color_t color_txt=WHITE,Color_t ERROR_Massage_color = RED,Color_t title_Massage_color = BLUE,String title="ERROR",bool filled_or_not = Fill_shape,int x = 100,int y = 70,int w = 160,int h = 240,int max_lines_of_masseage_error =5,int max_char_in_one_line = 20);
 
- ```
+    ```
 - Windows
     ```cpp
      void set_windows_mode(Color_t mode);
@@ -302,7 +302,10 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     ```
 - SEDHOM Data Types
     ```cpp
-    Color_t                 // Uint16_t
+    string_t                // char *
+    word_t                  // char *
+    byte_t                  // uint8_t
+    Color_t                 // uint16_t
     ROTATION_STASTUS_t      // enum
     WIFI_STATUS_t           // enum
     BLUETOOTH_STATUS_t      // enum
