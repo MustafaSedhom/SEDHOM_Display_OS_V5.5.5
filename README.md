@@ -74,6 +74,13 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     ROTATION_STASTUS_t Rotate_270 = Rotate_270_Degree;
 
     ```
+- Data Structure
+    ```cpp
+    Stack<Data Type> stack ;
+    Queue<Data Type> queue ;
+    LinkedList<Data Type> linkedlist ;
+
+    ```
 - Icons 
     ```Cpp
         // to set and handling mode
@@ -261,7 +268,7 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     ```
 - SD_Card <- handling all function to dealing betwwen sdcard and mcu
     - read() , write() , ... like sd lib do exactly .
-- handle_page
+- Handle pages
     ```cpp
       // input SEDHOM_Handling_pages_paramters instead of void (*pages_array[])(void), int size
       void Handle_all_pages(void (*pages_array[])(void), int size);
