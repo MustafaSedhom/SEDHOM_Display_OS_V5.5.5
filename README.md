@@ -54,7 +54,27 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
   WhatsApp : **+201144962908**
 #
 ## **properites of Library**
-- Icon <- for drawing icons and shapes and effects and text and fonts for text 
+- OS
+    ```cpp
+    void Init_Screen(ROTATION_STASTUS_t Rotate,Color_t Mode = Night_Mode);
+    void Set_Device_Mode(Color_t Mode = Night_Mode);
+    int Screen_Height();
+    int Screen_Width();
+    Color_t Mode();
+    Color_t Not_Mode();
+    void Fill_Screen(Color_t color);
+    int Convert_Coordenates_to_Center_X_Point(int x);
+    int Convert_Coordenates_to_Center_Y_Point(int y);
+    Coordenate_t Convert_Coordenates_to_Center(Coordenate_t new_point);
+    Color_t Night_mode = Night_Mode ;
+    Color_t Light_mode = Light_Mode ;
+    ROTATION_STASTUS_t Rotate_0 = Rotate_0_Degree;
+    ROTATION_STASTUS_t Rotate_90 = Rotate_90_Degree;
+    ROTATION_STASTUS_t Rotate_180 = Rotate_180_Degree;
+    ROTATION_STASTUS_t Rotate_270 = Rotate_270_Degree;
+
+    ```
+- Icons 
     ```Cpp
         // to set and handling mode
         uint16_t Not_Mode();
@@ -62,6 +82,7 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
         void Set_Mode(Color_t Mode);
         // colors
         Color_t set_Color(int r,int g,int b);
+        Color_t Set_Hex_Color(uint16_t Hex_code); 
         // define Basic shapes
         void draw_Pixel(int x,int y,Color_t color);
         void draw_Line(int x0,int y0,int x1,int y1,Color_t color);    
@@ -79,14 +100,17 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
         void Equilateral_Triangle_Left(int x, int y, int h,bool fill_or_draw, Color_t color); 
 
         void TEXT(int x,int y,const GFXfont* font,Color_t color,string_t txt);
+        void Text_cpp(int x,int y,const GFXfont* font,Color_t color,String txt);
         void Container(int x,int y,int h,int w,int raduis,Color_t color);
+        void Border_Rectangle(Icon_t Border_Rect,int h,int w,int Raduis,int Border_size);
         void fill_rectangle_with_end(int x,int y,int h,int w,int end_volume,Color_t color,Color_t end_color);
         void Draw_Custom_int_shap(int x,int y,int h,int w,int color,int arr[]);
         void Draw_Custom_Char(int x,int y,int h,int w,int color,char arr[]);
         // effects 
         Color_t Blur(int x,int y,int h,int w,int r,int Blur_value,Color_t mode,bool circle_or_rectangle = 1);
+        Color_t Color_Blur(int x,int y,int h,int w,int r,Color_t color,Color_t mode,bool circle_or_rectangle = 1,void (*shadow)(Icon_t shadow_icon, int shadow_h,int shadow_w,int shadow_r,Color_t shadow_color) = nullptr);
+        Color_t Shadow_effect(Icon_t shadow , Shapes_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Raduis = 20 , Position_t pos = Position_Right_and_Bottom, Color_t Shadow_color = Color_DarkGrey);
         // Draw SEDhOM Icons
-        void QRCode_Icon(int x,int y,int size,int version,string_t content,Color_t color,Color_t Background);
         void WIFI_Icon(int x,int y,WIFI_STATUS_t state,Color_t color_on,Color_t color_off,Color_t Background);
         void Battary_Icon(int x,int y,int range,Color_t color,Color_t txt_color,Color_t Background,bool low_charge_red_color);
         void Home_Icon(int x,int y,Color_t color,Color_t Background);
@@ -98,7 +122,7 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
         void Power_off_Icon(int x,int y,Color_t color,Color_t Background);
         void Bluetooth_Icon(int x , int y ,BLUETOOTH_STATUS_t connect_status,Color_t color,Color_t Background);
         void Button_Icon(int x,int y,Color_t Background=0,bool print_on_and_off = 0);
-        void Display_Time_Icon(int x,int y,int hour,int minut,int sec,word_t time_name,Color_t color,Color_t Background=0);
+        void Display_Time_Icon(int x,int y,Time_t time,Color_t color,Color_t Background=0);
         void Terminal_Icon(int x,int y,Color_t Background=0);
         void About_Icon(int x,int y ,Color_t color,Color_t Background);
         void Display_Date_Icon(int x,int y,Color_t color,Color_t text_color,int year,word_t month_name,int Day,word_t week_day_name,Color_t Background);
@@ -125,16 +149,108 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
         void Sound_value_Icon(int x,int y,int value,Color_t color,Color_t thikness_color,Color_t Background,bool thikness_or_not=0);
         void Video_Icon(int x,int y,Color_t color,Color_t Background);
         void Block_Icon(int x,int y,bool open_or_closed,Color_t color,Color_t Background);
+        void Signal_Icon(int x,int y,SIGNAL_STATUS_t state,Color_t color_on,Color_t color_off,Color_t Background);
+        void Bell_Icon(int x,int y,bool mute_or_not,bool filled_or_not,Color_t color,Color_t Background);
+        void Menu_Icon_1(int x,int y,Color_t color ,Color_t Background); // : : :
+        void Menu_Icon_2(int x,int y,Color_t color ,Color_t Background); // ...
+        void Menu_Icon_3(int x,int y,Color_t color ,Color_t Background); // :
+        void Menu_Icon_4(int x,int y,Color_t color ,Color_t Background); // : :
+        void Menu_Icon_5(int x,int y,Color_t color ,Color_t Background); // = 
+        void Moon_Icon(int x,int y,Color_t color,Color_t Background);
+        void Sun_Icon(int x,int y,Color_t color,Color_t Background);
+        void Check_Box_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t checked_fill_color,Color_t Background);
+        void Radio_Button_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t Background);
+        void Text_Feild_Icon(int x,int y,int lenght,int max_char,Color_t Border_color,Color_t Text_color, GFXfont* font,Color_t Background , String str);
+        void Warning_Icon(int x,int y,Color_t color,Color_t txt_color,Color_t Background,bool filled_or_not = Fill_shape);
+        void Chandelier_Icon(int x,int y,Color_t color,Color_t Background);
+        void Smart_TV_Icon(Icon_t icon,Color_t WIFI_icon);
+        void Air_Conditioner_Icon(Icon_t Icon);
 
     ```
+- Fonts 
+    ```cpp
+    // Dufualt small and Big Font
+     SmallFont                 
+     BigFont                   
+     FONT_SMALL                
+     FONT_BIG                  
+    // SevenSegment
+     FONT_SEVENSEGMENT         
+    // FreeSans
+     FONT_FREESANS_SMALL       
+     FONT_FREESANS_MEDIUM      
+     FONT_FREESANS_BIG         
+     FONT_FREESANS_VERYBIG     
+    // FreeSansBold
+     FONT_FREESANSBOLD_SMALL       
+     FONT_FREESANSBOLD_MEDIUM      
+     FONT_FREESANSBOLD_BIG         
+     FONT_FREESANSBOLD_VERYBIG     
+    // FreeSansOblique
+     FONT_FREESANSOBLIQUE_SMALL       
+     FONT_FREESANSOBLIQUE_MEDIUM      
+     FONT_FREESANSOBLIQUE_BIG         
+     FONT_FREESANSOBLIQUE_VERYBIG     
+    // FreeSerif
+     FONT_FREESERIF_SMALL       
+     FONT_FREESERIF_MEDIUM      
+     FONT_FREESERIF_BIG         
+     FONT_FREESERIF_VERYBIG     
+    // FreeSerifBold
+     FONT_FREESERIFBOLD_SMALL       
+     FONT_FREESERIFBOLD_MEDIUM      
+     FONT_FREESERIFBOLD_BIG         
+     FONT_FREESERIFBOLD_VERYBIG     
+    // FreeSerifItalic
+     FONT_FREESERIFITALIC_SMALL       
+     FONT_FREESERIFITALIC_MEDIUM      
+     FONT_FREESERIFITALIC_BIG         
+     FONT_FREESERIFITALIC_VERYBIG     
+    // FreeSerifBoldItalic
+     FONT_FREESERIFBOLDITALIC_SMALL       
+     FONT_FREESERIFBOLDITALIC_MEDIUM      
+     FONT_FREESERIFBOLDITALIC_BIG         
+     FONT_FREESERIFBOLDITALIC_VERYBIG     
+    // FreeMono
+     FONT_FREEMONO_SMALL       
+     FONT_FREEMONO_MEDIUM      
+     FONT_FREEMONO_BIG         
+     FONT_FREEMONO_VERYBIG     
+    // FreeMonoBold
+     FONT_FREEMONOBOLD_SMALL       
+     FONT_FREEMONOBOLD_MEDIUM      
+     FONT_FREEMONOBOLD_BIG         
+     FONT_FREEMONOBOLD_VERYBIG     
+    // FreeMonoOblique
+     FONT_FREEMONOOBLIQUE_SMALL       
+     FONT_FREEMONOOBLIQUE_MEDIUM      
+     FONT_FREEMONOOBLIQUE_BIG         
+     FONT_FREEMONOOBLIQUE_VERYBIG     
+    // FreeMonoBoldOblique
+     FONT_FREEMONOBOLDOBLIQUE_SMALL       
+     FONT_FREEMONOBOLDOBLIQUE_MEDIUM      
+     FONT_FREEMONOBOLDOBLIQUE_BIG         
+     FONT_FREEMONOBOLDOBLIQUE_VERYBIG     
 
-- Touch <- handling all touch mehods and output function name-> 
-    - onTap(x,y,h,w)->bool <- detect touch return true or false and take rectangle space for detect it  .
-    - onTap(x,y,h,w,*function)-> void <- detect touch and take rectangle space for detect it and do function  .
-    - is_preesed()-> bool <- return true if touch presed in any space in tft screen .
-    - get_x_Point()-> int <- return x coordenates for x touch place .
-    - get_y_Point()-> int <- return y coordenates for y touch place .
-    - get_Z_Point()-> int <- return preesed value  .
+    ```
+- Widgets
+ ```cpp
+    void set_widgets_mode(Color_t mode);
+    void APP_Bar_Widget(bool show_back_arrow,WIFI_STATUS_t WIFI_state,BLUETOOTH_STATUS_t Bluetooth_state,int Battary_Value,Time_t time,Color_t Wifi_on,Color_t Wifi_off,Color_t BLE_color,Color_t Battary_color,Color_t Time_color,Color_t Reverse_color,Color_t Background);
+    void Big_frame_widget(Color_t color,Color_t Background);
+    void ERROR_Massage_Widget(String masseage,Color_t Background,Color_t color=MAGENTA,Color_t color_txt=WHITE,Color_t ERROR_Massage_color = RED,Color_t title_Massage_color = BLUE,String title="ERROR",bool filled_or_not = Fill_shape,int x = 100,int y = 70,int w = 160,int h = 240,int max_lines_of_masseage_error =5,int max_char_in_one_line = 20);
+
+ ```
+- Windows
+    ```cpp
+     void set_windows_mode(Color_t mode);
+      String Full_KeyBoard_window_user_input_TXT = "";
+      //drawing window functions 
+      void Full_Key_Board_Window(Color_t color,Color_t Background,Color_t char_color = WHITE,Color_t text_feild_color = -1,bool caps_or_not=true,bool special_char_or_not=false);
+      bool Handling_Touch_Full_Key_Board_Window();
+
+    ```
+- Touch
     ``` Cpp
       bool Is_Presssed();
       int get_X_point();
@@ -145,12 +261,7 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     ```
 - SD_Card <- handling all function to dealing betwwen sdcard and mcu
     - read() , write() , ... like sd lib do exactly .
-- handle_page <- handling pages you do it in your project goto scrolling_betwwen_pages.ino file in example .
-    - SEDHOM_List_of_pages   <- put in it all function do you make it .
-    - Handle_all_pages(void (*pages_array[])(void), int size)-> void <- to push first page and show it in paramete dont put this parameter and put SEDHOM_Handling_pages_paramters only.
-    - goto_page(int number)-> void <- goto page with number .
-    - push_page()-> void <- show next page .
-    - pop_page()-> void <- show reveres page .
+- handle_page
     ```cpp
       // input SEDHOM_Handling_pages_paramters instead of void (*pages_array[])(void), int size
       void Handle_all_pages(void (*pages_array[])(void), int size);
@@ -158,7 +269,54 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
       void push_page();
       void pop_page();
     ```
+- Time
+    ```cpp
+    void Stop_Display(int time);
+    void Wait(int time);
+    unsigned long Calc_time_ms();
+    unsigned long Calc_time_us();
 
+    ```
+- Colors
+    ```cpp
+     Color_Black           
+     Color_Navy            
+     Color_DarkGary       
+     Color_DarkCyan      
+     Color_Maroon           
+     Color_Purple          
+     Color_Olive           
+     Color_LightGrey     
+     Color_DarkGrey       
+     Color_Blue               
+     Color_Green        
+     Color_Cyan              
+     Color_Red                
+     Color_Magenta        
+     Color_Yellow          
+     Color_White            
+     Color_Orange             
+     Color_GreenYellow  
+     Color_Pink         
+
+    ```
+- SEDHOM Data Types
+    ```cpp
+    Color_t                 // Uint16_t
+    ROTATION_STASTUS_t      // enum
+    WIFI_STATUS_t           // enum
+    BLUETOOTH_STATUS_t      // enum
+    SWITCH_STATUS_t         // enum
+    SIGNAL_STATUS_t         // enum
+    User_ID_Data_t          // struct
+    Time_t                  // struct
+    Icon_t                  // struct
+    Position_t              // enum
+    Shapes_t                // enum
+    Coordenate_t            // struct
+    WIFI_Encryption_Type_t  // enum
+    WIFI_Config_t           // struct
+    ```
 #
 ## if you want install it in arduino ide 
 1. download this folder in your pc

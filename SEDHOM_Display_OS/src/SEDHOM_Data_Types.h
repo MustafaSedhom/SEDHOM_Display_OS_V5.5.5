@@ -28,11 +28,11 @@
 #define byte_t         uint8_t
 #define string_t       char*
 #define word_t         char*
-#define SEDHOM_Display_OS_t    SEDHOM_Display_OS
-#define SEDHOM_Icons_t         SEDHOM_Icons
+
+
 typedef uint16_t Color_t;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-typedef enum Rotate
+typedef enum 
 {
   Rotate_0_Degree,
   Rotate_90_Degree,
@@ -40,7 +40,7 @@ typedef enum Rotate
   Rotate_270_Degree
 }ROTATION_STASTUS_t;
 
-typedef enum WIFI_Status
+typedef enum 
 {
     WIFI_Status_not_connected,
     WIFI_Status_no_internet,
@@ -50,14 +50,14 @@ typedef enum WIFI_Status
     WIFI_Status_conected_level_4_full
 }WIFI_STATUS_t;
 
-typedef enum Bluetooth_Status
+typedef enum 
 {
     BLuetooth_Status_closed,
     BLuetooth_Status_open_and_not_connected,
     BLuetooth_Status_open_and_connected
 }BLUETOOTH_STATUS_t;
 
-typedef enum Switch
+typedef enum 
 {
     OFF,
     ON

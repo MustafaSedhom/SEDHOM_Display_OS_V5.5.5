@@ -64,7 +64,7 @@
 #define BigFont                   &FreeBigFont
 #define FONT_SMALL                &FreeSmallFont
 #define FONT_BIG                  &FreeBigFont
-// SebenSegment
+// SevenSegment
 #define FONT_SEVENSEGMENT         &FreeSevenSegNumFont
 // FreeSans
 #define FONT_FREESANS_SMALL       &FreeSans9pt7b
