@@ -1,15 +1,27 @@
 //=======================================================================================
 // include OS lib from SEDHOM company
 #include <SEDHOM_Display_OS.h>
+//=======================================================================================
 // object from library
 SEDHOM_Display_OS OS;
+SEDHOM_Icon_OS Icons(OS);
+// SEDHOM_Widgets_OS Widgets(OS);
+SEDHOM_Touch_OS Touch(OS);
+SEDHOM_Time_OS Time(OS);
+// SEDHOM_Windows_OS Windows(OS);
+// SEDHOM_Data_Structure_OS Handling_Data(OS);
+// SEDHOM_Pages_OS Pages(OS);
+// SEDHOM_Handling_Pages_OS Handling_pages(OS);
+// SEDHOM_Communications_OS Call(OS);
+//=======================================================================================
+//=======================================================================================
 // var for touch
 int last_x,last_y; 
 void SEDHOM_Draw_Full_Calculator();
 void print_on_calc(String op,bool refresh = no ,bool is_result = no,String result = "error");
 void setup()
 {
-  OS.Init_Screen(Rotate_90_Degree,Night_Mode);
+  OS.Init_Screen(OS.Rotate_90,OS.Night_mode);
   ///////////////////////////////////////////////////////////////////////////////////////////////////
   SEDHOM_Draw_Full_Calculator();
   print_on_calc("3*5",yes,yes,calc_exp("3*5"));
@@ -17,10 +29,10 @@ void setup()
 }
 void loop() 
 {
-   if(OS.Touch.Is_Presssed())
+   if(Touch.Is_Presssed())
    {
-      int x = OS.Touch.get_X_point();
-      int y = OS.Touch.get_Y_point();
+      int x = Touch.get_X_point();
+      int y = Touch.get_Y_point();
       if(x != last_x || y != last_y)
       {
         ////////////////////////
@@ -29,7 +41,7 @@ void loop()
         last_y = y;
       }
    }
-   OS.Time.Stop_Display(100); // micro seconds
+   Time.Stop_Display(100); // micro seconds
 }
 
 String calc_exp(String op)
@@ -75,10 +87,10 @@ void print_on_calc(String op,bool refresh,bool is_result,String result)
 {
   if(refresh)
   {
-    OS.Icon.Container(10,20,460,50,20,Cyan);
-    OS.Icon.Container(10+3,20+3,460-6,50-6,20,OS.Mode());
+    Icons.Container(10,20,460,50,20,Cyan);
+    Icons.Container(10+3,20+3,460-6,50-6,20,OS.Mode());
   }
-  OS.Icon.Text_cpp(25,52,FONT_BIG,RED,is_result ? (op + " = " + result) : (op));
+  Icons.Text_cpp(25,52,FONT_BIG,RED,is_result ? (op + " = " + result) : (op));
 }
 
 void SEDHOM_Draw_Full_Calculator()
@@ -94,19 +106,19 @@ void SEDHOM_Draw_Full_Calculator()
   String col_4[] = { "1","2","3","-","~","&","|","^" };
   String col_5[] = { "0",".","PI","+","e","C","<-","=" };
   OS.Fill_Screen(OS.Mode());
-  OS.Icon.Text_cpp(15,10,FONT_BIG,OS.Not_Mode(),"SEDHOM Scientific Calculator");
+  Icons.Text_cpp(15,10,FONT_BIG,OS.Not_Mode(),"SEDHOM Scientific Calculator");
   // textfeild for input calc and ouput result
-  // OS.Icon.Container(10,20,460,50,20,Cyan);
-  // OS.Icon.Container(10+3,20+3,460-6,50-6,20,OS.Mode());
+  // Icons.Container(10,20,460,50,20,Cyan);
+  // Icons.Container(10+3,20+3,460-6,50-6,20,OS.Mode());
   print_on_calc("",yes);
 
   for(int i=0;i<8;i++)
   {
-    OS.Icon.Container(4+(i*60),80,53,40,5,sines_color);OS.Icon.Text_cpp(15+(i*60),105,FONT_SMALL,OS.Not_Mode(),col_1[i]);
-    OS.Icon.Container(4+(i*60),130,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:color_calc);OS.Icon.Text_cpp(20+(i*60),155,(i>=6)?FONT_SMALL:FONT_BIG,OS.Not_Mode(),col_2[i]);
-    OS.Icon.Container(4+(i*60),180,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:color_calc);OS.Icon.Text_cpp((i==7)?8+(i*60):20+(i*60),205,FONT_BIG,OS.Not_Mode(),col_3[i]);
-    OS.Icon.Container(4+(i*60),230,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:color_calc);OS.Icon.Text_cpp(20+(i*60),255,FONT_BIG,OS.Not_Mode(),col_4[i]);
-    OS.Icon.Container(4+(i*60),280,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:(i==7)?equal_color:color_calc);OS.Icon.Text_cpp(20+(i*60),305,FONT_BIG,OS.Not_Mode(),col_5[i]);    
+    Icons.Container(4+(i*60),80,53,40,5,sines_color);Icons.Text_cpp(15+(i*60),105,FONT_SMALL,OS.Not_Mode(),col_1[i]);
+    Icons.Container(4+(i*60),130,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:color_calc);Icons.Text_cpp(20+(i*60),155,(i>=6)?FONT_SMALL:FONT_BIG,OS.Not_Mode(),col_2[i]);
+    Icons.Container(4+(i*60),180,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:color_calc);Icons.Text_cpp((i==7)?8+(i*60):20+(i*60),205,FONT_BIG,OS.Not_Mode(),col_3[i]);
+    Icons.Container(4+(i*60),230,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:color_calc);Icons.Text_cpp(20+(i*60),255,FONT_BIG,OS.Not_Mode(),col_4[i]);
+    Icons.Container(4+(i*60),280,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:(i==7)?equal_color:color_calc);Icons.Text_cpp(20+(i*60),305,FONT_BIG,OS.Not_Mode(),col_5[i]);    
   }
 }
 

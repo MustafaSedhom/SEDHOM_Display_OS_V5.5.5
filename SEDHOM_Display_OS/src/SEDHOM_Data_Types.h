@@ -141,6 +141,32 @@ typedef struct
     int x;
     int y;
 }Coordenate_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of WiFi network Encytption type
+typedef enum
+{
+    WIFI_AUTH_OPEN,             // Open
+    WIFI_AUTH_WEP,              // WEP
+    WIFI_AUTH_WPA_PSK,          // WPA
+    WIFI_AUTH_WPA2_PSK,         // WPA2
+    WIFI_AUTH_WPA_WPA2_PSK,     // WPA+WPA2
+    WIFI_AUTH_WPA2_ENTERPRISE,  // WPA2 Enterprise
+    WIFI_AUTH_WPA3_PSK,         // WPA3
+    WIFI_AUTH_WPA2_WPA3_PSK,    // WPA2+WPA3
+}WIFI_Encryption_Type_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of WiFi network configuration
+typedef struct 
+{
+    String SSID;                   
+    String Password;              
+    int range;                    
+    int RSSI;                     
+    bool Secured;                  
+    int channel;                  
+    WIFI_Encryption_Type_t Encryption_Type; 
+    WIFI_STATUS_t wifi_status;     
+} WIFI_Config_t;
 
 //**********************************************************************************************************************
 #endif /* SEDHOM_DATA_TYPES_H_ */

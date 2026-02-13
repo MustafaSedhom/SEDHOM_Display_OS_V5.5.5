@@ -30,7 +30,7 @@
 // include communications file to use communication protocols in your projects
 #include "SEDHOM_Comminucations.h"
 // #include <QRCodeGFX.h>
-#include <QRCodeGFX.h>
+// #include <QRCodeGFX.h>
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class SEDHOM_Display_OS
 {

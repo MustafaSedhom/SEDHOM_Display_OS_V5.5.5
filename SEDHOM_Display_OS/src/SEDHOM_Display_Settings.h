@@ -26,6 +26,21 @@
 //////////////////////////////////////
 // #include <QRCodeGFX.h>
 //////////////////////////////////////
+#include <ArduinoJson.h>
+//////////////////////////////////////
+// #include <LittleFS.h>
+//////////////////////////////////////
+#if defined(ESP32)
+  #include <WiFi.h>
+  #include <Preferences.h>
+#elif defined(ESP8266)
+  #include <ESP8266WiFi.h>
+  #include <EEPROM.h>
+#else
+  #include <EEPROM.h>
+#endif
+
+//////////////////////////////////////
 // SEDHOMs lib
 #include "SEDHOM_Colors.h"
 #include "SEDHOM_Display_Fonts.h"

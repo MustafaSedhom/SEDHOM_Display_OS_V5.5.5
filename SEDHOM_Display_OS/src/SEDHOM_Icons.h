@@ -1129,11 +1129,11 @@ void SEDHOM_Icons::Text_Feild_Icon(int x,int y,int lenght,int max_char,Color_t B
       String word = "...";
       String part = str.substring(0, max_char-3);
       String all = part + word ;
-      Text_cpp(x+10,y+17,font,Text_color,all);
+      Text_cpp(x+10,y+25,font,Text_color,all);
    }
    else
    {
-    Text_cpp(x+10,y+17,font,Text_color,str);
+    Text_cpp(x+10,y+25,font,Text_color,str);
    }
 
 }
