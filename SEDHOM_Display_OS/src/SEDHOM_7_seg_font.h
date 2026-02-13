@@ -1,3 +1,6 @@
+#ifndef SEDHOM_7_SEG_FONT_H_
+#define SEDHOM_7_SEG_FONT_H_
+////////////////////////////////////////////////////////////////////////////////
 // generate FreeFont from UTFT font
 const uint8_t FreeSevenSegNumFontPlusPlusBitmaps[] PROGMEM = {
     // 7x7 [0x2E '.']
@@ -128,4 +131,5 @@ const GFXfont FreeSevenSegNumFontPlusPlus PROGMEM = {
     46, 59, 50
 };
 // FreeSevenSegNumFontPlusPlus bitmap size = 1395 [1525] [2617]
-
+//////////////////////////////////////////////////////////////////////////////////
+#endif // SEDHOM_7_SEG_FONT_H
