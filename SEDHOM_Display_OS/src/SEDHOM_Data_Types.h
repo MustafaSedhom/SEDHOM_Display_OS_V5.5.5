@@ -23,6 +23,8 @@
 #define yes               1
 #define no                0
 
+#define ON                1
+#define OFF               0
 #define on               ON
 #define off              OFF
 #define byte_t         uint8_t
@@ -58,8 +60,8 @@ typedef enum
 
 typedef enum 
 {
-    OFF,
-    ON
+   SWITCH_State_OFF,
+   SWITCH_State_ON,
 }SWITCH_STATUS_t;
 
 typedef enum 
@@ -84,6 +86,10 @@ typedef struct
     string_t department_2;
     string_t Born;
     string_t number;
+    Color_t image_background;
+    bool default_image;
+    bool eye;
+
 }User_ID_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of time icon
@@ -166,6 +172,16 @@ typedef struct
     WIFI_Encryption_Type_t Encryption_Type; 
     WIFI_STATUS_t wifi_status;     
 } WIFI_Config_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of Date
+typedef struct 
+{
+    int year;
+    int month;
+    int Day;
+    String month_name;
+    String week_day_name;     
+} Date_t;
 
 //**********************************************************************************************************************
 #endif /* SEDHOM_DATA_TYPES_H_ */

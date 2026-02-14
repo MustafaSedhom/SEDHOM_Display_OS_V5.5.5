@@ -30,7 +30,7 @@ void SEDHOM_Widgets::APP_Bar_Widget(bool show_back_arrow,WIFI_STATUS_t WIFI_stat
 {
   if(show_back_arrow)
   {
-    Icon.Back_Arrow_Icon(20,30,Reverse_color,(Background == Black) ? white : Black);
+    Icon.Back_Arrow_Icon({20,30,Reverse_color,(Background == Black) ? white : Black});
   }
   else
   {

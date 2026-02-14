@@ -62,26 +62,29 @@ class SEDHOM_Icons
         void Bluetooth_Icon(Icon_t Icon ,BLUETOOTH_STATUS_t connect_status);
         void Button_Icon(Icon_t Icon = {},bool print_on_and_off = 0);
         void Display_Time_Icon(Icon_t Icon , Time_t time);
-        void Terminal_Icon(int x,int y,Color_t Background=0);
-        void About_Icon(int x,int y ,Color_t color,Color_t Background);
-        void Display_Date_Icon(int x,int y,Color_t color,Color_t text_color,int year,word_t month_name,int Day,word_t week_day_name,Color_t Background);
-        void UP_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background=0);
-        void DOWN_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background=0);
-        void LEFT_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background=0);
-        void RIGHT_Aroow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background=0);
-        void Back_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background=0);
-        void After_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background=0);
-        void Color_Icon(int x,int y,Color_t Background=0);
-        void Time_Icon(int x,int y,Color_t color,Color_t Background);
-        void Date_Icon(int x,int y,Color_t color,Color_t Background);
-        void Switch_Icon(int x,int y,Color_t color_on,Color_t color_off,Color_t thumb_color,Color_t txt_color,bool state,Color_t Background=0);
-        void label_Icon(int x,int y,int h,int w,int end,word_t string_in_label,Color_t color_str_in_label,Color_t color,Color_t Background);
-        void slide_Icon(int x,int y,int h,byte_t range ,Color_t color_active,Color_t color_not_active ,Color_t ball_color,Color_t box_color,Color_t range_in_box_color,Color_t Background=0);
-        void file_Icon(int x,int y,Color_t color,Color_t end_color,Color_t file_extend_color,word_t file_extend,Color_t Background);
-        void folder_Icon(int x,int y,Color_t folder_color,Color_t Background=0);
-        void Divider_vertical(int x,int y,int length , int thikness,Color_t color);
-        void Divider_Horezontal(int x,int y,int length , int thikness,Color_t color);
-        void ID_Card_Icon(int x,int y,Color_t color,Color_t main_font_color,Color_t font_color,Color_t image_background,bool default_image,bool eye,bool prof,char* name,char* unversity,char* department_1,char* department_2,char* Born,char* number,Color_t Background=0);
+        void Terminal_Icon(Icon_t Icon = {});
+        void About_Icon(Icon_t Icon = {});
+        void Display_Date_Icon(Icon_t Icon,Date_t Date,Color_t text_color);
+
+        void UP_Arrow_Icon(Icon_t Icon = {},Color_t border_color = -1);
+        void DOWN_Arrow_Icon(Icon_t Icon = {},Color_t border_color = -1);
+        void LEFT_Arrow_Icon(Icon_t Icon = {},Color_t border_color = -1);
+        void RIGHT_Aroow_Icon(Icon_t Icon = {},Color_t border_color = -1);
+        void Back_Arrow_Icon(Icon_t Icon = {},Color_t border_color = -1);
+        void After_Arrow_Icon(Icon_t Icon = {},Color_t border_color = -1);
+
+        void Color_Icon(Icon_t Icon = {});
+        void Time_Icon(Icon_t Icon = {});
+        void Date_Icon(Icon_t Icon = {});
+        void Switch_Icon(Icon_t Icon,Color_t color_off,Color_t thumb_color,Color_t txt_color,SWITCH_STATUS_t state);
+        void label_Icon(Icon_t Icon ,int h,int w,int Border,Color_t color_str_in_label,String string_in_label);
+        void slider_Icon(Icon_t Icon ,int h,byte_t range ,Color_t color_not_active ,Color_t ball_color,Color_t box_color,Color_t range_in_box_color);
+        void file_Icon(Icon_t Icon,Color_t Border_color,Color_t file_extend_color,String file_extend);
+        void folder_Icon(Icon_t Icon = {});
+        void Divider_vertical(Icon_t Icon ,int length , int thikness);
+        void Divider_Horezontal(Icon_t Icon ,int length , int thikness);
+        void ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_font_color,Color_t font_color);
+
         void Joy_Stick_Icon(int x,int y,int thumb_x,int thumb_y,int size,int thumb_size,Color_t color,Color_t OutLine,Color_t thumb,Color_t in ,Color_t Background=0);
         void Temperature_Meter_Icon(int x,int y,int value,bool show_val_dashes,Color_t color,Color_t Outline,Color_t Background);
         void Tone_Icon(int x,int y,bool is_muted_or_not,Color_t color,Color_t Background);
@@ -608,259 +611,241 @@ void SEDHOM_Icons::Display_Time_Icon(Icon_t Icon,Time_t time)
     // time name
     Text(Icon.x+146,Icon.y+38,BigFont,Icon.color,time.time_name);
 }
-void SEDHOM_Icons::Terminal_Icon(int x,int y,Color_t Background)
+void SEDHOM_Icons::Terminal_Icon(Icon_t Icon)
 {
-    Fill_Rectangle(x,y,50,50,5,WHITE);
-    Fill_Rectangle(x+3,y+3,44,44,5,BLACK);
-    Text(x+10,y+30,BigFont,GREEN,">_");
+    Fill_Rectangle(Icon.x,Icon.y,50,50,5,WHITE);
+    Fill_Rectangle(Icon.x+3,Icon.y+3,44,44,5,BLACK);
+    Text(Icon.x+10,Icon.y+30,BigFont,GREEN,">_");
 }
-void SEDHOM_Icons::About_Icon(int x,int y ,Color_t color,Color_t Background)
+void SEDHOM_Icons::About_Icon(Icon_t Icon)
 {
-    Fill_Circle(x,y,20,color);
-    Fill_Circle(x,y,17,Background);
-    Text(x-6,y+8,BigFont,color,"!");
+    Fill_Circle(Icon.x,Icon.y,20,Icon.color);
+    Fill_Circle(Icon.x,Icon.y,17,Icon.Background);
+    Text(Icon.x-6,Icon.y+8,BigFont,Icon.color,"!");
 }
-void SEDHOM_Icons::Display_Date_Icon(int x,int y,Color_t color,Color_t text_color,int year,char * month_name,int Day,char * week_day_name,Color_t Background)
+void SEDHOM_Icons::Display_Date_Icon(Icon_t Icon,Date_t Date,Color_t text_color)
 {
     char year_as_str[5];
     char Day_as_str[5];
-    sprintf(year_as_str,"%d",year);
-    sprintf(Day_as_str,"%d",Day);
-    Fill_Rectangle(x,y,130,130,15,color);
-    Text(x+42,y+40,BigFont,text_color,week_day_name);
-    Text(x+47,y+65,BigFont,text_color,Day_as_str);
-    Text(x+42,y+90,BigFont,text_color,month_name);
-    Text(x+35,y+115,BigFont,text_color,year_as_str);
+    sprintf(year_as_str,"%d",Date.year);
+    sprintf(Day_as_str,"%d",Date.Day);
+    Fill_Rectangle(Icon.x,Icon.y,130,130,15,Icon.color);
+    Text_cpp(Icon.x+42,Icon.y+40,BigFont,text_color,Date.week_day_name);
+    Text(Icon.x+47,Icon.y+65,BigFont,text_color,Day_as_str);
+    Text_cpp(Icon.x+42,Icon.y+90,BigFont,text_color,Date.month_name);
+    Text(Icon.x+35,Icon.y+115,BigFont,text_color,year_as_str);
 
-    // Draw_Line(x+15,y,x+10,y+8,Background);
-    // Draw_Line(x+15+1,y,x+10+1,y+8,Background);
-    // Draw_Line(x+15+2,y,x+10+2,y+8,Background);
-    // Draw_Line(x+15+3,y,x+10+3,y+8,Background);
-    // Draw_Line(x+15+4,y,x+10+4,y+8,Background);
-    // Draw_Line(x+15+20,y,x+10+20,y+8,Background);
-    // Draw_Line(x+15+1+20,y,x+10+1+20,y+8,Background);
-    // Draw_Line(x+15+2+20,y,x+10+2+20,y+8,Background);
-    // Draw_Line(x+15+3+20,y,x+10+3+20,y+8,Background);
-    // Draw_Line(x+15+4+20,y,x+10+4+20,y+8,Background);
-    // Draw_Line(x+15+40,y,x+10+40,y+8,Background);
-    // Draw_Line(x+15+1+40,y,x+10+1+40,y+8,Background);
-    // Draw_Line(x+15+2+40,y,x+10+2+40,y+8,Background);
-    // Draw_Line(x+15+3+40,y,x+10+3+40,y+8,Background);
-    // Draw_Line(x+15+4+40,y,x+10+4+40,y+8,Background);
-    // Draw_Line(x+15+60,y,x+10+60,y+8,Background);
-    // Draw_Line(x+15+1+60,y,x+10+1+60,y+8,Background);
-    // Draw_Line(x+15+2+60,y,x+10+2+60,y+8,Background);
-    // Draw_Line(x+15+3+60,y,x+10+3+60,y+8,Background);
-    // Draw_Line(x+15+4+60,y,x+10+4+60,y+8,Background);
-    // Draw_Line(x+15+80,y,x+10+80,y+8,Background);
-    // Draw_Line(x+15+1+80,y,x+10+1+80,y+8,Background);
-    // Draw_Line(x+15+2+80,y,x+10+2+80,y+8,Background);
-    // Draw_Line(x+15+3+80,y,x+10+3+80,y+8,Background);
-    // Draw_Line(x+15+4+80,y,x+10+4+80,y+8,Background);
-    // Draw_Line(x+15+100,y,x+10+100,y+8,Background);
-    // Draw_Line(x+15+1+100,y,x+10+1+100,y+8,Background);
-    // Draw_Line(x+15+2+100,y,x+10+2+100,y+8,Background);
-    // Draw_Line(x+15+3+100,y,x+10+3+100,y+8,Background);
-    // Draw_Line(x+15+4+100,y,x+10+4+100,y+8,Background);
+    int x_start = Icon.x + 15;
+    int y_start = Icon.y;
+    int x_end_start = Icon.x + 10;
+    int y_end_start = Icon.y + 8;
 
-    Fill_Circle(x+114-100,y+8,4,Background);
-    Fill_Circle(x+114-80,y+8,4,Background);
-    Fill_Circle(x+114-60,y+8,4,Background);
-    Fill_Circle(x+114-40,y+8,4,Background);
-    Fill_Circle(x+114-20,y+8,4,Background);
-    Fill_Circle(x+114,y+8,4,Background);
+    for (int offset_block = 0; offset_block <= 100; offset_block += 20) // 0, 20, 40, 60, 80, 100
+    {
+        for (int i = 0; i <= 4; i++) // 0,1,2,3,4
+        {
+            Draw_Line(x_start + i + offset_block, y_start, x_end_start + i + offset_block, y_end_start,Icon.Background);
+        }
+    }
+
+
+    Fill_Circle(Icon.x+114-100,Icon.y+8,4,Icon.Background);
+    Fill_Circle(Icon.x+114-80,Icon.y+8,4,Icon.Background);
+    Fill_Circle(Icon.x+114-60,Icon.y+8,4,Icon.Background);
+    Fill_Circle(Icon.x+114-40,Icon.y+8,4,Icon.Background);
+    Fill_Circle(Icon.x+114-20,Icon.y+8,4,Icon.Background);
+    Fill_Circle(Icon.x+114,Icon.y+8,4,Icon.Background);
 
 }
-void SEDHOM_Icons::UP_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background)
+void SEDHOM_Icons::UP_Arrow_Icon(Icon_t Icon,Color_t border_color)
 {
-  Fill_Triangle(x-20-6,y+25+3,x,y-6,x+20+6,y+25+3,end_color);
-  Fill_Triangle(x-20,y+25,x,y,x+20,y+25,color);
-  fill_rectangle_with_end(x-10,y+25,20,20,3,color,end_color);
-  Fill_Rectangle(x-10+3,y+25,20-6,20-3,0,color);
+  Fill_Triangle(Icon.x-20-6,Icon.y+25+3,Icon.x,Icon.y-6,Icon.x+20+6,Icon.y+25+3,border_color);
+  Fill_Triangle(Icon.x-20,Icon.y+25,Icon.x,Icon.y,Icon.x+20,Icon.y+25,Icon.color);
+  fill_rectangle_with_end(Icon.x-10,Icon.y+25,20,20,3,Icon.color,border_color);
+  Fill_Rectangle(Icon.x-10+3,Icon.y+25,20-6,20-3,0,Icon.color);
 }
-void SEDHOM_Icons::DOWN_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background)
+void SEDHOM_Icons::DOWN_Arrow_Icon(Icon_t Icon,Color_t border_color)
 {
-  Fill_Triangle(x-20-6,y+25-3,x,y-6+60,x+20+6,y+25-3,end_color);
-  Fill_Triangle(x-20,y+25,x,y+50,x+20,y+25,color);
-  fill_rectangle_with_end(x-10,y+5,20,20,3,color,end_color);
-  Fill_Rectangle(x-10+3,y+8,20-6,20-3,0,color);
+  Fill_Triangle(Icon.x-20-6,Icon.y+25-3,Icon.x,Icon.y-6+60,Icon.x+20+6,Icon.y+25-3,border_color);
+  Fill_Triangle(Icon.x-20,Icon.y+25,Icon.x,Icon.y+50,Icon.x+20,Icon.y+25,Icon.color);
+  fill_rectangle_with_end(Icon.x-10,Icon.y+5,20,20,3,Icon.color,border_color);
+  Fill_Rectangle(Icon.x-10+3,Icon.y+8,20-6,20-3,0,Icon.color);
 }
-void SEDHOM_Icons::LEFT_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background)
+void SEDHOM_Icons::LEFT_Arrow_Icon(Icon_t Icon,Color_t border_color)
 {
-  Fill_Triangle(x-6,y,x+25+3,y-25-6,x+25+3,y+25+6,end_color);
-  Fill_Triangle(x,y,x+25,y-25,x+25,y+25,color);
-  fill_rectangle_with_end(x+25,y-8-1,20,20,3,color,end_color);
-  Fill_Rectangle(x+25,y-8+3-1,20-3,20-6,0,color);
+  Fill_Triangle(Icon.x-6,Icon.y,Icon.x+25+3,Icon.y-25-6,Icon.x+25+3,Icon.y+25+6,border_color);
+  Fill_Triangle(Icon.x,Icon.y,Icon.x+25,Icon.y-25,Icon.x+25,Icon.y+25,Icon.color);
+  fill_rectangle_with_end(Icon.x+25,Icon.y-8-1,20,20,3,Icon.color,border_color);
+  Fill_Rectangle(Icon.x+25,Icon.y-8+3-1,20-3,20-6,0,Icon.color);
 }
-void SEDHOM_Icons::RIGHT_Aroow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background)
+void SEDHOM_Icons::RIGHT_Aroow_Icon(Icon_t Icon,Color_t border_color)
 {
-  Fill_Triangle(x+6+50,y,x+25-3,y-25-6,x+25-3,y+25+6,end_color);
-  Fill_Triangle(x+50,y,x+25,y-25,x+25,y+25,color);
-  fill_rectangle_with_end(x+5,y-8-1,20,20,3,color,end_color);
-  Fill_Rectangle(x+8,y-8+3-1,20-3,20-6,0,color);
+  Fill_Triangle(Icon.x+6+50,Icon.y,Icon.x+25-3,Icon.y-25-6,Icon.x+25-3,Icon.y+25+6,border_color);
+  Fill_Triangle(Icon.x+50,Icon.y,Icon.x+25,Icon.y-25,Icon.x+25,Icon.y+25,Icon.color);
+  fill_rectangle_with_end(Icon.x+5,Icon.y-8-1,20,20,3,Icon.color,border_color);
+  Fill_Rectangle(Icon.x+8,Icon.y-8+3-1,20-3,20-6,0,Icon.color);
 }
-void SEDHOM_Icons::Color_Icon(int x,int y,Color_t Background)
+void SEDHOM_Icons::Back_Arrow_Icon(Icon_t Icon,Color_t border_color)
 {
-    Fill_Rectangle(x,y,30,30,5,MAGENTA);
-    Fill_Rectangle(x+5,y+5,30,30,5,RED);
-    Fill_Rectangle(x+10,y+10,30,30,5,BLUE);
-    Fill_Rectangle(x+15,y+15,30,30,5,GREEN);
+  Fill_Triangle(Icon.x-6,Icon.y,Icon.x+25+3,Icon.y-15-6,Icon.x+25+3,Icon.y+15+6,border_color);
+  Fill_Triangle(Icon.x,Icon.y,Icon.x+25,Icon.y-15,Icon.x+25,Icon.y+15,Icon.color);
+  fill_rectangle_with_end(Icon.x+25,Icon.y-8-1,25,18,3,Icon.color,border_color);
+  Fill_Rectangle(Icon.x+22,Icon.y-8+3-1,12,12,5,Icon.color);
 }
-void SEDHOM_Icons::Time_Icon(int x,int y,Color_t color,Color_t Background)
+void SEDHOM_Icons::After_Arrow_Icon(Icon_t Icon,Color_t border_color)
 {
-    Fill_Circle(x,y,20,color);
-    Fill_Circle(x,y,17,Background);
-    Fill_Rectangle(x-2,y-14,3,12,5,color);
-    Fill_Rectangle(x,y-1,10,3,5,color);
-    Fill_Circle(x,y,4,color);
+  Fill_Triangle(Icon.x+6+50,Icon.y,Icon.x+25-3,Icon.y-15-6,Icon.x+25-3,Icon.y+15+6,border_color);
+  Fill_Triangle(Icon.x+50,Icon.y,Icon.x+25,Icon.y-15,Icon.x+25,Icon.y+15,Icon.color);
+  fill_rectangle_with_end(Icon.x,Icon.y-8-1,25,18,3,Icon.color,border_color);
+  fill_Rectangle(Icon.x+15,Icon.y-8+3-1,12,13,5,Icon.color);
 }
-void SEDHOM_Icons::Date_Icon(int x,int y,Color_t color,Color_t Background)
+void SEDHOM_Icons::Color_Icon(Icon_t Icon)
 {
-    Fill_Rectangle(x,y,45,48,5,color);
-    Fill_Rectangle(x+2,y+10,41,36,5,Background);
-    Fill_Circle(x+5,y+5,3,Background);
-    Fill_Circle(x+23,y+5,3,Background);
-    Fill_Circle(x+40,y+5,3,Background);
-    Text(x+20,y+24,SmallFont,color,"6");
-    Text(x+12,y+33,SmallFont,color,"Jun");
-    Text(x+9,y+46,SmallFont,color,"2025");
+    Fill_Rectangle(Icon.x,Icon.y,30,30,5,MAGENTA);
+    Fill_Rectangle(Icon.x+5,Icon.y+5,30,30,5,RED);
+    Fill_Rectangle(Icon.x+10,Icon.y+10,30,30,5,BLUE);
+    Fill_Rectangle(Icon.x+15,Icon.y+15,30,30,5,GREEN);
 }
-void SEDHOM_Icons::Back_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background)
+void SEDHOM_Icons::Time_Icon(Icon_t Icon)
 {
-  Fill_Triangle(x-6,y,x+25+3,y-15-6,x+25+3,y+15+6,end_color);
-  Fill_Triangle(x,y,x+25,y-15,x+25,y+15,color);
-  fill_rectangle_with_end(x+25,y-8-1,25,18,3,color,end_color);
-  Fill_Rectangle(x+22,y-8+3-1,12,12,5,color);
+    Fill_Circle(Icon.x,Icon.y,20,Icon.color);
+    Fill_Circle(Icon.x,Icon.y,17,Icon.Background);
+    Fill_Rectangle(Icon.x-2,Icon.y-14,3,12,5,Icon.color);
+    Fill_Rectangle(Icon.x,Icon.y-1,10,3,5,Icon.color);
+    Fill_Circle(Icon.x,Icon.y,4,Icon.color);
 }
-void SEDHOM_Icons::After_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background)
+void SEDHOM_Icons::Date_Icon(Icon_t Icon)
 {
-  Fill_Triangle(x+6+50,y,x+25-3,y-15-6,x+25-3,y+15+6,end_color);
-  Fill_Triangle(x+50,y,x+25,y-15,x+25,y+15,color);
-  fill_rectangle_with_end(x,y-8-1,25,18,3,color,end_color);
-  fill_Rectangle(x+15,y-8+3-1,12,13,5,color);
+    Fill_Rectangle(Icon.x,Icon.y,45,48,5,Icon.color);
+    Fill_Rectangle(Icon.x+2,Icon.y+10,41,36,5,Icon.Background);
+    Fill_Circle(Icon.x+5,Icon.y+5,3,Icon.Background);
+    Fill_Circle(Icon.x+23,Icon.y+5,3,Icon.Background);
+    Fill_Circle(Icon.x+40,Icon.y+5,3,Icon.Background);
+    Text(Icon.x+20,Icon.y+24,SmallFont,Icon.color,"6");
+    Text(Icon.x+12,Icon.y+33,SmallFont,Icon.color,"Jun");
+    Text(Icon.x+9,Icon.y+46,SmallFont,Icon.color,"2025");
 }
-void SEDHOM_Icons::Switch_Icon(int x,int y,Color_t color_on,Color_t color_off,Color_t thumb_color,Color_t txt_color,bool state,Color_t Background)
+void SEDHOM_Icons::Switch_Icon(Icon_t Icon,Color_t color_off,Color_t thumb_color,Color_t txt_color,SWITCH_STATUS_t state)
 {
-    Color_t color = color_off;
-    int index = x+57;
-    int index_str = x-13;
+    Color_t State_color = color_off;
+    int index = Icon.x+57;
+    int index_str = Icon.x-13;
     String state_str = "OFF";
-    color = (state) ? color_on : color_off ;
-    index = (state) ? (x+20) : (x+80) ;
-    index_str = (state) ? (x+50) : (x+10) ;
-    state_str = (state) ? "ON" : "OFF" ;
-    Fill_Rectangle(x,y,100,40,50,color);
-    Fill_Circle(index,y+20,15,thumb_color);//not mode
-    Text_cpp((index_str),y+28,BigFont,txt_color,state_str);//mode
+    State_color = (state == SWITCH_State_ON) ? Icon.color : color_off ;
+    index = (state == SWITCH_State_ON) ? (Icon.x+20) : (Icon.x+80) ;
+    index_str = (state == SWITCH_State_ON) ? (Icon.x+50) : (Icon.x+10) ;
+    state_str = (state == SWITCH_State_ON) ? "ON" : "OFF" ;
+    Fill_Rectangle(Icon.x,Icon.y,100,40,50,State_color);
+    Fill_Circle(index,Icon.y+20,15,thumb_color);//not mode
+    Text_cpp((index_str),Icon.y+28,BigFont,txt_color,state_str);//mode
 }
-void SEDHOM_Icons::label_Icon(int x,int y,int h,int w,int end,word_t string_in_label,Color_t color_str_in_label,Color_t color,Color_t Background)
+void SEDHOM_Icons::label_Icon(Icon_t Icon ,int h,int w,int Border,Color_t color_str_in_label,String string_in_label)
 {
-    Color_t label_color_in_func = color;
-    float num = atoi(string_in_label);
+    Color_t label_color_in_func = Icon.color;
+    float num = 1;
+
     if(string_in_label == "OFF" || string_in_label == "off" || num == 0){label_color_in_func = RED;}
-    else if(string_in_label == "ON" || string_in_label == "on" || num >= 1){label_color_in_func = color;}
-    //else {label_color_in_func = color;}
-    if(string_in_label == "ON" || string_in_label == "on" || num >= 1){label_color_in_func = color;}
-   Fill_Rectangle(x,y,h,w,5,label_color_in_func); 
-   Fill_Rectangle(x+end,y+end,h-2*end,w-2*end,5,Background); 
-   Text(x+10,y+(0.6*w),SmallFont,color_str_in_label,string_in_label);
+    else if(string_in_label == "ON" || string_in_label == "on" || num >= 1){label_color_in_func = Icon.color;}
+    if(string_in_label == "ON" || string_in_label == "on" || num >= 1){label_color_in_func = Icon.color;}
+
+    Border_Rectangle({Icon.x,Icon.y,label_color_in_func,Icon.Background},h,w,5,Border);
+    Text_cpp(Icon.x+10,Icon.y+(0.6*w),SmallFont,color_str_in_label,string_in_label);
 }
-void SEDHOM_Icons::slide_Icon(int x,int y,int h,byte_t range ,Color_t color_active,Color_t color_not_active ,Color_t ball_color,Color_t box_color,Color_t range_in_box_color,Color_t Background)
+void SEDHOM_Icons::slider_Icon(Icon_t Icon ,int h,byte_t range ,Color_t color_not_active ,Color_t ball_color,Color_t box_color,Color_t range_in_box_color)
 {
     long index = map(range,0,100,0,h);
     char range_str[5];
     sprintf(range_str,"%d",range);
 
-    Fill_Rectangle(x,y,h,10,5,color_not_active);
-    Fill_Rectangle(x,y,index,10,5,color_active);
-    Fill_Circle(x+index,y+5,10,Not_Mode());
-    fill_rectangle_with_end(x+h+15,y-10,40,30,3,Mode(),box_color);
-    Text(x+h+8+15,y+19-8,SmallFont,range_in_box_color,range_str);
+    Fill_Rectangle(Icon.x,Icon.y,h,10,5,color_not_active);
+    Fill_Rectangle(Icon.x,Icon.y,index,10,5,Icon.color);
+    Fill_Circle(Icon.x+index,Icon.y+5,10,Not_Mode());
+    fill_rectangle_with_end(Icon.x+h+15,Icon.y-10,40,30,3,Mode(),box_color);
+    Text(Icon.x+h+8+15,Icon.y+19-8,SmallFont,range_in_box_color,range_str);
 }
-void SEDHOM_Icons::file_Icon(int x,int y,Color_t color,Color_t end_color,Color_t file_extend_color,word_t file_extend,Color_t Background)
+void SEDHOM_Icons::file_Icon(Icon_t Icon,Color_t Border_color,Color_t file_extend_color,String file_extend)
 {
-    fill_rectangle_with_end(x,y,50,60,3,Background,end_color);
-    fill_rectangle_with_end(x-10,y+30,30,20,3,color,end_color);
-    fill_rectangle_with_end(x+29,y-1,30,21,3,Background,Background);
-    Fill_Triangle(x+6+43,y+20,x+29,y,x+29,y+20,end_color);
-    Fill_Triangle(x+43,y+18,x+29+3,y+6,x+29+3,y+18,color);
-    Fill_Rectangle(x+10,y+15,15,2,5,end_color);
-    Fill_Rectangle(x+10,y+25,30,2,5,end_color);    
-    Fill_Rectangle(x+25,y+35,15,2,5,end_color);
-    Fill_Rectangle(x+25,y+45,15,2,5,end_color);
-    Text(x-5,y+46,SmallFont,file_extend_color,file_extend);
+    fill_rectangle_with_end(Icon.x,Icon.y,50,60,3,Icon.Background,Border_color);
+    fill_rectangle_with_end(Icon.x-10,Icon.y+30,30,20,3,Icon.color,Border_color);
+    fill_rectangle_with_end(Icon.x+29,Icon.y-1,30,21,3,Icon.Background,Icon.Background);
+    Fill_Triangle(Icon.x+6+43,Icon.y+20,Icon.x+29,Icon.y,Icon.x+29,Icon.y+20,Border_color);
+    Fill_Triangle(Icon.x+43,Icon.y+18,Icon.x+29+3,Icon.y+6,Icon.x+29+3,Icon.y+18,Icon.color);
+    Fill_Rectangle(Icon.x+10,Icon.y+15,15,2,5,Border_color);
+    Fill_Rectangle(Icon.x+10,Icon.y+25,30,2,5,Border_color);    
+    Fill_Rectangle(Icon.x+25,Icon.y+35,15,2,5,Border_color);
+    Fill_Rectangle(Icon.x+25,Icon.y+45,15,2,5,Border_color);
+    Text(Icon.x-5,Icon.y+46,SmallFont,file_extend_color,file_extend);
 }
-void SEDHOM_Icons::folder_Icon(int x,int y,Color_t folder_color,Color_t Background)
+void SEDHOM_Icons::folder_Icon(Icon_t Icon)
 {
-    Fill_Rectangle(x,y,30,40,5,folder_color);
-    Fill_Rectangle(x+28,y+5,40,20,5,folder_color);
-    fill_rectangle_with_end(x+5,y+10,60,20,1,WHITE,BLACK);
-    Fill_Rectangle(x,y+20,68,35,5,folder_color);
-    Fill_Rectangle(x,y+20,69,1,0,BLACK);
-
+    Fill_Rectangle(Icon.x,Icon.y,30,40,5,Icon.color);
+    Fill_Rectangle(Icon.x+28,Icon.y+5,40,20,5,Icon.color);
+    fill_rectangle_with_end(Icon.x+5,Icon.y+10,60,20,1,WHITE,BLACK);
+    Fill_Rectangle(Icon.x,Icon.y+20,68,35,5,Icon.color);
+    Fill_Rectangle(Icon.x,Icon.y+20,69,1,0,BLACK);
 }
-void SEDHOM_Icons::Divider_vertical(int x,int y,int length , int thikness,Color_t color)
+void SEDHOM_Icons::Divider_vertical(Icon_t Icon,int length,int thikness)
 {
-    Fill_Rectangle(x,y,length,thikness,1,color);
+    Fill_Rectangle(Icon.x,Icon.y,length,thikness,1,Icon.color);
 }
-void SEDHOM_Icons::Divider_Horezontal(int x,int y,int length , int thikness,Color_t color)
+void SEDHOM_Icons::Divider_Horezontal(Icon_t Icon ,int length , int thikness)
 {
-    Fill_Rectangle(x,y,thikness,length,1,color);
+    Fill_Rectangle(Icon.x,Icon.y,thikness,length,1,Icon.color);
 }
-void SEDHOM_Icons::ID_Card_Icon(int x,int y,Color_t color,Color_t main_font_color,Color_t font_color,Color_t image_background,bool default_image,bool eye,bool prof,char* name,char* unversity,char* department_1,char* department_2,char* Born,char* number,Color_t Background)
+void SEDHOM_Icons::ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_font_color,Color_t font_color)
 {
-    #define x1   x
-    #define y1   y
+    #define x1   Icon.x
+    #define y1   Icon.y
 
     #define h1    270
     #define w1    200
 
     Color_t color_id =0;
-    if(color == WHITE) color_id = BLACK;
-    else if(color == BLACK) color_id = WHITE;
-    else  color_id = color;
+    if(Icon.color == WHITE) color_id = BLACK;
+    else if(Icon.color == BLACK) color_id = WHITE;
+    else  color_id = Icon.color;
     Container(x1-3,y1-3,h1+6,w1+6,20,color_id);
-    Container(x1,y1,h1,w1,20,color);
-    Text(((prof)?x1+60:x1+80),y1+20,BigFont,main_font_color,((prof)?"PROFESSER":"STUDENT"));
-    Divider_vertical(x1+10,y1+35,h1-20,3,main_font_color);
+    Container(x1,y1,h1,w1,20,Icon.color);
+    Text(((User.is_professser)?x1+60:x1+80),y1+20,BigFont,main_font_color,((User.is_professser)?"PROFESSER":"STUDENT"));
+    Divider_vertical({x1+10,y1+35,main_font_color,Icon.Background},h1-20,3);
     Text(x1+30,y1+55,SmallFont,font_color,"IDENTITY CARD");
 
-    Text(x1+10,y1+70,SmallFont,main_font_color,((prof)?"Dr Name":"Nmae"));
-    Text(x1+10,y1+85,SmallFont,font_color,name);
+    Text(x1+10,y1+70,SmallFont,main_font_color,((User.is_professser)?"Dr Name":"Nmae"));
+    Text(x1+10,y1+85,SmallFont,font_color,User.user_name);
 
-    Text(x1+10,y1+100,SmallFont,main_font_color,((prof)?"Unversity":"Stadies at"));
-    Text(x1+10,y1+115,SmallFont,font_color,unversity);
+    Text(x1+10,y1+100,SmallFont,main_font_color,((User.is_professser)?"Unversity":"Stadies at"));
+    Text(x1+10,y1+115,SmallFont,font_color,User.universty);
 
     Text(x1+10,y1+130,SmallFont,main_font_color,"Department");
-    Text(x1+10,y1+145,SmallFont,font_color,department_1);
-    Text(x1+10,y1+160,SmallFont,font_color,department_2);
+    Text(x1+10,y1+145,SmallFont,font_color,User.department_1);
+    Text(x1+10,y1+160,SmallFont,font_color,User.department_2);
 
     Text(x1+10,y1+175,SmallFont,main_font_color,"Born");
-    Text(x1+10,y1+190,SmallFont,font_color,Born);
+    Text(x1+10,y1+190,SmallFont,font_color,User.Born);
 
-    Container(x1+160,y1+45,100,110,0,image_background);
+    Container(x1+160,y1+45,100,110,0,User.image_background);
     
-    if(default_image)
+    if(User.default_image)
     {
         Fill_Circle(x1+210,y1+160,40,DARKGREY);
         Fill_Circle(x1+210,y1+100,25,DARKGREY);
-        if(eye)
+        if(User.eye)
         {
             Fill_Circle(x1+220,y1+97,7,BLACK);
             Fill_Circle(x1+220,y1+97,5,DARKGREY);
             Fill_Circle(x1+220,y1+97,1,BLACK);//eye
-            Divider_vertical(x1+205,y1+97,10,2,BLACK);
+            Divider_vertical({x1+205,y1+97,Black,Icon.Background},10,2);
             Fill_Circle(x1+200,y1+97,7,BLACK);
             Fill_Circle(x1+200,y1+97,5,DARKGREY);
             Fill_Circle(x1+200,y1+97,1,BLACK);//eye
-            Divider_vertical(x1+225,y1+97,10,2,BLACK);
-            Divider_vertical(x1+185,y1+97,10,2,BLACK);
+            Divider_vertical({x1+225,y1+97,Black,Icon.Background},10,2);
+            Divider_vertical({x1+185,y1+97,Black,Icon.Background},10,2);
         }
     }
-    Fill_Rectangle(x1+150,y1+155,120,45,15,color);
-    Text(x1+157,y1+175,SmallFont,font_color,number);
+    Fill_Rectangle(x1+150,y1+155,120,45,15,Icon.color);
+    Text(x1+157,y1+175,SmallFont,font_color,User.number);
 }
-void SEDHOM_Icons::Joy_Stick_Icon(int x,int y,int thumb_x,int thumb_y,int size,int thumb_size,Color_t color,Color_t OutLine,Color_t thumb,Color_t in ,Color_t Background)
+void SEDHOM_Icons::Joy_Stick_Icon( int x,int y,int thumb_x,int thumb_y,int size,int thumb_size,Color_t color,Color_t OutLine,Color_t thumb,Color_t in ,Color_t Background)
 {
   fill_Circle(x,y,size,OutLine);
   fill_Circle(x,y,size-3,color);
