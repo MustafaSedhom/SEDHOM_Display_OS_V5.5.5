@@ -51,7 +51,7 @@ class SEDHOM_Icons
         Color_t Shadow_effect(Icon_t shadow , Shapes_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Raduis = 20 , Position_t pos = Position_Right_and_Bottom, Color_t Shadow_color = Color_DarkGrey);
         // Draw SEDhOM Icons
         void WIFI_Icon(int x,int y,WIFI_STATUS_t state,Color_t color_on,Color_t color_off,Color_t Background);
-        void Battary_Icon(int x,int y,int range,Color_t color,Color_t txt_color,Color_t Background,bool low_charge_red_color);
+        void Battary_Icon(int x,int y,int range,Color_t color,Color_t txt_color,Color_t Background,bool low_charge_red_color = true);
         void Home_Icon(int x,int y,Color_t color,Color_t Background);
         void Setting_Icon(int x,int y,Color_t color,Color_t Background);
         void Add_Icon(int x,int y,Color_t color,Color_t Background=0);
@@ -286,7 +286,7 @@ void SEDHOM_Icons::Draw_Custom_int_shap(int x,int y,int h,int w,int color,int ar
   }
 }
 // effects
-Color_t SEDHOM_Icons::Blur(int x,int y,int h,int w,int r,int Blur_value,Color_t mode,bool circle_or_rectangle = 1)
+Color_t SEDHOM_Icons::Blur(int x,int y,int h,int w,int r,int Blur_value,Color_t mode,bool circle_or_rectangle)
 {
   Color_t color_value = map(Blur_value,mode?20:0,mode?0:20,0,255);
 
@@ -301,7 +301,7 @@ Color_t SEDHOM_Icons::Blur(int x,int y,int h,int w,int r,int Blur_value,Color_t 
   }
   return color;
 }
-Color_t SEDHOM_Icons::Color_Blur(int x,int y,int h,int w,int r,Color_t color,Color_t mode,bool circle_or_rectangle = 1,void (*shadow)(Icon_t shadow_icon, int shadow_h,int shadow_w,int shadow_r,Color_t shadow_color) = nullptr)
+Color_t SEDHOM_Icons::Color_Blur(int x,int y,int h,int w,int r,Color_t color,Color_t mode,bool circle_or_rectangle ,void (*shadow)(Icon_t shadow_icon, int shadow_h,int shadow_w,int shadow_r,Color_t shadow_color) )
 {
   // if(shadow != nullptr)
   // {
@@ -322,7 +322,7 @@ Color_t SEDHOM_Icons::Color_Blur(int x,int y,int h,int w,int r,Color_t color,Col
   }
   return color;
 }
-Color_t SEDHOM_Icons::Shadow_effect(Icon_t shadow, Shapes_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Raduis = 20 , Position_t pos = Position_Right_and_Bottom , Color_t Shadow_color = Color_DarkGrey)
+Color_t SEDHOM_Icons::Shadow_effect(Icon_t shadow, Shapes_t shape , int shadow_size  , int shadow_h , int shadow_w ,int shadow_Raduis , Position_t pos  , Color_t Shadow_color )
 {
     int x = shadow.x;
     int y = shadow.y;
@@ -449,7 +449,7 @@ void SEDHOM_Icons::WIFI_Icon(int x,int y,WIFI_STATUS_t state,Color_t color_on,Co
     }
     Fill_Rectangle(x-10,y+13,20,10,0,Background);
 } 
-void SEDHOM_Icons::Battary_Icon(int x,int y,int range,Color_t color,Color_t txt_color,Color_t Background,bool low_charge_red_color=true)
+void SEDHOM_Icons::Battary_Icon(int x,int y,int range,Color_t color,Color_t txt_color,Color_t Background,bool low_charge_red_color)
 {
     int txt_x=0;
     int txt_y_index = y+22;
@@ -493,12 +493,12 @@ void SEDHOM_Icons::Setting_Icon(int x,int y,Color_t color,Color_t Background)
 
     Fill_Circle(x-10, y, 5, Background);
 }
-void SEDHOM_Icons::Add_Icon(int x,int y,Color_t color,Color_t Background=0)
+void SEDHOM_Icons::Add_Icon(int x,int y,Color_t color,Color_t Background)
 {
     Fill_Rectangle(x+15,y-2+15,30,5,5,color);
     Fill_Rectangle(x+13+15,y-14+15,5,30,5,color);
 }
-void SEDHOM_Icons::SD_Card_Icon(int x,int y,Color_t Background=0)
+void SEDHOM_Icons::SD_Card_Icon(int x,int y,Color_t Background)
 {
     Fill_Rectangle(x-5, y-5,40,45,5,WHITE);
     Fill_Rectangle(x, y,30,35,5,BLACK);
@@ -522,7 +522,7 @@ void SEDHOM_Icons::Control_Icon(int x,int y,Color_t color,Color_t Background)
     Fill_Circle(x+12,y+16,3,Background);
     Fill_Circle(x+29,y+31,3,Background);
 }
-void SEDHOM_Icons::Sensor_Icon(int x,int y,Color_t color,Color_t Background=0)
+void SEDHOM_Icons::Sensor_Icon(int x,int y,Color_t color,Color_t Background)
 {
     Fill_Rectangle(x+3,y,30,10,5,color);
     Fill_Circle(x+18, y+10,5,color);
@@ -559,7 +559,7 @@ void SEDHOM_Icons::Bluetooth_Icon(int x , int y ,BLUETOOTH_STATUS_t connect_stat
     Fill_Rectangle(x-20, y-10,42,50,0, Background);
  }
 }
-void SEDHOM_Icons::Button_Icon(int x,int y,Color_t Background=0,bool print_on_and_off = 0)
+void SEDHOM_Icons::Button_Icon(int x,int y,Color_t Background,bool print_on_and_off)
 {
     Fill_Rectangle(x,y,50,20 ,30,GREEN);
     Fill_Circle(x+39,y+10,7,WHITE);
@@ -572,7 +572,7 @@ void SEDHOM_Icons::Button_Icon(int x,int y,Color_t Background=0,bool print_on_an
          Text(x+23, y+41,SmallFont,WHITE,"OFF");
     }
 }
-void SEDHOM_Icons::Display_Time_Icon(int x,int y,Time_t time,Color_t color,Color_t Background=0)
+void SEDHOM_Icons::Display_Time_Icon(int x,int y,Time_t time,Color_t color,Color_t Background)
 {
     char Hour_as_str[3];
     char min_as_str[3];
@@ -608,7 +608,7 @@ void SEDHOM_Icons::Display_Time_Icon(int x,int y,Time_t time,Color_t color,Color
     // time name
     Text(x+146,y+38,BigFont,color,time.time_name);
 }
-void SEDHOM_Icons::Terminal_Icon(int x,int y,Color_t Background=0)
+void SEDHOM_Icons::Terminal_Icon(int x,int y,Color_t Background)
 {
     Fill_Rectangle(x,y,50,50,5,WHITE);
     Fill_Rectangle(x+3,y+3,44,44,5,BLACK);
@@ -671,35 +671,35 @@ void SEDHOM_Icons::Display_Date_Icon(int x,int y,Color_t color,Color_t text_colo
     Fill_Circle(x+114,y+8,4,Background);
 
 }
-void SEDHOM_Icons::UP_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background=0)
+void SEDHOM_Icons::UP_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background)
 {
   Fill_Triangle(x-20-6,y+25+3,x,y-6,x+20+6,y+25+3,end_color);
   Fill_Triangle(x-20,y+25,x,y,x+20,y+25,color);
   fill_rectangle_with_end(x-10,y+25,20,20,3,color,end_color);
   Fill_Rectangle(x-10+3,y+25,20-6,20-3,0,color);
 }
-void SEDHOM_Icons::DOWN_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background=0)
+void SEDHOM_Icons::DOWN_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background)
 {
   Fill_Triangle(x-20-6,y+25-3,x,y-6+60,x+20+6,y+25-3,end_color);
   Fill_Triangle(x-20,y+25,x,y+50,x+20,y+25,color);
   fill_rectangle_with_end(x-10,y+5,20,20,3,color,end_color);
   Fill_Rectangle(x-10+3,y+8,20-6,20-3,0,color);
 }
-void SEDHOM_Icons::LEFT_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background=0)
+void SEDHOM_Icons::LEFT_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background)
 {
   Fill_Triangle(x-6,y,x+25+3,y-25-6,x+25+3,y+25+6,end_color);
   Fill_Triangle(x,y,x+25,y-25,x+25,y+25,color);
   fill_rectangle_with_end(x+25,y-8-1,20,20,3,color,end_color);
   Fill_Rectangle(x+25,y-8+3-1,20-3,20-6,0,color);
 }
-void SEDHOM_Icons::RIGHT_Aroow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background=0)
+void SEDHOM_Icons::RIGHT_Aroow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background)
 {
   Fill_Triangle(x+6+50,y,x+25-3,y-25-6,x+25-3,y+25+6,end_color);
   Fill_Triangle(x+50,y,x+25,y-25,x+25,y+25,color);
   fill_rectangle_with_end(x+5,y-8-1,20,20,3,color,end_color);
   Fill_Rectangle(x+8,y-8+3-1,20-3,20-6,0,color);
 }
-void SEDHOM_Icons::Color_Icon(int x,int y,Color_t Background=0)
+void SEDHOM_Icons::Color_Icon(int x,int y,Color_t Background)
 {
     Fill_Rectangle(x,y,30,30,5,MAGENTA);
     Fill_Rectangle(x+5,y+5,30,30,5,RED);
@@ -725,33 +725,33 @@ void SEDHOM_Icons::Date_Icon(int x,int y,Color_t color,Color_t Background)
     Text(x+12,y+33,SmallFont,color,"Jun");
     Text(x+9,y+46,SmallFont,color,"2025");
 }
-void SEDHOM_Icons::Back_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background=0)
+void SEDHOM_Icons::Back_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background)
 {
   Fill_Triangle(x-6,y,x+25+3,y-15-6,x+25+3,y+15+6,end_color);
   Fill_Triangle(x,y,x+25,y-15,x+25,y+15,color);
   fill_rectangle_with_end(x+25,y-8-1,25,18,3,color,end_color);
   Fill_Rectangle(x+22,y-8+3-1,12,12,5,color);
 }
-void SEDHOM_Icons::After_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background=0)
+void SEDHOM_Icons::After_Arrow_Icon(int x,int y, Color_t color,Color_t end_color,Color_t Background)
 {
   Fill_Triangle(x+6+50,y,x+25-3,y-15-6,x+25-3,y+15+6,end_color);
   Fill_Triangle(x+50,y,x+25,y-15,x+25,y+15,color);
   fill_rectangle_with_end(x,y-8-1,25,18,3,color,end_color);
   fill_Rectangle(x+15,y-8+3-1,12,13,5,color);
 }
-void SEDHOM_Icons::Switch_Icon(int x,int y,Color_t color_on,Color_t color_off,Color_t thumb_color,Color_t txt_color,bool state,Color_t Background=0)
+void SEDHOM_Icons::Switch_Icon(int x,int y,Color_t color_on,Color_t color_off,Color_t thumb_color,Color_t txt_color,bool state,Color_t Background)
 {
     Color_t color = color_off;
     int index = x+57;
     int index_str = x-13;
-    word_t state_str = "OFF";
+    String state_str = "OFF";
     color = (state) ? color_on : color_off ;
     index = (state) ? (x+20) : (x+80) ;
     index_str = (state) ? (x+50) : (x+10) ;
     state_str = (state) ? "ON" : "OFF" ;
     Fill_Rectangle(x,y,100,40,50,color);
     Fill_Circle(index,y+20,15,thumb_color);//not mode
-    Text((index_str),y+28,BigFont,txt_color,state_str);//mode
+    Text_cpp((index_str),y+28,BigFont,txt_color,state_str);//mode
 }
 void SEDHOM_Icons::label_Icon(int x,int y,int h,int w,int end,word_t string_in_label,Color_t color_str_in_label,Color_t color,Color_t Background)
 {
@@ -765,7 +765,7 @@ void SEDHOM_Icons::label_Icon(int x,int y,int h,int w,int end,word_t string_in_l
    Fill_Rectangle(x+end,y+end,h-2*end,w-2*end,5,Background); 
    Text(x+10,y+(0.6*w),SmallFont,color_str_in_label,string_in_label);
 }
-void SEDHOM_Icons::slide_Icon(int x,int y,int h,byte_t range ,Color_t color_active,Color_t color_not_active ,Color_t ball_color,Color_t box_color,Color_t range_in_box_color,Color_t Background=0)
+void SEDHOM_Icons::slide_Icon(int x,int y,int h,byte_t range ,Color_t color_active,Color_t color_not_active ,Color_t ball_color,Color_t box_color,Color_t range_in_box_color,Color_t Background)
 {
     long index = map(range,0,100,0,h);
     char range_str[5];
@@ -790,7 +790,7 @@ void SEDHOM_Icons::file_Icon(int x,int y,Color_t color,Color_t end_color,Color_t
     Fill_Rectangle(x+25,y+45,15,2,5,end_color);
     Text(x-5,y+46,SmallFont,file_extend_color,file_extend);
 }
-void SEDHOM_Icons::folder_Icon(int x,int y,Color_t folder_color,Color_t Background=0)
+void SEDHOM_Icons::folder_Icon(int x,int y,Color_t folder_color,Color_t Background)
 {
     Fill_Rectangle(x,y,30,40,5,folder_color);
     Fill_Rectangle(x+28,y+5,40,20,5,folder_color);
@@ -807,7 +807,7 @@ void SEDHOM_Icons::Divider_Horezontal(int x,int y,int length , int thikness,Colo
 {
     Fill_Rectangle(x,y,thikness,length,1,color);
 }
-void SEDHOM_Icons::ID_Card_Icon(int x,int y,Color_t color,Color_t main_font_color,Color_t font_color,Color_t image_background,bool default_image,bool eye,bool prof,char* name,char* unversity,char* department_1,char* department_2,char* Born,char* number,Color_t Background=0)
+void SEDHOM_Icons::ID_Card_Icon(int x,int y,Color_t color,Color_t main_font_color,Color_t font_color,Color_t image_background,bool default_image,bool eye,bool prof,char* name,char* unversity,char* department_1,char* department_2,char* Born,char* number,Color_t Background)
 {
     #define x1   x
     #define y1   y
@@ -860,7 +860,7 @@ void SEDHOM_Icons::ID_Card_Icon(int x,int y,Color_t color,Color_t main_font_colo
     Fill_Rectangle(x1+150,y1+155,120,45,15,color);
     Text(x1+157,y1+175,SmallFont,font_color,number);
 }
-void SEDHOM_Icons::Joy_Stick_Icon(int x,int y,int thumb_x,int thumb_y,int size,int thumb_size,Color_t color,Color_t OutLine,Color_t thumb,Color_t in ,Color_t Background=0)
+void SEDHOM_Icons::Joy_Stick_Icon(int x,int y,int thumb_x,int thumb_y,int size,int thumb_size,Color_t color,Color_t OutLine,Color_t thumb,Color_t in ,Color_t Background)
 {
   fill_Circle(x,y,size,OutLine);
   fill_Circle(x,y,size-3,color);
@@ -913,7 +913,7 @@ void SEDHOM_Icons::Tone_Icon(int x,int y,bool is_muted_or_not,Color_t color,Colo
      draw_Line(x-5,y-20+1,x+32,y-5+1,color);    
    }
 }
-void SEDHOM_Icons::Sound_value_Icon(int x,int y,int value,Color_t color,Color_t thikness_color,Color_t Background,bool thikness_or_not=0)
+void SEDHOM_Icons::Sound_value_Icon(int x,int y,int value,Color_t color,Color_t thikness_color,Color_t Background,bool thikness_or_not)
 {
   int val = value;
   value = constrain(value,0,100);
@@ -1137,7 +1137,7 @@ void SEDHOM_Icons::Text_Feild_Icon(int x,int y,int lenght,int max_char,Color_t B
    }
 
 }
-void SEDHOM_Icons::Warning_Icon(int x,int y,Color_t color,Color_t txt_color,Color_t Background,bool filled_or_not = Fill_shape)
+void SEDHOM_Icons::Warning_Icon(int x,int y,Color_t color,Color_t txt_color,Color_t Background,bool filled_or_not )
 {
   Equilateral_Triangle_Up(x,y,40,filled_or_not,color);
   Text_cpp(x-6,y+5,BigFont,txt_color,"!");

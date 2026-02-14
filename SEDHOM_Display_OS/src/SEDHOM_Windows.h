@@ -68,7 +68,7 @@ public:
 };
 //;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 // define all functions for drawing windows
-void SEDHOM_Windows::Full_Key_Board_Window(Color_t color,Color_t Background,Color_t char_color = WHITE,Color_t text_feild_color = -1,bool caps_or_not=true,bool special_char_or_not=false)
+void SEDHOM_Windows::Full_Key_Board_Window(Color_t color,Color_t Background,Color_t char_color ,Color_t text_feild_color ,bool caps_or_not,bool special_char_or_not)
 {
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   // special_char_or_not = true;

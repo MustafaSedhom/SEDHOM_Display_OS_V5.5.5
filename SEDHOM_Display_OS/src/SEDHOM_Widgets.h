@@ -48,7 +48,7 @@ void SEDHOM_Widgets::Big_frame_widget(Color_t color,Color_t Background)
 
   Icon.fill_Rectangle(1,60+3,3,480-2,5,color);
 }
-void SEDHOM_Widgets::ERROR_Massage_Widget(String masseage,Color_t Background,Color_t color=MAGENTA,Color_t color_txt=WHITE,Color_t ERROR_Massage_color = RED,Color_t title_Massage_color = BLUE,String title="ERROR",bool filled_or_not = Fill_shape,int x = 100,int y = 70,int w = 160,int h = 240,int max_lines_of_masseage_error =5,int max_char_in_one_line = 20)
+void SEDHOM_Widgets::ERROR_Massage_Widget(String masseage,Color_t Background,Color_t color,Color_t color_txt,Color_t ERROR_Massage_color ,Color_t title_Massage_color ,String title,bool filled_or_not ,int x ,int y ,int w ,int h ,int max_lines_of_masseage_error ,int max_char_in_one_line )
 {
   #define x_start 100
   #define y_start 70

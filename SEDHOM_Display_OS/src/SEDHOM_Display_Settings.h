@@ -31,13 +31,13 @@
 // #include <LittleFS.h>
 //////////////////////////////////////
 #if defined(ESP32)
-  #include <WiFi.h>
-  #include <Preferences.h>
+  // #include <WiFi.h>
+  // #include <Preferences.h>
 #elif defined(ESP8266)
-  #include <ESP8266WiFi.h>
-  #include <EEPROM.h>
+  // #include <ESP8266WiFi.h>
+  // #include <EEPROM.h>
 #else
-  #include <EEPROM.h>
+  // #include <EEPROM.h>
 #endif
 
 //////////////////////////////////////
@@ -64,10 +64,18 @@ MCUFRIEND_kbv Display;
 // for Qrcode lib
 //////////////////////////////////////////////////
 // for touch
-#define YP A3  // must be an analog pin, use "An" notation!
-#define XM A2  // must be an analog pin, use "An" notation!
-#define YM 9   // can be a digital pin
-#define XP 8   // can be a digital pin
+#if defined(ESP32)
+#define XM 34  // أي رقم دبوس تناظرية موجود على ESP32
+#define XP 32
+#define YM 33
+#define YP 35
+#else
+
+  #define YP A3  // must be an analog pin, use "An" notation!
+  #define XM A2  // must be an analog pin, use "An" notation!
+  #define YM 9   // can be a digital pin
+  #define XP 8   // can be a digital pin
+#endif
 // touch screen dimentions
 const int TS_LEFT = 954, TS_RT = 88, TS_TOP = 908, TS_BOT = 125;
 #define MINPRESSURE 10

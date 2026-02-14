@@ -29,8 +29,6 @@
 #include "SEDHOM_Arabic_Font.h"
 // include communications file to use communication protocols in your projects
 #include "SEDHOM_Comminucations.h"
-// #include <QRCodeGFX.h>
-// #include <QRCodeGFX.h>
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class SEDHOM_Display_OS
 {
@@ -104,7 +102,7 @@ public:
     // Time.set_time_mode(OS.Mode());
   }
 };
-class SEDHOM_Data_Structure_OS : public Stack<int>, public Queue<int>
+class SEDHOM_Data_Structure_OS : public Stack<int>, public Queue<int>, public LinkedList<int>
 {
 private:
 public:
@@ -113,6 +111,9 @@ public:
     // Stack.set_stack_mode(OS.Mode());
     // Queue.set_queue_mode(OS.Mode());
   }
+  // Stack<int> Stack;
+  // Queue<int> Queue;
+  // LinkedList<int> LinkedList;
 };
 class SEDHOM_Touch_OS : public SEDHOM_Touch
 {

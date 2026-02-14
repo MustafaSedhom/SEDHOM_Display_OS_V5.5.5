@@ -29,7 +29,6 @@
 #define string_t       char*
 #define word_t         char*
 
-
 typedef uint16_t Color_t;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef enum 
@@ -145,14 +144,14 @@ typedef struct
 // data type of WiFi network Encytption type
 typedef enum
 {
-    WIFI_AUTH_OPEN,             // Open
-    WIFI_AUTH_WEP,              // WEP
-    WIFI_AUTH_WPA_PSK,          // WPA
-    WIFI_AUTH_WPA2_PSK,         // WPA2
-    WIFI_AUTH_WPA_WPA2_PSK,     // WPA+WPA2
-    WIFI_AUTH_WPA2_ENTERPRISE,  // WPA2 Enterprise
-    WIFI_AUTH_WPA3_PSK,         // WPA3
-    WIFI_AUTH_WPA2_WPA3_PSK,    // WPA2+WPA3
+    WIFI_Encryption_OPEN,             // Open
+    WIFI_Encryption_WEP,              // WEP
+    WIFI_Encryption_WPA_PSK,          // WPA
+    WIFI_Encryption_WPA2_PSK,         // WPA2
+    WIFI_Encryption_WPA_WPA2_PSK,     // WPA+WPA2
+    WIFI_Encryption_WPA2_ENTERPRISE,  // WPA2 Enterprise
+    WIFI_Encryption_WPA3_PSK,         // WPA3
+    WIFI_Encryption_WPA2_WPA3_PSK,    // WPA2+WPA3
 }WIFI_Encryption_Type_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of WiFi network configuration

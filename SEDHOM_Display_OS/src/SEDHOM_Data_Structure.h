@@ -152,5 +152,72 @@ T Queue<T>::dequeue()
     count--;
     return value;
 }
+// ================================= Linked List =================================
+template<typename T>
+class Node
+{
+    public:
+        T value ;
+        Node<T> * next ;
+        Node(T val)
+        {
+            this->value = val;
+            this->next = nullptr;
+        }
+};
+template<typename T>
+class LinkedList
+{
+    private:
+        Node<T>* head ;   
+    public:
+      LinkedList();
+     ~LinkedList();  
+     void add_end(T val);
+
+};
+
+// -------- LinkedList implementation --------
+template<typename T>
+LinkedList<T>::LinkedList()
+{
+    head = nullptr;
+}
+
+template<typename T>
+LinkedList<T>::~LinkedList()
+{
+    Node<T>* current = head;
+
+    while (current != nullptr)
+    {
+        Node<T>* temp = current;
+        current = current->next;
+        delete temp;
+    }
+    head = nullptr;
+}
+
+template<typename T>
+void LinkedList<T>::add_end(T val)
+{
+    Node<T>* newNode = new Node<T>(val);
+    if(head == nullptr)
+    {
+        head = newNode;
+        return ;
+    }
+    else
+    {
+        Node<T>* temp = head;
+        while ( temp->next = nullptr)
+        {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+}
+
+
 //;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 #endif /* SEDHOM_DATA_STRUCTURE_H_ */
