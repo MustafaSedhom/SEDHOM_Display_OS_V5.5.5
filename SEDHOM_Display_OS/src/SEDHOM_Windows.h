@@ -89,8 +89,8 @@ void SEDHOM_Windows::Full_Key_Board_Window(Color_t color,Color_t Background,Colo
   Icon.Back_Arrow_Icon({20,30,RED,Color_not_Blackground_full_keybard});
   if(index_char_in_text == 0)
   {
-    Icon.fill_Rectangle(85,8,50,380,20,Color_not_Blackground_full_keybard);
-    Icon.fill_Rectangle(85+3,8+3,50-6,380-6,20,Background);
+    Icon.fill_Rectangle(85,8,380,50,20,Color_not_Blackground_full_keybard);
+    Icon.fill_Rectangle(85+3,8+3,380-6,50-6,20,Background);
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   // draw rectangle of char
@@ -105,21 +105,21 @@ void SEDHOM_Windows::Full_Key_Board_Window(Color_t color,Color_t Background,Colo
   }
   // draw special buttons
       // caps button
-      Icon.fill_Rectangle(11,208,60,40,5,color);
-      Icon.fill_Rectangle(11,255,40,85,5,color);
+      Icon.fill_Rectangle(11,208,40,60,5,color);
+      Icon.fill_Rectangle(11,255,85,40,5,color);
       Icon.TEXT(22,280,FONT_BIG,char_color,"Caps");
       // draw special char button
-      Icon.fill_Rectangle(104,255,40,85,5,color);
+      Icon.fill_Rectangle(104,255,85,40,5,color);
       Icon.TEXT(130,280,FONT_BIG,char_color,"$?");
       // draw space button
-      Icon.fill_Rectangle(195,255,40,130,5,color);
+      Icon.fill_Rectangle(195,255,130,40,5,color);
       Icon.TEXT(220,280,FONT_BIG,char_color,"Space");
       // draw Done button
-      Icon.fill_Rectangle(332,255,40,130,5,color);
+      Icon.fill_Rectangle(332,255,130,40,5,color);
       Icon.TEXT(365,280,FONT_BIG,char_color,"Done");
       // return button
-      Icon.fill_Rectangle(424,163,52,39,5,color);
-      Icon.fill_Rectangle(378,209,40,85,5,color);
+      Icon.fill_Rectangle(424,163,39,52,5,color);
+      Icon.fill_Rectangle(378,209,85,40,5,color);
       Icon.TEXT(400,235,FONT_BIG,char_color,"<--");
 }
 
