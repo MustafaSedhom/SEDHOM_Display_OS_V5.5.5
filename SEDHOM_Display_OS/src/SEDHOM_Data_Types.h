@@ -1,6 +1,8 @@
 #ifndef SEDHOM_DATA_TYPES_H_ 
 #define SEDHOM_DATA_TYPES_H_ 
 //**********************************************************************************************************************
+#include "SEDHOM_Display_Settings.h"
+//**********************************************************************************************************************
 
 #define Night_Mode       BLACK
 #define Dark_Mode        BLACK
@@ -182,6 +184,13 @@ typedef struct
     String month_name;
     String week_day_name;     
 } Date_t;
+
+typedef struct 
+{
+    Color_t txt_color;
+    GFXfont* txt_font;
+    String txt;
+}Text_t;
 
 //**********************************************************************************************************************
 #endif /* SEDHOM_DATA_TYPES_H_ */

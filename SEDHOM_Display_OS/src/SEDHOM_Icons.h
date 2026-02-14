@@ -85,27 +85,31 @@ class SEDHOM_Icons
         void Divider_Horezontal(Icon_t Icon ,int length , int thikness);
         void ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_font_color,Color_t font_color);
 
-        void Joy_Stick_Icon(int x,int y,int thumb_x,int thumb_y,int size,int thumb_size,Color_t color,Color_t OutLine,Color_t thumb,Color_t in ,Color_t Background=0);
-        void Temperature_Meter_Icon(int x,int y,int value,bool show_val_dashes,Color_t color,Color_t Outline,Color_t Background);
-        void Tone_Icon(int x,int y,bool is_muted_or_not,Color_t color,Color_t Background);
-        void Sound_value_Icon(int x,int y,int value,Color_t color,Color_t thikness_color,Color_t Background,bool thikness_or_not=0);
-        void Video_Icon(int x,int y,Color_t color,Color_t Background);
-        void Block_Icon(int x,int y,bool open_or_closed,Color_t color,Color_t Background);
-        void Signal_Icon(int x,int y,SIGNAL_STATUS_t state,Color_t color_on,Color_t color_off,Color_t Background);
-        void Bell_Icon(int x,int y,bool mute_or_not,bool filled_or_not,Color_t color,Color_t Background);
-        void Menu_Icon_1(int x,int y,Color_t color ,Color_t Background); // : : :
-        void Menu_Icon_2(int x,int y,Color_t color ,Color_t Background); // ...
-        void Menu_Icon_3(int x,int y,Color_t color ,Color_t Background); // :
-        void Menu_Icon_4(int x,int y,Color_t color ,Color_t Background); // : :
-        void Menu_Icon_5(int x,int y,Color_t color ,Color_t Background); // = 
-        void Moon_Icon(int x,int y,Color_t color,Color_t Background);
-        void Sun_Icon(int x,int y,Color_t color,Color_t Background);
-        void Check_Box_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t checked_fill_color,Color_t Background);
-        void Radio_Button_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t Background);
-        void Text_Feild_Icon(int x,int y,int lenght,int max_char,Color_t Border_color,Color_t Text_color, GFXfont* font,Color_t Background , String str);
-        void Warning_Icon(int x,int y,Color_t color,Color_t txt_color,Color_t Background,bool filled_or_not = Fill_shape);
-        void Chandelier_Icon(int x,int y,Color_t color,Color_t Background);
-        void Smart_TV_Icon(Icon_t icon,Color_t WIFI_icon);
+        void Joy_Stick_Icon(Icon_t Icon ,Coordenate_t thumb ,int thumb_size,Color_t Border_color,Color_t thumb_color,Color_t Color_insde_arrow);
+        void Temperature_Meter_Icon(Icon_t Icon,Color_t Border,int value,bool show_val_dashes = true);
+        void Tone_Icon(Icon_t Icon,bool is_muted_or_not = false);
+        void Sound_value_Icon(Icon_t Icon,int value,Color_t thikness_color = GREEN,bool thikness_or_not = false);
+        void Video_Icon(Icon_t Icon = {});
+        void Block_Icon(Icon_t Icon,bool open_or_closed = false);
+        void Signal_Icon(Icon_t Icon,SIGNAL_STATUS_t state,Color_t color_off);
+        void Bell_Icon(Icon_t Icon,bool mute_or_not = false,bool filled_or_not = true);
+
+        void Menu_Icon_1(Icon_t Icon = {}); // : : :
+        void Menu_Icon_2(Icon_t Icon = {}); // ...
+        void Menu_Icon_3(Icon_t Icon = {}); // :
+        void Menu_Icon_4(Icon_t Icon = {}); // : :
+        void Menu_Icon_5(Icon_t Icon = {}); // = 
+
+        void Moon_Icon(Icon_t Icon = {});
+        void Sun_Icon(Icon_t Icon = {});
+
+        void Check_Box_Icon(Icon_t Icon,bool status,Color_t check_color,Color_t checked_fill_color);
+        void Radio_Button_Icon(Icon_t Icon,bool status,Color_t check_color);
+
+        void Text_Feild_Icon(  Icon_t Icon = {},Text_t text = {} ,int lenght = 200,int max_char = 10);
+        void Warning_Icon( Icon_t Icon,Color_t txt_color,bool filled_or_not = false );
+        void Chandelier_Icon(Icon_t Icon);
+        void Smart_TV_Icon(Icon_t icon,Color_t WIFI_icon = White);
         void Air_Conditioner_Icon(Icon_t Icon);
 };
 // define all functions and Draw all Widgets and icons
@@ -845,92 +849,92 @@ void SEDHOM_Icons::ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_f
     Fill_Rectangle(x1+150,y1+155,120,45,15,Icon.color);
     Text(x1+157,y1+175,SmallFont,font_color,User.number);
 }
-void SEDHOM_Icons::Joy_Stick_Icon( int x,int y,int thumb_x,int thumb_y,int size,int thumb_size,Color_t color,Color_t OutLine,Color_t thumb,Color_t in ,Color_t Background)
+void SEDHOM_Icons::Joy_Stick_Icon(Icon_t Icon ,Coordenate_t thumb ,int thumb_size,Color_t Border_color,Color_t thumb_color,Color_t Color_insde_arrow)
 {
-  fill_Circle(x,y,size,OutLine);
-  fill_Circle(x,y,size-3,color);
-  Equilateral_Triangle_Up(x,y-35,10,Fill_shape,in);
-  Equilateral_Triangle_Down(x,y+35,10,Fill_shape,in);
-  Equilateral_Triangle_Right(x+35,y,10,Fill_shape,in);
-  Equilateral_Triangle_Left(x-35,y,10,Fill_shape,in);
-  int dx = thumb_x - x;
-  int dy = thumb_y - y;
-  if ((dx*dx + dy*dy) <= (size/2)*(size/2))
+  fill_Circle(Icon.x,Icon.y,50,Border_color);
+  fill_Circle(Icon.x,Icon.y,50-3,Icon.color);
+  Equilateral_Triangle_Up(Icon.x,Icon.y-35,10,Fill_shape,Color_insde_arrow);
+  Equilateral_Triangle_Down(Icon.x,Icon.y+35,10,Fill_shape,Color_insde_arrow);
+  Equilateral_Triangle_Right(Icon.x+35,Icon.y,10,Fill_shape,Color_insde_arrow);
+  Equilateral_Triangle_Left(Icon.x-35,Icon.y,10,Fill_shape,Color_insde_arrow);
+  int dx = thumb.x - Icon.x;
+  int dy = thumb.y - Icon.y;
+  if ((dx*dx + dy*dy) <= (50/2)*(50/2))
   {
-      fill_Circle(thumb_x, thumb_y, thumb_size, thumb);
+      fill_Circle(thumb.x, thumb.y, thumb_size, thumb_color);
   }
 }
-void SEDHOM_Icons::Temperature_Meter_Icon(int x,int y,int value,bool show_val_dashes,Color_t color,Color_t Outline,Color_t Background)
+void SEDHOM_Icons::Temperature_Meter_Icon(Icon_t Icon,Color_t Border,int value,bool show_val_dashes)
 {
   Color_t color_dash =RED;
   value = constrain(value, 0, 100);
-  fill_Circle(x+50/2,y+150+25,50,Outline);
-  fill_Rectangle(x,y,150,50,5,Outline);
-  fill_Rectangle(x+5,y+5,150,50-10,5,Background);
-  fill_Circle(x+50/2,y+150+25,50-5,Background);
-  fill_Circle(x+50/2,y+150+25,50-13,color);
+  fill_Circle(Icon.x+50/2,Icon.y+150+25,50,Border);
+  fill_Rectangle(Icon.x,Icon.y,150,50,5,Border);
+  fill_Rectangle(Icon.x+5,Icon.y+5,150,50-10,5,Icon.Background);
+  fill_Circle(Icon.x+50/2,Icon.y+150+25,50-5,Icon.Background);
+  fill_Circle(Icon.x+50/2,Icon.y+150+25,50-13,Icon.color);
   int levelHeight = map(value, 0, 100, 0, 140);
-  fill_Rectangle(x+12,y + 150 - levelHeight,levelHeight,50-24,5,color);
+  fill_Rectangle(Icon.x+12,Icon.y + 150 - levelHeight,levelHeight,50-24,5,Icon.color);
   if(show_val_dashes)
   {
-   TEXT(x+55,y+10,FONT_BIG,red,"-100");
-    TEXT(x+55,y+135,FONT_BIG,Blue,"-0");
+   TEXT(Icon.x+55,Icon.y+10,FONT_BIG,red,"-100");
+    TEXT(Icon.x+55,Icon.y+135,FONT_BIG,Blue,"-0");
     for (int i=0;i<=10; i++) 
     {
       if(i==3) color_dash = Orange;
       else if(i==8) color_dash = blue;
-      TEXT(x+55,y+25+i*10,FONT_BIG,color_dash,"-");
+      TEXT(Icon.x+55,Icon.y+25+i*10,FONT_BIG,color_dash,"-");
     }
   }
 }
-void SEDHOM_Icons::Tone_Icon(int x,int y,bool is_muted_or_not,Color_t color,Color_t Background)
+void SEDHOM_Icons::Tone_Icon(Icon_t Icon,bool is_muted_or_not)
 {
-   fill_Circle(x,y,5,color);
-   fill_Circle(x,y,5-2,Background);
-   fill_Circle(x+20,y,5,color);
-   fill_Circle(x+20,y,5-2,Background);
-   fill_Rectangle(x+4,y-20,20,2,0,color);
-   fill_Rectangle(x+4+20,y-20,20,2,0,color);
-   fill_Rectangle(x+4,y-20,2,20,0,color);
+   fill_Circle(Icon.x,Icon.y,5,Icon.color);
+   fill_Circle(Icon.x,Icon.y,5-2,Icon.Background);
+   fill_Circle(Icon.x+20,Icon.y,5,Icon.color);
+   fill_Circle(Icon.x+20,Icon.y,5-2,Icon.Background);
+   fill_Rectangle(Icon.x+4,Icon.y-20,20,2,0,Icon.color);
+   fill_Rectangle(Icon.x+4+20,Icon.y-20,20,2,0,Icon.color);
+   fill_Rectangle(Icon.x+4,Icon.y-20,2,20,0,Icon.color);
    if(is_muted_or_not)
    {   
-     draw_Line(x-5,y-20,x+32,y-5,color);    
-     draw_Line(x-5,y-20+1,x+32,y-5+1,color);    
+     draw_Line(Icon.x-5,Icon.y-20,Icon.x+32,Icon.y-5,Icon.color);    
+     draw_Line(Icon.x-5,Icon.y-20+1,Icon.x+32,Icon.y-5+1,Icon.color);    
    }
 }
-void SEDHOM_Icons::Sound_value_Icon(int x,int y,int value,Color_t color,Color_t thikness_color,Color_t Background,bool thikness_or_not)
+void SEDHOM_Icons::Sound_value_Icon(Icon_t Icon,int value,Color_t thikness_color,bool thikness_or_not)
 {
   int val = value;
   value = constrain(value,0,100);
   value = map(value,0,100,150,0);
-  fill_Rectangle(x,y,150,50,40,thikness_or_not?thikness_color:color);
-  fill_Rectangle(x+5,y+5,150-10,50-10,40,Background);
-  fill_Rectangle(x+5,(y+value+5),((val<15)?(0):(150-value-10)),50-10,40,color);
-  Tone_Icon(65,180,(val==0)?true:false,(val<20)?color:Background,(val<20)?Background:color);
+  fill_Rectangle(Icon.x,Icon.y,150,50,40,thikness_or_not?thikness_color:Icon.color);
+  fill_Rectangle(Icon.x+5,Icon.y+5,150-10,50-10,40,Icon.Background);
+  fill_Rectangle(Icon.x+5,(Icon.y+value+5),((val<15)?(0):(150-value-10)),50-10,40,Icon.color);
+  Tone_Icon({Icon.x+12,Icon.y+130,(val<20)?Icon.color:Icon.Background,(val<20)?Icon.Background:Icon.color},(val==0)?true:false);
 }
-void SEDHOM_Icons::Video_Icon(int x,int y,Color_t color,Color_t Background)
+void SEDHOM_Icons::Video_Icon(Icon_t Icon)
 {
-   fill_Rectangle(x,y,35,50,8,color);
-   Equilateral_Triangle_Right(x+24,y+17,20,Fill_shape,Background);
+   fill_Rectangle(Icon.x,Icon.y,35,50,8,Icon.color);
+   Equilateral_Triangle_Right(Icon.x+24,Icon.y+17,20,Fill_shape,Icon.Background);
 }
-void SEDHOM_Icons::Block_Icon(int x,int y,bool open_or_closed,Color_t color,Color_t Background)
+void SEDHOM_Icons::Block_Icon(Icon_t Icon,bool open_or_closed)
 {
   if(!open_or_closed)
   {
-    fill_Rectangle(x+21,y-15,30,20,10,color);
-     fill_Rectangle(x+21+2,y-15+2,30-4,20-4,10,Background);
-     fill_Rectangle(x+26,y,20,26,2,Background);
+    fill_Rectangle(Icon.x+21,Icon.y-15,30,20,10,Icon.color);
+     fill_Rectangle(Icon.x+21+2,Icon.y-15+2,30-4,20-4,10,Icon.Background);
+     fill_Rectangle(Icon.x+26,Icon.y,20,26,2,Icon.Background);
   }
   else
   {
-     fill_Rectangle(x+3,y-15,30,20,10,color);
-     fill_Rectangle(x+3+2,y-15+2,30-4,20-4,10,Background);
+     fill_Rectangle(Icon.x+3,Icon.y-15,30,20,10,Icon.color);
+     fill_Rectangle(Icon.x+3+2,Icon.y-15+2,30-4,20-4,10,Icon.Background);
   }
-  fill_Rectangle(x,y,20,26,2,color);
-  fill_Circle(x+12,y+6,4,Background);
-  fill_Rectangle(x+10,y+9,8,5,2,Background);
+  fill_Rectangle(Icon.x,Icon.y,20,26,2,Icon.color);
+  fill_Circle(Icon.x+12,Icon.y+6,4,Icon.Background);
+  fill_Rectangle(Icon.x+10,Icon.y+9,8,5,2,Icon.Background);
 }
-void SEDHOM_Icons::Signal_Icon(int x,int y,SIGNAL_STATUS_t state,Color_t color_on,Color_t color_off,Color_t Background)
+void SEDHOM_Icons::Signal_Icon(Icon_t Icon,SIGNAL_STATUS_t state,Color_t color_off)
 {
   Color_t color_one,color_two,color_three,color_four,color_five;
 
@@ -944,7 +948,7 @@ void SEDHOM_Icons::Signal_Icon(int x,int y,SIGNAL_STATUS_t state,Color_t color_o
   }
   else if(state == Signal_Status_Signal_level_1)
   {
-     color_one = color_on;
+     color_one = Icon.color;
      color_two = color_off;
      color_three = color_off;
      color_four = color_off;
@@ -952,200 +956,193 @@ void SEDHOM_Icons::Signal_Icon(int x,int y,SIGNAL_STATUS_t state,Color_t color_o
   }
   else if(state == Signal_Status_Signal_level_2)
   {
-    color_one = color_on;
-    color_two = color_on;
+    color_one = Icon.color;
+    color_two = Icon.color;
     color_three = color_off;
     color_four = color_off;
     color_five = color_off;
   }
   else if(state == Signal_Status_Signal_level_3)
   {
-    color_one = color_on;
-    color_two = color_on;
-    color_three = color_on;
+    color_one = Icon.color;
+    color_two = Icon.color;
+    color_three = Icon.color;
     color_four = color_off;
     color_five = color_off;
   }
   else if(state == Signal_Status_Signal_level_4)
   {
-    color_one = color_on;
-    color_two = color_on;
-    color_three = color_on;
-    color_four = color_on;
+    color_one = Icon.color;
+    color_two = Icon.color;
+    color_three = Icon.color;
+    color_four = Icon.color;
     color_five = color_off;
   }
   else if(state == Signal_Status_Signal_level_5_full)
   {
-    color_one = color_on;
-    color_two = color_on;
-    color_three = color_on;
-    color_four = color_on;
-    color_five = color_on;
+    color_one = Icon.color;
+    color_two = Icon.color;
+    color_three = Icon.color;
+    color_four = Icon.color;
+    color_five = Icon.color;
   }
   else return ;
 
-  fill_Rectangle(x,y+20,5,5,0,color_one);
-  fill_Rectangle(x+10,y+15,10,5,0,color_two);
-  fill_Rectangle(x+20,y+10,15,5,0,color_three);
-  fill_Rectangle(x+30,y+5,20,5,0,color_four);
-  fill_Rectangle(x+40,y,25,5,0,color_five);
+  fill_Rectangle(Icon.x,Icon.y+20,5,5,0,color_one);
+  fill_Rectangle(Icon.x+10,Icon.y+15,10,5,0,color_two);
+  fill_Rectangle(Icon.x+20,Icon.y+10,15,5,0,color_three);
+  fill_Rectangle(Icon.x+30,Icon.y+5,20,5,0,color_four);
+  fill_Rectangle(Icon.x+40,Icon.y,25,5,0,color_five);
 }
-
-void SEDHOM_Icons::Bell_Icon(int x,int y,bool mute_or_not,bool filled_or_not,Color_t color,Color_t Background)
+void SEDHOM_Icons::Bell_Icon(Icon_t Icon,bool mute_or_not,bool filled_or_not)
 {
-   fill_Rectangle(x-3,y+20,5,30-4,4,color);
-   fill_Rectangle(x-5,y+23,5,30,4,color);
-   fill_Rectangle(x-7,y+26,5,30+4,4,color);
-   fill_Rectangle(x,y,30,20,10,color);
-   fill_Circle(x+10,y+32,5,color);
-   if(filled_or_not)
+   fill_Rectangle(Icon.x-3,Icon.y+20,5,30-4,4,Icon.color);
+   fill_Rectangle(Icon.x-5,Icon.y+23,5,30,4,Icon.color);
+   fill_Rectangle(Icon.x-7,Icon.y+26,5,30+4,4,Icon.color);
+   fill_Rectangle(Icon.x,Icon.y,30,20,10,Icon.color);
+   fill_Circle(Icon.x+10,Icon.y+32,5,Icon.color);
+   if(!filled_or_not)
    {
-      fill_Rectangle(x-3+2,y+20+2,5-1,30-4-4,4,Background);
-      fill_Rectangle(x-5+2,y+23+2,5-1,30-4,4,Background);
-      fill_Rectangle(x-7+2,y+26+2,5-4,30+4-4,4,Background);
-      fill_Rectangle(x+2,y+2,30-4,20-4,10,Background);
+      fill_Rectangle(Icon.x-3+2,Icon.y+20+2,5-1,30-4-4,4,Icon.Background);
+      fill_Rectangle(Icon.x-5+2,Icon.y+23+2,5-1,30-4,4,Icon.Background);
+      fill_Rectangle(Icon.x-7+2,Icon.y+26+2,5-4,30+4-4,4,Icon.Background);
+      fill_Rectangle(Icon.x+2,Icon.y+2,30-4,20-4,10,Icon.Background);
    }
-   if(!mute_or_not)
+   if(mute_or_not)
    {
-     draw_Line(x-10,y+3,x+35,y+28,Background);
-     draw_Line(x-10,y+4,x+35,y+29,Background);
-     draw_Line(x-10,y+5,x+35,y+30,GREEN);
-     draw_Line(x-10,y+6,x+35,y+31,GREEN);
-     draw_Line(x-10,y+7,x+35,y+32,Background);
-     draw_Line(x-10,y+8,x+35,y+33,Background);
+     draw_Line(Icon.x-10,Icon.y+3,Icon.x+35,Icon.y+28,Icon.Background);
+     draw_Line(Icon.x-10,Icon.y+4,Icon.x+35,Icon.y+29,Icon.Background);
+     draw_Line(Icon.x-10,Icon.y+5,Icon.x+35,Icon.y+30,Icon.color);
+     draw_Line(Icon.x-10,Icon.y+6,Icon.x+35,Icon.y+31,Icon.color);
+     draw_Line(Icon.x-10,Icon.y+7,Icon.x+35,Icon.y+32,Icon.Background);
+     draw_Line(Icon.x-10,Icon.y+8,Icon.x+35,Icon.y+33,Icon.Background);
    }
 }
-void SEDHOM_Icons::Menu_Icon_2(int x,int y,Color_t color ,Color_t Background) // ...
-{
- for(int i=0;i<3;i++)
-  {
-    fill_Circle(x+(i*10),y,3,color);
-  }
-}
-void SEDHOM_Icons::Menu_Icon_3(int x,int y,Color_t color ,Color_t Background) // :
-{
- for(int i=0;i<3;i++)
-  {
-    fill_Circle(x,y+(i*10),3,color);
-  }
-}
-void SEDHOM_Icons::Menu_Icon_1(int x,int y,Color_t color ,Color_t Background) // : : :
+void SEDHOM_Icons::Menu_Icon_1(Icon_t Icon) // : : :
 {
   for(int j=0;j<3;j++)
   {
     for(int i=0;i<3;i++)
     {
-     fill_Circle(x+(j*10),y+(i*10),3,color);
+     fill_Circle(Icon.x+(j*10),Icon.y+(i*10),3,Icon.color);
     }
   }
 }
-void SEDHOM_Icons::Menu_Icon_4(int x,int y,Color_t color ,Color_t Background) // : :
+void SEDHOM_Icons::Menu_Icon_2(Icon_t Icon) // ...
+{
+ for(int i=0;i<3;i++)
+  {
+    fill_Circle(Icon.x+(i*10),Icon.y,3,Icon.color);
+  }
+}
+void SEDHOM_Icons::Menu_Icon_3(Icon_t Icon) // :
+{
+ for(int i=0;i<3;i++)
+  {
+    fill_Circle(Icon.x,Icon.y+(i*10),3,Icon.color);
+  }
+}
+void SEDHOM_Icons::Menu_Icon_4(Icon_t Icon) // : :
 {
   for(int j=0;j<2;j++)
   {
     for(int i=0;i<2;i++)
     {
-     fill_Circle(x+(j*20),y+(i*20),3,color);
+     fill_Circle(Icon.x+(j*20),Icon.y+(i*20),3,Icon.color);
     }
   }
 }
-void SEDHOM_Icons::Menu_Icon_5(int x,int y,Color_t color ,Color_t Background) // =
+void SEDHOM_Icons::Menu_Icon_5(Icon_t Icon) // =
 {
   for(int j=0;j<3;j++)
   {
-    Fill_Rectangle(x,y+(j*10),30,5,5,color);
+    Fill_Rectangle(Icon.x,Icon.y+(j*10),30,5,5,Icon.color);
   }
 }
-void SEDHOM_Icons::Moon_Icon(int x,int y,Color_t color,Color_t Background)
+void SEDHOM_Icons::Moon_Icon(Icon_t Icon)
 {
-   fill_Circle(x, y,20,color);
-   fill_Circle(x+10,y-10,20,Background);
+   fill_Circle(Icon.x, Icon.y,20,Icon.color);
+   fill_Circle(Icon.x+10,Icon.y-10,20,Icon.Background);
 }
-void SEDHOM_Icons::Sun_Icon(int x,int y,Color_t color,Color_t Background)
+void SEDHOM_Icons::Sun_Icon(Icon_t Icon)
 {
   // master circle
-   fill_Circle(x, y,15,color);
+   fill_Circle(Icon.x, Icon.y,15,Icon.color);
    // small circles
-   fill_Circle(x-25,y,3,color);
-   fill_Circle(x+25,y,3,color);
-   fill_Circle(x,y-25,3,color);
-   fill_Circle(x,y+25,3,color);
-   fill_Circle(x+20,y+20,3,color);
-   fill_Circle(x-20,y-20,3,color);
-   fill_Circle(x+20,y-20,3,color);
-   fill_Circle(x-20,y+20,3,color);
+   fill_Circle(Icon.x-25,Icon.y,3,Icon.color);
+   fill_Circle(Icon.x+25,Icon.y,3,Icon.color);
+   fill_Circle(Icon.x,Icon.y-25,3,Icon.color);
+   fill_Circle(Icon.x,Icon.y+25,3,Icon.color);
+   fill_Circle(Icon.x+20,Icon.y+20,3,Icon.color);
+   fill_Circle(Icon.x-20,Icon.y-20,3,Icon.color);
+   fill_Circle(Icon.x+20,Icon.y-20,3,Icon.color);
+   fill_Circle(Icon.x-20,Icon.y+20,3,Icon.color);
 }
-void SEDHOM_Icons::Check_Box_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t checked_fill_color,Color_t Background)
+void SEDHOM_Icons::Check_Box_Icon(Icon_t Icon,bool status,Color_t check_color,Color_t checked_fill_color)
 {
-  fill_Rectangle(x,y,40,40,5,border_color);
-  fill_Rectangle(x+3,y+3,40-6,40-6,5,status ? checked_fill_color : Background);
+  fill_Rectangle(Icon.x,Icon.y,40,40,5,Icon.color);
+  fill_Rectangle(Icon.x+3,Icon.y+3,40-6,40-6,5,status ? checked_fill_color : Icon.Background);
   if(status)
   {
-    draw_Line(x+7,y+25,x+15,y+30,check_color);
-    draw_Line(x+7,y+25+1,x+15,y+30+1,check_color);
-    draw_Line(x+7,y+25+2,x+15,y+30+2,check_color);
-    draw_Line(x+7,y+25-1,x+15,y+30-1,check_color);
-    draw_Line(x+7,y+25+3,x+15,y+30+3,Background);
-    draw_Line(x+7,y+25-2,x+15,y+30-2,Background);
-    draw_Line(x+15,y+30,x+30,y+10,check_color);
-    draw_Line(x+15,y+30-1,x+30,y+10-1,check_color);
-    draw_Line(x+15,y+30+1,x+30,y+10+1,check_color);
-    draw_Line(x+15,y+30-2,x+30,y+10-2,check_color);
-    draw_Line(x+15,y+30+2,x+30,y+10+2,check_color);
-    draw_Line(x+15,y+30-3,x+30,y+10-3,check_color);
-    draw_Line(x+15,y+30+3,x+30,y+10+3,Background);
+      for(int i=-1; i<=3; i++) 
+      {
+          draw_Line(Icon.x+7, Icon.y+25+i, Icon.x+15, Icon.y+30+i, (i<=2 && i>=-1) ? check_color : Icon.Background);
+      }
+      for(int i=-3; i<=3; i++) 
+      {
+          draw_Line(Icon.x+15, Icon.y+30+i, Icon.x+30, Icon.y+10+i, (i<=2 && i>=-2) ? check_color : Icon.Background);
+      }
   }
-}
 
-void SEDHOM_Icons::Radio_Button_Icon(int x,int y,bool status,Color_t border_color,Color_t check_color,Color_t Background)
+}
+void SEDHOM_Icons::Radio_Button_Icon(Icon_t Icon,bool status,Color_t check_color)
 {
   // border
-   fill_Circle(x,y,15,border_color);
-   fill_Circle(x,y,12,Background);
+   fill_Circle(Icon.x,Icon.y,15,Icon.color);
+   fill_Circle(Icon.x,Icon.y,12,Icon.Background);
    // status
-  if(status) fill_Circle(x,y,5,check_color);
+  if(status) fill_Circle(Icon.x,Icon.y,5,check_color);
 }
-void SEDHOM_Icons::Text_Feild_Icon(int x,int y,int lenght,int max_char,Color_t Border_color,Color_t Text_color, GFXfont* font,Color_t Background , String str)
+void SEDHOM_Icons::Text_Feild_Icon( Icon_t Icon,Text_t text ,int lenght,int max_char)
 {
-   fill_Rectangle(x,y,40,lenght,20,Border_color);
-   fill_Rectangle(x+3,y+3,40-6,lenght-6,20,Background);
-   if( str.length() > max_char)
+   fill_Rectangle(Icon.x,Icon.y,40,lenght,20,Icon.color);
+   fill_Rectangle(Icon.x+3,Icon.y+3,40-6,lenght-6,20,Icon.Background);
+   if( text.txt.length() > max_char)
    {
       String word = "...";
-      String part = str.substring(0, max_char-3);
+      String part = text.txt.substring(0, max_char-3);
       String all = part + word ;
-      Text_cpp(x+10,y+25,font,Text_color,all);
+      Text_cpp(Icon.x+10,Icon.y+25,text.txt_font,text.txt_color,all);
    }
    else
    {
-    Text_cpp(x+10,y+25,font,Text_color,str);
+    Text_cpp(Icon.x+10,Icon.y+25,text.txt_font,text.txt_color,text.txt);
    }
-
 }
-void SEDHOM_Icons::Warning_Icon(int x,int y,Color_t color,Color_t txt_color,Color_t Background,bool filled_or_not )
+void SEDHOM_Icons::Warning_Icon( Icon_t Icon,Color_t txt_color,bool filled_or_not )
 {
-  Equilateral_Triangle_Up(x,y,40,filled_or_not,color);
-  Text_cpp(x-6,y+5,BigFont,txt_color,"!");
+  Equilateral_Triangle_Up(Icon.x,Icon.y,40,filled_or_not,Icon.color);
+  Text_cpp(Icon.x-6,Icon.y+5,BigFont,txt_color,"!");
 }
-void SEDHOM_Icons::Chandelier_Icon(int x,int y,Color_t color,Color_t Background)
+void SEDHOM_Icons::Chandelier_Icon(Icon_t Icon)
 {
-   fill_Circle(x,y,20,color);
-   fill_Circle(x,y,20-3,Background);
-   fill_Rectangle(x-23,y,25,46,0,Background);
-   fill_Circle(x,y+2,8,color);
-   fill_Circle(x,y+2,5,Background);
-   fill_Rectangle(x-10,y-10,10,20,0,Background);
-   fill_Rectangle(x-21,y,3,43,0,color);
-   fill_Rectangle(x-1,y-33,15,3,2,color);
+   fill_Circle(Icon.x,Icon.y,20,Icon.color);
+   fill_Circle(Icon.x,Icon.y,20-3,Icon.Background);
+   fill_Rectangle(Icon.x-23,Icon.y,25,46,0,Icon.Background);
+   fill_Circle(Icon.x,Icon.y+2,8,Icon.color);
+   fill_Circle(Icon.x,Icon.y+2,5,Icon.Background);
+   fill_Rectangle(Icon.x-10,Icon.y-10,10,20,0,Icon.Background);
+   fill_Rectangle(Icon.x-21,Icon.y,3,43,0,Icon.color);
+   fill_Rectangle(Icon.x-1,Icon.y-33,15,3,2,Icon.color);
 }
-void SEDHOM_Icons::Smart_TV_Icon(Icon_t icon,Color_t WIFI_icon)
+void SEDHOM_Icons::Smart_TV_Icon(Icon_t Icon,Color_t WIFI_icon)
 {
-  fill_Rectangle(icon.x,icon.y,50,60,7,icon.color);
-  fill_Rectangle(icon.x+3,icon.y+3,50-6,60-6,7,icon.Background);
-  WIFI_Icon({icon.x+30,icon.y+33,WIFI_icon,icon.Background},WIFI_Status_conected_level_4_full,WIFI_icon);
-  fill_Rectangle(icon.x+8,icon.y+50-3,3,50-6,5,icon.color);
-  fill_Rectangle(icon.x+22,icon.y+50-3,10,15,0,icon.color);
-  fill_Rectangle(icon.x+10,icon.y+50-3+10,5,40,5,icon.color);
+  fill_Rectangle(Icon.x,Icon.y,50,60,7,Icon.color);
+  fill_Rectangle(Icon.x+3,Icon.y+3,50-6,60-6,7,Icon.Background);
+  WIFI_Icon({Icon.x+30,Icon.y+33,WIFI_icon,Icon.Background},WIFI_Status_conected_level_4_full,WIFI_icon);
+  fill_Rectangle(Icon.x+8,Icon.y+50-3,3,50-6,5,Icon.color);
+  fill_Rectangle(Icon.x+22,Icon.y+50-3,10,15,0,Icon.color);
+  fill_Rectangle(Icon.x+10,Icon.y+50-3+10,5,40,5,Icon.color);
 }
 void SEDHOM_Icons::Air_Conditioner_Icon(Icon_t Icon)
 {

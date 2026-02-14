@@ -69,7 +69,7 @@ void SEDHOM_Widgets::ERROR_Massage_Widget(String masseage,Color_t Background,Col
      Icon.Text_cpp(x_start+60,y_start+20,BigFont,title_Massage_color,title);
   }
   // draw Wrongmassage
-  Icon.Warning_Icon(x_start+h-40,y_start+80,Color_Yellow,RED,Background,filled_or_not);
+  Icon.Warning_Icon({x_start+h-40,y_start+80,Color_Yellow,Background},RED,filled_or_not);
   // draw text of error message
 
   int lineHeight = 15;
