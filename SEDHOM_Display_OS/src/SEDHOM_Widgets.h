@@ -34,12 +34,12 @@ void SEDHOM_Widgets::APP_Bar_Widget(bool show_back_arrow,WIFI_STATUS_t WIFI_stat
   }
   else
   {
-    Icon.Power_off_Icon(30,30,Reverse_color,(Background == Black) ? Black : white);
+    Icon.Power_off_Icon({30,30,Reverse_color,(Background == Black) ? Black : white});
   }
   Icon.WIFI_Icon({373,38,Wifi_on,Background},Wifi_off,WIFI_state);
-  Icon.Bluetooth_Icon(330,12,Bluetooth_state,BLE_color,Background);
+  Icon.Bluetooth_Icon({330,12,BLE_color,Background},Bluetooth_state);
   Icon.Battary_Icon({410,15,Battary_color,Background},Battary_Value,(Background == Black) ? white : Black);
-  Icon.Display_Time_Icon(130,20,time,Time_color);
+  Icon.Display_Time_Icon({130,20,Time_color,Background},time);
 }
 void SEDHOM_Widgets::Big_frame_widget(Color_t color,Color_t Background)
 {
