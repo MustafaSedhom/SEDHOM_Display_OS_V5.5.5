@@ -1,8 +1,6 @@
 #ifndef SEDHOM_COLORS
 #define SEDHOM_COLORS
 //{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
-// define data types of colors
-typedef uint16_t Color_t;
 #define BLACK       0x0000      /*   0,   0,   0 */
 #define NAVY        0x000F      /*   0,   0, 128 */
 #define DARKGREEN   0x03E0      /*   0, 128,   0 */
@@ -64,8 +62,7 @@ typedef uint16_t Color_t;
 #define Pink        PINK 
 /////////////////////////////end colors//////////////////////////////
 #define Color_Black       BLACK    
-#define Color_Navy        NAVY    
-#define Color_DarkGary    DARKGREY   
+#define Color_Navy        NAVY     
 #define Color_DarkCyan    DARKCYAN  
 #define Color_Maroon      MAROON     
 #define Color_Purple      PURPLE    
