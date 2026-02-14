@@ -50,11 +50,11 @@ class SEDHOM_Icons
         Color_t Color_Blur(int x,int y,int h,int w,int r,Color_t color,Color_t mode,bool circle_or_rectangle = 1,void (*shadow)(Icon_t shadow_icon, int shadow_h,int shadow_w,int shadow_r,Color_t shadow_color) = nullptr);
         Color_t Shadow_effect(Icon_t shadow , Shapes_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Raduis = 20 , Position_t pos = Position_Right_and_Bottom, Color_t Shadow_color = Color_DarkGrey);
         // Draw SEDhOM Icons
-        void WIFI_Icon(int x,int y,WIFI_STATUS_t state,Color_t color_on,Color_t color_off,Color_t Background);
-        void Battary_Icon(int x,int y,int range,Color_t color,Color_t txt_color,Color_t Background,bool low_charge_red_color = true);
+        void WIFI_Icon(Icon_t Icon,Color_t color_off,WIFI_STATUS_t state);
+        void Battary_Icon(Icon_t Icon ,int range,Color_t txt_color,bool low_charge_red_color = true);
         void Home_Icon(int x,int y,Color_t color,Color_t Background);
         void Setting_Icon(int x,int y,Color_t color,Color_t Background);
-        void Add_Icon(int x,int y,Color_t color,Color_t Background=0);
+        void Add_Icon(Icon_t Icon = {});
         void SD_Card_Icon(int x,int y,Color_t Background=0);
         void Control_Icon(int x,int y,Color_t color,Color_t Background);
         void Sensor_Icon(int x,int y,Color_t color,Color_t Background=0);
@@ -418,57 +418,57 @@ Color_t SEDHOM_Icons::Shadow_effect(Icon_t shadow, Shapes_t shape , int shadow_s
     return Shadow_color;
 }
 // icons
-void SEDHOM_Icons::WIFI_Icon(int x,int y,WIFI_STATUS_t state,Color_t color_on,Color_t color_off,Color_t Background)
+void SEDHOM_Icons::WIFI_Icon(Icon_t Icon,Color_t color_off,WIFI_STATUS_t state)
 {
     if(state != WIFI_Status_not_connected)
     {
         uint16_t one=RED,two=RED,three=RED,four=RED;
         if(state==WIFI_Status_no_internet){one=color_off;two=color_off;three=color_off;four=color_off;}
-        else if(state==WIFI_Status_conected_level_1){one=color_off;two=color_off;three=color_off;four=color_on;}
-        else if(state==WIFI_Status_conected_level_2_half){one=color_off;two=color_off;three=color_on;four=color_on;}
-        else if(state==WIFI_Status_conected_level_3){one=color_off;two=color_on;three=color_on;four=color_on;}
-        else if(state==WIFI_Status_conected_level_4_full){one=color_on;two=color_on;three=color_on;four=color_on;}
-        Fill_Circle(x,y,20,one);
-        Fill_Circle(x,y,20-3,Background);
-        Fill_Circle(x,y,20-6,two);
-        Fill_Circle(x,y,20-9,Background);
-        Fill_Circle(x,y,20-12,three);
-        Fill_Circle(x,y,20-15,Background);
-        Fill_Rectangle(x-21,y,42,20,5,Background);
-        Fill_Triangle(x-3,y+5,x+24,y+5,x+21,y-20,Background);
-        Fill_Triangle(x+3,y+5,x-24,y+5,x-21,y-20,Background);
-        Fill_Circle(x,y,20-18,four);
+        else if(state==WIFI_Status_conected_level_1){one=color_off;two=color_off;three=color_off;four=Icon.color;}
+        else if(state==WIFI_Status_conected_level_2_half){one=color_off;two=color_off;three=Icon.color;four=Icon.color;}
+        else if(state==WIFI_Status_conected_level_3){one=color_off;two=Icon.color;three=Icon.color;four=Icon.color;}
+        else if(state==WIFI_Status_conected_level_4_full){one=Icon.color;two=Icon.color;three=Icon.color;four=Icon.color;}
+        Fill_Circle(Icon.x,Icon.y,20,one);
+        Fill_Circle(Icon.x,Icon.y,20-3,Icon.Background);
+        Fill_Circle(Icon.x,Icon.y,20-6,two);
+        Fill_Circle(Icon.x,Icon.y,20-9,Icon.Background);
+        Fill_Circle(Icon.x,Icon.y,20-12,three);
+        Fill_Circle(Icon.x,Icon.y,20-15,Icon.Background);
+        Fill_Rectangle(Icon.x-21,Icon.y,42,20,5,Icon.Background);
+        Fill_Triangle(Icon.x-3,Icon.y+5,Icon.x+24,Icon.y+5,Icon.x+21,Icon.y-20,Icon.Background);
+        Fill_Triangle(Icon.x+3,Icon.y+5,Icon.x-24,Icon.y+5,Icon.x-21,Icon.y-20,Icon.Background);
+        Fill_Circle(Icon.x,Icon.y,20-18,four);
         if(state==WIFI_Status_no_internet)
         {
-        Text(x+8,y,BigFont,color_off,"!");
+        Text(Icon.x+8,Icon.y,BigFont,color_off,"!");
         }
     }
     else if(state==WIFI_Status_not_connected)
     {
-      Fill_Rectangle(x-15,y-27,37,38,5,Background);
+      Fill_Rectangle(Icon.x-15,Icon.y-27,37,38,5,Icon.Background);
     }
-    Fill_Rectangle(x-10,y+13,20,10,0,Background);
+    Fill_Rectangle(Icon.x-10,Icon.y+13,20,10,0,Icon.Background);
 } 
-void SEDHOM_Icons::Battary_Icon(int x,int y,int range,Color_t color,Color_t txt_color,Color_t Background,bool low_charge_red_color)
+void SEDHOM_Icons::Battary_Icon(Icon_t Icon ,int range,Color_t txt_color,bool low_charge_red_color)
 {
     int txt_x=0;
-    int txt_y_index = y+22;
+    int txt_y_index = Icon.y+22;
     uint16_t color_Battary;
     if(low_charge_red_color==1)
     {
-        if(range<20){color_Battary=RED; txt_x=(range>=10)?x-60:x-45;txt_color=Not_Mode();}
-        else if(range>=20){color_Battary=color;txt_x=(range==100)?x-65:x-58;}
+        if(range<20){color_Battary=RED; txt_x=(range>=10)?Icon.x-60:Icon.x-45;txt_color=Not_Mode();}
+        else if(range>=20){color_Battary=Icon.color;txt_x=(range==100)?Icon.x-65:Icon.x-58;}
     }
     else if(low_charge_red_color==0)
     {
-        if(range<20){color_Battary=GREEN; txt_x=(range>=10)?x-53:x-45;}
-        else if(range>=20){color_Battary=GREEN;txt_x=(range==100)?x-65:x-58;}
+        if(range<20){color_Battary=GREEN; txt_x=(range>=10)?Icon.x-53:Icon.x-45;}
+        else if(range>=20){color_Battary=GREEN;txt_x=(range==100)?Icon.x-65:Icon.x-58;}
     }
     int rangeB=map(range,0,100,5,45);
-    Fill_Rectangle(x, y, 50,30, 5, color_Battary);
-    Fill_Rectangle(x+3, y+3, 50-6,30-6, 5, Background);
-    Fill_Rectangle(x+50-1, y+10,10,10,0,color_Battary);
-    Fill_Rectangle(x+2,y+3,rangeB,30-6,5,color_Battary);
+    Fill_Rectangle(Icon.x, Icon.y, 50,30, 5, color_Battary);
+    Fill_Rectangle(Icon.x+3, Icon.y+3, 50-6,30-6, 5, Icon.Background);
+    Fill_Rectangle(Icon.x+50-1,Icon.y+10,10,10,0,color_Battary);
+    Fill_Rectangle(Icon.x+2,Icon.y+3,rangeB,30-6,5,color_Battary);
     char range_as_str[10];
     sprintf(range_as_str, "%d", range);
     Text(txt_x+60,txt_y_index,BigFont,txt_color,range_as_str);
@@ -493,10 +493,10 @@ void SEDHOM_Icons::Setting_Icon(int x,int y,Color_t color,Color_t Background)
 
     Fill_Circle(x-10, y, 5, Background);
 }
-void SEDHOM_Icons::Add_Icon(int x,int y,Color_t color,Color_t Background)
+void SEDHOM_Icons::Add_Icon(Icon_t Icon)
 {
-    Fill_Rectangle(x+15,y-2+15,30,5,5,color);
-    Fill_Rectangle(x+13+15,y-14+15,5,30,5,color);
+    Fill_Rectangle(Icon.x+15,Icon.y-2+15,30,5,5,Icon.color);
+    Fill_Rectangle(Icon.x+13+15,Icon.y-14+15,5,30,5,Icon.color);
 }
 void SEDHOM_Icons::SD_Card_Icon(int x,int y,Color_t Background)
 {
@@ -1157,7 +1157,7 @@ void SEDHOM_Icons::Smart_TV_Icon(Icon_t icon,Color_t WIFI_icon)
 {
   fill_Rectangle(icon.x,icon.y,50,60,7,icon.color);
   fill_Rectangle(icon.x+3,icon.y+3,50-6,60-6,7,icon.Background);
-  WIFI_Icon(icon.x+30,icon.y+33,WIFI_Status_conected_level_4_full,WIFI_icon,WIFI_icon,icon.Background);
+  WIFI_Icon({icon.x+30,icon.y+33,WIFI_icon,icon.Background},WIFI_Status_conected_level_4_full,WIFI_icon);
   fill_Rectangle(icon.x+8,icon.y+50-3,3,50-6,5,icon.color);
   fill_Rectangle(icon.x+22,icon.y+50-3,10,15,0,icon.color);
   fill_Rectangle(icon.x+10,icon.y+50-3+10,5,40,5,icon.color);

@@ -36,9 +36,9 @@ void SEDHOM_Widgets::APP_Bar_Widget(bool show_back_arrow,WIFI_STATUS_t WIFI_stat
   {
     Icon.Power_off_Icon(30,30,Reverse_color,(Background == Black) ? Black : white);
   }
-  Icon.WIFI_Icon(373,38,WIFI_state,Wifi_on,Wifi_off,Background);
+  Icon.WIFI_Icon({373,38,Wifi_on,Background},Wifi_off,WIFI_state);
   Icon.Bluetooth_Icon(330,12,Bluetooth_state,BLE_color,Background);
-  Icon.Battary_Icon(410,15,Battary_Value,Battary_color,(Background == Black) ? white : Black,Background);
+  Icon.Battary_Icon({410,15,Battary_color,Background},Battary_Value,(Background == Black) ? white : Black);
   Icon.Display_Time_Icon(130,20,time,Time_color);
 }
 void SEDHOM_Widgets::Big_frame_widget(Color_t color,Color_t Background)
