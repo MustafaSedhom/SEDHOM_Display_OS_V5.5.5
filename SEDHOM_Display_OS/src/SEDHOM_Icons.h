@@ -46,9 +46,9 @@ class SEDHOM_Icons
         void Draw_Custom_int_shap(int x,int y,int h,int w,int color,int arr[]);
         void Draw_Custom_Char(int x,int y,int h,int w,int color,char arr[]);
         // effects 
-        Color_t Blur(int x,int y,int h,int w,int r,int Blur_value,Color_t mode,bool circle_or_rectangle = 1);
-        Color_t Color_Blur(int x,int y,int h,int w,int r,Color_t color,Color_t mode,bool circle_or_rectangle = 1,void (*shadow)(Icon_t shadow_icon, int shadow_h,int shadow_w,int shadow_r,Color_t shadow_color) = nullptr);
-        Color_t Shadow_effect(Icon_t shadow , Shapes_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Raduis = 20 , Position_t pos = Position_Right_and_Bottom, Color_t Shadow_color = Color_DarkGrey);
+        Color_t Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape = Shape_Rectangle);
+        Color_t Color_Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape = Shape_Rectangle);
+        Color_t Shadow_effect(Icon_t shadow = {} , Shapes_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Raduis = 20 , Position_t pos = Position_Right_and_Bottom, Color_t Shadow_color = Color_DarkGrey);
         // Draw SEDhOM Icons
         void WIFI_Icon(Icon_t Icon ,Color_t color_off,WIFI_STATUS_t state);
         void Battary_Icon(Icon_t Icon  ,int range,Color_t txt_color,bool low_charge_red_color = true);
@@ -293,41 +293,32 @@ void SEDHOM_Icons::Draw_Custom_int_shap(int x,int y,int h,int w,int color,int ar
   }
 }
 // effects
-Color_t SEDHOM_Icons::Blur(int x,int y,int h,int w,int r,int Blur_value,Color_t mode,bool circle_or_rectangle)
+Color_t SEDHOM_Icons::Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape)
 {
-  Color_t color_value = map(Blur_value,mode?20:0,mode?0:20,0,255);
+  Color_t color_value = map(Blur_value,Icon.color?20:0,Icon.color?0:20,0,255);
 
   Color_t color = set_Color(color_value,color_value,color_value);
-  if(circle_or_rectangle)
+  if(shape == Shape_Rectangle)
   {
-    fill_Rectangle(x,y,h,w,r,color);
+    fill_Rectangle(Icon.x,Icon.y,area.h,area.w,r,color);
   }
-  else
+  else if(shape == Shape_Circle)
   {
-    fill_Circle(x,y,r,color);
+    fill_Circle(Icon.x,Icon.y,r,color);
   }
   return color;
 }
-Color_t SEDHOM_Icons::Color_Blur(int x,int y,int h,int w,int r,Color_t color,Color_t mode,bool circle_or_rectangle ,void (*shadow)(Icon_t shadow_icon, int shadow_h,int shadow_w,int shadow_r,Color_t shadow_color) )
+Color_t SEDHOM_Icons::Color_Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape)
 {
-  // if(shadow != nullptr)
-  // {
-  //   Shadow_effect({x,y,color,0},h,w,r,color);
-  // }
-  // else
-  // {
-  //   shadow({x,y,color,0},h,w,r,shadow_color);
-  // }
-  
-  if(circle_or_rectangle)
+  if(shape == Shape_Rectangle)
   {
-    fill_Rectangle(x,y,h,w,r,color);
+    fill_Rectangle(Icon.x,Icon.y,area.h,area.w,r,Icon.color);
   }
-  else
+  else if(shape == Shape_Circle)
   {
-    fill_Circle(x,y,r,color);
+    fill_Circle(Icon.x,Icon.y,r,Icon.color);
   }
-  return color;
+  return Icon.color;
 }
 Color_t SEDHOM_Icons::Shadow_effect(Icon_t shadow, Shapes_t shape , int shadow_size  , int shadow_h , int shadow_w ,int shadow_Raduis , Position_t pos  , Color_t Shadow_color )
 {

@@ -184,13 +184,24 @@ typedef struct
     String month_name;
     String week_day_name;     
 } Date_t;
-
+///////////////////////////////////////////////////////////////////////////
+// data type of string
 typedef struct 
 {
     Color_t txt_color;
     GFXfont* txt_font;
     String txt;
 }Text_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of Area
+typedef struct 
+{
+    int h;
+    int w;
+}Area_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of  
+
 
 //**********************************************************************************************************************
 #endif /* SEDHOM_DATA_TYPES_H_ */
