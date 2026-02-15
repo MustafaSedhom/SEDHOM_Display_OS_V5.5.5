@@ -44,8 +44,8 @@ class SEDHOM_Windows
       int index_char_in_text = 0;
       void refresh_full_key_board_text(bool var_or_not = 0,string_t str = "")
       {
-        Icon.fill_Rectangle(85,8,50,380,20,Color_not_Blackground_full_keybard);
-        Icon.fill_Rectangle(85+3,8+3,50-6,380-6,20,Color_Blackground_full_keybard);
+        Icon.Rectangle({{85,8},{50,380},20,Shape_Fill,Color_not_Blackground_full_keybard});
+        Icon.Rectangle({{85+3,8+3},{50-6,380-6},20,Shape_Fill,Color_Blackground_full_keybard});
         // text input
         Icon.TEXT(92,40,FONT_BIG,Full_KeyBoard_text_feild_color,var_or_not ? str : full_key_board_text);
       }
@@ -89,37 +89,37 @@ void SEDHOM_Windows::Full_Key_Board_Window(Color_t color,Color_t Background,Colo
   Icon.Back_Arrow_Icon({20,30,RED,Color_not_Blackground_full_keybard});
   if(index_char_in_text == 0)
   {
-    Icon.fill_Rectangle(85,8,380,50,20,Color_not_Blackground_full_keybard);
-    Icon.fill_Rectangle(85+3,8+3,380-6,50-6,20,Background);
+    Icon.Rectangle({{85,8},{380,50},20,Shape_Fill,Color_not_Blackground_full_keybard});
+    Icon.Rectangle({{85+3,8+3},{380-6,50-6},20,Shape_Fill,Background});
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   // draw rectangle of char
   for(int i=0;i < max_char_in_line;i++)
   {
-    Icon.fill_Rectangle(11+(46*i),70,40,40,5,color); Icon.TEXT(11+(46*i)+10,70+27,FONT_BIG,char_color,special_char_or_not ? first_line_special[i] : (caps_or_not ? first_line_capital[i] : first_line_small[i]));
-    Icon.fill_Rectangle(11+(46*i),116,40,40,5,color); Icon.TEXT(11+(46*i)+10,116+27,FONT_BIG,char_color,special_char_or_not ? Second_line_special[i] : (caps_or_not ? Second_line_capital[i] : Second_line_small[i]));
+    Icon.Rectangle({{11+(46*i),70},{40,40},5,Shape_Fill,color}); Icon.TEXT(11+(46*i)+10,70+27,FONT_BIG,char_color,special_char_or_not ? first_line_special[i] : (caps_or_not ? first_line_capital[i] : first_line_small[i]));
+    Icon.Rectangle({{11+(46*i),116},{40,40},5,Shape_Fill,color}); Icon.TEXT(11+(46*i)+10,116+27,FONT_BIG,char_color,special_char_or_not ? Second_line_special[i] : (caps_or_not ? Second_line_capital[i] : Second_line_small[i]));
     if(i==9)break;
-    Icon.fill_Rectangle(11+(46*i),162,40,40,5,color); Icon.TEXT(11+(46*i)+10,162+27,FONT_BIG,char_color,special_char_or_not ? third_line_special[i] : (caps_or_not ? third_line_capital[i] : third_line_small[i]));
-    Icon.fill_Rectangle(11+(46*i),208,40,40,5,color); Icon.TEXT(11+(46*i)+10,208+27,FONT_BIG,char_color,special_char_or_not ? fourth_line_speciial[i] : (caps_or_not ? fourth_line_capital[i] : fourth_line_small[i]));
-    if(special_char_or_not) { if(i==1||i==2||i==6||i==7) { Icon.fill_Rectangle(11+(46*i),208,40,40,5,Background); } }
+    Icon.Rectangle({{11+(46*i),162},{40,40},5,Shape_Fill,color}); Icon.TEXT(11+(46*i)+10,162+27,FONT_BIG,char_color,special_char_or_not ? third_line_special[i] : (caps_or_not ? third_line_capital[i] : third_line_small[i]));
+    Icon.Rectangle({{11+(46*i),208},{40,40},5,Shape_Fill,color}); Icon.TEXT(11+(46*i)+10,208+27,FONT_BIG,char_color,special_char_or_not ? fourth_line_speciial[i] : (caps_or_not ? fourth_line_capital[i] : fourth_line_small[i]));
+    if(special_char_or_not) { if(i==1||i==2||i==6||i==7) { Icon.Rectangle({{11+(46*i),208},{40,40},5,Shape_Fill,Background}); } }
   }
   // draw special buttons
       // caps button
-      Icon.fill_Rectangle(11,208,40,60,5,color);
-      Icon.fill_Rectangle(11,255,85,40,5,color);
+      Icon.Rectangle({{11,208},{40,60},5,Shape_Fill,color});
+      Icon.Rectangle({{11,255},{85,40},5,Shape_Fill,color});
       Icon.TEXT(22,280,FONT_BIG,char_color,"Caps");
       // draw special char button
-      Icon.fill_Rectangle(104,255,85,40,5,color);
+      Icon.Rectangle({{104,255},{85,40},5,Shape_Fill,color});
       Icon.TEXT(130,280,FONT_BIG,char_color,"$?");
       // draw space button
-      Icon.fill_Rectangle(195,255,130,40,5,color);
+      Icon.Rectangle({{195,255},{130,40},5,Shape_Fill,color});
       Icon.TEXT(220,280,FONT_BIG,char_color,"Space");
       // draw Done button
-      Icon.fill_Rectangle(332,255,130,40,5,color);
+      Icon.Rectangle({{332,255},{130,40},5,Shape_Fill,color});
       Icon.TEXT(365,280,FONT_BIG,char_color,"Done");
       // return button
-      Icon.fill_Rectangle(424,163,39,52,5,color);
-      Icon.fill_Rectangle(378,209,85,40,5,color);
+      Icon.Rectangle({{424,163},{39,52},5,Shape_Fill,color});
+      Icon.Rectangle({{378,209},{85,40},5,Shape_Fill,color});
       Icon.TEXT(400,235,FONT_BIG,char_color,"<--");
 }
 

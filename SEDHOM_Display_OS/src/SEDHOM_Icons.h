@@ -4,11 +4,15 @@
 #include "SEDHOM_Display_Settings.h"
 #include "SEDHOM_Data_Types.h"
 #include "SEDHOM_Display_QRCodes.h"
+
+#include "SEDHOM_Basic_Shapes.h"
+#include "SEDHOM_Text.h"
+#include "SEDHOM_Effects.h"
 ///////////////////////////////////////////////////////////////////////////
 init_Display_variable();
 ///////////////////////////////////////////////////////////////////////////
 // Icons class
-class SEDHOM_Icons  
+class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SEDHOM_Effects , public SEDHOM_Colors
 {
   private:
         uint16_t mode;
@@ -17,35 +21,7 @@ class SEDHOM_Icons
         uint16_t Not_Mode();
         uint16_t Mode();
         void Set_Mode(Color_t Mode);
-        // colors
-        Color_t set_Color(int r,int g,int b);
-        Color_t Set_Hex_Color(uint16_t Hex_code); 
-        // define Basic shapes
-        void draw_Pixel(int x,int y,Color_t color);
-        void draw_Line(int x0,int y0,int x1,int y1,Color_t color);    
-        void fill_Rectangle(int x,int y,int w,int h,int r,Color_t color);    
-        void draw_Rectangle(int x,int y,int w,int h,int r,Color_t color);  
-        void fill_Circle(int x,int y,int r,Color_t color); 
-        void draw_Circle(int x,int y,int r,Color_t color);
-        void fill_Triangle(int x0,int y0,int x1,int y1,int x2,int y2,Color_t color); 
-        void draw_Triangle(int x0,int y0,int x1,int y1,int x2,int y2,Color_t color);
-        void Right_Triangle(int x, int y, int h, int w,bool fill_or_draw, Color_t color);
-        void Equilateral_Triangle_Up(int x, int y, int h,bool fill_or_draw, Color_t color);
-        void Equilateral_Triangle_Down(int x, int y, int h,bool fill_or_draw, Color_t color); 
-        void Equilateral_Triangle_Right(int x, int y, int h,bool fill_or_draw, Color_t color); 
-        void Equilateral_Triangle_Left(int x, int y, int h,bool fill_or_draw, Color_t color); 
-        void TEXT(int x,int y,const GFXfont* font,Color_t color,string_t txt);
-        void Text_cpp(int x,int y,const GFXfont* font,Color_t color,String txt);
-        void Container(int x,int y,int h,int w,int raduis,Color_t color);
-        void Border_Rectangle(Icon_t Border_Rect,int h,int w,int Raduis,int Border_size);
-        void fill_rectangle_with_end(int x,int y,int h,int w,int end_volume,Color_t color,Color_t end_color);
-        void Draw_Custom_int_shap(int x,int y,int h,int w,int color,int arr[]);
-        void Draw_Custom_Char(int x,int y,int h,int w,int color,char arr[]);
-        // effects 
-        Color_t Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape = Shape_Rectangle);
-        Color_t Color_Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape = Shape_Rectangle);
-        Color_t Shadow_effect(Icon_t shadow = {} , Shapes_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Raduis = 20 , Position_t pos = Position_Right_and_Bottom, Color_t Shadow_color = Color_DarkGrey);
-        // Draw SEDhOM Icons
+        // Draw SEDHOM Icons
         void WIFI_Icon(Icon_t Icon ,Color_t color_off,WIFI_STATUS_t state);
         void Battary_Icon(Icon_t Icon  ,int range,Color_t txt_color,bool low_charge_red_color = true);
         void Home_Icon(Icon_t Icon = {});
@@ -96,7 +72,7 @@ class SEDHOM_Icons
         void Check_Box_Icon(Icon_t Icon,bool status,Color_t check_color,Color_t checked_fill_color);
         void Radio_Button_Icon(Icon_t Icon,bool status,Color_t check_color);
         void Text_Feild_Icon(  Icon_t Icon = {},Text_t text = {} ,int lenght = 200,int max_char = 10);
-        void Warning_Icon( Icon_t Icon,Color_t txt_color,bool filled_or_not = false );
+        void Warning_Icon( Icon_t Icon,Color_t txt_color,Shape_filled_t filled = Shape_Draw );
         void Chandelier_Icon(Icon_t Icon);
         void Smart_TV_Icon(Icon_t icon,Color_t WIFI_icon = White);
         void Air_Conditioner_Icon(Icon_t Icon);
@@ -118,293 +94,7 @@ void SEDHOM_Icons::Set_Mode(Color_t Mode)
     mode = Mode;
     FillScreen(mode); 
 }
-// colors
-Color_t SEDHOM_Icons::set_Color(int r,int g,int b)
-{
-   return(Set_Color(r,g,b));
-}
-Color_t SEDHOM_Icons::Set_Hex_Color(uint16_t Hex_code)
-{
-    int r = ((Hex_code >> 11) & 0x1F) * 255 / 31; // 5-bit red
-    int g = ((Hex_code >> 5) & 0x3F) * 255 / 63;  // 6-bit green
-    int b = (Hex_code & 0x1F) * 255 / 31;         // 5-bit blue
-    return set_Color(r, g, b);
-}
-
-// Basic shapes function  
-void SEDHOM_Icons::draw_Pixel(int x,int y,Color_t color)
-{
-    Draw_Pixel(x,y,color);
-}
-void SEDHOM_Icons::draw_Line(int x0, int y0, int x1, int y1, uint16_t color)
-{
-    Draw_Line(x0,y0,x1,y1,color);
-}                                     
-void SEDHOM_Icons::fill_Rectangle(int x,int y,int w,int h,int r,Color_t color)
-{
-    Fill_Rectangle(x,y,w,h,r,color);
-}    
-void SEDHOM_Icons::draw_Rectangle(int x,int y,int w,int h,int r,Color_t color)
-{
-    Draw_Rectangle(x,y,w,h,r,color);
-}    
-void SEDHOM_Icons::fill_Circle(int x,int y,int r,Color_t color)
-{
-    Fill_Circle(x,y,r,color);
-}    
-void SEDHOM_Icons::draw_Circle(int x,int y,int r,Color_t color)
-{
-    Draw_Circle(x,y,r,color);
-}    
-void SEDHOM_Icons::fill_Triangle(int x0,int y0,int x1,int y1,int x2,int y2,Color_t color)
-{
-     Fill_Triangle(x0,y0,x1,y1,x2,y2,color);
-}    
-void SEDHOM_Icons::draw_Triangle(int x0,int y0,int x1,int y1,int x2,int y2,Color_t color)
-{
-     Draw_Triangle(x0,y0,x1,y1,x2,y2,color);
-}  
-void SEDHOM_Icons::Right_Triangle(int x, int y, int h, int w,bool fill_or_draw, Color_t color)
-{
-    if(fill_or_draw) {Fill_Triangle(x, y, x, y + w, x + h, y + w, color);}
-    else {Draw_Triangle(x, y, x, y + w, x + h, y + w, color);}
-}
-void SEDHOM_Icons::Equilateral_Triangle_Up(int x, int y, int h,bool fill_or_draw, uint16_t color) 
-{
-    float height = h * sqrt(3) / 2.0;
-
-    int x_0 = x;              
-    int y_0 = y - (2.0/3.0)*height;
-
-    int x_1 = x - h/2;        
-    int y_1 = y + (1.0/3.0)*height;
-
-    int x_2 = x + h/2;        
-    int y_2 = y + (1.0/3.0)*height;
-
-    if(fill_or_draw) fill_Triangle( x_0,  y_0,  x_1,  y_1,  x_2,  y_2, color);
-    else draw_Triangle( x_0,  y_0,  x_1,  y_1,  x_2,  y_2, color);
-}
-void SEDHOM_Icons::Equilateral_Triangle_Down(int x, int y, int h,bool fill_or_draw, uint16_t color) 
-{
-    float height = h * sqrt(3) / 2.0;
-
-    int x_0 = x;               
-    int y_0 = y + (2.0/3.0)*height;  
-
-    int x_1 = x - h/2;        
-    int y_1 = y - (1.0/3.0)*height;  
-
-    int x_2 = x + h/2;        
-    int y_2 = y - (1.0/3.0)*height;  
-
-    if(fill_or_draw) fill_Triangle(x_0, y_0, x_1, y_1, x_2, y_2, color);
-    else draw_Triangle(x_0, y_0, x_1, y_1, x_2, y_2, color);
-}
-void SEDHOM_Icons::Equilateral_Triangle_Right(int x, int y, int h,bool fill_or_draw, uint16_t color)
-{
-    float height = h * sqrt(3) / 2.0;
-
-    int x_0 = x + (2.0/3.0)*h; 
-    int y_0 = y;
-
-    int x_1 = x - (1.0/3.0)*h; 
-    int y_1 = y - height/2;
-
-    int x_2 = x - (1.0/3.0)*h; 
-    int y_2 = y + height/2;
-
-    if(fill_or_draw) fill_Triangle(x_0, y_0, x_1, y_1, x_2, y_2, color);
-    else draw_Triangle(x_0, y_0, x_1, y_1, x_2, y_2, color);
-}
-void SEDHOM_Icons::Equilateral_Triangle_Left(int x, int y, int h,bool fill_or_draw, uint16_t color)
-{
-    float height = h * sqrt(3) / 2.0;
-
-    int x_0 = x - (2.0/3.0)*h; 
-    int y_0 = y;
-
-    int x_1 = x + (1.0/3.0)*h; 
-    int y_1 = y - height/2;
-
-    int x_2 = x + (1.0/3.0)*h;
-    int y_2 = y + height/2;
-
-    if(fill_or_draw) fill_Triangle(x_0, y_0, x_1, y_1, x_2, y_2, color);
-    else draw_Triangle(x_0, y_0, x_1, y_1, x_2, y_2, color);
-}
-void SEDHOM_Icons::TEXT(int x,int y,const GFXfont* font,Color_t color,string_t txt) 
-{
-    Text(x,y,font,color,txt);
-}
-void SEDHOM_Icons::Text_cpp(int x,int y,const GFXfont* font,Color_t color,String txt) 
-{
-    Text(x,y,font,color,txt);
-}
-void SEDHOM_Icons::Container(int x,int y,int h,int w,int raduis,Color_t color)
-{
-    Fill_Rectangle(x, y, h, w, raduis, color);
-}
-void SEDHOM_Icons::Border_Rectangle(Icon_t Border_Rect,int h,int w,int Raduis,int Border_size)
-{
-  fill_Rectangle(Border_Rect.x,Border_Rect.y,w,h,Raduis,Border_Rect.color);
-  fill_Rectangle(Border_Rect.x+Border_size,Border_Rect.y+Border_size,w-(2*Border_size),h-(2*Border_size),Raduis,Border_Rect.Background);
-}
-void SEDHOM_Icons::fill_rectangle_with_end(int x,int y,int h,int w,int end_volume,Color_t color,Color_t end_color)
-{
-    Fill_Rectangle(x,y,w,h,5,end_color);
-    Fill_Rectangle(x + end_volume,y + end_volume,w - 2*end_volume,h - 2*end_volume,5,color);
-}
-void SEDHOM_Icons::Draw_Custom_Char(int x,int y,int h,int w,int color,char arr[])
-{
-  for(int i=0; i<h; i++) 
-  {
-    for(int j=0; j<w; j++) 
-    {
-      if(((arr[i]) >> (w-1-j)) & 0x01)
-      {
-        draw_Pixel(x+j, y+i, color); 
-      }
-    }
-  }
-}
-void SEDHOM_Icons::Draw_Custom_int_shap(int x,int y,int h,int w,int color,int arr[])
-{
-      for(int i=0; i<h; i++) 
-  {
-    for(int j=0; j<w; j++) 
-    {
-      if(((arr[i]) >> (w-1-j)) & 0x01)
-      {
-        draw_Pixel(x+j, y+i, color); 
-      }
-    }
-  }
-}
-// effects
-Color_t SEDHOM_Icons::Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape)
-{
-  Color_t color_value = map(Blur_value,Icon.color?20:0,Icon.color?0:20,0,255);
-
-  Color_t color = set_Color(color_value,color_value,color_value);
-  if(shape == Shape_Rectangle)
-  {
-    fill_Rectangle(Icon.x,Icon.y,area.w,area.h,r,color);
-  }
-  else if(shape == Shape_Circle)
-  {
-    fill_Circle(Icon.x,Icon.y,r,color);
-  }
-  return color;
-}
-Color_t SEDHOM_Icons::Color_Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape)
-{
-  if(shape == Shape_Rectangle)
-  {
-    fill_Rectangle(Icon.x,Icon.y,area.w,area.h,r,Icon.color);
-  }
-  else if(shape == Shape_Circle)
-  {
-    fill_Circle(Icon.x,Icon.y,r,Icon.color);
-  }
-  return Icon.color;
-}
-Color_t SEDHOM_Icons::Shadow_effect(Icon_t shadow, Shapes_t shape , int shadow_size  , int shadow_h , int shadow_w ,int shadow_Raduis , Position_t pos  , Color_t Shadow_color )
-{
-    int x = shadow.x;
-    int y = shadow.y;
-    int h = shadow_h;
-    int w = shadow_w;
-
-   switch (pos)
-    {
-    case Position_Center:
-        break;
-
-    case Position_Top:
-        y -= shadow_size;
-        break;
-
-    case Position_Bottom:
-        y += shadow_size;
-        break;
-
-    case Position_Right:
-        x += shadow_size;
-        break;
-
-    case Position_Left:
-        x -= shadow_size;
-        break;
-
-    case Position_Top_Left:
-        x -= shadow_size;
-        y -= shadow_size;
-        break;
-
-    case Position_Top_Right:
-        x += shadow_size;
-        y -= shadow_size;
-        break;
-
-    case Position_Bottom_Left:
-        x -= shadow_size;
-        y += shadow_size;
-        break;
-
-    case Position_Bottom_Right:
-        x += shadow_size;
-        y += shadow_size;
-        break;
-
-    case Position_Right_and_Left:
-        x -= shadow_size;
-        w += shadow_size * 2;
-        break;
-
-    case Position_Right_and_Top:
-        x += shadow_size;
-        y -= shadow_size;
-        break;
-
-    case Position_Right_and_Bottom:
-        x += shadow_size;
-        y += shadow_size;
-        break;
-
-    case Position_Left_and_Top:
-        x -= shadow_size;
-        y -= shadow_size;
-        break;
-
-    case Position_Left_and_Bottom:
-        x -= shadow_size;
-        y += shadow_size;
-        break;
-
-    case Position_Top_and_Bottom:
-        y -= shadow_size;
-        h += shadow_size * 2;
-        break;
-
-    case Position_All:
-        x -= shadow_size;
-        y -= shadow_size;
-        h += shadow_size * 2;
-        w += shadow_size * 2;
-        break;
-    }
-    if (shape == Shape_Circle)
-    {
-      fill_Circle(x , y , shadow_Raduis, Shadow_color);
-    }
-    else
-    {
-      fill_Rectangle(x, y, w, h, shadow_Raduis, Shadow_color);
-    }
-    return Shadow_color;
-}
-// icons
+// SEDHOM Icons
 void SEDHOM_Icons::WIFI_Icon(Icon_t Icon,Color_t color_off,WIFI_STATUS_t state)
 {
     if(state != WIFI_Status_not_connected)
@@ -415,16 +105,16 @@ void SEDHOM_Icons::WIFI_Icon(Icon_t Icon,Color_t color_off,WIFI_STATUS_t state)
         else if(state==WIFI_Status_conected_level_2_half){one=color_off;two=color_off;three=Icon.color;four=Icon.color;}
         else if(state==WIFI_Status_conected_level_3){one=color_off;two=Icon.color;three=Icon.color;four=Icon.color;}
         else if(state==WIFI_Status_conected_level_4_full){one=Icon.color;two=Icon.color;three=Icon.color;four=Icon.color;}
-        fill_Circle(Icon.x,Icon.y,20,one);
-        fill_Circle(Icon.x,Icon.y,20-3,Icon.Background);
-        fill_Circle(Icon.x,Icon.y,20-6,two);
-        fill_Circle(Icon.x,Icon.y,20-9,Icon.Background);
-        fill_Circle(Icon.x,Icon.y,20-12,three);
-        fill_Circle(Icon.x,Icon.y,20-15,Icon.Background);
-        fill_Rectangle(Icon.x-21,Icon.y,42,20,5,Icon.Background);
-        fill_Triangle(Icon.x-3,Icon.y+5,Icon.x+24,Icon.y+5,Icon.x+21,Icon.y-20,Icon.Background);
-        fill_Triangle(Icon.x+3,Icon.y+5,Icon.x-24,Icon.y+5,Icon.x-21,Icon.y-20,Icon.Background);
-        fill_Circle(Icon.x,Icon.y,20-18,four);
+        Circle({{Icon.x,Icon.y},20,Shape_Fill,one});
+        Circle({{Icon.x,Icon.y},20-3,Shape_Fill,Icon.Background});
+        Circle({{Icon.x,Icon.y},20-6,Shape_Fill,two});
+        Circle({{Icon.x,Icon.y},20-9,Shape_Fill,Icon.Background});
+        Circle({{Icon.x,Icon.y},20-12,Shape_Fill,three});
+        Circle({{Icon.x,Icon.y},20-15,Shape_Fill,Icon.Background});
+        Rectangle({{Icon.x-21,Icon.y},{42,20},5,Shape_Fill,Icon.Background});
+        Triangle({{Icon.x-3,Icon.y+5},{Icon.x+24,Icon.y+5},{Icon.x+21,Icon.y-20},Shape_Fill,Icon.Background});
+        Triangle({{Icon.x+3,Icon.y+5},{Icon.x-24,Icon.y+5},{Icon.x-21,Icon.y-20},Shape_Fill,Icon.Background});
+        Circle({{Icon.x,Icon.y},20-18,Shape_Fill,four});
         if(state==WIFI_Status_no_internet)
         {
         TEXT(Icon.x+8,Icon.y,BigFont,color_off,"!");
@@ -432,9 +122,9 @@ void SEDHOM_Icons::WIFI_Icon(Icon_t Icon,Color_t color_off,WIFI_STATUS_t state)
     }
     else if(state==WIFI_Status_not_connected)
     {
-      Fill_Rectangle(Icon.x-15,Icon.y-27,37,38,5,Icon.Background);
+      Rectangle({{Icon.x-15,Icon.y-27},{37,38},5,Shape_Fill,Icon.Background});
     }
-    Fill_Rectangle(Icon.x-10,Icon.y+13,20,10,0,Icon.Background);
+    Rectangle({{Icon.x-10,Icon.y+13},{20,10},0,Shape_Fill,Icon.Background});
 } 
 void SEDHOM_Icons::Battary_Icon(Icon_t Icon ,int range,Color_t txt_color,bool low_charge_red_color)
 {
@@ -452,102 +142,102 @@ void SEDHOM_Icons::Battary_Icon(Icon_t Icon ,int range,Color_t txt_color,bool lo
         else if(range>=20){color_Battary=GREEN;txt_x=(range==100)?Icon.x-65:Icon.x-58;}
     }
     int rangeB=map(range,0,100,5,45);
-    fill_Rectangle(Icon.x, Icon.y, 50,30, 5, color_Battary);
-    fill_Rectangle(Icon.x+3, Icon.y+3, 50-6,30-6, 5, Icon.Background);
-    fill_Rectangle(Icon.x+50-1,Icon.y+10,10,10,0,color_Battary);
-    fill_Rectangle(Icon.x+2,Icon.y+3,rangeB,30-6,5,color_Battary);
+    Rectangle({{Icon.x, Icon.y}, {50,30}, 5,Shape_Fill, color_Battary});
+    Rectangle({{Icon.x+3, Icon.y+3}, {50-6,30-6}, 5,Shape_Fill, Icon.Background});
+    Rectangle({{Icon.x+50-1,Icon.y+10},{10,10},0,Shape_Fill,color_Battary});
+    Rectangle({{Icon.x+2,Icon.y+3},{rangeB,30-6},5,Shape_Fill,color_Battary});
     Text_cpp(txt_x+60,txt_y_index,BigFont,txt_color,String(range) + "%");
 }
 void SEDHOM_Icons::Home_Icon(Icon_t Icon)
 {
     
-    fill_Triangle(Icon.x+30,Icon.y,(Icon.x+30)+25,Icon.y+15,(Icon.x+30)-25,Icon.y+15,Icon.color);
-    fill_Rectangle(Icon.x+10, Icon.y+12,40,25,5,Icon.color);
-    fill_Rectangle(Icon.x+23, Icon.y+20,15,20,5,Icon.Background);
+    Triangle({{Icon.x+30,Icon.y},{(Icon.x+30)+25,Icon.y+15},{(Icon.x+30)-25,Icon.y+15},Shape_Fill,Icon.color});
+    Rectangle({{Icon.x+10, Icon.y+12},{40,25},5,Shape_Fill,Icon.color});
+    Rectangle({{Icon.x+23, Icon.y+20},{15,20},5,Shape_Fill,Icon.Background});
 }
 void SEDHOM_Icons::Setting_Icon(Icon_t Icon)
 {
-    fill_Circle(Icon.x-10, Icon.y,10, Icon.color);
-    fill_Circle(Icon.x-10, Icon.y-10, 3, Icon.color);
-    fill_Circle(Icon.x-10, Icon.y+10, 3, Icon.color);
-    fill_Circle(Icon.x, Icon.y-5, 3, Icon.color);
-    fill_Circle(Icon.x, Icon.y+5, 3, Icon.color);
-    fill_Circle(Icon.x-20, Icon.y-5, 3, Icon.color);
-    fill_Circle(Icon.x-20, Icon.y+5, 3, Icon.color);
-    fill_Circle(Icon.x-10, Icon.y, 5, Icon.Background);
+    Circle({{Icon.x-10, Icon.y},10,Shape_Fill, Icon.color});
+    Circle({{Icon.x-10, Icon.y-10}, 3,Shape_Fill, Icon.color});
+    Circle({{Icon.x-10, Icon.y+10}, 3,Shape_Fill, Icon.color});
+    Circle({{Icon.x, Icon.y-5}, 3,Shape_Fill, Icon.color});
+    Circle({{Icon.x, Icon.y+5}, 3,Shape_Fill, Icon.color});
+    Circle({{Icon.x-20, Icon.y-5}, 3,Shape_Fill, Icon.color});
+    Circle({{Icon.x-20, Icon.y+5}, 3,Shape_Fill, Icon.color});
+    Circle({{Icon.x-10, Icon.y}, 5,Shape_Fill, Icon.Background});
 }
 void SEDHOM_Icons::Add_Icon(Icon_t Icon)
 {
-    fill_Rectangle(Icon.x+15,Icon.y-2+15,30,5,5,Icon.color);
-    fill_Rectangle(Icon.x+13+15,Icon.y-14+15,5,30,5,Icon.color);
+    Rectangle({{Icon.x+15,Icon.y-2+15},{30,5},5,Shape_Fill,Icon.color});
+    Rectangle({{Icon.x+13+15,Icon.y-14+15},{5,30},5,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::SD_Card_Icon(Icon_t Icon)
 {
-    fill_Rectangle(Icon.x-5, Icon.y-5,40,45,5,WHITE);
-    fill_Rectangle(Icon.x, Icon.y,30,35,5,BLACK);
-    fill_Rectangle(Icon.x+15,Icon.y,17,8,5,WHITE);
-    fill_Triangle(Icon.x+30,Icon.y+8,Icon.x+17,Icon.y+8,Icon.x+17,Icon.y,BLACK);
-    fill_Rectangle(Icon.x+4,Icon.y+20,2,10,5,YELLOW);
-    fill_Rectangle(Icon.x+11,Icon.y+20,2,10,5,YELLOW);
-    fill_Rectangle(Icon.x+18,Icon.y+20,2,10,5,YELLOW);
-    fill_Rectangle(Icon.x+25,Icon.y+20,2,10,5,YELLOW);
-    fill_Rectangle(Icon.x+12,Icon.y+1,5,8,0,BLACK);
+    Rectangle({{Icon.x-5, Icon.y-5},{40,45},5,Shape_Fill,WHITE});
+    Rectangle({{Icon.x, Icon.y},{30,35},5,Shape_Fill,BLACK});
+    Rectangle({{Icon.x+15,Icon.y},{17,8},5,Shape_Fill,WHITE});
+    Triangle({{Icon.x+30,Icon.y+8},{Icon.x+17,Icon.y+8},{Icon.x+17,Icon.y},Shape_Fill,BLACK});
+    Rectangle({{Icon.x+4,Icon.y+20},{2,10},5,Shape_Fill,YELLOW});
+    Rectangle({{Icon.x+11,Icon.y+20},{2,10},5,Shape_Fill,YELLOW});
+    Rectangle({{Icon.x+18,Icon.y+20},{2,10},5,Shape_Fill,YELLOW});
+    Rectangle({{Icon.x+25,Icon.y+20},{2,10},5,Shape_Fill,YELLOW});
+    Rectangle({{Icon.x+12,Icon.y+1},{5,8},0,Shape_Fill,BLACK});
 }
 void SEDHOM_Icons::Control_Icon(Icon_t Icon)
 {
-    fill_Rectangle(Icon.x, Icon.y,40,3,5, Icon.color);
-    fill_Rectangle(Icon.x,Icon.y+15,40,3,5,Icon.color);
-    fill_Rectangle(Icon.x,Icon.y+30,40,3,5,Icon.color);
-    fill_Circle(Icon.x+28,Icon.y+1,6,Icon.color);
-    fill_Circle(Icon.x+12,Icon.y+16,6,Icon.color);
-    fill_Circle(Icon.x+31-2,Icon.y+30+1,6,Icon.color);
-    fill_Circle(Icon.x+28,Icon.y+1,3,Icon.Background);
-    fill_Circle(Icon.x+12,Icon.y+16,3,Icon.Background);
-    fill_Circle(Icon.x+29,Icon.y+31,3,Icon.Background);
+    Rectangle({{Icon.x, Icon.y},{40,3},5,Shape_Fill, Icon.color});
+    Rectangle({{Icon.x,Icon.y+15},{40,3},5,Shape_Fill,Icon.color});
+    Rectangle({{Icon.x,Icon.y+30},{40,3},5,Shape_Fill,Icon.color});
+    Circle({{Icon.x+28,Icon.y+1},6,Shape_Fill,Icon.color});
+    Circle({{Icon.x+12,Icon.y+16},6,Shape_Fill,Icon.color});
+    Circle({{Icon.x+31-2,Icon.y+30+1},6,Shape_Fill,Icon.color});
+    Circle({{Icon.x+28,Icon.y+1},3,Shape_Fill,Icon.Background});
+    Circle({{Icon.x+12,Icon.y+16},3,Shape_Fill,Icon.Background});
+    Circle({{Icon.x+29,Icon.y+31},3,Shape_Fill,Icon.Background});
 }
 void SEDHOM_Icons::Sensor_Icon(Icon_t Icon)
 {
-    fill_Rectangle(Icon.x+3,Icon.y,30,10,5,Icon.color);
-    fill_Circle(Icon.x+18, Icon.y+10,5,Icon.color);
-    draw_Line(Icon.x+12,Icon.y+17,Icon.x+6,Icon.y+25,Icon.color);
-    draw_Line(Icon.x+23,Icon.y+17,Icon.x+30,Icon.y+25,Icon.color);
-    draw_Line(Icon.x+18,Icon.y+17,Icon.x+18,Icon.y+25,Icon.color);
+    Rectangle({{Icon.x+3,Icon.y},{30,10},5,Shape_Fill,Icon.color});
+    Circle({{Icon.x+18, Icon.y+10},5,Shape_Fill,Icon.color});
+    Line({{Icon.x+12,Icon.y+17},{Icon.x+6,Icon.y+25},Icon.color});
+    Line({{Icon.x+23,Icon.y+17},{Icon.x+30,Icon.y+25},Icon.color});
+    Line({{Icon.x+18,Icon.y+17},{Icon.x+18,Icon.y+25},Icon.color});
 }
 void SEDHOM_Icons::Power_off_Icon(Icon_t Icon)
 {
-    fill_Circle(Icon.x,Icon.y,20,Icon.color);
-    fill_Circle(Icon.x,Icon.y,17,Icon.Background);
-    fill_Rectangle(Icon.x-8, Icon.y-20,16,20, 0,Icon.Background);
-    fill_Rectangle(Icon.x-1, Icon.y-23,2,23,0,Icon.color);
+    Circle({{Icon.x,Icon.y},20,Shape_Fill,Icon.color});
+    Circle({{Icon.x,Icon.y},17,Shape_Fill,Icon.Background});
+    Rectangle({{Icon.x-8, Icon.y-20},{16,20}, 0,Shape_Fill,Icon.Background});
+    Rectangle({{Icon.x-1, Icon.y-23},{2,23},0,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::Bluetooth_Icon(Icon_t Icon,BLUETOOTH_STATUS_t connect_status)
 {
  if(connect_status == BLuetooth_Status_open_and_not_connected || connect_status == BLuetooth_Status_open_and_connected )
  {
-    fill_Triangle( (Icon.x) , (Icon.y) , (Icon.x+15) , (Icon.y+10) , (Icon.x) , (Icon.y+20) , Icon.color);
-    fill_Triangle( (Icon.x) , (Icon.y)+15 , (Icon.x+15) , (Icon.y+10)+15 , (Icon.x) , (Icon.y+20)+15 , Icon.color);
-    fill_Triangle( (Icon.x-15) , (Icon.y+5) , (Icon.x) , (Icon.y+16) , (Icon.x-15) , (Icon.y+30) , Icon.color);
-    fill_Triangle( (Icon.x-15)+2 , (Icon.y+5)+3 , (Icon.x)-2 , (Icon.y+16) , (Icon.x-15)+2 , (Icon.y+30)-3 , Icon.Background);
-    fill_Triangle( (Icon.x)+2 , (Icon.y)+3 , (Icon.x+15)-2 , (Icon.y+10) , (Icon.x)+2 , (Icon.y+20)-4 , Icon.Background);
-    fill_Triangle( ((Icon.x))+2 , ((Icon.y)+15)+3 , ((Icon.x+15))-2 , ((Icon.y)+15)+10 , ((Icon.x))+2 , ((Icon.y+20)+15)-3 , Icon.Background);
-    fill_Rectangle(Icon.x-18, Icon.y+2,6,30,0, Icon.Background);
+    Triangle({{(Icon.x) , (Icon.y)} , {(Icon.x+15) , (Icon.y+10)} , {(Icon.x) , (Icon.y+20)},Shape_Fill , Icon.color});
+    Triangle({{(Icon.x) , (Icon.y)+15} , {(Icon.x+15) , (Icon.y+10)+15} , {(Icon.x) , (Icon.y+20)+15},Shape_Fill , Icon.color});
+    Triangle({{(Icon.x-15) , (Icon.y+5) },{ (Icon.x) , (Icon.y+16)} , {(Icon.x-15) , (Icon.y+30)},Shape_Fill , Icon.color});
+    Triangle({{(Icon.x-15)+2 , (Icon.y+5)+3 }, {(Icon.x)-2 , (Icon.y+16)} , {(Icon.x-15)+2 , (Icon.y+30)-3},Shape_Fill , Icon.Background});
+    Triangle({{(Icon.x)+2 , (Icon.y)+3 },{ (Icon.x+15)-2 , (Icon.y+10) }, {(Icon.x)+2 , (Icon.y+20)-4},Shape_Fill , Icon.Background});
+    Triangle({{((Icon.x))+2 , ((Icon.y)+15)+3} , {((Icon.x+15))-2 , ((Icon.y)+15)+10 }, {((Icon.x))+2 , ((Icon.y+20)+15)-3},Shape_Fill , Icon.Background});
+    Rectangle({{Icon.x-18, Icon.y+2},{6,30},0,Shape_Fill, Icon.Background});
     if(connect_status == BLuetooth_Status_open_and_connected)
     {
-        fill_Circle(Icon.x-10, Icon.y+17, 1, Icon.color);
-        fill_Circle(Icon.x+13, Icon.y+18, 1, Icon.color);
+        Circle({{Icon.x-10, Icon.y+17}, 1,Shape_Fill, Icon.color});
+        Circle({{Icon.x+13, Icon.y+18}, 1,Shape_Fill, Icon.color});
     }
  }
  else
  {
-    fill_Rectangle(Icon.x-20, Icon.y-10,42,50,0, Icon.Background);
+    Rectangle({{Icon.x-20, Icon.y-10},{42,50},0,Shape_Fill, Icon.Background});
  }
 }
 void SEDHOM_Icons::Button_Icon(Icon_t Icon,bool print_on_and_off)
 {
-    fill_Rectangle(Icon.x,Icon.y,50,20 ,30,GREEN);
-    fill_Circle(Icon.x+39,Icon.y+10,7,WHITE);
-    fill_Rectangle(Icon.x,Icon.y+25,50,20,30,RED);
-    fill_Circle(Icon.x+10,Icon.y+35,7,WHITE);
+    Rectangle({{Icon.x,Icon.y},{50,20} ,30,Shape_Fill,GREEN});
+    Circle({{Icon.x+39,Icon.y+10},7,Shape_Fill,WHITE});
+    Rectangle({{Icon.x,Icon.y+25},{50,20},30,Shape_Fill,RED});
+    Circle({{Icon.x+10,Icon.y+35},7,Shape_Fill,WHITE});
 
     if(print_on_and_off)
     {
@@ -562,8 +252,8 @@ void SEDHOM_Icons::Display_Time_Icon(Icon_t Icon,Time_t time)
     // minutes
     Text_cpp(Icon.x+83,Icon.y+35,FONT_SEVENSEGMENT,Icon.color,(time.minut < 10) ? ("0" + String(time.minut)) : String(time.minut));
     // seprator
-    fill_Circle(Icon.x+73,Icon.y,5,Icon.color);
-    fill_Circle(Icon.x+73,Icon.y+20,5,Icon.color);
+    Circle({{Icon.x+73,Icon.y},5,Shape_Fill,Icon.color});
+    Circle({{Icon.x+73,Icon.y+20},5,Shape_Fill,Icon.color});
     //sec
     Text_cpp(Icon.x+146,Icon.y,BigFont,Icon.color,String(time.sec));
     // time name
@@ -571,19 +261,19 @@ void SEDHOM_Icons::Display_Time_Icon(Icon_t Icon,Time_t time)
 }
 void SEDHOM_Icons::Terminal_Icon(Icon_t Icon)
 {
-    fill_Rectangle(Icon.x,Icon.y,50,50,5,WHITE);
-    fill_Rectangle(Icon.x+3,Icon.y+3,44,44,5,BLACK);
+    Rectangle({{Icon.x,Icon.y},{50,50},5,Shape_Fill,WHITE});
+    Rectangle({{Icon.x+3,Icon.y+3},{44,44},5,Shape_Fill,BLACK});
     TEXT(Icon.x+10,Icon.y+30,BigFont,GREEN,">_");
 }
 void SEDHOM_Icons::About_Icon(Icon_t Icon)
 {
-    fill_Circle(Icon.x,Icon.y,20,Icon.color);
-    fill_Circle(Icon.x,Icon.y,17,Icon.Background);
+    Circle({{Icon.x,Icon.y},20,Shape_Fill,Icon.color});
+    Circle({{Icon.x,Icon.y},17,Shape_Fill,Icon.Background});
     TEXT(Icon.x-6,Icon.y+8,BigFont,Icon.color,"!");
 }
 void SEDHOM_Icons::Display_Date_Icon(Icon_t Icon,Date_t Date,Color_t text_color)
 {
-    fill_Rectangle(Icon.x,Icon.y,130,130,15,Icon.color);
+    Rectangle({{Icon.x,Icon.y},{130,130},15,Shape_Fill,Icon.color});
     Text_cpp(Icon.x+42,Icon.y+40,BigFont,text_color,String(Date.week_day_name));
     Text_cpp(Icon.x+47,Icon.y+65,BigFont,text_color,String(Date.Day));
     Text_cpp(Icon.x+42,Icon.y+90,BigFont,text_color,String(Date.month_name));
@@ -598,83 +288,83 @@ void SEDHOM_Icons::Display_Date_Icon(Icon_t Icon,Date_t Date,Color_t text_color)
     {
         for (int i = 0; i <= 4; i++) // 0,1,2,3,4
         {
-            draw_Line(x_start + i + offset_block, y_start, x_end_start + i + offset_block, y_end_start,Icon.Background);
+          Line({{(x_start + i + offset_block),y_start},{(x_end_start + i + offset_block),y_end_start},Icon.Background});
         }
     }
 
 
-    fill_Circle(Icon.x+114-100,Icon.y+8,4,Icon.Background);
-    fill_Circle(Icon.x+114-80,Icon.y+8,4,Icon.Background);
-    fill_Circle(Icon.x+114-60,Icon.y+8,4,Icon.Background);
-    fill_Circle(Icon.x+114-40,Icon.y+8,4,Icon.Background);
-    fill_Circle(Icon.x+114-20,Icon.y+8,4,Icon.Background);
-    fill_Circle(Icon.x+114,Icon.y+8,4,Icon.Background);
+    Circle({{Icon.x+114-100,Icon.y+8},4,Shape_Fill,Icon.Background});
+    Circle({{Icon.x+114-80,Icon.y+8},4,Shape_Fill,Icon.Background});
+    Circle({{Icon.x+114-60,Icon.y+8},4,Shape_Fill,Icon.Background});
+    Circle({{Icon.x+114-40,Icon.y+8},4,Shape_Fill,Icon.Background});
+    Circle({{Icon.x+114-20,Icon.y+8},4,Shape_Fill,Icon.Background});
+    Circle({{Icon.x+114,Icon.y+8},4,Shape_Fill,Icon.Background});
 
 }
 void SEDHOM_Icons::UP_Arrow_Icon(Icon_t Icon,Color_t border_color)
 {
-  fill_Triangle(Icon.x-20-6,Icon.y+25+3,Icon.x,Icon.y-6,Icon.x+20+6,Icon.y+25+3,border_color);
-  fill_Triangle(Icon.x-20,Icon.y+25,Icon.x,Icon.y,Icon.x+20,Icon.y+25,Icon.color);
+  Triangle({{Icon.x-20-6,Icon.y+25+3},{Icon.x,Icon.y-6},{Icon.x+20+6,Icon.y+25+3},Shape_Fill,border_color});
+  Triangle({{Icon.x-20,Icon.y+25},{Icon.x,Icon.y},{Icon.x+20,Icon.y+25},Shape_Fill,Icon.color});
   fill_rectangle_with_end(Icon.x-10,Icon.y+25,20,20,3,Icon.color,border_color);
-  fill_Rectangle(Icon.x-10+3,Icon.y+25,20-6,20-3,0,Icon.color);
+  Rectangle({{Icon.x-10+3,Icon.y+25},{20-6,20-3},0,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::DOWN_Arrow_Icon(Icon_t Icon,Color_t border_color)
 {
-  fill_Triangle(Icon.x-20-6,Icon.y+25-3,Icon.x,Icon.y-6+60,Icon.x+20+6,Icon.y+25-3,border_color);
-  fill_Triangle(Icon.x-20,Icon.y+25,Icon.x,Icon.y+50,Icon.x+20,Icon.y+25,Icon.color);
+  Triangle({{Icon.x-20-6,Icon.y+25-3},{Icon.x,Icon.y-6+60},{Icon.x+20+6,Icon.y+25-3},Shape_Fill,border_color});
+  Triangle({{Icon.x-20,Icon.y+25},{Icon.x,Icon.y+50},{Icon.x+20,Icon.y+25},Shape_Fill,Icon.color});
   fill_rectangle_with_end(Icon.x-10,Icon.y+5,20,20,3,Icon.color,border_color);
-  fill_Rectangle(Icon.x-10+3,Icon.y+8,20-6,20-3,0,Icon.color);
+  Rectangle({{Icon.x-10+3,Icon.y+8},{20-6,20-3},0,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::LEFT_Arrow_Icon(Icon_t Icon,Color_t border_color)
 {
-  fill_Triangle(Icon.x-6,Icon.y,Icon.x+25+3,Icon.y-25-6,Icon.x+25+3,Icon.y+25+6,border_color);
-  fill_Triangle(Icon.x,Icon.y,Icon.x+25,Icon.y-25,Icon.x+25,Icon.y+25,Icon.color);
+  Triangle({{Icon.x-6,Icon.y},{Icon.x+25+3,Icon.y-25-6},{Icon.x+25+3,Icon.y+25+6},Shape_Fill,border_color});
+  Triangle({{Icon.x,Icon.y},{Icon.x+25,Icon.y-25},{Icon.x+25,Icon.y+25},Shape_Fill,Icon.color});
   fill_rectangle_with_end(Icon.x+25,Icon.y-8-1,20,20,3,Icon.color,border_color);
-  fill_Rectangle(Icon.x+25,Icon.y-8+3-1,20-3,20-6,0,Icon.color);
+  Rectangle({{Icon.x+25,Icon.y-8+3-1},{20-3,20-6},0,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::RIGHT_Aroow_Icon(Icon_t Icon,Color_t border_color)
 {
-  fill_Triangle(Icon.x+6+50,Icon.y,Icon.x+25-3,Icon.y-25-6,Icon.x+25-3,Icon.y+25+6,border_color);
-  fill_Triangle(Icon.x+50,Icon.y,Icon.x+25,Icon.y-25,Icon.x+25,Icon.y+25,Icon.color);
+  Triangle({{Icon.x+6+50,Icon.y},{Icon.x+25-3,Icon.y-25-6},{Icon.x+25-3,Icon.y+25+6},Shape_Fill,border_color});
+  Triangle({{Icon.x+50,Icon.y},{Icon.x+25,Icon.y-25},{Icon.x+25,Icon.y+25},Shape_Fill,Icon.color});
   fill_rectangle_with_end(Icon.x+5,Icon.y-8-1,20,20,3,Icon.color,border_color);
-  fill_Rectangle(Icon.x+8,Icon.y-8+3-1,20-3,20-6,0,Icon.color);
+  Rectangle({{Icon.x+8,Icon.y-8+3-1},{20-3,20-6},0,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::Back_Arrow_Icon(Icon_t Icon,Color_t border_color)
 {
-  fill_Triangle(Icon.x-6,Icon.y,Icon.x+25+3,Icon.y-15-6,Icon.x+25+3,Icon.y+15+6,border_color);
-  fill_Triangle(Icon.x,Icon.y,Icon.x+25,Icon.y-15,Icon.x+25,Icon.y+15,Icon.color);
+  Triangle({{Icon.x-6,Icon.y},{Icon.x+25+3,Icon.y-15-6},{Icon.x+25+3,Icon.y+15+6},Shape_Fill,border_color});
+  Triangle({{Icon.x,Icon.y},{Icon.x+25,Icon.y-15},{Icon.x+25,Icon.y+15},Shape_Fill,Icon.color});
   fill_rectangle_with_end(Icon.x+25,Icon.y-8-1,18,25,3,Icon.color,border_color);
-  fill_Rectangle(Icon.x+22,Icon.y-8+3-1,12,12,5,Icon.color);
+  Rectangle({{Icon.x+22,Icon.y-8+3-1},{12,12},5,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::After_Arrow_Icon(Icon_t Icon,Color_t border_color)
 {
-  fill_Triangle(Icon.x+6+50,Icon.y,Icon.x+25-3,Icon.y-15-6,Icon.x+25-3,Icon.y+15+6,border_color);
-  fill_Triangle(Icon.x+50,Icon.y,Icon.x+25,Icon.y-15,Icon.x+25,Icon.y+15,Icon.color);
+  Triangle({{Icon.x+6+50,Icon.y},{Icon.x+25-3,Icon.y-15-6},{Icon.x+25-3,Icon.y+15+6},Shape_Fill,border_color});
+  Triangle({{Icon.x+50,Icon.y},{Icon.x+25,Icon.y-15},{Icon.x+25,Icon.y+15},Shape_Fill,Icon.color});
   fill_rectangle_with_end(Icon.x,Icon.y-8-1,18,25,3,Icon.color,border_color);
-  fill_Rectangle(Icon.x+15,Icon.y-8+3-1,12,13,5,Icon.color);
+  Rectangle({{Icon.x+15,Icon.y-8+3-1},{12,13},5,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::Color_Icon(Icon_t Icon)
 {
-    fill_Rectangle(Icon.x,Icon.y,30,30,5,MAGENTA);
-    fill_Rectangle(Icon.x+5,Icon.y+5,30,30,5,RED);
-    fill_Rectangle(Icon.x+10,Icon.y+10,30,30,5,BLUE);
-    fill_Rectangle(Icon.x+15,Icon.y+15,30,30,5,GREEN);
+    Rectangle({{Icon.x,Icon.y},{30,30},5,Shape_Fill,MAGENTA});
+    Rectangle({{Icon.x+5,Icon.y+5},{30,30},5,Shape_Fill,RED});
+    Rectangle({{Icon.x+10,Icon.y+10},{30,30},5,Shape_Fill,BLUE});
+    Rectangle({{Icon.x+15,Icon.y+15},{30,30},5,Shape_Fill,GREEN});
 }
 void SEDHOM_Icons::Time_Icon(Icon_t Icon)
 {
-    fill_Circle(Icon.x,Icon.y,20,Icon.color);
-    fill_Circle(Icon.x,Icon.y,17,Icon.Background);
-    fill_Rectangle(Icon.x-2,Icon.y-14,3,12,5,Icon.color);
-    fill_Rectangle(Icon.x,Icon.y-1,10,3,5,Icon.color);
-    fill_Circle(Icon.x,Icon.y,4,Icon.color);
+    Circle({{Icon.x,Icon.y},20,Shape_Fill,Icon.color});
+    Circle({{Icon.x,Icon.y},17,Shape_Fill,Icon.Background});
+    Rectangle({{Icon.x-2,Icon.y-14},{3,12},5,Shape_Fill,Icon.color});
+    Rectangle({{Icon.x,Icon.y-1},{10,3},5,Shape_Fill,Icon.color});
+    Circle({{Icon.x,Icon.y},4,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::Date_Icon(Icon_t Icon)
 {
-    fill_Rectangle(Icon.x,Icon.y,45,48,5,Icon.color);
-    fill_Rectangle(Icon.x+2,Icon.y+10,41,36,5,Icon.Background);
-    fill_Circle(Icon.x+5,Icon.y+5,3,Icon.Background);
-    fill_Circle(Icon.x+23,Icon.y+5,3,Icon.Background);
-    fill_Circle(Icon.x+40,Icon.y+5,3,Icon.Background);
+    Rectangle({{Icon.x,Icon.y},{45,48},5,Shape_Fill,Icon.color});
+    Rectangle({{Icon.x+2,Icon.y+10},{41,36},5,Shape_Fill,Icon.Background});
+    Circle({{Icon.x+5,Icon.y+5},3,Shape_Fill,Icon.Background});
+    Circle({{Icon.x+23,Icon.y+5},3,Shape_Fill,Icon.Background});
+    Circle({{Icon.x+40,Icon.y+5},3,Shape_Fill,Icon.Background});
     TEXT(Icon.x+20,Icon.y+24,SmallFont,Icon.color,"6");
     TEXT(Icon.x+12,Icon.y+33,SmallFont,Icon.color,"Jun");
     TEXT(Icon.x+9,Icon.y+46,SmallFont,Icon.color,"2025");
@@ -689,8 +379,8 @@ void SEDHOM_Icons::Switch_Icon(Icon_t Icon,Color_t color_off,Color_t thumb_color
     index = (state == SWITCH_State_ON) ? (Icon.x+20) : (Icon.x+80) ;
     index_str = (state == SWITCH_State_ON) ? (Icon.x+50) : (Icon.x+10) ;
     state_str = (state == SWITCH_State_ON) ? "ON" : "OFF" ;
-    fill_Rectangle(Icon.x,Icon.y,100,40,50,State_color);
-    fill_Circle(index,Icon.y+20,15,thumb_color);
+    Rectangle({{Icon.x,Icon.y},{100,40},50,Shape_Fill,State_color});
+    Circle({{index,Icon.y+20},15,Shape_Fill,thumb_color});
     Text_cpp((index_str),Icon.y+28,BigFont,txt_color,state_str);
 }
 void SEDHOM_Icons::label_Icon(Icon_t Icon ,Area_t area,int Border,Color_t color_str_in_label,String string_in_label)
@@ -708,9 +398,9 @@ void SEDHOM_Icons::label_Icon(Icon_t Icon ,Area_t area,int Border,Color_t color_
 void SEDHOM_Icons::slider_Icon(Icon_t Icon ,int h,byte_t range ,Color_t color_not_active ,Color_t ball_color,Color_t box_color,Color_t range_in_box_color)
 {
     long index = map(range,0,100,0,h);
-    fill_Rectangle(Icon.x,Icon.y,h,10,5,color_not_active);
-    fill_Rectangle(Icon.x,Icon.y,index,10,5,Icon.color);
-    fill_Circle(Icon.x+index,Icon.y+5,10,Not_Mode());
+    Rectangle({{Icon.x,Icon.y},{h,10},5,Shape_Fill,color_not_active});
+    Rectangle({{Icon.x,Icon.y},{index,10},5,Shape_Fill,Icon.color});
+    Circle({{Icon.x+index,Icon.y+5},10,Shape_Fill,Not_Mode()});
     fill_rectangle_with_end(Icon.x+h+15,Icon.y-10,30,40,3,Mode(),box_color);
     Text_cpp(Icon.x+h+8+15,Icon.y+19-8,SmallFont,range_in_box_color,String(range));
 }
@@ -719,29 +409,29 @@ void SEDHOM_Icons::file_Icon(Icon_t Icon,Color_t Border_color,Color_t file_exten
     fill_rectangle_with_end(Icon.x,Icon.y,60,50,3,Icon.Background,Border_color);
     fill_rectangle_with_end(Icon.x-10,Icon.y+30,20,30,3,Icon.color,Border_color);
     fill_rectangle_with_end(Icon.x+29,Icon.y-1,21,30,3,Icon.Background,Icon.Background);
-    fill_Triangle(Icon.x+6+43,Icon.y+20,Icon.x+29,Icon.y,Icon.x+29,Icon.y+20,Border_color);
-    fill_Triangle(Icon.x+43,Icon.y+18,Icon.x+29+3,Icon.y+6,Icon.x+29+3,Icon.y+18,Icon.color);
-    fill_Rectangle(Icon.x+10,Icon.y+15,15,2,5,Border_color);
-    fill_Rectangle(Icon.x+10,Icon.y+25,30,2,5,Border_color);    
-    fill_Rectangle(Icon.x+25,Icon.y+35,15,2,5,Border_color);
-    fill_Rectangle(Icon.x+25,Icon.y+45,15,2,5,Border_color);
+    Triangle({{Icon.x+6+43,Icon.y+20},{Icon.x+29,Icon.y},{Icon.x+29,Icon.y+20},Shape_Fill,Border_color});
+    Triangle({{Icon.x+43,Icon.y+18},{Icon.x+29+3,Icon.y+6},{Icon.x+29+3,Icon.y+18},Shape_Fill,Icon.color});
+    Rectangle({{Icon.x+10,Icon.y+15},{15,2},5,Shape_Fill,Border_color});
+    Rectangle({{Icon.x+10,Icon.y+25},{30,2},5,Shape_Fill,Border_color});    
+    Rectangle({{Icon.x+25,Icon.y+35},{15,2},5,Shape_Fill,Border_color});
+    Rectangle({{Icon.x+25,Icon.y+45},{15,2},5,Shape_Fill,Border_color});
     Text_cpp(Icon.x-5,Icon.y+46,SmallFont,file_extend_color,file_extend);
 }
 void SEDHOM_Icons::folder_Icon(Icon_t Icon)
 {
-    fill_Rectangle(Icon.x,Icon.y,30,40,5,Icon.color);
-    fill_Rectangle(Icon.x+28,Icon.y+5,40,20,5,Icon.color);
+    Rectangle({{Icon.x,Icon.y},{30,40},5,Shape_Fill,Icon.color});
+    Rectangle({{Icon.x+28,Icon.y+5},{40,20},5,Shape_Fill,Icon.color});
     fill_rectangle_with_end(Icon.x+5,Icon.y+10,20,60,1,WHITE,BLACK);
-    fill_Rectangle(Icon.x,Icon.y+20,68,35,5,Icon.color);
-    fill_Rectangle(Icon.x,Icon.y+20,69,1,0,BLACK);
+    Rectangle({{Icon.x,Icon.y+20},{68,35},5,Shape_Fill,Icon.color});
+    Rectangle({{Icon.x,Icon.y+20},{69,1},0,Shape_Fill,BLACK});
 }
 void SEDHOM_Icons::Divider_vertical(Icon_t Icon,int length,int thikness)
 {
-    fill_Rectangle(Icon.x,Icon.y,length,thikness,1,Icon.color);
+    Rectangle({{Icon.x,Icon.y},{length,thikness},1,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::Divider_Horezontal(Icon_t Icon ,int length , int thikness)
 {
-    fill_Rectangle(Icon.x,Icon.y,thikness,length,1,Icon.color);
+    Rectangle({{Icon.x,Icon.y},{thikness,length},1,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_font_color,Color_t font_color)
 {
@@ -778,50 +468,50 @@ void SEDHOM_Icons::ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_f
     
     if(User.default_image)
     {
-        fill_Circle(x1+210,y1+160,40,DARKGREY);
-        fill_Circle(x1+210,y1+100,25,DARKGREY);
+        Circle({{x1+210,y1+160},40,Shape_Fill,DARKGREY});
+        Circle({{x1+210,y1+100},25,Shape_Fill,DARKGREY});
         if(User.eye)
         {
-            fill_Circle(x1+220,y1+97,7,BLACK);
-            fill_Circle(x1+220,y1+97,5,DARKGREY);
-            fill_Circle(x1+220,y1+97,1,BLACK);//eye
+            Circle({{x1+220,y1+97},7,Shape_Fill,BLACK});
+            Circle({{x1+220,y1+97},5,Shape_Fill,DARKGREY});
+            Circle({{x1+220,y1+97},1,Shape_Fill,BLACK});//eye
             Divider_vertical({x1+205,y1+97,Black,Icon.Background},10,2);
-            fill_Circle(x1+200,y1+97,7,BLACK);
-            fill_Circle(x1+200,y1+97,5,DARKGREY);
-            fill_Circle(x1+200,y1+97,1,BLACK);//eye
+            Circle({{x1+200,y1+97},7,Shape_Fill,BLACK});
+            Circle({{x1+200,y1+97},5,Shape_Fill,DARKGREY});
+            Circle({{x1+200,y1+97},1,Shape_Fill,BLACK});//eye
             Divider_vertical({x1+225,y1+97,Black,Icon.Background},10,2);
             Divider_vertical({x1+185,y1+97,Black,Icon.Background},10,2);
         }
     }
-    fill_Rectangle(x1+150,y1+155,120,45,15,Icon.color);
+    Rectangle({{x1+150,y1+155},{120,45},15,Shape_Fill,Icon.color});
     TEXT(x1+157,y1+175,SmallFont,font_color,User.number);
 }
 void SEDHOM_Icons::Joy_Stick_Icon(Icon_t Icon ,Coordenate_t thumb ,int thumb_size,Color_t Border_color,Color_t thumb_color,Color_t Color_insde_arrow)
 {
-  fill_Circle(Icon.x,Icon.y,50,Border_color);
-  fill_Circle(Icon.x,Icon.y,50-3,Icon.color);
-  Equilateral_Triangle_Up(Icon.x,Icon.y-35,10,Fill_shape,Color_insde_arrow);
-  Equilateral_Triangle_Down(Icon.x,Icon.y+35,10,Fill_shape,Color_insde_arrow);
-  Equilateral_Triangle_Right(Icon.x+35,Icon.y,10,Fill_shape,Color_insde_arrow);
-  Equilateral_Triangle_Left(Icon.x-35,Icon.y,10,Fill_shape,Color_insde_arrow);
+  Circle({{Icon.x,Icon.y},50,Shape_Fill,Border_color});
+  Circle({{Icon.x,Icon.y},50-3,Shape_Fill,Icon.color});
+  Equilateral_Triangle({{Icon.x,Icon.y-35},10,Shape_Fill,Direction_Up,Color_insde_arrow});
+  Equilateral_Triangle({{Icon.x,Icon.y+35},10,Shape_Fill,Direction_Down,Color_insde_arrow});
+  Equilateral_Triangle({{Icon.x+35,Icon.y},10,Shape_Fill,Direction_Right,Color_insde_arrow});
+  Equilateral_Triangle({{Icon.x-35,Icon.y},10,Shape_Fill,Direction_Left,Color_insde_arrow});
   int dx = thumb.x - Icon.x;
   int dy = thumb.y - Icon.y;
   if ((dx*dx + dy*dy) <= (50/2)*(50/2))
   {
-      fill_Circle(thumb.x, thumb.y, thumb_size, thumb_color);
+      Circle({{thumb.x, thumb.y}, thumb_size,Shape_Fill, thumb_color});
   }
 }
 void SEDHOM_Icons::Temperature_Meter_Icon(Icon_t Icon,Color_t Border,int value,bool show_val_dashes)
 {
   Color_t color_dash =RED;
   value = constrain(value, 0, 100);
-  fill_Circle(Icon.x+50/2,Icon.y+150+25,50,Border);
-  fill_Rectangle(Icon.x,Icon.y,50,150,5,Border);
-  fill_Rectangle(Icon.x+5,Icon.y+5,50-10,150,5,Icon.Background);
-  fill_Circle(Icon.x+50/2,Icon.y+150+25,50-5,Icon.Background);
-  fill_Circle(Icon.x+50/2,Icon.y+150+25,50-13,Icon.color);
+  Circle({{Icon.x+50/2,Icon.y+150+25},50,Shape_Fill,Border});
+  Rectangle({{Icon.x,Icon.y},{50,150},5,Shape_Fill,Border});
+  Rectangle({{Icon.x+5,Icon.y+5},{50-10,150},5,Shape_Fill,Icon.Background});
+  Circle({{Icon.x+50/2,Icon.y+150+25},50-5,Shape_Fill,Icon.Background});
+  Circle({{Icon.x+50/2,Icon.y+150+25},50-13,Shape_Fill,Icon.color});
   int levelHeight = map(value, 0, 100, 0, 140);
-  fill_Rectangle(Icon.x+12,Icon.y + 150 - levelHeight,50-24,levelHeight,5,Icon.color);
+  Rectangle({{Icon.x+12,Icon.y + 150 - levelHeight},{50-24,levelHeight},5,Shape_Fill,Icon.color});
   if(show_val_dashes)
   {
    TEXT(Icon.x+55,Icon.y+10,FONT_BIG,red,"-100");
@@ -836,17 +526,17 @@ void SEDHOM_Icons::Temperature_Meter_Icon(Icon_t Icon,Color_t Border,int value,b
 }
 void SEDHOM_Icons::Tone_Icon(Icon_t Icon,bool is_muted_or_not)
 {
-   fill_Circle(Icon.x,Icon.y,5,Icon.color);
-   fill_Circle(Icon.x,Icon.y,5-2,Icon.Background);
-   fill_Circle(Icon.x+20,Icon.y,5,Icon.color);
-   fill_Circle(Icon.x+20,Icon.y,5-2,Icon.Background);
-   fill_Rectangle(Icon.x+4,Icon.y-20,2,20,0,Icon.color);
-   fill_Rectangle(Icon.x+4+20,Icon.y-20,2,20,0,Icon.color);
-   fill_Rectangle(Icon.x+4,Icon.y-20,20,2,0,Icon.color);
+   Circle({{Icon.x,Icon.y},5,Shape_Fill,Icon.color});
+   Circle({{Icon.x,Icon.y},5-2,Shape_Fill,Icon.Background});
+   Circle({{Icon.x+20,Icon.y},5,Shape_Fill,Icon.color});
+   Circle({{Icon.x+20,Icon.y},5-2,Shape_Fill,Icon.Background});
+   Rectangle({{Icon.x+4,Icon.y-20},{2,20},0,Shape_Fill,Icon.color});
+   Rectangle({{Icon.x+4+20,Icon.y-20},{2,20},0,Shape_Fill,Icon.color});
+   Rectangle({{Icon.x+4,Icon.y-20},{20,2},0,Shape_Fill,Icon.color});
    if(is_muted_or_not)
    {   
-     draw_Line(Icon.x-5,Icon.y-20,Icon.x+32,Icon.y-5,Icon.color);    
-     draw_Line(Icon.x-5,Icon.y-20+1,Icon.x+32,Icon.y-5+1,Icon.color);    
+     Line({{Icon.x-5,Icon.y-20},{Icon.x+32,Icon.y-5},Icon.color});    
+     Line({{Icon.x-5,Icon.y-20+1},{Icon.x+32,Icon.y-5+1},Icon.color});    
    }
 }
 void SEDHOM_Icons::Sound_value_Icon(Icon_t Icon,int value,Color_t thikness_color,bool thikness_or_not)
@@ -854,32 +544,32 @@ void SEDHOM_Icons::Sound_value_Icon(Icon_t Icon,int value,Color_t thikness_color
   int val = value;
   value = constrain(value,0,100);
   value = map(value,0,100,150,0);
-  fill_Rectangle(Icon.x,Icon.y,50,150,40,thikness_or_not?thikness_color:Icon.color);
-  fill_Rectangle(Icon.x+5,Icon.y+5,50-10,150-10,40,Icon.Background);
-  fill_Rectangle(Icon.x+5,(Icon.y+value+5),50-10,((val<15)?(0):(150-value-10)),40,Icon.color);
+  Rectangle({{Icon.x,Icon.y},{50,150},40,Shape_Fill,thikness_or_not?thikness_color:Icon.color});
+  Rectangle({{Icon.x+5,Icon.y+5},{50-10,150-10},40,Shape_Fill,Icon.Background});
+  Rectangle({{Icon.x+5,(Icon.y+value+5)},{50-10,((val<15)?(0):(150-value-10))},40,Shape_Fill,Icon.color});
   Tone_Icon({Icon.x+12,Icon.y+130,(val<20)?Icon.color:Icon.Background,(val<20)?Icon.Background:Icon.color},(val==0)?true:false);
 }
 void SEDHOM_Icons::Video_Icon(Icon_t Icon)
 {
-   fill_Rectangle(Icon.x,Icon.y,50,35,8,Icon.color);
-   Equilateral_Triangle_Right(Icon.x+24,Icon.y+17,20,Fill_shape,Icon.Background);
+   Rectangle({{Icon.x,Icon.y},{50,35},8,Shape_Fill,Icon.color});
+   Equilateral_Triangle({{Icon.x+24,Icon.y+17},20,Shape_Fill,Direction_Right,Icon.Background});
 }
 void SEDHOM_Icons::Block_Icon(Icon_t Icon,bool open_or_closed)
 {
   if(!open_or_closed)
   {
-     fill_Rectangle(Icon.x+21,Icon.y-15,20,30,10,Icon.color);
-     fill_Rectangle(Icon.x+21+2,Icon.y-15+2,20-4,30-4,10,Icon.Background);
-     fill_Rectangle(Icon.x+26,Icon.y,26,20,2,Icon.Background);
+     Rectangle({{Icon.x+21,Icon.y-15},{20,30},10,Shape_Fill,Icon.color});
+     Rectangle({{Icon.x+21+2,Icon.y-15+2},{20-4,30-4},10,Shape_Fill,Icon.Background});
+     Rectangle({{Icon.x+26,Icon.y},{26,20},2,Shape_Fill,Icon.Background});
   }
   else
   {
-     fill_Rectangle(Icon.x+3,Icon.y-15,20,30,10,Icon.color);
-     fill_Rectangle(Icon.x+3+2,Icon.y-15+2,20-4,30-4,10,Icon.Background);
+     Rectangle({{Icon.x+3,Icon.y-15},{20,30},10,Shape_Fill,Icon.color});
+     Rectangle({{Icon.x+3+2,Icon.y-15+2},{20-4,30-4},10,Shape_Fill,Icon.Background});
   }
-  fill_Rectangle(Icon.x,Icon.y,26,20,2,Icon.color);
-  fill_Circle(Icon.x+12,Icon.y+6,4,Icon.Background);
-  fill_Rectangle(Icon.x+10,Icon.y+9,5,8,2,Icon.Background);
+  Rectangle({{Icon.x,Icon.y},{26,20},2,Shape_Fill,Icon.color});
+  Circle({{Icon.x+12,Icon.y+6},4,Shape_Fill,Icon.Background});
+  Rectangle({{Icon.x+10,Icon.y+9},{5,8},2,Shape_Fill,Icon.Background});
 }
 void SEDHOM_Icons::Signal_Icon(Icon_t Icon,SIGNAL_STATUS_t state,Color_t color_off)
 {
@@ -935,34 +625,34 @@ void SEDHOM_Icons::Signal_Icon(Icon_t Icon,SIGNAL_STATUS_t state,Color_t color_o
   }
   else return ;
 
-  fill_Rectangle(Icon.x,Icon.y+20,5,5,0,color_one);
-  fill_Rectangle(Icon.x+10,Icon.y+15,5,10,0,color_two);
-  fill_Rectangle(Icon.x+20,Icon.y+10,5,15,0,color_three);
-  fill_Rectangle(Icon.x+30,Icon.y+5,5,20,0,color_four);
-  fill_Rectangle(Icon.x+40,Icon.y,5,25,0,color_five);
+  Rectangle({{Icon.x,Icon.y+20},{5,5},0,Shape_Fill,color_one});
+  Rectangle({{Icon.x+10,Icon.y+15},{5,10},0,Shape_Fill,color_two});
+  Rectangle({{Icon.x+20,Icon.y+10},{5,15},0,Shape_Fill,color_three});
+  Rectangle({{Icon.x+30,Icon.y+5},{5,20},0,Shape_Fill,color_four});
+  Rectangle({{Icon.x+40,Icon.y},{5,25},0,Shape_Fill,color_five});
 }
 void SEDHOM_Icons::Bell_Icon(Icon_t Icon,bool mute_or_not,bool filled_or_not)
 {
-   fill_Rectangle(Icon.x-3,Icon.y+20,30-4,5,4,Icon.color);
-   fill_Rectangle(Icon.x-5,Icon.y+23,30,5,4,Icon.color);
-   fill_Rectangle(Icon.x-7,Icon.y+26,30+4,5,4,Icon.color);
-   fill_Rectangle(Icon.x,Icon.y,20,30,10,Icon.color);
-   fill_Circle(Icon.x+10,Icon.y+32,5,Icon.color);
+   Rectangle({{Icon.x-3,Icon.y+20},{30-4,5},4,Shape_Fill,Icon.color});
+   Rectangle({{Icon.x-5,Icon.y+23},{30,5},4,Shape_Fill,Icon.color});
+   Rectangle({{Icon.x-7,Icon.y+26},{30+4,5},4,Shape_Fill,Icon.color});
+   Rectangle({{Icon.x,Icon.y},{20,30},10,Shape_Fill,Icon.color});
+   Circle({{Icon.x+10,Icon.y+32},5,Shape_Fill,Icon.color});
    if(!filled_or_not)
    {
-      fill_Rectangle(Icon.x-3+2,Icon.y+20+2,30-4-4,5-1,4,Icon.Background);
-      fill_Rectangle(Icon.x-5+2,Icon.y+23+2,30-4,5-1,4,Icon.Background);
-      fill_Rectangle(Icon.x-7+2,Icon.y+26+2,30+4-4,5-4,4,Icon.Background);
-      fill_Rectangle(Icon.x+2,Icon.y+2,20-4,30-4,10,Icon.Background);
+      Rectangle({{Icon.x-3+2,Icon.y+20+2},{30-4-4,5-1},4,Shape_Fill,Icon.Background});
+      Rectangle({{Icon.x-5+2,Icon.y+23+2},{30-4,5-1},4,Shape_Fill,Icon.Background});
+      Rectangle({{Icon.x-7+2,Icon.y+26+2},{30+4-4,5-4},4,Shape_Fill,Icon.Background});
+      Rectangle({{Icon.x+2,Icon.y+2},{20-4,30-4},10,Shape_Fill,Icon.Background});
    }
    if(mute_or_not)
    {
-     draw_Line(Icon.x-10,Icon.y+3,Icon.x+35,Icon.y+28,Icon.Background);
-     draw_Line(Icon.x-10,Icon.y+4,Icon.x+35,Icon.y+29,Icon.Background);
-     draw_Line(Icon.x-10,Icon.y+5,Icon.x+35,Icon.y+30,Icon.color);
-     draw_Line(Icon.x-10,Icon.y+6,Icon.x+35,Icon.y+31,Icon.color);
-     draw_Line(Icon.x-10,Icon.y+7,Icon.x+35,Icon.y+32,Icon.Background);
-     draw_Line(Icon.x-10,Icon.y+8,Icon.x+35,Icon.y+33,Icon.Background);
+     Line({{Icon.x-10,Icon.y+3},{Icon.x+35,Icon.y+28},Icon.Background});
+     Line({{Icon.x-10,Icon.y+4},{Icon.x+35,Icon.y+29},Icon.Background});
+     Line({{Icon.x-10,Icon.y+5},{Icon.x+35,Icon.y+30},Icon.color});
+     Line({{Icon.x-10,Icon.y+6},{Icon.x+35,Icon.y+31},Icon.color});
+     Line({{Icon.x-10,Icon.y+7},{Icon.x+35,Icon.y+32},Icon.Background});
+     Line({{Icon.x-10,Icon.y+8},{Icon.x+35,Icon.y+33},Icon.Background});
    }
 }
 void SEDHOM_Icons::Menu_Icon_1(Icon_t Icon) // : : :
@@ -971,7 +661,7 @@ void SEDHOM_Icons::Menu_Icon_1(Icon_t Icon) // : : :
   {
     for(int i=0;i<3;i++)
     {
-     fill_Circle(Icon.x+(j*10),Icon.y+(i*10),3,Icon.color);
+     Circle({{Icon.x+(j*10),Icon.y+(i*10)},3,Shape_Fill,Icon.color});
     }
   }
 }
@@ -979,14 +669,14 @@ void SEDHOM_Icons::Menu_Icon_2(Icon_t Icon) // ...
 {
  for(int i=0;i<3;i++)
   {
-    fill_Circle(Icon.x+(i*10),Icon.y,3,Icon.color);
+    Circle({{Icon.x+(i*10),Icon.y},3,Shape_Fill,Icon.color});
   }
 }
 void SEDHOM_Icons::Menu_Icon_3(Icon_t Icon) // :
 {
  for(int i=0;i<3;i++)
   {
-    fill_Circle(Icon.x,Icon.y+(i*10),3,Icon.color);
+    Circle({{Icon.x,Icon.y+(i*10)},3,Shape_Fill,Icon.color});
   }
 }
 void SEDHOM_Icons::Menu_Icon_4(Icon_t Icon) // : :
@@ -995,7 +685,7 @@ void SEDHOM_Icons::Menu_Icon_4(Icon_t Icon) // : :
   {
     for(int i=0;i<2;i++)
     {
-     fill_Circle(Icon.x+(j*20),Icon.y+(i*20),3,Icon.color);
+     Circle({{Icon.x+(j*20),Icon.y+(i*20)},3,Shape_Fill,Icon.color});
     }
   }
 }
@@ -1003,41 +693,41 @@ void SEDHOM_Icons::Menu_Icon_5(Icon_t Icon) // =
 {
   for(int j=0;j<3;j++)
   {
-    fill_Rectangle(Icon.x,Icon.y+(j*10),30,5,5,Icon.color);
+    Rectangle({{Icon.x,Icon.y+(j*10)},{30,5},5,Shape_Fill,Icon.color});
   }
 }
 void SEDHOM_Icons::Moon_Icon(Icon_t Icon)
 {
-   fill_Circle(Icon.x, Icon.y,20,Icon.color);
-   fill_Circle(Icon.x+10,Icon.y-10,20,Icon.Background);
+   Circle({{Icon.x, Icon.y},20,Shape_Fill,Icon.color});
+   Circle({{Icon.x+10,Icon.y-10},20,Shape_Fill,Icon.Background});
 }
 void SEDHOM_Icons::Sun_Icon(Icon_t Icon)
 {
   // master circle
-   fill_Circle(Icon.x, Icon.y,15,Icon.color);
+   Circle({{Icon.x, Icon.y},15,Shape_Fill,Icon.color});
    // small circles
-   fill_Circle(Icon.x-25,Icon.y,3,Icon.color);
-   fill_Circle(Icon.x+25,Icon.y,3,Icon.color);
-   fill_Circle(Icon.x,Icon.y-25,3,Icon.color);
-   fill_Circle(Icon.x,Icon.y+25,3,Icon.color);
-   fill_Circle(Icon.x+20,Icon.y+20,3,Icon.color);
-   fill_Circle(Icon.x-20,Icon.y-20,3,Icon.color);
-   fill_Circle(Icon.x+20,Icon.y-20,3,Icon.color);
-   fill_Circle(Icon.x-20,Icon.y+20,3,Icon.color);
+   Circle({{Icon.x-25,Icon.y},3,Shape_Fill,Icon.color});
+   Circle({{Icon.x+25,Icon.y},3,Shape_Fill,Icon.color});
+   Circle({{Icon.x,Icon.y-25},3,Shape_Fill,Icon.color});
+   Circle({{Icon.x,Icon.y+25},3,Shape_Fill,Icon.color});
+   Circle({{Icon.x+20,Icon.y+20},3,Shape_Fill,Icon.color});
+   Circle({{Icon.x-20,Icon.y-20},3,Shape_Fill,Icon.color});
+   Circle({{Icon.x+20,Icon.y-20},3,Shape_Fill,Icon.color});
+   Circle({{Icon.x-20,Icon.y+20},3,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::Check_Box_Icon(Icon_t Icon,bool status,Color_t check_color,Color_t checked_fill_color)
 {
-  fill_Rectangle(Icon.x,Icon.y,40,40,5,Icon.color);
-  fill_Rectangle(Icon.x+3,Icon.y+3,40-6,40-6,5,status ? checked_fill_color : Icon.Background);
+  Rectangle({{Icon.x,Icon.y},{40,40},5,Shape_Fill,Icon.color});
+  Rectangle({{Icon.x+3,Icon.y+3},{40-6,40-6},5,Shape_Fill,status ? checked_fill_color : Icon.Background});
   if(status)
   {
       for(int i=-1; i<=3; i++) 
       {
-          draw_Line(Icon.x+7, Icon.y+25+i, Icon.x+15, Icon.y+30+i, (i<=2 && i>=-1) ? check_color : Icon.Background);
+          Line({{Icon.x+7, Icon.y+25+i}, {Icon.x+15, Icon.y+30+i}, (i<=2 && i>=-1) ? check_color : Icon.Background});
       }
       for(int i=-3; i<=3; i++) 
       {
-          draw_Line(Icon.x+15, Icon.y+30+i, Icon.x+30, Icon.y+10+i, (i<=2 && i>=-2) ? check_color : Icon.Background);
+          Line({{Icon.x+15, Icon.y+30+i},{ Icon.x+30, Icon.y+10+i}, (i<=2 && i>=-2) ? check_color : Icon.Background});
       }
   }
 
@@ -1045,15 +735,15 @@ void SEDHOM_Icons::Check_Box_Icon(Icon_t Icon,bool status,Color_t check_color,Co
 void SEDHOM_Icons::Radio_Button_Icon(Icon_t Icon,bool status,Color_t check_color)
 {
   // border
-   fill_Circle(Icon.x,Icon.y,15,Icon.color);
-   fill_Circle(Icon.x,Icon.y,12,Icon.Background);
+   Circle({{Icon.x,Icon.y},15,Shape_Fill,Icon.color});
+   Circle({{Icon.x,Icon.y},12,Shape_Fill,Icon.Background});
    // status
-  if(status) fill_Circle(Icon.x,Icon.y,5,check_color);
+  if(status) Circle({{Icon.x,Icon.y},5,Shape_Fill,check_color});
 }
 void SEDHOM_Icons::Text_Feild_Icon( Icon_t Icon,Text_t text ,int lenght,int max_char)
 {
-   fill_Rectangle(Icon.x,Icon.y,lenght,40,20,Icon.color);
-   fill_Rectangle(Icon.x+3,Icon.y+3,lenght-6,40-6,20,Icon.Background);
+   Rectangle({{Icon.x,Icon.y},{lenght,40},20,Shape_Fill,Icon.color});
+   Rectangle({{Icon.x+3,Icon.y+3},{lenght-6,40-6},20,Shape_Fill,Icon.Background});
    if( text.txt.length() > max_char)
    {
       String word = "...";
@@ -1066,38 +756,38 @@ void SEDHOM_Icons::Text_Feild_Icon( Icon_t Icon,Text_t text ,int lenght,int max_
     Text_cpp(Icon.x+10,Icon.y+25,text.txt_font,text.txt_color,text.txt);
    }
 }
-void SEDHOM_Icons::Warning_Icon( Icon_t Icon,Color_t txt_color,bool filled_or_not )
+void SEDHOM_Icons::Warning_Icon( Icon_t Icon,Color_t txt_color,Shape_filled_t filled )
 {
-  Equilateral_Triangle_Up(Icon.x,Icon.y,40,filled_or_not,Icon.color);
+  Equilateral_Triangle({{Icon.x,Icon.y},40,filled,Direction_Up,Icon.color});
   Text_cpp(Icon.x-6,Icon.y+5,BigFont,txt_color,"!");
 }
 void SEDHOM_Icons::Chandelier_Icon(Icon_t Icon)
 {
-   fill_Circle(Icon.x,Icon.y,20,Icon.color);
-   fill_Circle(Icon.x,Icon.y,20-3,Icon.Background);
-   fill_Rectangle(Icon.x-23,Icon.y,46,25,0,Icon.Background);
-   fill_Circle(Icon.x,Icon.y+2,8,Icon.color);
-   fill_Circle(Icon.x,Icon.y+2,5,Icon.Background);
-   fill_Rectangle(Icon.x-10,Icon.y-10,20,10,0,Icon.Background);
-   fill_Rectangle(Icon.x-21,Icon.y,43,3,0,Icon.color);
-   fill_Rectangle(Icon.x-1,Icon.y-33,3,15,2,Icon.color);
+   Circle({{Icon.x,Icon.y},20,Shape_Fill,Icon.color});
+   Circle({{Icon.x,Icon.y},20-3,Shape_Fill,Icon.Background});
+   Rectangle({{Icon.x-23,Icon.y},{46,25},0,Shape_Fill,Icon.Background});
+   Circle({{Icon.x,Icon.y+2},8,Shape_Fill,Icon.color});
+   Circle({{Icon.x,Icon.y+2},5,Shape_Fill,Icon.Background});
+   Rectangle({{Icon.x-10,Icon.y-10},{20,10},0,Shape_Fill,Icon.Background});
+   Rectangle({{Icon.x-21,Icon.y},{43,3},0,Shape_Fill,Icon.color});
+   Rectangle({{Icon.x-1,Icon.y-33},{3,15},2,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::Smart_TV_Icon(Icon_t Icon,Color_t WIFI_icon)
 {
-  fill_Rectangle(Icon.x,Icon.y,60,50,7,Icon.color);
-  fill_Rectangle(Icon.x+3,Icon.y+3,60-6,50-6,7,Icon.Background);
-  WIFI_Icon({Icon.x+30,Icon.y+33,WIFI_icon,Icon.Background},WIFI_Status_conected_level_4_full,WIFI_icon);
-  fill_Rectangle(Icon.x+8,Icon.y+50-3,50-6,3,5,Icon.color);
-  fill_Rectangle(Icon.x+22,Icon.y+50-3,15,10,0,Icon.color);
-  fill_Rectangle(Icon.x+10,Icon.y+50-3+10,40,5,5,Icon.color);
+  Rectangle({{Icon.x,Icon.y},{60,50},7,Shape_Fill,Icon.color});
+  Rectangle({{Icon.x+3,Icon.y+3},{60-6,50-6},7,Shape_Fill,Icon.Background});
+  WIFI_Icon({Icon.x,Icon.y,WIFI_icon,Icon.Background},WIFI_icon,WIFI_Status_conected_level_4_full);
+  Rectangle({{Icon.x+8,Icon.y+50-3},{50-6,3},5,Shape_Fill,Icon.color});
+  Rectangle({{Icon.x+22,Icon.y+50-3},{15,10},0,Shape_Fill,Icon.color});
+  Rectangle({{Icon.x+10,Icon.y+50-3+10},{40,5},5,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::Air_Conditioner_Icon(Icon_t Icon)
 {
   Border_Rectangle(Icon,40,80,10,3);
-  fill_Rectangle(Icon.x+50,Icon.y+8,20,5,5,Icon.color);
+  Rectangle({{Icon.x+50,Icon.y+8},{20,5},5,Shape_Fill,Icon.color});
   Border_Rectangle({Icon.x +15 , Icon.y +25 ,Icon.color , Icon.Background},20,50,10,3);
-  fill_Rectangle(Icon.x+12,Icon.y+37,53,3,5,Icon.color);
-  fill_Rectangle(Icon.x+12,Icon.y+40,55,8,5,Icon.Background);
+  Rectangle({{Icon.x+12,Icon.y+37},{53,3},5,Shape_Fill,Icon.color});
+  Rectangle({{Icon.x+12,Icon.y+40},{55,8},5,Shape_Fill,Icon.Background});
 }
 
 

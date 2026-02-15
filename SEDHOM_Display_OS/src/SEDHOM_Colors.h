@@ -1,6 +1,10 @@
 #ifndef SEDHOM_COLORS
 #define SEDHOM_COLORS
 //{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+#include "SEDHOM_Display_Settings.h"
+//{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+typedef uint16_t Color_t ;
+//{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
 #define BLACK       0x0000      /*   0,   0,   0 */
 #define NAVY        0x000F      /*   0,   0, 128 */
 #define DARKGREEN   0x03E0      /*   0, 128,   0 */
@@ -80,5 +84,29 @@
 #define Color_GreenYellow GREENYELLOW 
 #define Color_Pink        PINK 
 /////////////////////////////end colors//////////////////////////////
+//{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+class SEDHOM_Colors
+{
+    private:
+
+    public:
+        // colors
+        Color_t set_Color(int r,int g,int b);
+        Color_t Set_Hex_Color(uint16_t Hex_code); 
+};
+//{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+// colors
+Color_t SEDHOM_Colors::set_Color(int r,int g,int b)
+{
+    uint16_t rgb565 = ((r & 0xF8) << 8) |
+                  ((g & 0xFC) << 3) |
+                  (b >> 3);
+
+   return(rgb565);
+}
+Color_t SEDHOM_Colors::Set_Hex_Color(uint16_t Hex_code)
+{
+    return Hex_code;
+}
 //{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
 #endif // !SEDHOM_COLORS

@@ -55,6 +55,42 @@ class SEDHOM_Display_OS
     ROTATION_STASTUS_t Rotate_180 = Rotate_180_Degree;
     ROTATION_STASTUS_t Rotate_270 = Rotate_270_Degree;
 };
+class SEDHOM_Shapes_OS : public SEDHOM_Basic_Shapes
+{
+  public:
+    SEDHOM_Shapes_OS(SEDHOM_Display_OS & OS)
+    {
+    //  SEDHOM_Basic_Shapes::set_windows_mode(OS.Mode());
+    }
+
+};
+class SEDHOM_Text_OS : public SEDHOM_Text
+{
+  public:
+    SEDHOM_Text_OS(SEDHOM_Display_OS & OS)
+    {
+    //  SEDHOM_Text::set_windows_mode(OS.Mode());
+    }
+
+};
+class SEDHOM_Colors_OS : public SEDHOM_Colors
+{
+  public:
+    SEDHOM_Colors_OS(SEDHOM_Display_OS & OS)
+    {
+    //  SEDHOM_Colors::set_windows_mode(OS.Mode());
+    }
+
+};
+class SEDHOM_Effects_OS : public SEDHOM_Effects
+{
+  public:
+    SEDHOM_Effects_OS(SEDHOM_Display_OS & OS)
+    {
+    //  SEDHOM_Effects::set_windows_mode(OS.Mode());
+    }
+
+};
 class SEDHOM_Icon_OS : public SEDHOM_Icons
 {
 private:

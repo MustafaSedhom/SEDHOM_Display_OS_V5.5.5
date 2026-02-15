@@ -12,23 +12,13 @@
 #define Vertical         0 
 #define Horizontal       1
 
-#define Circle           0
-#define Rect             1
-#define Rectangle       Rect
-
-#define Fill_shape        1
-#define Draw_shape        0
-
-#define Show              1
-#define Hide              0
-
 #define yes               1
 #define no                0
-
 #define ON                1
 #define OFF               0
 #define on               ON
 #define off              OFF
+
 #define byte_t         uint8_t
 #define string_t       char*
 #define word_t         char*
@@ -37,12 +27,12 @@ typedef uint16_t Color_t;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef enum 
 {
-  Rotate_0_Degree,
-  Rotate_90_Degree,
-  Rotate_180_Degree,
-  Rotate_270_Degree
+    Rotate_0_Degree,
+    Rotate_90_Degree,
+    Rotate_180_Degree,
+    Rotate_270_Degree
 }ROTATION_STASTUS_t;
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef enum 
 {
     WIFI_Status_not_connected,
@@ -52,31 +42,31 @@ typedef enum
     WIFI_Status_conected_level_3,
     WIFI_Status_conected_level_4_full
 }WIFI_STATUS_t;
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef enum 
 {
     BLuetooth_Status_closed,
     BLuetooth_Status_open_and_not_connected,
     BLuetooth_Status_open_and_connected
 }BLUETOOTH_STATUS_t;
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef enum 
 {
-   SWITCH_State_OFF,
-   SWITCH_State_ON,
+    SWITCH_State_OFF,
+    SWITCH_State_ON,
 }SWITCH_STATUS_t;
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef enum 
 {
-  Signal_Status_Off,
-  Signal_Status_No_Signal,
-  Signal_Status_Signal_level_1,
-  Signal_Status_Signal_level_2,
-  Signal_Status_Signal_level_3,
-  Signal_Status_Signal_level_4,
-  Signal_Status_Signal_level_5_full,
+    Signal_Status_Off,
+    Signal_Status_No_Signal,
+    Signal_Status_Signal_level_1,
+    Signal_Status_Signal_level_2,
+    Signal_Status_Signal_level_3,
+    Signal_Status_Signal_level_4,
+    Signal_Status_Signal_level_5_full,
 }SIGNAL_STATUS_t;
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 // data type of Id icon
 typedef struct 
@@ -140,6 +130,7 @@ typedef enum
     Shape_Rectangle,
     Shape_Triangle,
     Shape_Line,
+    Shape_Square,
 }Shapes_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of coordenate
@@ -196,8 +187,8 @@ typedef struct
 // data type of Area
 typedef struct 
 {
-    int h;
     int w;
+    int h;
 }Area_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of RGB color
@@ -208,7 +199,92 @@ typedef struct
     byte_t B;
 }Color_RGB_t;
 ///////////////////////////////////////////////////////////////////////////
-// data type of  
+// data type of  Shape_filled_t
+typedef enum 
+{
+    Shape_Draw,
+    Shape_Fill,
+}Shape_filled_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of  Square_t shape
+typedef struct 
+{
+   Coordenate_t coordenate;
+    int length;
+    int Raduis;
+    Shape_filled_t Filled ;
+    Color_t color;
+}Square_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of  Rectangle_t shape
+typedef struct 
+{
+    Coordenate_t coordenate;
+    Area_t area;
+    int Raduis;
+    Shape_filled_t Filled ;
+    Color_t color;
+}Rectangle_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of  Circle_t shape
+typedef struct 
+{
+    Coordenate_t coordenate;
+    int Raduis;
+    Shape_filled_t Filled ;
+    Color_t color;
+}Circle_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of  Triangle_t shape
+typedef struct 
+{
+    Coordenate_t coordenate_Point_1;
+    Coordenate_t coordenate_Point_2;
+    Coordenate_t coordenate_Point_3;
+    Shape_filled_t Filled ;
+    Color_t color;
+}Triangle_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of  Line_t shape
+typedef struct 
+{
+    Coordenate_t coordenate_Start_Point;
+    Coordenate_t coordenate_End_Point;
+    Color_t color;
+}Line_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of  Pixel_t shape
+typedef struct 
+{
+    Coordenate_t coordenate_Point;
+    Color_t color;
+}Pixel_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of  Visibility_t
+typedef enum  
+{
+    Hide,
+    Show,
+}Visibility_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of  Direction_t
+typedef enum  
+{
+    Direction_Up,
+    Direction_Down,
+    Direction_Right,
+    Direction_Left,
+}Direction_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of  Special_Triangle_t
+typedef struct  
+{
+    Coordenate_t coordinate ;
+    int lenght ;
+    Shape_filled_t filled ;
+    Direction_t Dir ;
+    Color_t color ;
+}Triangle_special_t;
 
 
 //**********************************************************************************************************************
