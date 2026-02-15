@@ -193,11 +193,12 @@ void SEDHOM_Display_OS::Init_Screen(ROTATION_STASTUS_t Rotate,Color_t Mode)
 {
   init_Screen(Rotate);
   OS_Mode = Mode;
-  FillScreen(OS_Mode);
+  Set_Device_Mode(Mode);
 }
 void SEDHOM_Display_OS::Set_Device_Mode(Color_t Mode)
 {
   OS_Mode = Mode;
+  Fill_Screen(OS_Mode);
 }
 int SEDHOM_Display_OS::Screen_Height()
 {
@@ -219,7 +220,7 @@ Color_t SEDHOM_Display_OS::Not_Mode()
 }
 void SEDHOM_Display_OS::Fill_Screen(Color_t color)
 {
-   FillScreen(color);  
+   FillScreen(color); 
 }
 Coordenate_t SEDHOM_Display_OS::Convert_Coordenates_to_Center(Coordenate_t new_point)
 {

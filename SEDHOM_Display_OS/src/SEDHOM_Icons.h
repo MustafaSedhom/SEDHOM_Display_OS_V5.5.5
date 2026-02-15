@@ -1,15 +1,10 @@
 #ifndef SEDHOM_OS_ICONS_H_
 #define SEDHOM_OS_ICONS_H_
 //////////////////////////////////////////////////////////////////////////////////////////
-#include "SEDHOM_Display_Settings.h"
 #include "SEDHOM_Data_Types.h"
-#include "SEDHOM_Display_QRCodes.h"
-
 #include "SEDHOM_Basic_Shapes.h"
 #include "SEDHOM_Text.h"
 #include "SEDHOM_Effects.h"
-///////////////////////////////////////////////////////////////////////////
-init_Display_variable();
 ///////////////////////////////////////////////////////////////////////////
 // Icons class
 class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SEDHOM_Effects , public SEDHOM_Colors
@@ -18,9 +13,7 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
         uint16_t mode;
   public:
         // to set and handling mode
-        uint16_t Not_Mode();
-        uint16_t Mode();
-        void Set_Mode(Color_t Mode);
+        void Set_Mode(Color_t Mode){mode = Mode;}
         // Draw SEDHOM Icons
         void WIFI_Icon(Icon_t Icon ,Color_t color_off,WIFI_STATUS_t state);
         void Battary_Icon(Icon_t Icon  ,int range,Color_t txt_color,bool low_charge_red_color = true);
@@ -79,21 +72,6 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
 };
 // define all functions and Draw all Widgets and icons
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-// mode functions
-uint16_t SEDHOM_Icons::Not_Mode()
-{
-   if(mode == BLACK) return WHITE;
-   else return BLACK;
-}
-uint16_t SEDHOM_Icons::Mode()
-{
-   return mode;
-}
-void SEDHOM_Icons::Set_Mode(Color_t Mode)
-{
-    mode = Mode;
-    FillScreen(mode); 
-}
 // SEDHOM Icons
 void SEDHOM_Icons::WIFI_Icon(Icon_t Icon,Color_t color_off,WIFI_STATUS_t state)
 {
@@ -133,7 +111,7 @@ void SEDHOM_Icons::Battary_Icon(Icon_t Icon ,int range,Color_t txt_color,bool lo
     uint16_t color_Battary;
     if(low_charge_red_color==1)
     {
-        if(range<20){color_Battary=RED; txt_x=(range>=10)?Icon.x-60:Icon.x-45;txt_color=Not_Mode();}
+        if(range<20){color_Battary=RED; txt_x=(range>=10)?Icon.x-60:Icon.x-45;txt_color= ((Icon.Background == Color_Black)?Color_White : Color_Black );}
         else if(range>=20){color_Battary=Icon.color;txt_x=(range==100)?Icon.x-65:Icon.x-58;}
     }
     else if(low_charge_red_color==0)
@@ -392,7 +370,7 @@ void SEDHOM_Icons::label_Icon(Icon_t Icon ,Area_t area,int Border,Color_t color_
     else if(string_in_label == "ON" || string_in_label == "on" || num >= 1){label_color_in_func = Icon.color;}
     if(string_in_label == "ON" || string_in_label == "on" || num >= 1){label_color_in_func = Icon.color;}
 
-    Border_Rectangle({Icon.x,Icon.y,label_color_in_func,Icon.Background},area.w,area.h,5,Border);
+    Border_Rectangle({Icon.x,Icon.y,label_color_in_func,Icon.Background},area,5,Border);
     Text_cpp(Icon.x+10,Icon.y+(0.6*area.w),SmallFont,color_str_in_label,string_in_label);
 }
 void SEDHOM_Icons::slider_Icon(Icon_t Icon ,int h,byte_t range ,Color_t color_not_active ,Color_t ball_color,Color_t box_color,Color_t range_in_box_color)
@@ -400,8 +378,8 @@ void SEDHOM_Icons::slider_Icon(Icon_t Icon ,int h,byte_t range ,Color_t color_no
     long index = map(range,0,100,0,h);
     Rectangle({{Icon.x,Icon.y},{h,10},5,Shape_Fill,color_not_active});
     Rectangle({{Icon.x,Icon.y},{index,10},5,Shape_Fill,Icon.color});
-    Circle({{Icon.x+index,Icon.y+5},10,Shape_Fill,Not_Mode()});
-    fill_rectangle_with_end(Icon.x+h+15,Icon.y-10,30,40,3,Mode(),box_color);
+    Circle({{Icon.x+index,Icon.y+5},10,Shape_Fill,((Icon.Background == Color_Black)?Color_White : Color_Black)});
+    fill_rectangle_with_end(Icon.x+h+15,Icon.y-10,30,40,3,Icon.Background,box_color);
     Text_cpp(Icon.x+h+8+15,Icon.y+19-8,SmallFont,range_in_box_color,String(range));
 }
 void SEDHOM_Icons::file_Icon(Icon_t Icon,Color_t Border_color,Color_t file_extend_color,String file_extend)
@@ -438,17 +416,17 @@ void SEDHOM_Icons::ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_f
     #define x1   Icon.x
     #define y1   Icon.y
 
-    #define h1    270
-    #define w1    200
+    #define w1    270
+    #define h1    200
 
     Color_t color_id =0;
     if(Icon.color == WHITE) color_id = BLACK;
     else if(Icon.color == BLACK) color_id = WHITE;
     else  color_id = Icon.color;
-    Container(x1-3,y1-3,h1+6,w1+6,20,color_id);
-    Container(x1,y1,h1,w1,20,Icon.color);
+    Rectangle({{x1-3,y1-3},{w1+6,h1+6},20,Shape_Fill,color_id});
+    Rectangle({{x1,y1},{w1,h1},20,Shape_Fill,Icon.color});
     TEXT(((User.is_professser)?x1+60:x1+80),y1+20,BigFont,main_font_color,((User.is_professser)?"PROFESSER":"STUDENT"));
-    Divider_vertical({x1+10,y1+35,main_font_color,Icon.Background},h1-20,3);
+    Divider_vertical({x1+10,y1+35,main_font_color,Icon.Background},w1-20,3);
     TEXT(x1+30,y1+55,SmallFont,font_color,"IDENTITY CARD");
 
     TEXT(x1+10,y1+70,SmallFont,main_font_color,((User.is_professser)?"Dr Name":"Nmae"));
@@ -464,7 +442,7 @@ void SEDHOM_Icons::ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_f
     TEXT(x1+10,y1+175,SmallFont,main_font_color,"Born");
     TEXT(x1+10,y1+190,SmallFont,font_color,User.Born);
 
-    Container(x1+160,y1+45,100,110,0,User.image_background);
+    Rectangle({{x1+160,y1+45},{100,110},0,Shape_Fill,User.image_background});
     
     if(User.default_image)
     {
@@ -783,9 +761,9 @@ void SEDHOM_Icons::Smart_TV_Icon(Icon_t Icon,Color_t WIFI_icon)
 }
 void SEDHOM_Icons::Air_Conditioner_Icon(Icon_t Icon)
 {
-  Border_Rectangle(Icon,40,80,10,3);
+  Border_Rectangle(Icon,{80,40},10,3);
   Rectangle({{Icon.x+50,Icon.y+8},{20,5},5,Shape_Fill,Icon.color});
-  Border_Rectangle({Icon.x +15 , Icon.y +25 ,Icon.color , Icon.Background},20,50,10,3);
+  Border_Rectangle({Icon.x +15 , Icon.y +25 ,Icon.color , Icon.Background},{50,20},10,3);
   Rectangle({{Icon.x+12,Icon.y+37},{53,3},5,Shape_Fill,Icon.color});
   Rectangle({{Icon.x+12,Icon.y+40},{55,8},5,Shape_Fill,Icon.Background});
 }

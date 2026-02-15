@@ -17,13 +17,13 @@ class SEDHOM_Basic_Shapes
         void Circle(Circle_t circle); 
         void Triangle(Triangle_t tri); 
         void Equilateral_Triangle(Triangle_special_t tri);
-        void Right_Triangle(int x, int y, int h, int w,bool fill_or_draw, Color_t color);
-        void Border_Rectangle(Icon_t Border_Rect,int h,int w,int Raduis,int Border_size);
-        // custom image or font
-        void Draw_Custom_int_shap(int x,int y,int h,int w,int color,int arr[]);
-        void Draw_Custom_Char(int x,int y,int h,int w,int color,char arr[]);
-        void Container(int x,int y,int h,int w,int raduis,Color_t color);
+        void Right_Triangle(Icon_t Icon,Area_t area,Shape_filled_t filled);
+        void Border_Rectangle(Icon_t Border_Rect,Area_t area,int Raduis,int Border_size);
+        void Container(Rectangle_t container);
         void fill_rectangle_with_end(int x,int y,int h,int w,int end_volume,Color_t color,Color_t end_color);
+        // custom image or font
+        void Draw_Custom_int_shap(Icon_t Icon,Area_t area,int arr[]);
+        void Draw_Custom_Char(Icon_t Icon,Area_t area,char arr[]);
         
 };
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -78,10 +78,9 @@ void SEDHOM_Basic_Shapes::Triangle(Triangle_t tri)
       break;
     }  
 }    
-void SEDHOM_Basic_Shapes::Right_Triangle(int x, int y, int h, int w,bool fill_or_draw, Color_t color)
+void SEDHOM_Basic_Shapes::Right_Triangle(Icon_t Icon,Area_t area,Shape_filled_t filled)
 {
-    if(fill_or_draw) {Fill_Triangle(x, y, x, y + w, x + h, y + w, color);}
-    else {Draw_Triangle(x, y, x, y + w, x + h, y + w, color);}
+    Triangle({{Icon.x,Icon.y},{Icon.x ,Icon.y + area.h },{Icon.x + area.w,Icon.y + area.h },filled,Icon.color});
 }
 void SEDHOM_Basic_Shapes::Equilateral_Triangle(Triangle_special_t tri) 
 {
@@ -142,40 +141,40 @@ void SEDHOM_Basic_Shapes::Equilateral_Triangle(Triangle_special_t tri)
   Triangle({{ x_0,  y_0},{  x_1,  y_1},{  x_2,  y_2},tri.filled, tri.color});
 }
 // Draw custom image or font
-void SEDHOM_Basic_Shapes::Draw_Custom_Char(int x,int y,int h,int w,int color,char arr[])
+void SEDHOM_Basic_Shapes::Draw_Custom_Char(Icon_t Icon,Area_t area,char arr[])
 {
-  for(int i=0; i<h; i++) 
+  for(int i=0; i<area.w; i++) 
   {
-    for(int j=0; j<w; j++) 
+    for(int j=0; j<area.h; j++) 
     {
-      if(((arr[i]) >> (w-1-j)) & 0x01)
+      if(((arr[i]) >> (area.h-1-j)) & 0x01)
       {
-        Pixel({x+j, y+i, color}); 
+        Pixel({{Icon.x+j,Icon.y+i}, Icon.color}); 
       }
     }
   }
 }
-void SEDHOM_Basic_Shapes::Draw_Custom_int_shap(int x,int y,int h,int w,int color,int arr[])
+void SEDHOM_Basic_Shapes::Draw_Custom_int_shap(Icon_t Icon,Area_t area,int arr[])
 {
-      for(int i=0; i<h; i++) 
+      for(int i=0; i<area.w; i++) 
   {
-    for(int j=0; j<w; j++) 
+    for(int j=0; j<area.h; j++) 
     {
-      if(((arr[i]) >> (w-1-j)) & 0x01)
+      if(((arr[i]) >> (area.w-1-j)) & 0x01)
       {
-        Pixel({x+j, y+i, color}); 
+        Pixel({{Icon.x+j,Icon.y+i}, Icon.color}); 
       }
     }
   }
 }
-void SEDHOM_Basic_Shapes::Border_Rectangle(Icon_t Border_Rect,int h,int w,int Raduis,int Border_size)
+void SEDHOM_Basic_Shapes::Border_Rectangle(Icon_t Border_Rect,Area_t area,int Raduis,int Border_size)
 {
-  Rectangle({{Border_Rect.x,Border_Rect.y},{w,h},Raduis,Shape_Fill,Border_Rect.color});
-  Rectangle({{Border_Rect.x+Border_size,Border_Rect.y+Border_size},{w-(2*Border_size),h-(2*Border_size)},Raduis,Shape_Fill,Border_Rect.Background});
+  Rectangle({{Border_Rect.x,Border_Rect.y},{area.w,area.h},Raduis,Shape_Fill,Border_Rect.color});
+  Rectangle({{Border_Rect.x+Border_size,Border_Rect.y+Border_size},{area.w-(2*Border_size),area.h-(2*Border_size)},Raduis,Shape_Fill,Border_Rect.Background});
 }
-void SEDHOM_Basic_Shapes::Container(int x,int y,int h,int w,int raduis,Color_t color)
+void SEDHOM_Basic_Shapes::Container(Rectangle_t container)
 {
-    Rectangle({{x, y},{ h, w}, raduis,Shape_Fill, color});
+    Rectangle(container);
 }
 
 void SEDHOM_Basic_Shapes::fill_rectangle_with_end(int x,int y,int h,int w,int end_volume,Color_t color,Color_t end_color)
