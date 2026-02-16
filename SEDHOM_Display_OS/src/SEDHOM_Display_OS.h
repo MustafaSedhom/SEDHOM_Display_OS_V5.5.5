@@ -29,6 +29,8 @@
 #include "SEDHOM_Arabic_Font.h"
 // include communications file to use communication protocols in your projects
 #include "SEDHOM_Comminucations.h"
+// include communications file to use communication protocols in your projects
+#include "SEDHOM_Animations.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class SEDHOM_Display_OS
 {
@@ -113,12 +115,12 @@ public:
 };
 class SEDHOM_Pages_OS : public SEDHOM_Pages
 {
-private:
-public:
-  SEDHOM_Pages_OS(SEDHOM_Display_OS & OS)
-  {
-    SEDHOM_Pages::set_pages_mode(OS.Mode());
-  }
+  private:
+  public:
+    SEDHOM_Pages_OS(SEDHOM_Display_OS & OS)
+    {
+      SEDHOM_Pages::set_pages_mode(OS.Mode());
+    }
 };
 class SEDHOM_Communications_OS : public SEDHOM_Comminucations_UART
 {
@@ -180,13 +182,25 @@ public:
 };
 class SEDHOM_Widgets_OS : public SEDHOM_Widgets
 {
-private:
-public:
-  SEDHOM_Widgets_OS(SEDHOM_Display_OS & OS)
-  {
-    SEDHOM_Widgets::set_widgets_mode(OS.Mode());
-  }
+  private:
+  public:
+    SEDHOM_Widgets_OS(SEDHOM_Display_OS & OS)
+    {
+      SEDHOM_Widgets::set_widgets_mode(OS.Mode());
+    }
 };
+class SEDHOM_Aiimations_OS : public SEDHOM_Animations
+{
+  private:
+  public:
+  SEDHOM_Aiimations_OS(SEDHOM_Display_OS & OS)
+  {
+    // SEDHOM_Animations::set_widgets_mode(OS.Mode());
+  }
+
+};
+
+
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // define all functions
 void SEDHOM_Display_OS::Init_Screen(ROTATION_STASTUS_t Rotate,Color_t Mode)
