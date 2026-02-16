@@ -23,8 +23,8 @@ void setup()
   ///////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////////////////////////
   Icon_t myIcon;
-  myIcon.x = 150;
-  myIcon.y = 80;
+  myIcon.coordinate.x = 150;
+  myIcon.coordinate.y = 80;
   myIcon.color = Color_Magenta;
   myIcon.Background = OS.Mode(); 
   Text_t myText;
@@ -73,7 +73,7 @@ void setup()
   // Icons.folder_Icon(myIcon);
   // Icons.Divider_vertical(myIcon,100,5);
   // Icons.ID_Card_Icon(myIcon,User,GREEN,RED);
-  // Icons.Joy_Stick_Icon(myIcon,{myIcon.x,myIcon.y},15,GREEN,WHITE,BLUE);
+  // Icons.Joy_Stick_Icon(myIcon,{myIcon.coordinate.x,myIcon.coordinate.y},15,GREEN,WHITE,BLUE);
   // Icons.Temperature_Meter_Icon(myIcon,OS.Not_Mode(),50);
   // Icons.Tone_Icon(myIcon);
   // Icons.Sound_value_Icon(myIcon,50);

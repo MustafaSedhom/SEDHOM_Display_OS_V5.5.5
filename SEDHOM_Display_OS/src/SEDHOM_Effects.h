@@ -25,11 +25,11 @@ Color_t SEDHOM_Effects::Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes
   Color_t color = Colors.set_Color({color_value,color_value,color_value});
   if(shape == Shape_Rectangle)
   {
-    Shape.Rectangle({{Icon.x,Icon.y},{area.w,area.h},r,Shape_Fill,color});
+    Shape.Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{area.w,area.h},r,Shape_Fill,color});
   }
   else if(shape == Shape_Circle)
   {
-    Shape.Circle({{Icon.x,Icon.y},r,Shape_Fill,color});
+    Shape.Circle({{Icon.coordinate.x,Icon.coordinate.y},r,Shape_Fill,color});
   }
   return color;
 }
@@ -37,18 +37,18 @@ Color_t SEDHOM_Effects::Color_Blur(Icon_t Icon,Area_t area,int r,int Blur_value,
 {
   if(shape == Shape_Rectangle)
   {
-    Shape.Rectangle({{Icon.x,Icon.y},{area.w,area.h},r,Shape_Fill,Icon.color});
+    Shape.Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{area.w,area.h},r,Shape_Fill,Icon.color});
   }
   else if(shape == Shape_Circle)
   {
-    Shape.Circle({{Icon.x,Icon.y},r,Shape_Fill,Icon.color});
+    Shape.Circle({{Icon.coordinate.x,Icon.coordinate.y},r,Shape_Fill,Icon.color});
   }
   return Icon.color;
 }
 Color_t SEDHOM_Effects::Shadow_effect(Icon_t shadow, Shapes_t shape , int shadow_size  , int shadow_h , int shadow_w ,int shadow_Raduis , Position_t pos  , Color_t Shadow_color )
 {
-    int x = shadow.x;
-    int y = shadow.y;
+    int x = shadow.coordinate.x;
+    int y = shadow.coordinate.y;
     int h = shadow_h;
     int w = shadow_w;
 

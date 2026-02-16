@@ -20,7 +20,6 @@ class SEDHOM_Basic_Shapes
         void Right_Triangle(Icon_t Icon,Area_t area,Shape_filled_t filled);
         void Border_Rectangle(Icon_t Border_Rect,Area_t area,int Raduis,int Border_size);
         void Container(Rectangle_t container);
-        void Border_Color_Rectangle(Icon_t Icon,Area_t area,byte_t Borde,Color_t Border_color);
         // custom image or font
         void Draw_Custom_int_shap(Icon_t Icon,Area_t area,int arr[]);
         void Draw_Custom_Char(Icon_t Icon,Area_t area,char arr[]);
@@ -80,7 +79,7 @@ void SEDHOM_Basic_Shapes::Triangle(Triangle_t tri)
 }    
 void SEDHOM_Basic_Shapes::Right_Triangle(Icon_t Icon,Area_t area,Shape_filled_t filled)
 {
-    Triangle({{Icon.x,Icon.y},{Icon.x ,Icon.y + area.h },{Icon.x + area.w,Icon.y + area.h },filled,Icon.color});
+    Triangle({{Icon.coordinate.x,Icon.coordinate.y},{Icon.coordinate.x ,Icon.coordinate.y + area.h },{Icon.coordinate.x + area.w,Icon.coordinate.y + area.h },filled,Icon.color});
 }
 void SEDHOM_Basic_Shapes::Equilateral_Triangle(Triangle_special_t tri) 
 {
@@ -149,7 +148,7 @@ void SEDHOM_Basic_Shapes::Draw_Custom_Char(Icon_t Icon,Area_t area,char arr[])
     {
       if(((arr[i]) >> (area.h-1-j)) & 0x01)
       {
-        Pixel({{Icon.x+j,Icon.y+i}, Icon.color}); 
+        Pixel({{Icon.coordinate.x+j,Icon.coordinate.y+i}, Icon.color}); 
       }
     }
   }
@@ -162,25 +161,19 @@ void SEDHOM_Basic_Shapes::Draw_Custom_int_shap(Icon_t Icon,Area_t area,int arr[]
     {
       if(((arr[i]) >> (area.w-1-j)) & 0x01)
       {
-        Pixel({{Icon.x+j,Icon.y+i}, Icon.color}); 
+        Pixel({{Icon.coordinate.x+j,Icon.coordinate.y+i}, Icon.color}); 
       }
     }
   }
 }
 void SEDHOM_Basic_Shapes::Border_Rectangle(Icon_t Border_Rect,Area_t area,int Raduis,int Border_size)
 {
-  Rectangle({{Border_Rect.x,Border_Rect.y},{area.w,area.h},Raduis,Shape_Fill,Border_Rect.color});
-  Rectangle({{Border_Rect.x+Border_size,Border_Rect.y+Border_size},{area.w-(2*Border_size),area.h-(2*Border_size)},Raduis,Shape_Fill,Border_Rect.Background});
+  Rectangle({{Border_Rect.coordinate.x,Border_Rect.coordinate.y},{area.w,area.h},Raduis,Shape_Fill,Border_Rect.color});
+  Rectangle({{Border_Rect.coordinate.x+Border_size,Border_Rect.coordinate.y+Border_size},{area.w-(2*Border_size),area.h-(2*Border_size)},Raduis,Shape_Fill,Border_Rect.Background});
 }
 void SEDHOM_Basic_Shapes::Container(Rectangle_t container)
 {
     Rectangle(container);
-}
-
-void SEDHOM_Basic_Shapes::Border_Color_Rectangle(Icon_t Icon,Area_t area,byte_t Borde,Color_t Border_color)
-{
-    Rectangle({{Icon.x,Icon.y},area,5,Shape_Fill,Border_color});
-    Rectangle({{Icon.x + Borde,Icon.y + Borde},{area.w - 2*Borde,area.h - 2*Borde},5,Shape_Fill,Icon.color});
 }
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 #endif // !SEDHOM_BASIC_SHAPES_H_

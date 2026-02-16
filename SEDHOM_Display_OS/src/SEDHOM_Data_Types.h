@@ -93,11 +93,17 @@ typedef struct
     word_t time_name;
 }Time_t;
 ///////////////////////////////////////////////////////////////////////////
-// data type of all icon
+// data type of coordenate
 typedef struct 
 {
     int x;
     int y;
+}Coordenate_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of all icon
+typedef struct 
+{
+    Coordenate_t coordinate;
     Color_t color;
     Color_t Background;
 }Icon_t;
@@ -132,13 +138,7 @@ typedef enum
     Shape_Line,
     Shape_Square,
 }Shapes_t;
-///////////////////////////////////////////////////////////////////////////
-// data type of coordenate
-typedef struct 
-{
-    int x;
-    int y;
-}Coordenate_t;
+
 ///////////////////////////////////////////////////////////////////////////
 // data type of WiFi network Encytption type
 typedef enum
