@@ -28,23 +28,28 @@ void setup()
   ///////////////////////////////////////////////////////////////////////////////////////////////////
   // all Icons
   ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-  Icons.Display_Date_Icon({20,20,Color_Blue,OS.Mode()},{2026,2,16,"Feb","Mon"},Color_White);
-  Icons.Color_Icon({170,30,Color_Blue,OS.Mode()});
-  Icons.Time_Icon({250,50,Color_Blue,OS.Mode()});
-  Icons.Date_Icon({290,30,Color_Blue,OS.Mode()});
-  Icons.Switch_Icon({350,30,Color_Blue,OS.Mode()});
-  Icons.Switch_Icon({350,80,Color_Blue,OS.Mode()},RED,WHITE,WHITE,SWITCH_State_OFF);
-  Icons.label_Icon({30,180,Color_Blue,OS.Mode()});
-  Icons.slider_Icon({170,140,Color_Blue,OS.Mode()});
-  Icons.file_Icon({160,190,Color_Blue,OS.Mode()});
-  Icons.folder_Icon({280,190,Color_Blue,OS.Mode()});
-  Icons.Divider_vertical({20,280,Color_Blue,OS.Mode()},200,5);  
+  // Icons.ID_Card_Icon({20,190,Color_Blue,OS.Mode()});
+  Icons.Joy_Stick_Icon({50,50,Color_Green,OS.Mode()},{50,50},15,Color_White,Color_White,OS.Mode());
+  Icons.Temperature_Meter_Icon({160,10,Color_Red,OS.Mode()});
+  Icons.Tone_Icon({330,30,Color_Blue,OS.Mode()});
+  Icons.Tone_Icon({400,270,Color_Red,OS.Mode()},true);
+  Icons.Sound_value_Icon({30,150,Color_Magenta,OS.Mode()});
+  Icons.Video_Icon({280,50,Color_Red,OS.Mode()});
+  Icons.Block_Icon({280,130,Color_Green,OS.Mode()});
+  Icons.Block_Icon({350,130,Color_Red,OS.Mode()},true);
+  Icons.Signal_Icon({330,200,Color_Blue,OS.Mode()});
+  Icons.Bell_Icon({420,10,Color_Yellow,OS.Mode()});
+  Icons.Moon_Icon({420,90,Color_White,OS.Mode()});
+  Icons.Sun_Icon({430,170,Color_Yellow,OS.Mode()});
+  Icons.Menu_Icon_1({100,270,Color_Blue,OS.Mode()});
+  Icons.Menu_Icon_2({150,280,Color_Blue,OS.Mode()});
+  Icons.Menu_Icon_3({200,270,Color_Blue,OS.Mode()});
+  Icons.Menu_Icon_4({250,270,Color_Blue,OS.Mode()});
+  Icons.Menu_Icon_5({300,270,Color_Blue,OS.Mode()}); 
 }
 //=======================================================================================
 void loop() 
 {
-
 }
 //=======================================================================================
 

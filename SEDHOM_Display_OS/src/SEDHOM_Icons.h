@@ -746,9 +746,10 @@ void SEDHOM_Icons::Chandelier_Icon(Icon_t Icon)
 }
 void SEDHOM_Icons::Smart_TV_Icon(Icon_t Icon,Color_t WIFI_icon)
 {
-  Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{60,50},7,Shape_Fill,Icon.color});
-  Rectangle({{Icon.coordinate.x+3,Icon.coordinate.y+3},{60-6,50-6},7,Shape_Fill,Icon.Background});
-  WIFI_Icon({Icon.coordinate.x,Icon.coordinate.y,WIFI_icon,Icon.Background},WIFI_icon,WIFI_Status_conected_level_4_full);
+  // Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{60,50},7,Shape_Fill,Icon.color});
+  // Rectangle({{Icon.coordinate.x+3,Icon.coordinate.y+3},{60-6,50-6},7,Shape_Fill,Icon.Background});
+  Border_Rectangle({Icon.coordinate.x,Icon.coordinate.y,Icon.color,Icon.Background},{60,50},7,3);
+  WIFI_Icon({Icon.coordinate.x+30,Icon.coordinate.y+33,WIFI_icon,Icon.Background},WIFI_icon,WIFI_Status_conected_level_4_full);
   Rectangle({{Icon.coordinate.x+8,Icon.coordinate.y+50-3},{50-6,3},5,Shape_Fill,Icon.color});
   Rectangle({{Icon.coordinate.x+22,Icon.coordinate.y+50-3},{15,10},0,Shape_Fill,Icon.color});
   Rectangle({{Icon.coordinate.x+10,Icon.coordinate.y+50-3+10},{40,5},5,Shape_Fill,Icon.color});

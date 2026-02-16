@@ -7,7 +7,7 @@ SEDHOM_Display_OS OS;
 // SEDHOM_Shapes_OS Shapes(OS);
 // SEDHOM_Text_OS Texts(OS);
 // SEDHOM_Colors_OS colors(OS);
-SEDHOM_Icon_OS Icons(OS);
+// SEDHOM_Icon_OS Icons(OS);
 // SEDHOM_Widgets_OS Widgets(OS);
 // SEDHOM_Effects_OS effect(OS);
 // SEDHOM_Touch_OS Touch(OS);
@@ -17,6 +17,7 @@ SEDHOM_Icon_OS Icons(OS);
 // SEDHOM_Pages_OS Pages(OS);
 // SEDHOM_Handling_Pages_OS Handling_pages(OS);
 // SEDHOM_Communications_OS Call(OS);
+// SEDHOM_Aiimations_OS Animates(OS);
 //=======================================================================================
 //=======================================================================================
 void setup()
@@ -86,13 +87,28 @@ void setup()
   ///////////////////////////////////////////////////////////////////////////////////////////////////
   // Shapes.Rectangle({{10,20},{50,50},10,Shape_Fill,Color_Green});
   // Icons.Right_Triangle(myIcon,{60,60},Shape_Fill);
+  ///////////////////////////////////////////////////////////////////////////////////////////////////
+  // Icons.Text({10,10},FONT_BIG,GREEN,"SEDHOM");
 }
 //=======================================================================================
 void loop() 
 {
-
+  // Animates.Change_Text_Color({100,150},FONT_FREESANSOBLIQUE_BIG,1000,"Eng.Mustafa SEDHOM");
+  // Animates.Scrolling_Text({50,200,RED,OS.Mode()},FONT_BIG,500,"MUSTAFA SHAWKY",{0,70});
 }
 //=======================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

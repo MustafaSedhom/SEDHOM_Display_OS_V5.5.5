@@ -28,18 +28,19 @@ void setup()
   ///////////////////////////////////////////////////////////////////////////////////////////////////
   // all Icons
   ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-  Icons.Display_Date_Icon({20,20,Color_Blue,OS.Mode()},{2026,2,16,"Feb","Mon"},Color_White);
-  Icons.Color_Icon({170,30,Color_Blue,OS.Mode()});
-  Icons.Time_Icon({250,50,Color_Blue,OS.Mode()});
-  Icons.Date_Icon({290,30,Color_Blue,OS.Mode()});
-  Icons.Switch_Icon({350,30,Color_Blue,OS.Mode()});
-  Icons.Switch_Icon({350,80,Color_Blue,OS.Mode()},RED,WHITE,WHITE,SWITCH_State_OFF);
-  Icons.label_Icon({30,180,Color_Blue,OS.Mode()});
-  Icons.slider_Icon({170,140,Color_Blue,OS.Mode()});
-  Icons.file_Icon({160,190,Color_Blue,OS.Mode()});
-  Icons.folder_Icon({280,190,Color_Blue,OS.Mode()});
-  Icons.Divider_vertical({20,280,Color_Blue,OS.Mode()},200,5);  
+  Icons.Check_Box_Icon({170,30,Color_Green,OS.Mode()});
+  Icons.Check_Box_Icon({240,30,Color_Red,OS.Mode()},false);
+  Icons.Radio_Button_Icon({340,50,Color_Green,OS.Mode()});
+  Icons.Radio_Button_Icon({410,50,Color_Red,OS.Mode()},false);
+  Icons.Text_Feild_Icon({150,100,Color_Magenta,OS.Mode()});
+  Icons.Warning_Icon({410,120,Color_Red,OS.Mode()});
+  Icons.Chandelier_Icon({100,250,Color_Yellow,OS.Mode()});
+  Icons.Smart_TV_Icon({200,220,Color_Green,OS.Mode()});
+  Icons.Air_Conditioner_Icon({300,230,Color_Magenta,OS.Mode()});
+  Icons.Arrow_Icon({20,80,Color_Blue,OS.Mode()},Direction_Right);
+  Icons.Arrow_Icon({100,80,Color_Blue,OS.Mode()},Direction_Left);
+  Icons.Arrow_Icon({85,20,Color_Blue,OS.Mode()},Direction_Up);
+  Icons.Arrow_Icon({85,90,Color_Blue,OS.Mode()},Direction_Down);
 }
 //=======================================================================================
 void loop() 
