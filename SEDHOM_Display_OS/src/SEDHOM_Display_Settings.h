@@ -120,10 +120,10 @@ const int TS_LEFT = 954, TS_RT = 88, TS_TOP = 908, TS_BOT = 125;
 // define draw string 
 //*************************************************************************************************
 #define Text_Normal(x_,y_,size_,color_,txt_)     Display.setCursor(x_,y_);Display.setTextSize(size_);Display.setTextColor(color_);Display.print(txt_);
-#define Text(x_,y_,font_,color_,txt_)            Display.setCursor(x_,y_);Display.setFont(font_);Display.setTextColor(color_);Display.print(txt_);
+#define Text_Driver(x_,y_,font_,color_,txt_)            Display.setCursor(x_,y_);Display.setFont(font_);Display.setTextColor(color_);Display.print(txt_);
 #define Text_Add(str_)                           Display.print(str_);
-// #define Text(x,y,font,color,txt)         Display.setCursor(x,y);Display.setFont(font);Display.setTextColor(color);Display.write(txt);
-// #define Text(x,y,size,color,txt)         Display.setTextColor(color);Display.print(txt,x,y);
+// #define Text_C(x,y,font,color,txt)         Display.setCursor(x,y);Display.setFont(font);Display.setText_CColor(color);Display.write(txt);
+// #define Text_C(x,y,size,color,txt)         Display.setText_CColor(color);Display.print(txt,x,y);
 //============================================================================================================================================
 //*************************************************************************************************
 // fill all screen with color

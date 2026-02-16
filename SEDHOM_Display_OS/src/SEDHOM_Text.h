@@ -1,5 +1,5 @@
-#ifndef SEDHOM_TEXT_H_
-#define SEDHOM_TEXT_H_
+#ifndef SEDHOM_Text_H_
+#define SEDHOM_Text_H_
 //ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 #include "SEDHOM_Display_Settings.h"
 #include "SEDHOM_Display_Fonts.h"
@@ -12,19 +12,19 @@ class SEDHOM_Text
     private:
     
     public:
-        // Text
-        void TEXT(int x,int y,const GFXfont* font,Color_t color,string_t txt);
-        void Text_cpp(int x,int y,const GFXfont* font,Color_t color,String txt);
+        // Text_C
+        void Text_C(Coordenate_t coordinate,const GFXfont* font,Color_t color,string_t txt);
+        void Text(Coordenate_t coordinate,const GFXfont* font,Color_t color,String str);
 };
 //ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
-// Text
-void SEDHOM_Text::TEXT(int x,int y,const GFXfont* font,Color_t color,string_t txt) 
+// Text_C
+void SEDHOM_Text::Text_C(Coordenate_t coordinate,const GFXfont* font,Color_t color,string_t txt) 
 {
-    Text(x,y,font,color,txt);
+    Text_Driver(coordinate.x,coordinate.y,font,color,txt);
 }
-void SEDHOM_Text::Text_cpp(int x,int y,const GFXfont* font,Color_t color,String txt) 
+void SEDHOM_Text::Text(Coordenate_t coordinate,const GFXfont* font,Color_t color,String str) 
 {
-    Text(x,y,font,color,txt);
+    Text_Driver(coordinate.x,coordinate.y,font,color,str);
 }
 //ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
-#endif // !SEDHOM_TEXT_H_
+#endif // !SEDHOM_Text_C_H_

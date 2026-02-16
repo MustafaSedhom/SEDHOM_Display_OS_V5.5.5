@@ -20,8 +20,8 @@ void setup()
   OS.Init_Screen(OS.Rotate_90,OS.Night_mode);
   ///////////////////////////////////////////////////////////////////////////////////////////////////
   Icons.fill_Rectangle(200,250,50,90,10,RED);
-  Icons.TEXT(120,20,FONT_FREEMONOBOLD_MEDIUM,MAGENTA,"SEDHOM Display OS V5.5.5");
-  Icons.TEXT(100,220,FONT_FREESERIFBOLDITALIC_MEDIUM,CYAN,"Eng.Mustafa Sedhom");
+  Icons.Text_C(120,20,FONT_FREEMONOBOLD_MEDIUM,MAGENTA,"SEDHOM Display OS V5.5.5");
+  Icons.Text_C(100,220,FONT_FREESERIFBOLDITALIC_MEDIUM,CYAN,"Eng.Mustafa Sedhom");
   Icons.fill_Circle(50,250,30,MAGENTA);
   Icons.Container(150,70,70,70,0,BLUE);
   Icons.fill_Triangle(50,50,50,100,100,20,GREEN);

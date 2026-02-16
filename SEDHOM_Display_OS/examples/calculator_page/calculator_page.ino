@@ -90,7 +90,7 @@ void print_on_calc(String op,bool refresh,bool is_result,String result)
     Icons.Container(10,20,460,50,20,Cyan);
     Icons.Container(10+3,20+3,460-6,50-6,20,OS.Mode());
   }
-  Icons.Text_cpp(25,52,FONT_BIG,RED,is_result ? (op + " = " + result) : (op));
+  Icons.Text_C_cpp(25,52,FONT_BIG,RED,is_result ? (op + " = " + result) : (op));
 }
 
 void SEDHOM_Draw_Full_Calculator()
@@ -106,19 +106,19 @@ void SEDHOM_Draw_Full_Calculator()
   String col_4[] = { "1","2","3","-","~","&","|","^" };
   String col_5[] = { "0",".","PI","+","e","C","<-","=" };
   OS.Fill_Screen(OS.Mode());
-  Icons.Text_cpp(15,10,FONT_BIG,OS.Not_Mode(),"SEDHOM Scientific Calculator");
-  // textfeild for input calc and ouput result
+  Icons.Text_C_cpp(15,10,FONT_BIG,OS.Not_Mode(),"SEDHOM Scientific Calculator");
+  // Text_Cfeild for input calc and ouput result
   // Icons.Container(10,20,460,50,20,Cyan);
   // Icons.Container(10+3,20+3,460-6,50-6,20,OS.Mode());
   print_on_calc("",yes);
 
   for(int i=0;i<8;i++)
   {
-    Icons.Container(4+(i*60),80,53,40,5,sines_color);Icons.Text_cpp(15+(i*60),105,FONT_SMALL,OS.Not_Mode(),col_1[i]);
-    Icons.Container(4+(i*60),130,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:color_calc);Icons.Text_cpp(20+(i*60),155,(i>=6)?FONT_SMALL:FONT_BIG,OS.Not_Mode(),col_2[i]);
-    Icons.Container(4+(i*60),180,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:color_calc);Icons.Text_cpp((i==7)?8+(i*60):20+(i*60),205,FONT_BIG,OS.Not_Mode(),col_3[i]);
-    Icons.Container(4+(i*60),230,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:color_calc);Icons.Text_cpp(20+(i*60),255,FONT_BIG,OS.Not_Mode(),col_4[i]);
-    Icons.Container(4+(i*60),280,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:(i==7)?equal_color:color_calc);Icons.Text_cpp(20+(i*60),305,FONT_BIG,OS.Not_Mode(),col_5[i]);    
+    Icons.Container(4+(i*60),80,53,40,5,sines_color);Icons.Text_C_cpp(15+(i*60),105,FONT_SMALL,OS.Not_Mode(),col_1[i]);
+    Icons.Container(4+(i*60),130,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:color_calc);Icons.Text_C_cpp(20+(i*60),155,(i>=6)?FONT_SMALL:FONT_BIG,OS.Not_Mode(),col_2[i]);
+    Icons.Container(4+(i*60),180,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:color_calc);Icons.Text_C_cpp((i==7)?8+(i*60):20+(i*60),205,FONT_BIG,OS.Not_Mode(),col_3[i]);
+    Icons.Container(4+(i*60),230,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:color_calc);Icons.Text_C_cpp(20+(i*60),255,FONT_BIG,OS.Not_Mode(),col_4[i]);
+    Icons.Container(4+(i*60),280,53,40,5,(i<3)?numbers_color:(i==3)?Basic_op:(i==7)?equal_color:color_calc);Icons.Text_C_cpp(20+(i*60),305,FONT_BIG,OS.Not_Mode(),col_5[i]);    
   }
 }
 

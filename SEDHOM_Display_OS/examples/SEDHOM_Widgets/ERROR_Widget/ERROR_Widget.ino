@@ -19,7 +19,7 @@ void setup()
 {
   OS.Init_Screen(OS.Rotate_90,OS.Night_mode);
   ///////////////////////////////////////////////////////////////////////////////////////////////////
-  // Icons.Text_Feild_Icon(100,100,260,22,GREEN,Blue,FONT_FREEMONO_SMALL,OS.Mode(),"mustafa SEDggggHOhM Mg");
+  // Icons.Text_C_Feild_Icon(100,100,260,22,GREEN,Blue,FONT_FREEMONO_SMALL,OS.Mode(),"mustafa SEDggggHOhM Mg");
   Widgets.ERROR_Massage_Widget("Undefinjjjmmmmmmmmmj Behaviogngjngjgkgggggtrddedrhuhi8njgngjjjjjjjjjjgnjgngjnhguhghhhhhhgjngjgngjgnr",OS.Mode());
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////

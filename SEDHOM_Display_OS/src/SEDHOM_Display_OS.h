@@ -69,7 +69,7 @@ class SEDHOM_Text_OS : public SEDHOM_Text
   public:
     SEDHOM_Text_OS(SEDHOM_Display_OS & OS)
     {
-    //  SEDHOM_Text::set_windows_mode(OS.Mode());
+    //  SEDHOM_Text_C::set_windows_mode(OS.Mode());
     }
 
 };

@@ -62,15 +62,15 @@ void SEDHOM_Widgets::ERROR_Massage_Widget(String masseage,Color_t Background,Col
   // draw txt of title messaage
   if(title.length() > 7)
   {
-     Icon.Text_cpp(x_start+10,y_start+20,BigFont,title_Massage_color,title);
+     Icon.Text({x_start+10,y_start+20},BigFont,title_Massage_color,title);
   }
   else
   {
-     Icon.Text_cpp(x_start+60,y_start+20,BigFont,title_Massage_color,title);
+     Icon.Text({x_start+60,y_start+20},BigFont,title_Massage_color,title);
   }
   // draw Wrongmassage
   Icon.Warning_Icon({x_start+w-40,y_start+80,Color_Yellow,Background},RED,filled);
-  // draw text of error message
+  // draw Text of error message
 
   int lineHeight = 15;
   int messageLength = masseage.length();
@@ -82,23 +82,28 @@ void SEDHOM_Widgets::ERROR_Massage_Widget(String masseage,Color_t Background,Col
       if (startY > max_lines_of_masseage_error * lineHeight + y_start + 50) {
         break; // Stop if the maximum number of lines is exceeded
       }
-        Icon.Text_cpp(
-        x_start + 10,
-        startY ,
-        SmallFont,
-        ERROR_Massage_color,
-        line
+        Icon.Text(
+        {
+          x_start + 10,
+          startY 
+        },
+        
+          SmallFont,
+          ERROR_Massage_color
+        ,
+          line
+        
     );
     startY += lineHeight;
   }
   // draw ok button
   Icon.Rectangle({{x_start+20,y_start+h-40},{60,30},5,Shape_Fill,color});
   Icon.Rectangle({{x_start+20+3,y_start+h-40+3},{60-6,30-6},5,Shape_Fill,Background});
-  Icon.TEXT(x_start+32,y_start+h-18,BigFont,color_txt,"OK");
+  Icon.Text_C({x_start+32,y_start+h-18},BigFont,color_txt,"OK");
   // draw close button
   Icon.Rectangle({{x_start+w-80,y_start+h-40},{60,30},5,Shape_Fill,color});
   Icon.Rectangle({{x_start+w-80+3,y_start+h-40+3},{60-6,30-6},5,Shape_Fill,Background});
-  Icon.TEXT(x_start+w-80+8,y_start+h-18,BigFont,color_txt,"Out");
+  Icon.Text_C({x_start+w-80+8,y_start+h-18},BigFont,color_txt,"Out");
   
 }
 

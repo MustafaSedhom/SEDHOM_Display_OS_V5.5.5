@@ -179,8 +179,8 @@ typedef struct
 // data type of string
 typedef struct 
 {
-    Color_t txt_color;
     GFXfont* txt_font;
+    Color_t txt_color;
     String txt;
 }Text_t;
 ///////////////////////////////////////////////////////////////////////////

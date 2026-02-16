@@ -27,10 +27,10 @@ void setup()
   myIcon.coordinate.y = 80;
   myIcon.color = Color_Magenta;
   myIcon.Background = OS.Mode(); 
-  Text_t myText;
-  myText.txt = "Mustafa Sedhom";
-  myText.txt_font = FONT_BIG;
-  myText.txt_color = Color_Blue ;
+  Text_C_t myText_C;
+  myText_C.txt = "Mustafa Sedhom";
+  myText_C.txt_font = FONT_BIG;
+  myText_C.txt_color = Color_Blue ;
   Time_t mytime;
   mytime.time_name = "PM";
   mytime.hour = 20 ;
@@ -90,7 +90,7 @@ void setup()
   // Icons.Sun_Icon(myIcon);
   // Icons.Check_Box_Icon(myIcon,true,GREEN,OS.Mode());
   // Icons.Radio_Button_Icon(myIcon,true,GREEN);
-  // Icons.Text_Feild_Icon(myIcon,myText,200,10);
+  // Icons.Text_C_Feild_Icon(myIcon,myText_C,200,10);
   // Icons.Warning_Icon(myIcon,RED);
   // Icons.Chandelier_Icon(myIcon);
   // Icons.Smart_TV_Icon(myIcon);

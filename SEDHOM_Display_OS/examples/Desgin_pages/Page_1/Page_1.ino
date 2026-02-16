@@ -62,23 +62,23 @@ void Desgin_Page_1()
   
   // Setting Widgets
   Icons.Setting_Icon(70,40,Icons_color,is_selected[0][0] ? Icons.Color_Blur(20,10,120,200,20,is_selected[0][1],OS.Mode()) : Icons.Blur(20,10,120,200,20,Blur_effect_value,OS.Mode()));
-  Icons.TEXT(100,40,FONT_FREEMONOBOLD_MEDIUM,Icons_TXT_color,"Setting");
-  Icons.TEXT(80,103,FONT_FREEMONOBOLD_SMALL,Second_TXT_color,"System");
+  Icons.Text_C(100,40,FONT_FREEMONOBOLD_MEDIUM,Icons_TXT_color,"Setting");
+  Icons.Text_C(80,103,FONT_FREEMONOBOLD_SMALL,Second_TXT_color,"System");
 
   // WIFI Widgets
   Icons.WIFI_Icon(300,50,WIFI_Status_conected_level_4_full,Icons_color,0,is_selected[1][0] ? Icons.Color_Blur(260,10,120,200,20,is_selected[1][1],OS.Mode()) : Icons.Blur(260,10,120,200,20,Blur_effect_value,OS.Mode()));
-  Icons.TEXT(380,50,FONT_FREEMONOBOLD_MEDIUM,Icons_TXT_color,"WIFI");
-  Icons.TEXT(310,103,FONT_FREEMONOBOLD_SMALL,Second_TXT_color,"Connected");
+  Icons.Text_C(380,50,FONT_FREEMONOBOLD_MEDIUM,Icons_TXT_color,"WIFI");
+  Icons.Text_C(310,103,FONT_FREEMONOBOLD_SMALL,Second_TXT_color,"Connected");
 
   // BLE Widgets
   Icons.Bluetooth_Icon(55,190,BLuetooth_Status_open_and_not_connected,Icons_color,is_selected[2][0] ? Icons.Color_Blur(20,170,120,200,20,is_selected[2][1],OS.Mode()) : Icons.Blur(20,170,120,200,20,Blur_effect_value,OS.Mode()));
-  Icons.TEXT(100,210,FONT_FREEMONOBOLD_MEDIUM,Icons_TXT_color,"Blutooth");
-  Icons.TEXT(50,270,FONT_FREEMONOBOLD_SMALL,Second_TXT_color,"DisConnected");
+  Icons.Text_C(100,210,FONT_FREEMONOBOLD_MEDIUM,Icons_TXT_color,"Blutooth");
+  Icons.Text_C(50,270,FONT_FREEMONOBOLD_SMALL,Second_TXT_color,"DisConnected");
 
   // Home Widgets
   Icons.Home_Icon(270,185,Icons_color,is_selected[3][0] ? Icons.Color_Blur(260,170,120,200,20,is_selected[3][1],OS.Mode()) : Icons.Blur(260,170,120,200,20,Blur_effect_value,OS.Mode()));
-  Icons.TEXT(380,210,FONT_FREEMONOBOLD_MEDIUM,Icons_TXT_color,"Home");
-  Icons.TEXT(345,270,FONT_FREEMONOBOLD_SMALL,Second_TXT_color,"GUI");
+  Icons.Text_C(380,210,FONT_FREEMONOBOLD_MEDIUM,Icons_TXT_color,"Home");
+  Icons.Text_C(345,270,FONT_FREEMONOBOLD_SMALL,Second_TXT_color,"GUI");
 }
 
 

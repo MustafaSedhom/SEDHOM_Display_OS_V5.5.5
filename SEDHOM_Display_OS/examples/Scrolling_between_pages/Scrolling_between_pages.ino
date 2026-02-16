@@ -33,8 +33,8 @@ void Home_page()
    Icons.Power_off_Icon(40,40,RED,OS.Mode());
    Icons.After_Arrow_Icon(400,280,BLUE,OS.Not_Mode());
    Icons.Home_Icon(200,140,GREEN,Icons.Blur(200,130,60,60,15,2,OS.Mode(),Rect));
-   Icons.TEXT(250,50,FONT_FREEMONOBOLD_MEDIUM,MAGENTA,"Home Page");
-   Icons.TEXT(20,280,BigFont,RED,"Page 1");
+   Icons.Text_C(250,50,FONT_FREEMONOBOLD_MEDIUM,MAGENTA,"Home Page");
+   Icons.Text_C(20,280,BigFont,RED,"Page 1");
 }
 void Setting_page()
 {
@@ -42,8 +42,8 @@ void Setting_page()
    Icons.After_Arrow_Icon(400,280,BLUE,OS.Not_Mode());
    Icons.Back_Arrow_Icon(20,40,RED,OS.Not_Mode());
    Icons.Setting_Icon(240,160,Cyan,Icons.Blur(230,160,0,0,30,2,OS.Mode(),Circle));
-   Icons.TEXT(250,50,FONT_FREEMONOBOLD_MEDIUM,MAGENTA,"Setting Page");
-   Icons.TEXT(20,280,BigFont,RED,"Page 3");
+   Icons.Text_C(250,50,FONT_FREEMONOBOLD_MEDIUM,MAGENTA,"Setting Page");
+   Icons.Text_C(20,280,BigFont,RED,"Page 3");
 }
 void Switch_page()
 {
@@ -51,8 +51,8 @@ void Switch_page()
    Icons.After_Arrow_Icon(400,280,BLUE,OS.Not_Mode());
    Icons.Back_Arrow_Icon(20,40,RED,OS.Not_Mode());
    Icons.Button_Icon(200,130,Icons.Blur(190,120,70,70,15,2,OS.Mode(),Rect));
-   Icons.TEXT(250,50,FONT_FREEMONOBOLD_MEDIUM,MAGENTA,"Switches Page");
-   Icons.TEXT(20,280,BigFont,RED,"Page 2");
+   Icons.Text_C(250,50,FONT_FREEMONOBOLD_MEDIUM,MAGENTA,"Switches Page");
+   Icons.Text_C(20,280,BigFont,RED,"Page 2");
 }
 void Wifi_page()
 {
@@ -60,8 +60,8 @@ void Wifi_page()
    Icons.Back_Arrow_Icon(20,40,RED,OS.Not_Mode());
    Icons.WIFI_Icon(240,160,WIFI_Status_conected_level_2_half,GREEN,DarkGrey,Icons.Blur(208,125,65,65,15,2,OS.Mode(),Rect));
    Icons.Add_Icon(400,260,GREEN);
-   Icons.TEXT(250,50,FONT_FREEMONOBOLD_MEDIUM,MAGENTA,"WIFI Page");
-   Icons.TEXT(20,280,BigFont,RED,"Page 4");
+   Icons.Text_C(250,50,FONT_FREEMONOBOLD_MEDIUM,MAGENTA,"WIFI Page");
+   Icons.Text_C(20,280,BigFont,RED,"Page 4");
 }
 
 

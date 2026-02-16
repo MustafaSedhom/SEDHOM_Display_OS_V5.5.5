@@ -42,8 +42,8 @@ void setup()
   Wifi_setting["WIFI_status"] = my_WIFI.wifi_status;
   // serializeJsonPretty(doc,Serial);
   ///////////////////////////////////////////////////////////////////////////////////////////////////
-  Icons.Text_Feild_Icon(50,100,300,50,BLUE,GREEN,FONT_BIG,OS.Mode(),Wifi_setting["SSID"].as<String>());
-  Icons.Text_Feild_Icon(50,200,300,50,BLUE,GREEN,FONT_BIG,OS.Mode(),Wifi_setting["Password"].as<String>());
+  Icons.Text_C_Feild_Icon(50,100,300,50,BLUE,GREEN,FONT_BIG,OS.Mode(),Wifi_setting["SSID"].as<String>());
+  Icons.Text_C_Feild_Icon(50,200,300,50,BLUE,GREEN,FONT_BIG,OS.Mode(),Wifi_setting["Password"].as<String>());
   Icons.WIFI_Icon(70,50,Wifi_setting["WIFI_status"].as<WIFI_STATUS_t>(),Color_Green,Color_DarkGrey,OS.Mode());
   ///////////////////////////////////////////////////////////////////////////////////////////////////
 }
