@@ -23,7 +23,7 @@ class Text_Animator
         }
 
         void Change_Text_Color(Coordenate_t co, GFXfont* Font,int Animation_time, String txt);
-
+        void Scrolling_Text(Icon_t Icon,GFXfont* Font,int time_ms,String txt ,Coordenate_t min_max);
 };
 //GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 void Text_Animator::Change_Text_Color(Coordenate_t co, GFXfont* Font,int Animation_time, String txt)
@@ -37,8 +37,33 @@ void Text_Animator::Change_Text_Color(Coordenate_t co, GFXfont* Font,int Animati
         lastTime = time_now;
     }
 }
+void Text_Animator::Scrolling_Text(Icon_t myIcon,GFXfont* Font,int time_ms,String txt ,Coordenate_t min_max)
+{
+  static Coordenate_t co = min_max ;
+  static unsigned long t = 0;
+  static int i = 0;
+  static int dir = 1;   
+  static int last_i = 0;
+
+  unsigned long now = Time.Calc_time_ms();
+
+  if (now - t > time_ms)
+  {
+      Icon.Text({myIcon.coordinate.x + last_i, myIcon.coordinate.y}, Font, myIcon.Background, txt);
+      Icon.Text({myIcon.coordinate.x + i, myIcon.coordinate.y},Font,myIcon.color , txt);
+      last_i = i;
+      t = now;
+
+      i += dir;
+
+      if (i > co.y || i < co.x)
+          dir = -dir;  
+  }
+}
 //GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-class SEDHOM_Animations : public Text_Animator
+
+//GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+class SEDHOM_Animations : public Text_Animator //, public Shapes_Animations
 {
     private:
       
