@@ -256,7 +256,7 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
       bool onTap(int x, int y, int w, int h);
       void onTap(int x, int y, int w, int h,void (*Do_Function)());
     ```
-- SD_Card <- handling all function to dealing betwwen sdcard and mcu
+- SD_Card 
     ```cpp
     read();
     write();
