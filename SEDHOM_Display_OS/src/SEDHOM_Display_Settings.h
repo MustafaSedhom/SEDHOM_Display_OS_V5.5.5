@@ -40,11 +40,6 @@
   // #include <EEPROM.h>
 #endif
 
-//////////////////////////////////////
-// SEDHOMs lib
-#include "SEDHOM_Colors.h"
-#include "SEDHOM_Display_Fonts.h"
-#include "SEDHOM_Arabic_Font.h"
 //============================================================================================================================================
 //*************************************************************************************************
 // define your object for you Display here but you should name Display Like a do  

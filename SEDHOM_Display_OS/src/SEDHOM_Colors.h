@@ -2,6 +2,7 @@
 #define SEDHOM_COLORS
 //{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
 #include "SEDHOM_Display_Settings.h"
+#include "SEDHOM_Data_Types.h"
 //{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
 typedef uint16_t Color_t ;
 //{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
@@ -91,16 +92,16 @@ class SEDHOM_Colors
 
     public:
         // colors
-        Color_t set_Color(int r,int g,int b);
+        Color_t set_Color(Color_RGB_t color);
         Color_t Set_Hex_Color(uint16_t Hex_code); 
 };
 //{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
 // colors
-Color_t SEDHOM_Colors::set_Color(int r,int g,int b)
+Color_t SEDHOM_Colors::set_Color(Color_RGB_t color)
 {
-    uint16_t rgb565 = ((r & 0xF8) << 8) |
-                  ((g & 0xFC) << 3) |
-                  (b >> 3);
+    uint16_t rgb565 = ((color.R & 0xF8) << 8) |
+                  ((color.G & 0xFC) << 3) |
+                  (color.B >> 3);
 
    return(rgb565);
 }

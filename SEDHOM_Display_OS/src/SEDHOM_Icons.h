@@ -30,12 +30,7 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
         void Terminal_Icon(Icon_t Icon = {});
         void About_Icon(Icon_t Icon = {});
         void Display_Date_Icon(Icon_t Icon,Date_t Date,Color_t text_color);
-        void UP_Arrow_Icon(Icon_t Icon = {},Color_t border_color = -1);
-        void DOWN_Arrow_Icon(Icon_t Icon = {},Color_t border_color = -1);
-        void LEFT_Arrow_Icon(Icon_t Icon = {},Color_t border_color = -1);
-        void RIGHT_Aroow_Icon(Icon_t Icon = {},Color_t border_color = -1);
-        void Back_Arrow_Icon(Icon_t Icon = {},Color_t border_color = -1);
-        void After_Arrow_Icon(Icon_t Icon = {},Color_t border_color = -1);
+        void Arrow_Icon(Icon_t Icon = {},Direction_t Dir = Direction_Right,Color_t border_color = -1);
         void Color_Icon(Icon_t Icon = {});
         void Time_Icon(Icon_t Icon = {});
         void Date_Icon(Icon_t Icon = {});
@@ -279,47 +274,36 @@ void SEDHOM_Icons::Display_Date_Icon(Icon_t Icon,Date_t Date,Color_t text_color)
     Circle({{Icon.x+114,Icon.y+8},4,Shape_Fill,Icon.Background});
 
 }
-void SEDHOM_Icons::UP_Arrow_Icon(Icon_t Icon,Color_t border_color)
+void SEDHOM_Icons::Arrow_Icon(Icon_t Icon,Direction_t Dir,Color_t border_color)
 {
-  Triangle({{Icon.x-20-6,Icon.y+25+3},{Icon.x,Icon.y-6},{Icon.x+20+6,Icon.y+25+3},Shape_Fill,border_color});
-  Triangle({{Icon.x-20,Icon.y+25},{Icon.x,Icon.y},{Icon.x+20,Icon.y+25},Shape_Fill,Icon.color});
-  fill_rectangle_with_end(Icon.x-10,Icon.y+25,20,20,3,Icon.color,border_color);
-  Rectangle({{Icon.x-10+3,Icon.y+25},{20-6,20-3},0,Shape_Fill,Icon.color});
-}
-void SEDHOM_Icons::DOWN_Arrow_Icon(Icon_t Icon,Color_t border_color)
-{
-  Triangle({{Icon.x-20-6,Icon.y+25-3},{Icon.x,Icon.y-6+60},{Icon.x+20+6,Icon.y+25-3},Shape_Fill,border_color});
-  Triangle({{Icon.x-20,Icon.y+25},{Icon.x,Icon.y+50},{Icon.x+20,Icon.y+25},Shape_Fill,Icon.color});
-  fill_rectangle_with_end(Icon.x-10,Icon.y+5,20,20,3,Icon.color,border_color);
-  Rectangle({{Icon.x-10+3,Icon.y+8},{20-6,20-3},0,Shape_Fill,Icon.color});
-}
-void SEDHOM_Icons::LEFT_Arrow_Icon(Icon_t Icon,Color_t border_color)
-{
-  Triangle({{Icon.x-6,Icon.y},{Icon.x+25+3,Icon.y-25-6},{Icon.x+25+3,Icon.y+25+6},Shape_Fill,border_color});
-  Triangle({{Icon.x,Icon.y},{Icon.x+25,Icon.y-25},{Icon.x+25,Icon.y+25},Shape_Fill,Icon.color});
-  fill_rectangle_with_end(Icon.x+25,Icon.y-8-1,20,20,3,Icon.color,border_color);
-  Rectangle({{Icon.x+25,Icon.y-8+3-1},{20-3,20-6},0,Shape_Fill,Icon.color});
-}
-void SEDHOM_Icons::RIGHT_Aroow_Icon(Icon_t Icon,Color_t border_color)
-{
-  Triangle({{Icon.x+6+50,Icon.y},{Icon.x+25-3,Icon.y-25-6},{Icon.x+25-3,Icon.y+25+6},Shape_Fill,border_color});
-  Triangle({{Icon.x+50,Icon.y},{Icon.x+25,Icon.y-25},{Icon.x+25,Icon.y+25},Shape_Fill,Icon.color});
-  fill_rectangle_with_end(Icon.x+5,Icon.y-8-1,20,20,3,Icon.color,border_color);
-  Rectangle({{Icon.x+8,Icon.y-8+3-1},{20-3,20-6},0,Shape_Fill,Icon.color});
-}
-void SEDHOM_Icons::Back_Arrow_Icon(Icon_t Icon,Color_t border_color)
-{
-  Triangle({{Icon.x-6,Icon.y},{Icon.x+25+3,Icon.y-15-6},{Icon.x+25+3,Icon.y+15+6},Shape_Fill,border_color});
-  Triangle({{Icon.x,Icon.y},{Icon.x+25,Icon.y-15},{Icon.x+25,Icon.y+15},Shape_Fill,Icon.color});
-  fill_rectangle_with_end(Icon.x+25,Icon.y-8-1,18,25,3,Icon.color,border_color);
-  Rectangle({{Icon.x+22,Icon.y-8+3-1},{12,12},5,Shape_Fill,Icon.color});
-}
-void SEDHOM_Icons::After_Arrow_Icon(Icon_t Icon,Color_t border_color)
-{
-  Triangle({{Icon.x+6+50,Icon.y},{Icon.x+25-3,Icon.y-15-6},{Icon.x+25-3,Icon.y+15+6},Shape_Fill,border_color});
-  Triangle({{Icon.x+50,Icon.y},{Icon.x+25,Icon.y-15},{Icon.x+25,Icon.y+15},Shape_Fill,Icon.color});
-  fill_rectangle_with_end(Icon.x,Icon.y-8-1,18,25,3,Icon.color,border_color);
-  Rectangle({{Icon.x+15,Icon.y-8+3-1},{12,13},5,Shape_Fill,Icon.color});
+  switch (Dir)
+  {
+  case Direction_Up:
+    Triangle({{Icon.x-20-6,Icon.y+25+3},{Icon.x,Icon.y-6},{Icon.x+20+6,Icon.y+25+3},Shape_Fill,border_color});
+    Triangle({{Icon.x-20,Icon.y+25},{Icon.x,Icon.y},{Icon.x+20,Icon.y+25},Shape_Fill,Icon.color});
+    Border_Rectangle({Icon.x-10,Icon.y+25,border_color,Icon.color},{20,20},5,3);
+    Rectangle({{Icon.x-10+3,Icon.y+25},{20-6,20-3},0,Shape_Fill,Icon.color});
+    break;
+  case Direction_Down:
+    Triangle({{Icon.x-20-6,Icon.y+25-3},{Icon.x,Icon.y-6+60},{Icon.x+20+6,Icon.y+25-3},Shape_Fill,border_color});
+    Triangle({{Icon.x-20,Icon.y+25},{Icon.x,Icon.y+50},{Icon.x+20,Icon.y+25},Shape_Fill,Icon.color});
+    Border_Rectangle({Icon.x-10,Icon.y+5,border_color,Icon.color},{20,20},5,3);
+    Rectangle({{Icon.x-10+3,Icon.y+8},{20-6,20-3},0,Shape_Fill,Icon.color});
+    break;
+  case Direction_Right:
+    Triangle({{Icon.x-6,Icon.y},{Icon.x+25+3,Icon.y-15-6},{Icon.x+25+3,Icon.y+15+6},Shape_Fill,border_color});
+    Triangle({{Icon.x,Icon.y},{Icon.x+25,Icon.y-15},{Icon.x+25,Icon.y+15},Shape_Fill,Icon.color});
+    Border_Rectangle({Icon.x+25,Icon.y-8-1,border_color,Icon.color},{25,18},5,3);
+    Rectangle({{Icon.x+22,Icon.y-8+3-1},{12,12},5,Shape_Fill,Icon.color});
+    break;
+  case Direction_Left:
+    Triangle({{Icon.x+6+50,Icon.y},{Icon.x+25-3,Icon.y-15-6},{Icon.x+25-3,Icon.y+15+6},Shape_Fill,border_color});
+    Triangle({{Icon.x+50,Icon.y},{Icon.x+25,Icon.y-15},{Icon.x+25,Icon.y+15},Shape_Fill,Icon.color});
+    Border_Rectangle({Icon.x,Icon.y-8-1,border_color,Icon.color},{25,18},5,3);
+    Rectangle({{Icon.x+15,Icon.y-8+3-1},{12,13},5,Shape_Fill,Icon.color});
+    break;
+
+  }
 }
 void SEDHOM_Icons::Color_Icon(Icon_t Icon)
 {
@@ -379,14 +363,14 @@ void SEDHOM_Icons::slider_Icon(Icon_t Icon ,int h,byte_t range ,Color_t color_no
     Rectangle({{Icon.x,Icon.y},{h,10},5,Shape_Fill,color_not_active});
     Rectangle({{Icon.x,Icon.y},{index,10},5,Shape_Fill,Icon.color});
     Circle({{Icon.x+index,Icon.y+5},10,Shape_Fill,((Icon.Background == Color_Black)?Color_White : Color_Black)});
-    fill_rectangle_with_end(Icon.x+h+15,Icon.y-10,30,40,3,Icon.Background,box_color);
+    Border_Rectangle({Icon.x+h+15,Icon.y-10,box_color,Icon.Background},{40,30},5,3);
     Text_cpp(Icon.x+h+8+15,Icon.y+19-8,SmallFont,range_in_box_color,String(range));
 }
 void SEDHOM_Icons::file_Icon(Icon_t Icon,Color_t Border_color,Color_t file_extend_color,String file_extend)
 {
-    fill_rectangle_with_end(Icon.x,Icon.y,60,50,3,Icon.Background,Border_color);
-    fill_rectangle_with_end(Icon.x-10,Icon.y+30,20,30,3,Icon.color,Border_color);
-    fill_rectangle_with_end(Icon.x+29,Icon.y-1,21,30,3,Icon.Background,Icon.Background);
+    Border_Rectangle({Icon.x,Icon.y,Border_color,Icon.Background},{50,60},5,3);
+    Border_Rectangle({Icon.x-10,Icon.y+30,Border_color,Icon.Background},{30,21},5,3);
+    Border_Rectangle({Icon.x+29,Icon.y-1,Icon.Background,Icon.Background},{30,21},5,3);
     Triangle({{Icon.x+6+43,Icon.y+20},{Icon.x+29,Icon.y},{Icon.x+29,Icon.y+20},Shape_Fill,Border_color});
     Triangle({{Icon.x+43,Icon.y+18},{Icon.x+29+3,Icon.y+6},{Icon.x+29+3,Icon.y+18},Shape_Fill,Icon.color});
     Rectangle({{Icon.x+10,Icon.y+15},{15,2},5,Shape_Fill,Border_color});
@@ -399,7 +383,7 @@ void SEDHOM_Icons::folder_Icon(Icon_t Icon)
 {
     Rectangle({{Icon.x,Icon.y},{30,40},5,Shape_Fill,Icon.color});
     Rectangle({{Icon.x+28,Icon.y+5},{40,20},5,Shape_Fill,Icon.color});
-    fill_rectangle_with_end(Icon.x+5,Icon.y+10,20,60,1,WHITE,BLACK);
+    Border_Rectangle({Icon.x+5,Icon.y+10,BLACK,WHITE},{60,20},5,1);
     Rectangle({{Icon.x,Icon.y+20},{68,35},5,Shape_Fill,Icon.color});
     Rectangle({{Icon.x,Icon.y+20},{69,1},0,Shape_Fill,BLACK});
 }

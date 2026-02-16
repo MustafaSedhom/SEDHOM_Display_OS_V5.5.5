@@ -20,7 +20,7 @@ class SEDHOM_Basic_Shapes
         void Right_Triangle(Icon_t Icon,Area_t area,Shape_filled_t filled);
         void Border_Rectangle(Icon_t Border_Rect,Area_t area,int Raduis,int Border_size);
         void Container(Rectangle_t container);
-        void fill_rectangle_with_end(int x,int y,int h,int w,int end_volume,Color_t color,Color_t end_color);
+        void Border_Color_Rectangle(Icon_t Icon,Area_t area,byte_t Borde,Color_t Border_color);
         // custom image or font
         void Draw_Custom_int_shap(Icon_t Icon,Area_t area,int arr[]);
         void Draw_Custom_Char(Icon_t Icon,Area_t area,char arr[]);
@@ -177,10 +177,10 @@ void SEDHOM_Basic_Shapes::Container(Rectangle_t container)
     Rectangle(container);
 }
 
-void SEDHOM_Basic_Shapes::fill_rectangle_with_end(int x,int y,int h,int w,int end_volume,Color_t color,Color_t end_color)
+void SEDHOM_Basic_Shapes::Border_Color_Rectangle(Icon_t Icon,Area_t area,byte_t Borde,Color_t Border_color)
 {
-    Rectangle({{x,y},{w,h},5,Shape_Fill,end_color});
-    Rectangle({{x + end_volume,y + end_volume},{w - 2*end_volume,h - 2*end_volume},5,Shape_Fill,color});
+    Rectangle({{Icon.x,Icon.y},area,5,Shape_Fill,Border_color});
+    Rectangle({{Icon.x + Borde,Icon.y + Borde},{area.w - 2*Borde,area.h - 2*Borde},5,Shape_Fill,Icon.color});
 }
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 #endif // !SEDHOM_BASIC_SHAPES_H_

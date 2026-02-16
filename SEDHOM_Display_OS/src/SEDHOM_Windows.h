@@ -86,7 +86,7 @@ void SEDHOM_Windows::Full_Key_Board_Window(Color_t color,Color_t Background,Colo
   Full_KeyBoard_window_color = color;
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   //Draw back arrow and text feild
-  Icon.Back_Arrow_Icon({20,30,RED,Color_not_Blackground_full_keybard});
+  Icon.Arrow_Icon({20,30,RED,Color_not_Blackground_full_keybard},Direction_Right,(Background == Color_Black) ? Color_White : Color_Black);
   if(index_char_in_text == 0)
   {
     Icon.Rectangle({{85,8},{380,50},20,Shape_Fill,Color_not_Blackground_full_keybard});

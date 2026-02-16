@@ -19,10 +19,10 @@
 #define on               ON
 #define off              OFF
 
-#define byte_t         uint8_t
 #define string_t       char*
 #define word_t         char*
 
+typedef unsigned char  byte_t;   
 typedef uint16_t Color_t;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef enum 

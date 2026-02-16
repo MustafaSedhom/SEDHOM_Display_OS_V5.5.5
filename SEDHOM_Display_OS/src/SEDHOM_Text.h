@@ -3,7 +3,9 @@
 //ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 #include "SEDHOM_Display_Settings.h"
 #include "SEDHOM_Display_Fonts.h"
+#include "SEDHOM_Arabic_Font.h"
 #include "SEDHOM_Data_Types.h"
+#include "SEDHOM_Colors.h"
 //ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 class SEDHOM_Text
 {
