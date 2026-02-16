@@ -100,7 +100,7 @@ void SEDHOM_Icons::WIFI_Icon(Icon_t Icon,Color_t color_off,WIFI_STATUS_t state)
         Circle({{Icon.coordinate.x,Icon.coordinate.y},20-18,Shape_Fill,four});
         if(state==WIFI_Status_no_internet)
         {
-        Text_C({Icon.coordinate.x+8,Icon.coordinate.y},BigFont,color_off,"!");
+        Text_C({Icon.coordinate.x+8,Icon.coordinate.y},FONT_BIG,color_off,"!");
         }
     }
     else if(state==WIFI_Status_not_connected)
@@ -129,7 +129,7 @@ void SEDHOM_Icons::Battary_Icon(Icon_t Icon ,int range,Color_t txt_color,bool lo
     Rectangle({{Icon.coordinate.x+3, Icon.coordinate.y+3}, {50-6,30-6}, 5,Shape_Fill, Icon.Background});
     Rectangle({{Icon.coordinate.x+50-1,Icon.coordinate.y+10},{10,10},0,Shape_Fill,color_Battary});
     Rectangle({{Icon.coordinate.x+2,Icon.coordinate.y+3},{rangeB,30-6},5,Shape_Fill,color_Battary});
-    Text({txt_x+60,txt_y_index},BigFont,txt_color,String(range) + "%");
+    Text({txt_x+60,txt_y_index},FONT_BIG,txt_color,String(range) + "%");
 }
 void SEDHOM_Icons::Home_Icon(Icon_t Icon)
 {
@@ -224,8 +224,8 @@ void SEDHOM_Icons::Button_Icon(Icon_t Icon,bool print_on_and_off)
 
     if(print_on_and_off)
     {
-        Text_C({Icon.coordinate.x+8, Icon.coordinate.y+16},SmallFont,WHITE,"ON");
-        Text_C({Icon.coordinate.x+23, Icon.coordinate.y+41},SmallFont,WHITE,"OFF");
+        Text_C({Icon.coordinate.x+8, Icon.coordinate.y+16},FONT_SMALL,WHITE,"ON");
+        Text_C({Icon.coordinate.x+23, Icon.coordinate.y+41},FONT_SMALL,WHITE,"OFF");
     }
 }
 void SEDHOM_Icons::Display_Time_Icon(Icon_t Icon,Time_t time)
@@ -238,29 +238,29 @@ void SEDHOM_Icons::Display_Time_Icon(Icon_t Icon,Time_t time)
     Circle({{Icon.coordinate.x+73,Icon.coordinate.y},5,Shape_Fill,Icon.color});
     Circle({{Icon.coordinate.x+73,Icon.coordinate.y+20},5,Shape_Fill,Icon.color});
     //sec
-    Text({Icon.coordinate.x+146,Icon.coordinate.y},BigFont,Icon.color,String(time.sec));
+    Text({Icon.coordinate.x+146,Icon.coordinate.y},FONT_BIG,Icon.color,String(time.sec));
     // time name
-    Text({Icon.coordinate.x+146,Icon.coordinate.y+38},BigFont,Icon.color,String(time.time_name));
+    Text({Icon.coordinate.x+146,Icon.coordinate.y+38},FONT_BIG,Icon.color,String(time.time_name));
 }
 void SEDHOM_Icons::Terminal_Icon(Icon_t Icon)
 {
     Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{50,50},5,Shape_Fill,WHITE});
     Rectangle({{Icon.coordinate.x+3,Icon.coordinate.y+3},{44,44},5,Shape_Fill,BLACK});
-    Text_C({Icon.coordinate.x+10,Icon.coordinate.y+30},BigFont,GREEN,">_");
+    Text_C({Icon.coordinate.x+10,Icon.coordinate.y+30},FONT_BIG,GREEN,">_");
 }
 void SEDHOM_Icons::About_Icon(Icon_t Icon)
 {
     Circle({{Icon.coordinate.x,Icon.coordinate.y},20,Shape_Fill,Icon.color});
     Circle({{Icon.coordinate.x,Icon.coordinate.y},17,Shape_Fill,Icon.Background});
-    Text_C({Icon.coordinate.x-6,Icon.coordinate.y+8},BigFont,Icon.color,"!");
+    Text_C({Icon.coordinate.x-6,Icon.coordinate.y+8},FONT_BIG,Icon.color,"!");
 }
 void SEDHOM_Icons::Display_Date_Icon(Icon_t Icon,Date_t Date,Color_t Text_color)
 {
     Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{130,130},15,Shape_Fill,Icon.color});
-    Text({Icon.coordinate.x+42,Icon.coordinate.y+40},BigFont,Text_color,String(Date.week_day_name));
-    Text({Icon.coordinate.x+47,Icon.coordinate.y+65},BigFont,Text_color,String(Date.Day));
-    Text({Icon.coordinate.x+42,Icon.coordinate.y+90},BigFont,Text_color,String(Date.month_name));
-    Text({Icon.coordinate.x+35,Icon.coordinate.y+115},BigFont,Text_color,String(Date.year));
+    Text({Icon.coordinate.x+42,Icon.coordinate.y+40},FONT_BIG,Text_color,String(Date.week_day_name));
+    Text({Icon.coordinate.x+47,Icon.coordinate.y+65},FONT_BIG,Text_color,String(Date.Day));
+    Text({Icon.coordinate.x+42,Icon.coordinate.y+90},FONT_BIG,Text_color,String(Date.month_name));
+    Text({Icon.coordinate.x+35,Icon.coordinate.y+115},FONT_BIG,Text_color,String(Date.year));
 
     int x_start = Icon.coordinate.x + 15;
     int y_start = Icon.coordinate.y;
@@ -337,9 +337,9 @@ void SEDHOM_Icons::Date_Icon(Icon_t Icon)
     Circle({{Icon.coordinate.x+5,Icon.coordinate.y+5},3,Shape_Fill,Icon.Background});
     Circle({{Icon.coordinate.x+23,Icon.coordinate.y+5},3,Shape_Fill,Icon.Background});
     Circle({{Icon.coordinate.x+40,Icon.coordinate.y+5},3,Shape_Fill,Icon.Background});
-    Text_C({Icon.coordinate.x+20,Icon.coordinate.y+24},SmallFont,Icon.color,"6");
-    Text_C({Icon.coordinate.x+12,Icon.coordinate.y+33},SmallFont,Icon.color,"Jun");
-    Text_C({Icon.coordinate.x+9,Icon.coordinate.y+46},SmallFont,Icon.color,"2025");
+    Text_C({Icon.coordinate.x+20,Icon.coordinate.y+24},FONT_SMALL,Icon.color,"6");
+    Text_C({Icon.coordinate.x+12,Icon.coordinate.y+33},FONT_SMALL,Icon.color,"Jun");
+    Text_C({Icon.coordinate.x+9,Icon.coordinate.y+46},FONT_SMALL,Icon.color,"2025");
 }
 void SEDHOM_Icons::Switch_Icon(Icon_t Icon,Color_t color_off,Color_t thumb_color,Color_t txt_color,SWITCH_STATUS_t state)
 {
@@ -353,7 +353,7 @@ void SEDHOM_Icons::Switch_Icon(Icon_t Icon,Color_t color_off,Color_t thumb_color
     state_str = (state == SWITCH_State_ON) ? "ON" : "OFF" ;
     Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{100,40},50,Shape_Fill,State_color});
     Circle({{index,Icon.coordinate.y+20},15,Shape_Fill,thumb_color});
-    Text({(index_str),Icon.coordinate.y+28},BigFont,txt_color,state_str);
+    Text({(index_str),Icon.coordinate.y+28},FONT_BIG,txt_color,state_str);
 }
 void SEDHOM_Icons::label_Icon(Icon_t Icon ,Area_t area,int Border,Color_t color_str_in_label,String string_in_label)
 {
@@ -365,7 +365,7 @@ void SEDHOM_Icons::label_Icon(Icon_t Icon ,Area_t area,int Border,Color_t color_
     if(string_in_label == "ON" || string_in_label == "on" || num >= 1){label_color_in_func = Icon.color;}
 
     Border_Rectangle({Icon.coordinate.x,Icon.coordinate.y,label_color_in_func,Icon.Background},area,5,Border);
-    Text({Icon.coordinate.x+10,Icon.coordinate.y+(0.6*area.w)},SmallFont,color_str_in_label,string_in_label);
+    Text({Icon.coordinate.x+10,Icon.coordinate.y+(0.6*area.w)},FONT_SMALL,color_str_in_label,string_in_label);
 }
 void SEDHOM_Icons::slider_Icon(Icon_t Icon ,int h,byte_t range ,Color_t color_not_active ,Color_t ball_color,Color_t box_color,Color_t range_in_box_color)
 {
@@ -374,7 +374,7 @@ void SEDHOM_Icons::slider_Icon(Icon_t Icon ,int h,byte_t range ,Color_t color_no
     Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{index,10},5,Shape_Fill,Icon.color});
     Circle({{Icon.coordinate.x+index,Icon.coordinate.y+5},10,Shape_Fill,((Icon.Background == Color_Black)?Color_White : Color_Black)});
     Border_Rectangle({Icon.coordinate.x+h+15,Icon.coordinate.y-10,box_color,Icon.Background},{40,30},5,3);
-    Text({Icon.coordinate.x+h+8+15,Icon.coordinate.y+19-8},SmallFont,range_in_box_color,String(range));
+    Text({Icon.coordinate.x+h+8+15,Icon.coordinate.y+19-8},FONT_SMALL,range_in_box_color,String(range));
 }
 void SEDHOM_Icons::file_Icon(Icon_t Icon,Color_t Border_color,Color_t file_extend_color,String file_extend)
 {
@@ -387,7 +387,7 @@ void SEDHOM_Icons::file_Icon(Icon_t Icon,Color_t Border_color,Color_t file_exten
     Rectangle({{Icon.coordinate.x+10,Icon.coordinate.y+25},{30,2},5,Shape_Fill,Border_color});    
     Rectangle({{Icon.coordinate.x+25,Icon.coordinate.y+35},{15,2},5,Shape_Fill,Border_color});
     Rectangle({{Icon.coordinate.x+25,Icon.coordinate.y+45},{15,2},5,Shape_Fill,Border_color});
-    Text({Icon.coordinate.x-5,Icon.coordinate.y+46},SmallFont,file_extend_color,file_extend);
+    Text({Icon.coordinate.x-5,Icon.coordinate.y+46},FONT_SMALL,file_extend_color,file_extend);
 }
 void SEDHOM_Icons::folder_Icon(Icon_t Icon)
 {
@@ -419,22 +419,22 @@ void SEDHOM_Icons::ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_f
     else  color_id = Icon.color;
     Rectangle({{x1-3,y1-3},{w1+6,h1+6},20,Shape_Fill,color_id});
     Rectangle({{x1,y1},{w1,h1},20,Shape_Fill,Icon.color});
-    Text_C({((User.is_professser)?x1+60:x1+80),y1+20},BigFont,main_font_color,((User.is_professser)?"PROFESSER":"STUDENT"));
+    Text_C({((User.is_professser)?x1+60:x1+80),y1+20},FONT_BIG,main_font_color,((User.is_professser)?"PROFESSER":"STUDENT"));
     Divider_vertical({x1+10,y1+35,main_font_color,Icon.Background},w1-20,3);
-    Text_C({x1+30,y1+55},SmallFont,font_color,"IDENTITY CARD");
+    Text_C({x1+30,y1+55},FONT_SMALL,font_color,"IDENTITY CARD");
 
-    Text_C({x1+10,y1+70},SmallFont,main_font_color,((User.is_professser)?"Dr Name":"Nmae"));
-    Text_C({x1+10,y1+85},SmallFont,font_color,User.user_name);
+    Text_C({x1+10,y1+70},FONT_SMALL,main_font_color,((User.is_professser)?"Dr Name":"Nmae"));
+    Text_C({x1+10,y1+85},FONT_SMALL,font_color,User.user_name);
 
-    Text_C({x1+10,y1+100},SmallFont,main_font_color,((User.is_professser)?"Unversity":"Stadies at"));
-    Text_C({x1+10,y1+115},SmallFont,font_color,User.universty);
+    Text_C({x1+10,y1+100},FONT_SMALL,main_font_color,((User.is_professser)?"Unversity":"Stadies at"));
+    Text_C({x1+10,y1+115},FONT_SMALL,font_color,User.universty);
 
-    Text_C({x1+10,y1+130},SmallFont,main_font_color,"Department");
-    Text_C({x1+10,y1+145},SmallFont,font_color,User.department_1);
-    Text_C({x1+10,y1+160},SmallFont,font_color,User.department_2);
+    Text_C({x1+10,y1+130},FONT_SMALL,main_font_color,"Department");
+    Text_C({x1+10,y1+145},FONT_SMALL,font_color,User.department_1);
+    Text_C({x1+10,y1+160},FONT_SMALL,font_color,User.department_2);
 
-    Text_C({x1+10,y1+175},SmallFont,main_font_color,"Born");
-    Text_C({x1+10,y1+190},SmallFont,font_color,User.Born);
+    Text_C({x1+10,y1+175},FONT_SMALL,main_font_color,"Born");
+    Text_C({x1+10,y1+190},FONT_SMALL,font_color,User.Born);
 
     Rectangle({{x1+160,y1+45},{100,110},0,Shape_Fill,User.image_background});
     
@@ -456,7 +456,7 @@ void SEDHOM_Icons::ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_f
         }
     }
     Rectangle({{x1+150,y1+155},{120,45},15,Shape_Fill,Icon.color});
-    Text_C({x1+157,y1+175},SmallFont,font_color,User.number);
+    Text_C({x1+157,y1+175},FONT_SMALL,font_color,User.number);
 }
 void SEDHOM_Icons::Joy_Stick_Icon(Icon_t Icon ,Coordenate_t thumb ,int thumb_size,Color_t Border_color,Color_t thumb_color,Color_t Color_insde_arrow)
 {
@@ -731,7 +731,7 @@ void SEDHOM_Icons::Text_Feild_Icon( Icon_t Icon,Text_t Txt ,int lenght,int max_c
 void SEDHOM_Icons::Warning_Icon( Icon_t Icon,Color_t txt_color,Shape_filled_t filled )
 {
   Equilateral_Triangle({{Icon.coordinate.x,Icon.coordinate.y},40,filled,Direction_Up,Icon.color});
-  Text_C({Icon.coordinate.x-6,Icon.coordinate.y+5},BigFont,txt_color,"!");
+  Text_C({Icon.coordinate.x-6,Icon.coordinate.y+5},FONT_BIG,txt_color,"!");
 }
 void SEDHOM_Icons::Chandelier_Icon(Icon_t Icon)
 {
