@@ -8,11 +8,11 @@
 ![Language](https://img.shields.io/badge/Language-C++-yellow) &emsp;
 ![Language](https://img.shields.io/badge/Language-C-cyan)
 
-# <img src="Images/SEDHOM.jpg" width="30" style="border-radius:40%;"> ***SEDHOM Company***
+# <img src="images/SEDHOM.jpg" width="30" style="border-radius:40%;"> ***SEDHOM Company***
 
 by ***Eng.Mustafa Sedhom*** Embedded Software and Hardware Engineer
 
-<img src="Images/SEDHOM.jpg" width="600" style="border-radius:30%; border:2px solid #00000;">
+<img src="images/SEDHOM.jpg" width="600" style="border-radius:30%; border:2px solid #00000;">
 
 #
 ## **about library**
@@ -366,21 +366,21 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
 
 ## **Library Projects Photo**
  look Images folder on it all photos and videos
- # <img src="Images/mustafa_6.jpeg" style="border-radius:5%;">
- # <img src="Images/mustafa_3.jpeg" style="border-radius:5%;">
- # <img src="Images/mustafa_1.jpeg" style="border-radius:5%;">
- # <img src="Images/mustafa_20.jpeg" style="border-radius:5%;">
- # <img src="Images/mustafa_2.jpeg" style="border-radius:5%;">
- # <img src="Images/mustafa_4.jpeg" style="border-radius:5%;">
- # <img src="Images/mustafa_7.jpeg" style="border-radius:5%;">
- # <img src="Images/mustafa_8.jpeg" style="border-radius:5%;">
- # <img src="Images/mustaf_9.jpeg" style="border-radius:5%;">
- # <img src="Images/mustafa_10.jpeg" style="border-radius:5%;">
- # <img src="Images/mustaf_11.jpeg" style="border-radius:5%;">
- # <img src="Images/mustafa_12.jpeg" style="border-radius:5%;">
- # <img src="Images/mustafa_13.jpeg" style="border-radius:5%;">
- # <img src="Images/mustafa_14.jpeg" style="border-radius:5%;">
- # <img src="Images/mustafa_16.jpeg" style="border-radius:5%;">
+ # <img src="images/mustafa_6.jpeg" style="border-radius:5%;">
+ # <img src="images/mustafa_3.jpeg" style="border-radius:5%;">
+ # <img src="images/mustafa_1.jpeg" style="border-radius:5%;">
+ # <img src="images/mustafa_20.jpeg" style="border-radius:5%;">
+ # <img src="images/mustafa_2.jpeg" style="border-radius:5%;">
+ # <img src="images/mustafa_4.jpeg" style="border-radius:5%;">
+ # <img src="images/mustafa_7.jpeg" style="border-radius:5%;">
+ # <img src="images/mustafa_8.jpeg" style="border-radius:5%;">
+ # <img src="images/mustaf_9.jpeg" style="border-radius:5%;">
+ # <img src="images/mustafa_10.jpeg" style="border-radius:5%;">
+ # <img src="images/mustaf_11.jpeg" style="border-radius:5%;">
+ # <img src="images/mustafa_12.jpeg" style="border-radius:5%;">
+ # <img src="images/mustafa_13.jpeg" style="border-radius:5%;">
+ # <img src="images/mustafa_14.jpeg" style="border-radius:5%;">
+ # <img src="images/mustafa_16.jpeg" style="border-radius:5%;">
 #
 
 ## if you want install it in arduino ide 
