@@ -1,14 +1,18 @@
 
 # ***SEDHOM Display OS***  
 ![Version](https://img.shields.io/badge/Version-5.5.5-green) &emsp;
-![Platform](https://img.shields.io/badge/Platform-Arduino_IDE-blue) &emsp;
-![Language](https://img.shields.io/badge/Language-C++-yellow)
 
-# <img src="images/SEDHOM.jpg" width="30" style="border-radius:40%;"> ***SEDHOM Company***
+![Platform](https://img.shields.io/badge/Platform-Arduino_IDE-blue) &emsp;
+![Platform](https://img.shields.io/badge/Platform-Platform_IO-orange) &emsp;
+
+![Language](https://img.shields.io/badge/Language-C++-yellow) &emsp;
+![Language](https://img.shields.io/badge/Language-C-cyan)
+
+# <img src="Images/SEDHOM.jpg" width="30" style="border-radius:40%;"> ***SEDHOM Company***
 
 by ***Eng.Mustafa Sedhom*** Embedded Software and Hardware Engineer
 
-<img src="images/SEDHOM.jpg" width="600" style="border-radius:30%; border:2px solid #00000;">
+<img src="Images/SEDHOM.jpg" width="600" style="border-radius:30%; border:2px solid #00000;">
 
 #
 ## **about library**
@@ -78,7 +82,7 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     ```cpp
     Stack<Data Type> stack ;
     Queue<Data Type> queue ;
-    LinkedList<Data Type> linkedlist ;
+    LinkedList<Data Type> linkedlist = new LinkedList<Data Type>() ;
 
     ```
 - Shapes
@@ -256,7 +260,7 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
       bool onTap(int x, int y, int w, int h);
       void onTap(int x, int y, int w, int h,void (*Do_Function)());
     ```
-- SD_Card 
+- SD Card 
     ```cpp
     read();
     write();
@@ -296,9 +300,10 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     ```
 - Colors
     ```cpp
-    // colors
+    // colors functions
     Color_t set_Color(Color_RGB_t color);
     Color_t Set_Hex_Color(uint16_t Hex_code);
+    // Basic colors
     Color_Black           
     Color_Navy            
     Color_DarkGary       
@@ -358,6 +363,26 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
 
     ```
 #
+
+## **Library Projects Photo**
+ look Images folder on it all photos and videos
+ # <img src="Images/mustafa_6.jpeg" style="border-radius:5%;">
+ # <img src="Images/mustafa_3.jpeg" style="border-radius:5%;">
+ # <img src="Images/mustafa_1.jpeg" style="border-radius:5%;">
+ # <img src="Images/mustafa_20.jpeg" style="border-radius:5%;">
+ # <img src="Images/mustafa_2.jpeg" style="border-radius:5%;">
+ # <img src="Images/mustafa_4.jpeg" style="border-radius:5%;">
+ # <img src="Images/mustafa_7.jpeg" style="border-radius:5%;">
+ # <img src="Images/mustafa_8.jpeg" style="border-radius:5%;">
+ # <img src="Images/mustaf_9.jpeg" style="border-radius:5%;">
+ # <img src="Images/mustafa_10.jpeg" style="border-radius:5%;">
+ # <img src="Images/mustaf_11.jpeg" style="border-radius:5%;">
+ # <img src="Images/mustafa_12.jpeg" style="border-radius:5%;">
+ # <img src="Images/mustafa_13.jpeg" style="border-radius:5%;">
+ # <img src="Images/mustafa_14.jpeg" style="border-radius:5%;">
+ # <img src="Images/mustafa_16.jpeg" style="border-radius:5%;">
+#
+
 ## if you want install it in arduino ide 
 1. download this folder in your pc
 2. put this folder in (~/Documentos/Arduino/libraries) between your arduino libraries .
