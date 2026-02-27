@@ -51,14 +51,15 @@ class SEDHOM_Touch
         Touch_getXY();
         return pixel_z; 
     }
-    bool onTap(int x, int y, int w, int h)
+    bool onTap(Touch_t pressed_space)
     {
       if (!Touch_getXY()) return false;
-      return ((pixel_x >= x && pixel_x <= (x + w)) && (pixel_y >= y && pixel_y <= (y + h)));
+      return ((pixel_x >= pressed_space.coordinate.x && pixel_x <= (pressed_space.coordinate.x + pressed_space.area.w)) 
+            && (pixel_y >= pressed_space.coordinate.y && pixel_y <= (pressed_space.coordinate.y + pressed_space.area.h)));
     }
-    void onTap(int x, int y, int w, int h,void (*Do_Function)())
+    void onTap(Touch_t pressed_space,void (*Do_Function)())
     {
-      if(onTap(x,y,h,w))
+      if(onTap(pressed_space))
       {
         Do_Function();
       }

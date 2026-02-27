@@ -293,6 +293,13 @@ typedef struct
     Direction_t Dir ;
     Color_t color ;
 }Triangle_special_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of  touch point
+typedef struct  
+{
+    Coordenate_t coordinate ;
+    Area_t area;
+}Touch_t;
 
 
 //**********************************************************************************************************************

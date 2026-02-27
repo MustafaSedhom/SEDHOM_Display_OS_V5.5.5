@@ -19,7 +19,7 @@
 #include "SEDHOM_Handlig_pages.h"
 // include windows file to use sedhom_default_windows
 #include "SEDHOM_Windows.h"
-// include Page file to use sedhom_oadefualt_pages
+// include Page file to use sedhom_defualt_pages
 #include "SEDHOM_pages.h"
 // include colors file to use colors in your projects
 #include "SEDHOM_Colors.h"
@@ -40,13 +40,13 @@ class SEDHOM_Display_OS
     // my name is Mustafa SEDHOM i wrote this lib to make easy way to use TFT Display in embedded projects
   public:
     /// define all functions
-    void Init_Screen(ROTATION_STASTUS_t Rotate,Color_t Mode = Night_Mode);
+    void Init_Screen(ROTATION_STASTUS_t Rotate = Rotate_90_Degree,Color_t Mode = Night_Mode);
     void Set_Device_Mode(Color_t Mode = Night_Mode);
     int Screen_Height();
     int Screen_Width();
     Color_t Mode();
     Color_t Not_Mode();
-    void Fill_Screen(Color_t color);
+    void Fill_Screen(Color_t color = Night_Mode);
     int Convert_Coordenates_to_Center_X_Point(int x);
     int Convert_Coordenates_to_Center_Y_Point(int y);
     Coordenate_t Convert_Coordenates_to_Center(Coordenate_t new_point);
