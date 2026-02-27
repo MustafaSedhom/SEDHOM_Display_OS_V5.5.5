@@ -20,8 +20,12 @@ class SEDHOM_Widgets
     void APP_Bar_Widget(bool show_back_arrow = true,WIFI_STATUS_t WIFI_state = WIFI_Status_conected_level_2_half,BLUETOOTH_STATUS_t Bluetooth_state = BLuetooth_Status_open_and_not_connected,int Battary_Value = 22,Time_t time = {12,33,17,"Am"},Color_t Wifi_on = Color_Blue,Color_t Wifi_off= Color_DarkGrey,Color_t BLE_color= Color_Yellow,Color_t Battary_color = Color_Green,Color_t Time_color = Color_Magenta,Color_t Reverse_color = Color_Blue,Color_t Background=Color_Black);
     void Big_frame_widget(Color_t color = Color_White,Color_t Background = Color_Black);
     void ERROR_Massage_Widget(String masseage = "SEDHOM Display OS Error",Color_t Background = Color_Black,Color_t color=MAGENTA,Color_t color_txt=WHITE,Color_t ERROR_Massage_color = RED,Color_t title_Massage_color = BLUE,String title="ERROR",Shape_filled_t filled = Shape_Fill,int x = 100,int y = 70,int w = 240,int h = 160,int max_lines_of_masseage_error =5,int max_char_in_one_line = 20);
-    void Drawer(String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_Blue,Color_t exit_button_color = Color_Red);
-  };
+    void Drawer_Widget(String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_Blue,Color_t exit_button_color = Color_Red);
+    void Handle_Drawer_Widget();
+
+
+
+};
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 void SEDHOM_Widgets::set_widgets_mode(Color_t mode)
 {
@@ -107,7 +111,7 @@ void SEDHOM_Widgets::ERROR_Massage_Widget(String masseage,Color_t Background,Col
   Icon.Text_C({x_start+w-80+8,y_start+h-18},FONT_BIG,color_txt,"Out");
   
 }
-void SEDHOM_Widgets::Drawer(String Drawer_name,bool show_exit_icon ,Color_t Drawer_color,Color_t Drawer_border_color,Color_t Drawer_name_color,Color_t exit_button_color)
+void SEDHOM_Widgets::Drawer_Widget(String Drawer_name,bool show_exit_icon ,Color_t Drawer_color,Color_t Drawer_border_color,Color_t Drawer_name_color,Color_t exit_button_color)
 {
   #define pos_x    3
   #define pos_y    0
@@ -124,6 +128,26 @@ void SEDHOM_Widgets::Drawer(String Drawer_name,bool show_exit_icon ,Color_t Draw
   Icon.Text({pos_x+15,pos_y+98},FONT_BIG,Drawer_name_color,Drawer_name);
   Icon.Divider_vertical({{pos_x+25,pos_y+110},Drawer_border_color,Drawer_color},100,2);
 }
-
+void SEDHOM_Widgets::Handle_Drawer_Widget()
+{
+  static bool var = false;
+     if(!var)
+    {
+     if(Touch.onTap({{30,90},{40,40}}))
+      {
+       Drawer_Widget();
+      var = true;
+      }
+    }
+    if(var)
+    {
+      if(Touch.onTap({{120,80},{40,40}}))
+      {
+          Icon.Rectangle({{4,67},{160,250},10,Shape_Fill,Color_Black});
+          Icon.Menu_Icon_5({{30,90},Color_Blue,Color_Black});
+          var = false;
+      }
+    }
+}
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 #endif // !SEDHOM_WIDGETS_H_

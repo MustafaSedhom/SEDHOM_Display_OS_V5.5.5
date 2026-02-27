@@ -15,10 +15,6 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
   public:
         SEDHOM_Icons()
         {
-          // myIcon.coordinate.x = 150;
-          // myIcon.coordinate.y = 80;
-          // myIcon.color = Color_Magenta;
-          // myIcon.Background = Black;
         } 
         #define defualt_paramter_for_icon  {{150,80},Magenta,Black}
         #define defualt_paramter_for_text  {FONT_BIG,Blue,"Text"}
