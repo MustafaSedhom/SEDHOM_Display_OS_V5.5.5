@@ -208,6 +208,7 @@ void SEDHOM_Display_OS::Init_Screen(ROTATION_STASTUS_t Rotate,Color_t Mode)
   init_Screen(Rotate);
   OS_Mode = Mode;
   Set_Device_Mode(Mode);
+  SEDHOM_Icon_OS::Text_C({0,0},FONT_BIG,0," ");
 }
 void SEDHOM_Display_OS::Set_Device_Mode(Color_t Mode)
 {

@@ -13,7 +13,8 @@ class SEDHOM_Text
     
     public:
         // Text
-        void Text_C(Coordenate_t coordinate,const GFXfont* font,Color_t color,string_t txt);
+        // void Text_C(Coordenate_t coordinate,const GFXfont* font,Color_t color,string_t txt);
+        static void Text_C(Coordenate_t coordinate,const GFXfont* font,Color_t color,string_t txt);
         void Text(Coordenate_t coordinate,const GFXfont* font,Color_t color,String str);
         void Text(Coordenate_t coordinate,Text_t str);
         void Text(Coordenate_t coordinate,const GFXfont* font,Color_t color,float value);
