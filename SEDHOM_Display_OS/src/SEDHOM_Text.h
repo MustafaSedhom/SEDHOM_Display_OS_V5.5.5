@@ -15,7 +15,7 @@ class SEDHOM_Text
         // Text
         static void Text_C(Coordinate_t coordinate,const GFXfont* font,Color_t color,string_t txt);
         void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,String str);
-        void Text(Coordinate_t coordinate,Text_t str);
+        void Text(Coordinate_t coordinate,Text_Data_t str);
         void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,float value);
         void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,int value);
 };
@@ -29,7 +29,7 @@ void SEDHOM_Text::Text(Coordinate_t coordinate,const GFXfont* font,Color_t color
 {
     Text_Driver(coordinate.x,coordinate.y,font,color,str);
 }
-void SEDHOM_Text::Text(Coordinate_t coordinate,Text_t str)
+void SEDHOM_Text::Text(Coordinate_t coordinate,Text_Data_t str)
 {
     Text_Driver(coordinate.x,coordinate.y,str.txt_font,str.txt_color,str.txt);
 }

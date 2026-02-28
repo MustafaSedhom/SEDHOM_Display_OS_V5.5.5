@@ -23,7 +23,7 @@ class Text_Animator
         }
 
         void Change_Text_Color(Coordinate_t co, GFXfont* Font,int Animation_time, String txt);
-        void Scrolling_Text(Icon_t Icon,GFXfont* Font,int time_ms,String txt ,Coordinate_t min_max);
+        void Scrolling_Text(Icon_Data_t Icon,GFXfont* Font,int time_ms,String txt ,Coordinate_t min_max);
 };
 //GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 void Text_Animator::Change_Text_Color(Coordinate_t co, GFXfont* Font,int Animation_time, String txt)
@@ -37,7 +37,7 @@ void Text_Animator::Change_Text_Color(Coordinate_t co, GFXfont* Font,int Animati
         lastTime = time_now;
     }
 }
-void Text_Animator::Scrolling_Text(Icon_t myIcon,GFXfont* Font,int time_ms,String txt ,Coordinate_t min_max)
+void Text_Animator::Scrolling_Text(Icon_Data_t myIcon,GFXfont* Font,int time_ms,String txt ,Coordinate_t min_max)
 {
   static Coordinate_t co = min_max ;
   static unsigned long t = 0;

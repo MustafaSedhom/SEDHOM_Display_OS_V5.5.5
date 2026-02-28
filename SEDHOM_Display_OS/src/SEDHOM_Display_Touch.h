@@ -51,13 +51,13 @@ class SEDHOM_Touch
         Touch_getXY();
         return pixel_z; 
     }
-    bool onTap(Touch_t pressed_space)
+    bool onTap(Touch_Data_t pressed_space)
     {
       if (!Touch_getXY()) return false;
       return ((pixel_x >= pressed_space.coordinate.x && pixel_x <= (pressed_space.coordinate.x + pressed_space.area.w)) 
             && (pixel_y >= pressed_space.coordinate.y && pixel_y <= (pressed_space.coordinate.y + pressed_space.area.h)));
     }
-    void onTap(Touch_t pressed_space,void (*Do_Function)())
+    void onTap(Touch_Data_t pressed_space,void (*Do_Function)())
     {
       if(onTap(pressed_space))
       {

@@ -12,13 +12,13 @@ class SEDHOM_Effects
        SEDHOM_Colors Colors ;
     public:
         // effects 
-        Color_t Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape = Shape_Rectangle);
-        Color_t Color_Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape = Shape_Rectangle);
-        Color_t Shadow_effect(Icon_t shadow = {} , Shapes_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Radius = 20 , Position_t pos = Position_Right_and_Bottom, Color_t Shadow_color = Color_DarkGrey);
+        Color_t Blur(Icon_Data_t Icon,Area_t area,int r,int Blur_value,Shapes_type_t shape = Shape_Rectangle);
+        Color_t Color_Blur(Icon_Data_t Icon,Area_t area,int r,int Blur_value,Shapes_type_t shape = Shape_Rectangle);
+        Color_t Shadow_effect(Icon_Data_t shadow = {} , Shapes_type_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Radius = 20 , Position_t pos = Position_Right_and_Bottom, Color_t Shadow_color = Color_DarkGrey);
 };
 //EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 // Effects
-Color_t SEDHOM_Effects::Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape)
+Color_t SEDHOM_Effects::Blur(Icon_Data_t Icon,Area_t area,int r,int Blur_value,Shapes_type_t shape)
 {
   Color_t color_value = map(Blur_value,Icon.color?20:0,Icon.color?0:20,0,255);
 
@@ -33,7 +33,7 @@ Color_t SEDHOM_Effects::Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes
   }
   return color;
 }
-Color_t SEDHOM_Effects::Color_Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape)
+Color_t SEDHOM_Effects::Color_Blur(Icon_Data_t Icon,Area_t area,int r,int Blur_value,Shapes_type_t shape)
 {
   if(shape == Shape_Rectangle)
   {
@@ -45,7 +45,7 @@ Color_t SEDHOM_Effects::Color_Blur(Icon_t Icon,Area_t area,int r,int Blur_value,
   }
   return Icon.color;
 }
-Color_t SEDHOM_Effects::Shadow_effect(Icon_t shadow, Shapes_t shape , int shadow_size  , int shadow_h , int shadow_w ,int shadow_Radius , Position_t pos  , Color_t Shadow_color )
+Color_t SEDHOM_Effects::Shadow_effect(Icon_Data_t shadow, Shapes_type_t shape , int shadow_size  , int shadow_h , int shadow_w ,int shadow_Radius , Position_t pos  , Color_t Shadow_color )
 {
     int x = shadow.coordinate.x;
     int y = shadow.coordinate.y;

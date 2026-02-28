@@ -88,7 +88,7 @@ typedef struct
     int minute;
     int sec;
     word_t time_name;
-}Time_t;
+}Time_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of coordinate
 typedef struct 
@@ -103,7 +103,7 @@ typedef struct
     Coordinate_t coordinate;
     Color_t color;
     Color_t Background;
-}Icon_t;
+}Icon_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of positions
 typedef enum 
@@ -134,7 +134,7 @@ typedef enum
     Shape_Triangle,
     Shape_Line,
     Shape_Square,
-}Shapes_t;
+}Shapes_type_t;
 
 ///////////////////////////////////////////////////////////////////////////
 // data type of WiFi network Encryption type
@@ -171,7 +171,7 @@ typedef struct
     int Day;
     String month_name;
     String week_day_name;     
-} Date_t;
+} Date_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of string
 typedef struct 
@@ -179,7 +179,7 @@ typedef struct
     GFXfont* txt_font;
     Color_t txt_color;
     String txt;
-}Text_t;
+}Text_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of string
 typedef struct 
@@ -187,7 +187,7 @@ typedef struct
     GFXfont* txt_font;
     Color_t txt_color;
     char* txt;
-}Text_C_t;
+}Text_C_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of Area
 typedef struct 
@@ -211,7 +211,7 @@ typedef enum
     Shape_Fill,
 }Shape_filled_t;
 ///////////////////////////////////////////////////////////////////////////
-// data type of  Square_t shape
+// data type of  Square_Data_t shape
 typedef struct 
 {
    Coordinate_t coordinate;
@@ -219,9 +219,9 @@ typedef struct
     int Radius;
     Shape_filled_t Filled ;
     Color_t color;
-}Square_t;
+}Square_Data_t;
 ///////////////////////////////////////////////////////////////////////////
-// data type of  Rectangle_t shape
+// data type of  Rectangle_Data_t shape
 typedef struct 
 {
     Coordinate_t coordinate;
@@ -229,18 +229,18 @@ typedef struct
     int Radius;
     Shape_filled_t Filled ;
     Color_t color;
-}Rectangle_t;
+}Rectangle_Data_t;
 ///////////////////////////////////////////////////////////////////////////
-// data type of  Circle_t shape
+// data type of  Circle_Data_t shape
 typedef struct 
 {
     Coordinate_t coordinate;
     int Radius;
     Shape_filled_t Filled ;
     Color_t color;
-}Circle_t;
+}Circle_Data_t;
 ///////////////////////////////////////////////////////////////////////////
-// data type of  Triangle_t shape
+// data type of  Triangle_Data_t shape
 typedef struct 
 {
     Coordinate_t coordinate_Point_1;
@@ -248,22 +248,22 @@ typedef struct
     Coordinate_t coordinate_Point_3;
     Shape_filled_t Filled ;
     Color_t color;
-}Triangle_t;
+}Triangle_Data_t;
 ///////////////////////////////////////////////////////////////////////////
-// data type of  Line_t shape
+// data type of  Line_Data_t shape
 typedef struct 
 {
     Coordinate_t coordinate_Start_Point;
     Coordinate_t coordinate_End_Point;
     Color_t color;
-}Line_t;
+}Line_Data_t;
 ///////////////////////////////////////////////////////////////////////////
-// data type of  Pixel_t shape
+// data type of  Pixel_Data_t shape
 typedef struct 
 {
     Coordinate_t coordinate_Point;
     Color_t color;
-}Pixel_t;
+}Pixel_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of  Visibility_t
 typedef enum  
@@ -281,7 +281,7 @@ typedef enum
     Direction_Left,
 }Direction_t;
 ///////////////////////////////////////////////////////////////////////////
-// data type of  Special_Triangle_t
+// data type of  Special_Triangle_Data_t
 typedef struct  
 {
     Coordinate_t coordinate ;
@@ -289,14 +289,14 @@ typedef struct
     Shape_filled_t filled ;
     Direction_t Dir ;
     Color_t color ;
-}Triangle_special_t;
+}Triangle_special_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of  touch point
 typedef struct  
 {
     Coordinate_t coordinate ;
     Area_t area;
-}Touch_t;
+}Touch_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of  Orientation
 typedef enum{

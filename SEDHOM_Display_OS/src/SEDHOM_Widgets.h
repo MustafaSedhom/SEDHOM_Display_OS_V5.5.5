@@ -17,12 +17,12 @@ class SEDHOM_Widgets
   public:
     //
     void set_widgets_mode(Color_t mode = Color_Black);
-    void APP_Bar_Widget(bool show_back_arrow = true,WIFI_STATUS_t WIFI_state = WIFI_Status_connected_level_2_half,BLUETOOTH_STATUS_t Bluetooth_state = BLuetooth_Status_open_and_not_connected,int Battery_Value = 22,Time_t time = {12,33,17,"Am"},Color_t Wifi_on = Color_Blue,Color_t Wifi_off= Color_DarkGrey,Color_t BLE_color= Color_Yellow,Color_t Battery_color = Color_Green,Color_t Time_color = Color_Magenta,Color_t Reverse_color = Color_Blue,Color_t Background=Color_Black);
+    void APP_Bar_Widget(bool show_back_arrow = true,WIFI_STATUS_t WIFI_state = WIFI_Status_connected_level_2_half,BLUETOOTH_STATUS_t Bluetooth_state = BLuetooth_Status_open_and_not_connected,int Battery_Value = 22,Time_Data_t time = {12,33,17,"Am"},Color_t Wifi_on = Color_Blue,Color_t Wifi_off= Color_DarkGrey,Color_t BLE_color= Color_Yellow,Color_t Battery_color = Color_Green,Color_t Time_color = Color_Magenta,Color_t Reverse_color = Color_Blue,Color_t Background=Color_Black);
     void Big_frame_widget(Color_t color = Color_White,Color_t Background = Color_Black);
     void ERROR_Massage_Widget(String massage = "SEDHOM Display OS Error",Color_t Background = Color_Black,Color_t color=MAGENTA,Color_t color_txt=WHITE,Color_t ERROR_Massage_color = RED,Color_t title_Massage_color = BLUE,String title="ERROR",Shape_filled_t filled = Shape_Fill,int x = 100,int y = 70,int w = 240,int h = 160,int max_lines_of_massage_error =5,int max_char_in_one_line = 20);
     void Drawer_Widget(String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_White,Color_t exit_button_color = Color_Red);
     void Delete_Drawer_Widget();
-    void Handle_Drawer_Widget(Icon_t Icon_menu = {{30,90},Color_Blue,Color_Black},int menu_icon_number = 5,String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_White,Color_t exit_button_color = Color_Red);
+    void Handle_Drawer_Widget(Icon_Data_t Icon_menu = {{30,90},Color_Blue,Color_Black},int menu_icon_number = 5,String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_White,Color_t exit_button_color = Color_Red);
 
 
 
@@ -32,7 +32,7 @@ void SEDHOM_Widgets::set_widgets_mode(Color_t mode)
 {
   Icons.Set_Mode(mode);
 }
-void SEDHOM_Widgets::APP_Bar_Widget(bool show_back_arrow,WIFI_STATUS_t WIFI_state,BLUETOOTH_STATUS_t Bluetooth_state,int Battery_Value,Time_t time,Color_t Wifi_on,Color_t Wifi_off,Color_t BLE_color,Color_t Battery_color,Color_t Time_color,Color_t Reverse_color,Color_t Background)
+void SEDHOM_Widgets::APP_Bar_Widget(bool show_back_arrow,WIFI_STATUS_t WIFI_state,BLUETOOTH_STATUS_t Bluetooth_state,int Battery_Value,Time_Data_t time,Color_t Wifi_on,Color_t Wifi_off,Color_t BLE_color,Color_t Battery_color,Color_t Time_color,Color_t Reverse_color,Color_t Background)
 {
   if(show_back_arrow)
   {
@@ -140,7 +140,7 @@ void SEDHOM_Widgets::Delete_Drawer_Widget()
 {
   Icons.Rectangle({{4,67},{160,250},10,Shape_Fill,Color_Black});
 }
-void SEDHOM_Widgets::Handle_Drawer_Widget(Icon_t Icon_menu,int menu_icon_number,String Drawer_name,bool show_exit_icon ,Color_t Drawer_color,Color_t Drawer_border_color,Color_t Drawer_name_color,Color_t exit_button_color)
+void SEDHOM_Widgets::Handle_Drawer_Widget(Icon_Data_t Icon_menu,int menu_icon_number,String Drawer_name,bool show_exit_icon ,Color_t Drawer_color,Color_t Drawer_border_color,Color_t Drawer_name_color,Color_t exit_button_color)
 {
   static bool var = false;
     if(!var)

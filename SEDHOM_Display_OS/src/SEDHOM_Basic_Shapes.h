@@ -10,33 +10,33 @@ class SEDHOM_Basic_Shapes
         
     public:
         // define Basic shapes
-        void Pixel(Pixel_t pixel);
-        void Line(Line_t line);    
-        void Rectangle(Rectangle_t rect);
-        void Square(Square_t sqrt);  
-        void Circle(Circle_t circle); 
-        void Triangle(Triangle_t tri); 
-        void Equilateral_Triangle(Triangle_special_t tri);
-        void Right_Triangle(Icon_t Icon,Area_t area,Shape_filled_t filled);
-        void Border_Rectangle(Icon_t Border_Rect,Area_t area,int Radius,int Border_size);
-        void Container(Rectangle_t container);
+        void Pixel(Pixel_Data_t pixel);
+        void Line(Line_Data_t line);    
+        void Rectangle(Rectangle_Data_t rect);
+        void Square(Square_Data_t sqrt);  
+        void Circle(Circle_Data_t circle); 
+        void Triangle(Triangle_Data_t tri); 
+        void Equilateral_Triangle(Triangle_special_Data_t tri);
+        void Right_Triangle(Icon_Data_t Icon,Area_t area,Shape_filled_t filled);
+        void Border_Rectangle(Icon_Data_t Border_Rect,Area_t area,int Radius,int Border_size);
+        void Container(Rectangle_Data_t container);
         // custom image or font
-        void Draw_Custom_int_shape(Icon_t Icon,Area_t area,int arr[]);
-        void Draw_Custom_Char(Icon_t Icon,Area_t area,char arr[]);
+        void Draw_Custom_int_shape(Icon_Data_t Icon,Area_t area,int arr[]);
+        void Draw_Custom_Char(Icon_Data_t Icon,Area_t area,char arr[]);
         
 };
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 // define functions
 // Basic shapes function  
-void SEDHOM_Basic_Shapes::Pixel(Pixel_t pixel)
+void SEDHOM_Basic_Shapes::Pixel(Pixel_Data_t pixel)
 {
     Draw_Pixel(pixel.coordinate_Point.x,pixel.coordinate_Point.y,pixel.color);
 }
-void SEDHOM_Basic_Shapes::Line(Line_t line)
+void SEDHOM_Basic_Shapes::Line(Line_Data_t line)
 {
     Draw_Line(line.coordinate_Start_Point.x,line.coordinate_Start_Point.y,line.coordinate_End_Point.x,line.coordinate_End_Point.y,line.color);
 }                                     
-void SEDHOM_Basic_Shapes::Rectangle(Rectangle_t rect)
+void SEDHOM_Basic_Shapes::Rectangle(Rectangle_Data_t rect)
 {
     switch (rect.Filled)
     {
@@ -49,11 +49,11 @@ void SEDHOM_Basic_Shapes::Rectangle(Rectangle_t rect)
     }
 
 }    
-void SEDHOM_Basic_Shapes::Square(Square_t sqrt)
+void SEDHOM_Basic_Shapes::Square(Square_Data_t sqrt)
 {
   Rectangle({{sqrt.coordinate.x,sqrt.coordinate.y},{sqrt.length,sqrt.length},sqrt.Radius,sqrt.Filled,sqrt.color});
 }  
-void SEDHOM_Basic_Shapes::Circle(Circle_t circle)
+void SEDHOM_Basic_Shapes::Circle(Circle_Data_t circle)
 {
     switch (circle.Filled)
     {
@@ -65,7 +65,7 @@ void SEDHOM_Basic_Shapes::Circle(Circle_t circle)
       break;
     }
 }      
-void SEDHOM_Basic_Shapes::Triangle(Triangle_t tri)
+void SEDHOM_Basic_Shapes::Triangle(Triangle_Data_t tri)
 {
     switch (tri.Filled)
     {
@@ -77,11 +77,11 @@ void SEDHOM_Basic_Shapes::Triangle(Triangle_t tri)
       break;
     }  
 }    
-void SEDHOM_Basic_Shapes::Right_Triangle(Icon_t Icon,Area_t area,Shape_filled_t filled)
+void SEDHOM_Basic_Shapes::Right_Triangle(Icon_Data_t Icon,Area_t area,Shape_filled_t filled)
 {
     Triangle({{Icon.coordinate.x,Icon.coordinate.y},{Icon.coordinate.x ,Icon.coordinate.y + area.h },{Icon.coordinate.x + area.w,Icon.coordinate.y + area.h },filled,Icon.color});
 }
-void SEDHOM_Basic_Shapes::Equilateral_Triangle(Triangle_special_t tri) 
+void SEDHOM_Basic_Shapes::Equilateral_Triangle(Triangle_special_Data_t tri) 
 {
   int x_0,y_0,x_1,y_1,x_2,y_2 ;
   float height  = tri.length * sqrt(3) / 2.0; ;
@@ -140,7 +140,7 @@ void SEDHOM_Basic_Shapes::Equilateral_Triangle(Triangle_special_t tri)
   Triangle({{ x_0,  y_0},{  x_1,  y_1},{  x_2,  y_2},tri.filled, tri.color});
 }
 // Draw custom image or font
-void SEDHOM_Basic_Shapes::Draw_Custom_Char(Icon_t Icon,Area_t area,char arr[])
+void SEDHOM_Basic_Shapes::Draw_Custom_Char(Icon_Data_t Icon,Area_t area,char arr[])
 {
   for(int i=0; i<area.w; i++) 
   {
@@ -153,7 +153,7 @@ void SEDHOM_Basic_Shapes::Draw_Custom_Char(Icon_t Icon,Area_t area,char arr[])
     }
   }
 }
-void SEDHOM_Basic_Shapes::Draw_Custom_int_shape(Icon_t Icon,Area_t area,int arr[])
+void SEDHOM_Basic_Shapes::Draw_Custom_int_shape(Icon_Data_t Icon,Area_t area,int arr[])
 {
       for(int i=0; i<area.w; i++) 
   {
@@ -166,12 +166,12 @@ void SEDHOM_Basic_Shapes::Draw_Custom_int_shape(Icon_t Icon,Area_t area,int arr[
     }
   }
 }
-void SEDHOM_Basic_Shapes::Border_Rectangle(Icon_t Border_Rect,Area_t area,int Radius,int Border_size)
+void SEDHOM_Basic_Shapes::Border_Rectangle(Icon_Data_t Border_Rect,Area_t area,int Radius,int Border_size)
 {
   Rectangle({{Border_Rect.coordinate.x,Border_Rect.coordinate.y},{area.w,area.h},Radius,Shape_Fill,Border_Rect.color});
   Rectangle({{Border_Rect.coordinate.x+Border_size,Border_Rect.coordinate.y+Border_size},{area.w-(2*Border_size),area.h-(2*Border_size)},Radius,Shape_Fill,Border_Rect.Background});
 }
-void SEDHOM_Basic_Shapes::Container(Rectangle_t container)
+void SEDHOM_Basic_Shapes::Container(Rectangle_Data_t container)
 {
     Rectangle(container);
 }
