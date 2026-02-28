@@ -253,7 +253,7 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
       String Full_KeyBoard_window_user_input_TXT = "";
       //drawing window functions 
       void Full_Key_Board_Window(Color_t color,Color_t Background,Color_t char_color = WHITE,Color_t text_field_color = -1,bool caps_or_not=true,bool special_char_or_not=false);
-      <!-- bool Handling_Touch_Full_Key_Board_Window(); -->
+      //bool Handling_Touch_Full_Key_Board_Window();
 
     ```
 - Touch
