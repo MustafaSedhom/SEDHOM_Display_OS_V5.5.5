@@ -22,11 +22,11 @@ class Text_Animator
             interval = t;
         }
 
-        void Change_Text_Color(Coordenate_t co, GFXfont* Font,int Animation_time, String txt);
-        void Scrolling_Text(Icon_t Icon,GFXfont* Font,int time_ms,String txt ,Coordenate_t min_max);
+        void Change_Text_Color(Coordinate_t co, GFXfont* Font,int Animation_time, String txt);
+        void Scrolling_Text(Icon_t Icon,GFXfont* Font,int time_ms,String txt ,Coordinate_t min_max);
 };
 //GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-void Text_Animator::Change_Text_Color(Coordenate_t co, GFXfont* Font,int Animation_time, String txt)
+void Text_Animator::Change_Text_Color(Coordinate_t co, GFXfont* Font,int Animation_time, String txt)
 {
     interval = Animation_time ;
     unsigned long time_now = Time.Calc_time_ms();
@@ -37,9 +37,9 @@ void Text_Animator::Change_Text_Color(Coordenate_t co, GFXfont* Font,int Animati
         lastTime = time_now;
     }
 }
-void Text_Animator::Scrolling_Text(Icon_t myIcon,GFXfont* Font,int time_ms,String txt ,Coordenate_t min_max)
+void Text_Animator::Scrolling_Text(Icon_t myIcon,GFXfont* Font,int time_ms,String txt ,Coordinate_t min_max)
 {
-  static Coordenate_t co = min_max ;
+  static Coordinate_t co = min_max ;
   static unsigned long t = 0;
   static int i = 0;
   static int dir = 1;   
@@ -68,11 +68,11 @@ class SEDHOM_Animations : public Text_Animator //, public Shapes_Animations
     private:
       
     public:
-    // void Text_change_color(Coordenate_t co,GFXfont* Font,int time_ms,String txt);
+    // void Text_change_color(Coordinate_t co,GFXfont* Font,int time_ms,String txt);
 };
 
 //GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-// void SEDHOM_Animations::Text_change_color(Coordenate_t co,GFXfont* Font,int time_ms,String txt)
+// void SEDHOM_Animations::Text_change_color(Coordinate_t co,GFXfont* Font,int time_ms,String txt)
 // {
 //   static unsigned long t_change = 0;
 //    if( Time.Calc_time_ms() - t_change > time_ms)

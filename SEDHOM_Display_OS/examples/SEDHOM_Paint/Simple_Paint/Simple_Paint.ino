@@ -22,7 +22,7 @@ void setup()
 }
 void loop() 
 {
-    if(Touch.Is_Presssed()) 
+    if(Touch.Is_Pressed()) 
     {
       Icons.fill_Circle(Touch.get_X_point(),Touch.get_Y_point(),5,CYAN);
     }

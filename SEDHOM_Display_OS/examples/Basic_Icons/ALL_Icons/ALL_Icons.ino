@@ -17,7 +17,7 @@ SEDHOM_Display_OS OS;
 // SEDHOM_Pages_OS Pages(OS);
 // SEDHOM_Handling_Pages_OS Handling_pages(OS);
 // SEDHOM_Communications_OS Call(OS);
-// SEDHOM_Aiimations_OS Animates(OS);
+// SEDHOM_Animations_OS Animates(OS);
 //=======================================================================================
 //=======================================================================================
 void setup()

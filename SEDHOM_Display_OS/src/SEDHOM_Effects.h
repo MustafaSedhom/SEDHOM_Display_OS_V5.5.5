@@ -14,7 +14,7 @@ class SEDHOM_Effects
         // effects 
         Color_t Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape = Shape_Rectangle);
         Color_t Color_Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape = Shape_Rectangle);
-        Color_t Shadow_effect(Icon_t shadow = {} , Shapes_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Raduis = 20 , Position_t pos = Position_Right_and_Bottom, Color_t Shadow_color = Color_DarkGrey);
+        Color_t Shadow_effect(Icon_t shadow = {} , Shapes_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Radius = 20 , Position_t pos = Position_Right_and_Bottom, Color_t Shadow_color = Color_DarkGrey);
 };
 //EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
 // Effects
@@ -45,7 +45,7 @@ Color_t SEDHOM_Effects::Color_Blur(Icon_t Icon,Area_t area,int r,int Blur_value,
   }
   return Icon.color;
 }
-Color_t SEDHOM_Effects::Shadow_effect(Icon_t shadow, Shapes_t shape , int shadow_size  , int shadow_h , int shadow_w ,int shadow_Raduis , Position_t pos  , Color_t Shadow_color )
+Color_t SEDHOM_Effects::Shadow_effect(Icon_t shadow, Shapes_t shape , int shadow_size  , int shadow_h , int shadow_w ,int shadow_Radius , Position_t pos  , Color_t Shadow_color )
 {
     int x = shadow.coordinate.x;
     int y = shadow.coordinate.y;
@@ -132,11 +132,11 @@ Color_t SEDHOM_Effects::Shadow_effect(Icon_t shadow, Shapes_t shape , int shadow
     }
     if (shape == Shape_Circle)
     {
-      Shape.Circle({{x , y }, shadow_Raduis,Shape_Fill, Shadow_color});
+      Shape.Circle({{x , y }, shadow_Radius,Shape_Fill, Shadow_color});
     }
     else
     {
-      Shape.Rectangle({{x, y},{ w, h}, shadow_Raduis,Shape_Fill, Shadow_color});
+      Shape.Rectangle({{x, y},{ w, h}, shadow_Radius,Shape_Fill, Shadow_color});
     }
     return Shadow_color;
 }

@@ -15,11 +15,11 @@
 #include "SEDHOM_Time.h"
 // include Data structure file to use Stack and Queue in my projects
 #include "SEDHOM_Data_Structure.h"
-// includew pages handlig file to handle user pages
+// include pages Handling file to handle user pages
 #include "SEDHOM_Handlig_pages.h"
 // include windows file to use sedhom_default_windows
 #include "SEDHOM_Windows.h"
-// include Page file to use sedhom_defualt_pages
+// include Page file to use sedhom_default_pages
 #include "SEDHOM_pages.h"
 // include colors file to use colors in your projects
 #include "SEDHOM_Colors.h"
@@ -40,22 +40,22 @@ class SEDHOM_Display_OS
     // my name is Mustafa SEDHOM i wrote this lib to make easy way to use TFT Display in embedded projects
   public:
     /// define all functions
-    void Init_Screen(ROTATION_STASTUS_t Rotate = Rotate_90_Degree,Color_t Mode = Night_Mode);
+    void Init_Screen(ROTATION_STATUS_t Rotate = Rotate_90_Degree,Color_t Mode = Night_Mode);
     void Set_Device_Mode(Color_t Mode = Night_Mode);
     int Screen_Height();
     int Screen_Width();
     Color_t Mode();
     Color_t Not_Mode();
     void Fill_Screen(Color_t color = Night_Mode);
-    int Convert_Coordenates_to_Center_X_Point(int x);
-    int Convert_Coordenates_to_Center_Y_Point(int y);
-    Coordenate_t Convert_Coordenates_to_Center(Coordenate_t new_point);
+    int Convert_Coordinates_to_Center_X_Point(int x);
+    int Convert_Coordinates_to_Center_Y_Point(int y);
+    Coordinate_t Convert_Coordinates_to_Center(Coordinate_t new_point);
     Color_t Night_mode = Night_Mode ;
     Color_t Light_mode = Light_Mode ;
-    ROTATION_STASTUS_t Rotate_0 = Rotate_0_Degree;
-    ROTATION_STASTUS_t Rotate_90 = Rotate_90_Degree;
-    ROTATION_STASTUS_t Rotate_180 = Rotate_180_Degree;
-    ROTATION_STASTUS_t Rotate_270 = Rotate_270_Degree;
+    ROTATION_STATUS_t Rotate_0 = Rotate_0_Degree;
+    ROTATION_STATUS_t Rotate_90 = Rotate_90_Degree;
+    ROTATION_STATUS_t Rotate_180 = Rotate_180_Degree;
+    ROTATION_STATUS_t Rotate_270 = Rotate_270_Degree;
 };
 class SEDHOM_Shapes_OS : public SEDHOM_Basic_Shapes
 {
@@ -122,7 +122,7 @@ class SEDHOM_Pages_OS : public SEDHOM_Pages
       SEDHOM_Pages::set_pages_mode(OS.Mode());
     }
 };
-class SEDHOM_Communications_OS : public SEDHOM_Comminucations_UART
+class SEDHOM_Communications_OS : public SEDHOM_Communications_UART
 {
 private:
 public:
@@ -171,7 +171,7 @@ public:
     // SD_Card.set_sd_card_mode(OS.Mode());
   }
 };
-class SEDHOM_Handling_Pages_OS : public SEDHOM_Handlig_Pages
+class SEDHOM_Handling_Pages_OS : public SEDHOM_Handling_Pages
 {
 private:
 public:
@@ -189,11 +189,11 @@ class SEDHOM_Widgets_OS : public SEDHOM_Widgets
       SEDHOM_Widgets::set_widgets_mode(OS.Mode());
     }
 };
-class SEDHOM_Aiimations_OS : public SEDHOM_Animations
+class SEDHOM_Animations_OS : public SEDHOM_Animations
 {
   private:
   public:
-  SEDHOM_Aiimations_OS(SEDHOM_Display_OS & OS)
+  SEDHOM_Animations_OS(SEDHOM_Display_OS & OS)
   {
     // SEDHOM_Animations::set_widgets_mode(OS.Mode());
   }
@@ -203,7 +203,7 @@ class SEDHOM_Aiimations_OS : public SEDHOM_Animations
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // define all functions
-void SEDHOM_Display_OS::Init_Screen(ROTATION_STASTUS_t Rotate,Color_t Mode)
+void SEDHOM_Display_OS::Init_Screen(ROTATION_STATUS_t Rotate,Color_t Mode)
 {
   init_Screen(Rotate);
   OS_Mode = Mode;
@@ -237,18 +237,18 @@ void SEDHOM_Display_OS::Fill_Screen(Color_t color)
 {
    FillScreen(color); 
 }
-Coordenate_t SEDHOM_Display_OS::Convert_Coordenates_to_Center(Coordenate_t new_point)
+Coordinate_t SEDHOM_Display_OS::Convert_Coordinates_to_Center(Coordinate_t new_point)
 {
-  Coordenate_t old_coordinate ;
-  old_coordinate.x = Convert_Coordenates_to_Center_X_Point(new_point.x);
-  old_coordinate.y = Convert_Coordenates_to_Center_Y_Point(new_point.y);
+  Coordinate_t old_coordinate ;
+  old_coordinate.x = Convert_Coordinates_to_Center_X_Point(new_point.x);
+  old_coordinate.y = Convert_Coordinates_to_Center_Y_Point(new_point.y);
    return old_coordinate;
 }
-int SEDHOM_Display_OS::Convert_Coordenates_to_Center_X_Point(int x)
+int SEDHOM_Display_OS::Convert_Coordinates_to_Center_X_Point(int x)
 {
   return x + (Screen_Height()/2);
 }
-int SEDHOM_Display_OS::Convert_Coordenates_to_Center_Y_Point(int y)
+int SEDHOM_Display_OS::Convert_Coordinates_to_Center_Y_Point(int y)
 {
   return (Screen_Width()/2) - y;
 }

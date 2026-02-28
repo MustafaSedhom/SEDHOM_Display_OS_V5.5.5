@@ -1,5 +1,5 @@
-#ifndef SEDHOOM_ARABIC_FONT_H_
-#define SEDHOOM_ARABIC_FONT_H_
+#ifndef SEDHOM_ARABIC_FONT_H_
+#define SEDHOM_ARABIC_FONT_H_
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ///                    Arabic_word.h
 /// ------------------------------------------------------------------
@@ -21,7 +21,7 @@ uint16_t alef_with_hamza[16] = {
   0b0000001110000000,
   0b0000001110000000
 };
-uint16_t Baa_Seperate[]=
+uint16_t Baa_Separate[]=
 {
 0b0000000000000000, 
 0b0000000000000000, 
@@ -41,4 +41,4 @@ uint16_t Baa_Seperate[]=
 0b0000000110000000,
 };
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#endif // !SEDHOOM_ARABIC_FONT_H_
+#endif // !SEDHOM_ARABIC_FONT_H_

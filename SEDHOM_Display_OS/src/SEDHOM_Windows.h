@@ -17,7 +17,7 @@ class SEDHOM_Windows
     // variables for windows handling
 
     //#########################################################################################################################################
-    // keyboard varbiles
+    // keyboard variables
       // array of capital litters
       word_t first_line_capital    [10] = { "!","@","#","$","%","^","&","*","(",")" };
       word_t Second_line_capital   [10] = { "Q","W","E","R","T","Y","U","I","O","P" };
@@ -31,21 +31,21 @@ class SEDHOM_Windows
       // array of special character
       word_t Second_line_special   [10] = { "`","~","-","_","=","+","[","]","{","}" };
       word_t third_line_special    [10] = { "\\","|",":",";","\"","\"",",",".","/"  };
-      word_t fourth_line_speciial  [10] = { " " ," "," ","<",">","?"," "," "," "," "}; 
+      word_t fourth_line_special  [10] = { " " ," "," ","<",">","?"," "," "," "," "}; 
       bool caps_or_not = true;
       bool special_char_or_not = false;
       Color_t Full_KeyBoard_window_color = GREEN;
       Color_t Full_KeyBoard_Text_feild_color = RED;
-      Color_t Color_Blackground_full_keybard = BLACK;
-      Color_t Color_not_Blackground_full_keybard = White;
-      Color_t Color_char_full_keybard = Cyan;
+      Color_t Color_Background_full_keyboard = BLACK;
+      Color_t Color_not_Background_full_keyboard = White;
+      Color_t Color_char_full_keyboard = Cyan;
       // variables for windows handling
       char full_key_board_Text[50] = "";
       int index_char_in_Text = 0;
       void refresh_full_key_board_Text(bool var_or_not = 0,string_t str = "")
       {
-        Icon.Rectangle({{85,8},{50,380},20,Shape_Fill,Color_not_Blackground_full_keybard});
-        Icon.Rectangle({{85+3,8+3},{50-6,380-6},20,Shape_Fill,Color_Blackground_full_keybard});
+        Icon.Rectangle({{85,8},{50,380},20,Shape_Fill,Color_not_Background_full_keyboard});
+        Icon.Rectangle({{85+3,8+3},{50-6,380-6},20,Shape_Fill,Color_Background_full_keyboard});
         // Text input
         Icon.Text_C({92,40},FONT_BIG,Full_KeyBoard_Text_feild_color,var_or_not ? str : full_key_board_Text);
       }
@@ -73,19 +73,19 @@ void SEDHOM_Windows::Full_Key_Board_Window(Color_t color,Color_t Background,Colo
   #define max_char_in_line      10
   #define first_line_special    first_line_capital    
   if(Text_feild_color == -1) Text_feild_color = color;
-  if(Background == BLACK) Color_not_Blackground_full_keybard = WHITE;
-  else Color_not_Blackground_full_keybard = BLACK;
-  Color_Blackground_full_keybard = Background;
+  if(Background == BLACK) Color_not_Background_full_keyboard = WHITE;
+  else Color_not_Background_full_keyboard = BLACK;
+  Color_Background_full_keyboard = Background;
   Full_KeyBoard_Text_feild_color = Text_feild_color;
-  Color_char_full_keybard = char_color;
+  Color_char_full_keyboard = char_color;
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   Full_KeyBoard_window_color = color;
   /////////////////////////////////////////////////////////////////////////////////////////////////////
   //Draw back arrow and Text feild
-  Icon.Arrow_Icon({20,30,RED,Color_not_Blackground_full_keybard},Direction_Right,(Background == Color_Black) ? Color_White : Color_Black);
+  Icon.Arrow_Icon({20,30,RED,Color_not_Background_full_keyboard},Direction_Right,(Background == Color_Black) ? Color_White : Color_Black);
   if(index_char_in_Text == 0)
   {
-    Icon.Rectangle({{85,8},{380,50},20,Shape_Fill,Color_not_Blackground_full_keybard});
+    Icon.Rectangle({{85,8},{380,50},20,Shape_Fill,Color_not_Background_full_keyboard});
     Icon.Rectangle({{85+3,8+3},{380-6,50-6},20,Shape_Fill,Background});
   }
   /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,7 +96,7 @@ void SEDHOM_Windows::Full_Key_Board_Window(Color_t color,Color_t Background,Colo
     Icon.Rectangle({{11+(46*i),116},{40,40},5,Shape_Fill,color}); Icon.Text_C({11+(46*i)+10,116+27},FONT_BIG,char_color,special_char_or_not ? Second_line_special[i] : (caps_or_not ? Second_line_capital[i] : Second_line_small[i]));
     if(i==9)break;
     Icon.Rectangle({{11+(46*i),162},{40,40},5,Shape_Fill,color}); Icon.Text_C({11+(46*i)+10,162+27},FONT_BIG,char_color,special_char_or_not ? third_line_special[i] : (caps_or_not ? third_line_capital[i] : third_line_small[i]));
-    Icon.Rectangle({{11+(46*i),208},{40,40},5,Shape_Fill,color}); Icon.Text_C({11+(46*i)+10,208+27},FONT_BIG,char_color,special_char_or_not ? fourth_line_speciial[i] : (caps_or_not ? fourth_line_capital[i] : fourth_line_small[i]));
+    Icon.Rectangle({{11+(46*i),208},{40,40},5,Shape_Fill,color}); Icon.Text_C({11+(46*i)+10,208+27},FONT_BIG,char_color,special_char_or_not ? fourth_line_special[i] : (caps_or_not ? fourth_line_capital[i] : fourth_line_small[i]));
     if(special_char_or_not) { if(i==1||i==2||i==6||i==7) { Icon.Rectangle({{11+(46*i),208},{40,40},5,Shape_Fill,Background}); } }
   }
   // draw special buttons
@@ -123,7 +123,7 @@ void SEDHOM_Windows::Full_Key_Board_Window(Color_t color,Color_t Background,Colo
 // define handling touch of function
 bool SEDHOM_Windows::Handling_Touch_Full_Key_Board_Window()
 {
-  // if(Touch.Is_Presssed())
+  // if(Touch.Is_Pressed())
   // {
   //   if(index_char_in_Text > 22)
   //   {
@@ -136,13 +136,13 @@ bool SEDHOM_Windows::Handling_Touch_Full_Key_Board_Window()
   //     if(Touch.onTap({{11,208},{60,40}})||Touch.onTap({{11,255},{80,40}})) // caps lock
   //     {
   //       caps_or_not = !caps_or_not;
-  //       Full_Key_Board_Window(Full_KeyBoard_window_color,Color_Blackground_full_keybard,Color_char_full_keybard,Full_KeyBoard_Text_feild_color,caps_or_not,special_char_or_not);
+  //       Full_Key_Board_Window(Full_KeyBoard_window_color,Color_Background_full_keyboard,Color_char_full_keyboard,Full_KeyBoard_Text_feild_color,caps_or_not,special_char_or_not);
 
   //     }
   //     if(Touch.onTap({{104,255},{85,40}})) // special char
   //     {
   //       special_char_or_not = !special_char_or_not;
-  //       Full_Key_Board_Window(Full_KeyBoard_window_color,Color_Blackground_full_keybard,Color_char_full_keybard,Full_KeyBoard_Text_feild_color,caps_or_not,special_char_or_not);
+  //       Full_Key_Board_Window(Full_KeyBoard_window_color,Color_Background_full_keyboard,Color_char_full_keyboard,Full_KeyBoard_Text_feild_color,caps_or_not,special_char_or_not);
   //     }
   //     if(Touch.onTap({{195,255},{135,40}})) // space
   //     {
@@ -192,7 +192,7 @@ bool SEDHOM_Windows::Handling_Touch_Full_Key_Board_Window()
   //     {
   //       if(i == 0||i==8||i==9) { break; }
   //       if(special_char_or_not && (i==1||i==2||i==6||i==7)) { break; }
-  //       full_key_board_Text[index_char_in_Text++] = special_char_or_not ? fourth_line_speciial[i][0] : (caps_or_not ? fourth_line_capital[i][0] : fourth_line_small[i][0]);
+  //       full_key_board_Text[index_char_in_Text++] = special_char_or_not ? fourth_line_special[i][0] : (caps_or_not ? fourth_line_capital[i][0] : fourth_line_small[i][0]);
   //       //Draw back arrow and Text feild
   //       refresh_full_key_board_Text();
   //     }

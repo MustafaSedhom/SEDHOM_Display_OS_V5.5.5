@@ -1,13 +1,13 @@
-#ifndef SEDHOM_PAGES_HANDLIG_H_
-#define SEDHOM_PAGES_HANDLIG_H_
+#ifndef SEDHOM_PAGES_Handling_H_
+#define SEDHOM_PAGES_Handling_H_
 
 #include "SEDHOM_Data_Structure.h"
 
 constexpr int MAX_PAGES = 50;   
 #define SEDHOM_List_of_pages                void (*pages[])(void)
-#define SEDHOM_Handling_pages_paramters     pages,sizeof(pages)/sizeof(pages[0])
+#define SEDHOM_Handling_Pages_parameters     pages,sizeof(pages)/sizeof(pages[0])
 
-class SEDHOM_Handlig_Pages
+class SEDHOM_Handling_Pages
 {
 private:
     int current_page = -1;
@@ -16,7 +16,7 @@ private:
     Stack<int> page;
 
 public:
-    SEDHOM_Handlig_Pages() : page(MAX_PAGES) {}
+    SEDHOM_Handling_Pages() : page(MAX_PAGES) {}
 
     void Handle_all_pages(void (*pages_array[])(void), int size)
     {

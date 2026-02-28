@@ -58,8 +58,8 @@
 #include <Fonts/FreeMonoBoldOblique12pt7b.h>   
 #include <Fonts/FreeMonoBoldOblique18pt7b.h>   
 #include <Fonts/FreeMonoBoldOblique24pt7b.h>   
-//=========================== define all shotcut fonts =================
-// Dufualt small and Big Font
+//=========================== define all shortcut fonts =================
+// Default small and Big Font
 #define FONT_SMALL                &FreeSmallFont
 #define FONT_BIG                  &FreeBigFont
 // SevenSegment

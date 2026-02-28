@@ -1,5 +1,5 @@
-#ifndef SEDHOM_DEFUALT_FONT_H_
-#define SEDHOM_DEFUALT_FONT_H_
+#ifndef SEDHOM_DEFAULT_FONT_H_
+#define SEDHOM_DEFAULT_FONT_H_
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -729,4 +729,4 @@ const GFXfont FreeSevenSegNumFont PROGMEM = {
 // FreeSevenSegNumFont bitmap size = 1363 [1433] [2014]
 
 /////////////////////////////////////////////////////////////////////////////////////
-#endif // !SEDHOM_DEFUALT_FONT_H_
+#endif // !SEDHOM_DEFAULT_FONT_H_

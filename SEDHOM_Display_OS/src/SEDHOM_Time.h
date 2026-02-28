@@ -6,7 +6,7 @@
 #define SEDHOM_OS_Stop_Display(time)                        wait_time(time);
 #define SEDHOM_OS_Wait(time)                                wait_time(time);
 #define SEDHOM_OS_Calc_time_ms()                            millis_func();
-#define SEDHOM_OS_Calc_time_us()                            milcros_func();
+#define SEDHOM_OS_Calc_time_us()                            micros_func();
 //""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 class SEDHOM_Time
 {

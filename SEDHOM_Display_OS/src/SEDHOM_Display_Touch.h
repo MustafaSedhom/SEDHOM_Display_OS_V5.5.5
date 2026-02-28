@@ -32,7 +32,7 @@ class SEDHOM_Touch
       return pressed;
     }
  public:
-    bool Is_Presssed()
+    bool Is_Pressed()
     {
         return Touch_getXY();
     }

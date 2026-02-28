@@ -60,7 +60,7 @@ MCUFRIEND_kbv Display;
 //////////////////////////////////////////////////
 // for touch
 #if defined(ESP32)
-#define XM 34  // أي رقم دبوس تناظرية موجود على ESP32
+#define XM 34  
 #define XP 32
 #define YM 33
 #define YP 35
@@ -71,7 +71,7 @@ MCUFRIEND_kbv Display;
   #define YM 9   // can be a digital pin
   #define XP 8   // can be a digital pin
 #endif
-// touch screen dimentions
+// touch screen dimensions
 const int TS_LEFT = 954, TS_RT = 88, TS_TOP = 908, TS_BOT = 125;
 #define MINPRESSURE 10
 #define MAXPRESSURE 1000
@@ -90,7 +90,7 @@ const int TS_LEFT = 954, TS_RT = 88, TS_TOP = 908, TS_BOT = 125;
 //*************************************************************************************************
 // set Rotation of screen
 //*************************************************************************************************
-#define Rotate_screeen(x_)                                    Display.setRotation(x_); 
+#define Rotate_screen(x_)                                    Display.setRotation(x_); 
 //============================================================================================================================================
 //*************************************************************************************************
 // define screen width and height (per pixels) like width = 320 && Height = 480
@@ -113,8 +113,8 @@ const int TS_LEFT = 954, TS_RT = 88, TS_TOP = 908, TS_BOT = 125;
 //*************************************************************************************************
 // define draw picture to display it on tft     
 //*************************************************************************************************
-#define Draw_RGB_Picture(x_,y_,h_,w_,pictur_array_)                        Display.drawRGBBitmap(x_, y_, pictur_array_, w_, h_);
-#define Draw_Single_Color_Picture(x_,y_,h_,w_,color_,pictur_array_)        Display.drawBitmap(x_, y_, pictur_array_, w_, h_, color_);
+#define Draw_RGB_Picture(x_,y_,h_,w_,picture_array_)                        Display.drawRGBBitmap(x_, y_, picture_array_, w_, h_);
+#define Draw_Single_Color_Picture(x_,y_,h_,w_,color_,picture_array_)        Display.drawBitmap(x_, y_, picture_array_, w_, h_, color_);
 //============================================================================================================================================
 //*************************************************************************************************
 // define draw string 
@@ -139,7 +139,7 @@ const int TS_LEFT = 954, TS_RT = 88, TS_TOP = 908, TS_BOT = 125;
 #define wait_time(time_)                       delay(time_);   
 // #define wait_time(time_)                    _delay_ms(time_);   
 #define millis_func()                          millis();   
-#define milcros_func()                         micros();   
+#define micros_func()                         micros();   
 //============================================================================================================================================
 //============================================================================================================================================
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

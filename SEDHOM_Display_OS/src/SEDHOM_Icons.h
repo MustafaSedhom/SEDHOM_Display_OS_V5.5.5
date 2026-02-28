@@ -16,60 +16,60 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
         SEDHOM_Icons()
         {
         } 
-        #define defualt_paramter_for_icon  {{150,80},Magenta,Black}
-        #define defualt_paramter_for_text  {FONT_BIG,Blue,"Text"}
+        #define default_parameter_for_icon  {{150,80},Magenta,Black}
+        #define default_parameter_for_text  {FONT_BIG,Blue,"Text"}
         // to set and handling mode
         void Set_Mode(Color_t Mode){mode = Mode;}
         // Draw SEDHOM Icons
-        void WIFI_Icon(Icon_t Icon = defualt_paramter_for_icon ,Color_t color_off = DarkGrey,WIFI_STATUS_t state = WIFI_Status_conected_level_4_full);
-        void Battary_Icon(Icon_t Icon = defualt_paramter_for_icon  ,int range = 50 ,Color_t txt_color = White ,bool low_charge_red_color = true);
-        void Home_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Setting_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Add_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void SD_Card_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Control_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Sensor_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Power_off_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Bluetooth_Icon(Icon_t Icon = defualt_paramter_for_icon ,BLUETOOTH_STATUS_t connect_status = BLuetooth_Status_open_and_connected);
-        void Button_Icon(Icon_t Icon = defualt_paramter_for_icon,bool print_on_and_off = 0);
-        void Display_Time_Icon(Icon_t Icon = defualt_paramter_for_icon , Time_t time = {5,13,42,"AM"});
-        void Terminal_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void About_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Display_Date_Icon(Icon_t Icon =defualt_paramter_for_icon,Date_t Date = {2026,2,16,"Feb","Mon"},Color_t Text_color = BLUE);
-        void Arrow_Icon(Icon_t Icon = defualt_paramter_for_icon,Direction_t Dir = Direction_Right,Color_t border_color = -1);
-        void Color_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Time_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Date_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Switch_Icon(Icon_t Icon = defualt_paramter_for_icon,Color_t color_off = RED,Color_t thumb_color = WHITE,Color_t txt_color = WHITE,SWITCH_STATUS_t state = SWITCH_State_ON);
-        void label_Icon(Icon_t Icon = defualt_paramter_for_icon ,Area_t area = {100,50},int Border = 3,Color_t color_str_in_label = Magenta,String string_in_label = "Label");
-        void slider_Icon(Icon_t Icon = defualt_paramter_for_icon,int h = 200,byte_t range =50 ,Color_t color_not_active = Color_DarkGrey ,Color_t ball_color = WHITE,Color_t box_color = RED,Color_t range_in_box_color = BLUE);
-        void file_Icon(Icon_t Icon = defualt_paramter_for_icon,Color_t Border_color = RED,Color_t file_extend_color = Color_Blue,String file_extend = "txt");
-        void folder_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Divider_vertical(Icon_t Icon = defualt_paramter_for_icon ,int length =50 , int thikness = 5);
-        void Divider_Horezontal(Icon_t Icon = defualt_paramter_for_icon ,int length =50 , int thikness = 5);
-        void ID_Card_Icon(Icon_t Icon = defualt_paramter_for_icon, User_ID_Data_t User = {} ,Color_t main_font_color = RED,Color_t font_color = Blue);
-        void Joy_Stick_Icon(Icon_t Icon = defualt_paramter_for_icon ,Coordenate_t thumb = {150,80} ,int thumb_size = 15,Color_t Border_color = BLUE,Color_t thumb_color = white,Color_t Color_insde_arrow = BLACK);
-        void Temperature_Meter_Icon(Icon_t Icon = defualt_paramter_for_icon,Color_t Border = WHITE,int value = 50,bool show_val_dashes = true);
-        void Tone_Icon(Icon_t Icon = defualt_paramter_for_icon,bool is_muted_or_not = false);
-        void Sound_value_Icon(Icon_t Icon = defualt_paramter_for_icon,int value = 50,Color_t thikness_color = GREEN,bool thikness_or_not = false);
-        void Video_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Block_Icon(Icon_t Icon = defualt_paramter_for_icon,bool open_or_closed = false);
-        void Signal_Icon(Icon_t Icon = defualt_paramter_for_icon,SIGNAL_STATUS_t state = Signal_Status_Signal_level_3,Color_t color_off = DarkGrey);
-        void Bell_Icon(Icon_t Icon = defualt_paramter_for_icon,bool mute_or_not = false,bool filled_or_not = true);
-        void Menu_Icon_1(Icon_t Icon = defualt_paramter_for_icon); // : : :
-        void Menu_Icon_2(Icon_t Icon = defualt_paramter_for_icon); // ...
-        void Menu_Icon_3(Icon_t Icon = defualt_paramter_for_icon); // :
-        void Menu_Icon_4(Icon_t Icon = defualt_paramter_for_icon); // : :
-        void Menu_Icon_5(Icon_t Icon = defualt_paramter_for_icon); // = 
-        void Moon_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Sun_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Check_Box_Icon(Icon_t Icon = defualt_paramter_for_icon,bool status = true,Color_t check_color = GREEN,Color_t checked_fill_color = Black);
-        void Radio_Button_Icon(Icon_t Icon = defualt_paramter_for_icon,bool status = true,Color_t check_color = Green);
-        void Text_Feild_Icon(  Icon_t Icon = defualt_paramter_for_icon,Text_t Text = {} ,int lenght = 200,int max_char = 10);
-        void Warning_Icon( Icon_t Icon = defualt_paramter_for_icon,Color_t txt_color = RED,Shape_filled_t filled = Shape_Draw );
-        void Chandelier_Icon(Icon_t Icon = defualt_paramter_for_icon);
-        void Smart_TV_Icon(Icon_t Icon = defualt_paramter_for_icon,Color_t WIFI_icon = White);
-        void Air_Conditioner_Icon(Icon_t Icon = defualt_paramter_for_icon);
+        void WIFI_Icon(Icon_t Icon = default_parameter_for_icon ,Color_t color_off = DarkGrey,WIFI_STATUS_t state = WIFI_Status_connected_level_4_full);
+        void Battery_Icon(Icon_t Icon = default_parameter_for_icon  ,int range = 50 ,Color_t txt_color = White ,bool low_charge_red_color = true);
+        void Home_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Setting_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Add_Icon(Icon_t Icon = default_parameter_for_icon);
+        void SD_Card_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Control_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Sensor_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Power_off_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Bluetooth_Icon(Icon_t Icon = default_parameter_for_icon ,BLUETOOTH_STATUS_t connect_status = BLuetooth_Status_open_and_connected);
+        void Button_Icon(Icon_t Icon = default_parameter_for_icon,bool print_on_and_off = 0);
+        void Display_Time_Icon(Icon_t Icon = default_parameter_for_icon , Time_t time = {5,13,42,"AM"});
+        void Terminal_Icon(Icon_t Icon = default_parameter_for_icon);
+        void About_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Display_Date_Icon(Icon_t Icon =default_parameter_for_icon,Date_t Date = {2026,2,16,"Feb","Mon"},Color_t Text_color = BLUE);
+        void Arrow_Icon(Icon_t Icon = default_parameter_for_icon,Direction_t Dir = Direction_Right,Color_t border_color = -1);
+        void Color_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Time_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Date_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Switch_Icon(Icon_t Icon = default_parameter_for_icon,Color_t color_off = RED,Color_t thumb_color = WHITE,Color_t txt_color = WHITE,SWITCH_STATUS_t state = SWITCH_State_ON);
+        void label_Icon(Icon_t Icon = default_parameter_for_icon ,Area_t area = {100,50},int Border = 3,Color_t color_str_in_label = Magenta,String string_in_label = "Label");
+        void slider_Icon(Icon_t Icon = default_parameter_for_icon,int h = 200,byte_t range =50 ,Color_t color_not_active = Color_DarkGrey ,Color_t ball_color = WHITE,Color_t box_color = RED,Color_t range_in_box_color = BLUE);
+        void file_Icon(Icon_t Icon = default_parameter_for_icon,Color_t Border_color = RED,Color_t file_extend_color = Color_Blue,String file_extend = "txt");
+        void folder_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Divider_vertical(Icon_t Icon = default_parameter_for_icon ,int length =50 , int thickness = 5);
+        void Divider_Horizontal(Icon_t Icon = default_parameter_for_icon ,int length =50 , int thickness = 5);
+        void ID_Card_Icon(Icon_t Icon = default_parameter_for_icon, User_ID_Data_t User = {} ,Color_t main_font_color = RED,Color_t font_color = Blue);
+        void Joy_Stick_Icon(Icon_t Icon = default_parameter_for_icon ,Coordinate_t thumb = {150,80} ,int thumb_size = 15,Color_t Border_color = BLUE,Color_t thumb_color = white,Color_t Color_inside_arrow = BLACK);
+        void Temperature_Meter_Icon(Icon_t Icon = default_parameter_for_icon,Color_t Border = WHITE,int value = 50,bool show_val_dashes = true);
+        void Tone_Icon(Icon_t Icon = default_parameter_for_icon,bool is_muted_or_not = false);
+        void Sound_value_Icon(Icon_t Icon = default_parameter_for_icon,int value = 50,Color_t thickness_color = GREEN,bool thickness_or_not = false);
+        void Video_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Block_Icon(Icon_t Icon = default_parameter_for_icon,bool open_or_closed = false);
+        void Signal_Icon(Icon_t Icon = default_parameter_for_icon,SIGNAL_STATUS_t state = Signal_Status_Signal_level_3,Color_t color_off = DarkGrey);
+        void Bell_Icon(Icon_t Icon = default_parameter_for_icon,bool mute_or_not = false,bool filled_or_not = true);
+        void Menu_Icon_1(Icon_t Icon = default_parameter_for_icon); // : : :
+        void Menu_Icon_2(Icon_t Icon = default_parameter_for_icon); // ...
+        void Menu_Icon_3(Icon_t Icon = default_parameter_for_icon); // :
+        void Menu_Icon_4(Icon_t Icon = default_parameter_for_icon); // : :
+        void Menu_Icon_5(Icon_t Icon = default_parameter_for_icon); // = 
+        void Moon_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Sun_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Check_Box_Icon(Icon_t Icon = default_parameter_for_icon,bool status = true,Color_t check_color = GREEN,Color_t checked_fill_color = Black);
+        void Radio_Button_Icon(Icon_t Icon = default_parameter_for_icon,bool status = true,Color_t check_color = Green);
+        void Text_Feild_Icon(  Icon_t Icon = default_parameter_for_icon,Text_t Text = {} ,int length = 200,int max_char = 10);
+        void Warning_Icon( Icon_t Icon = default_parameter_for_icon,Color_t txt_color = RED,Shape_filled_t filled = Shape_Draw );
+        void Chandelier_Icon(Icon_t Icon = default_parameter_for_icon);
+        void Smart_TV_Icon(Icon_t Icon = default_parameter_for_icon,Color_t WIFI_icon = White);
+        void Air_Conditioner_Icon(Icon_t Icon = default_parameter_for_icon);
 };
 // define all functions and Draw all Widgets and icons
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -80,10 +80,10 @@ void SEDHOM_Icons::WIFI_Icon(Icon_t Icon,Color_t color_off,WIFI_STATUS_t state)
     {
         uint16_t one=RED,two=RED,three=RED,four=RED;
         if(state==WIFI_Status_no_internet){one=color_off;two=color_off;three=color_off;four=color_off;}
-        else if(state==WIFI_Status_conected_level_1){one=color_off;two=color_off;three=color_off;four=Icon.color;}
-        else if(state==WIFI_Status_conected_level_2_half){one=color_off;two=color_off;three=Icon.color;four=Icon.color;}
-        else if(state==WIFI_Status_conected_level_3){one=color_off;two=Icon.color;three=Icon.color;four=Icon.color;}
-        else if(state==WIFI_Status_conected_level_4_full){one=Icon.color;two=Icon.color;three=Icon.color;four=Icon.color;}
+        else if(state==WIFI_Status_connected_level_1){one=color_off;two=color_off;three=color_off;four=Icon.color;}
+        else if(state==WIFI_Status_connected_level_2_half){one=color_off;two=color_off;three=Icon.color;four=Icon.color;}
+        else if(state==WIFI_Status_connected_level_3){one=color_off;two=Icon.color;three=Icon.color;four=Icon.color;}
+        else if(state==WIFI_Status_connected_level_4_full){one=Icon.color;two=Icon.color;three=Icon.color;four=Icon.color;}
         Circle({{Icon.coordinate.x,Icon.coordinate.y},20,Shape_Fill,one});
         Circle({{Icon.coordinate.x,Icon.coordinate.y},20-3,Shape_Fill,Icon.Background});
         Circle({{Icon.coordinate.x,Icon.coordinate.y},20-6,Shape_Fill,two});
@@ -105,26 +105,26 @@ void SEDHOM_Icons::WIFI_Icon(Icon_t Icon,Color_t color_off,WIFI_STATUS_t state)
     }
     Rectangle({{Icon.coordinate.x-10,Icon.coordinate.y+13},{20,10},0,Shape_Fill,Icon.Background});
 } 
-void SEDHOM_Icons::Battary_Icon(Icon_t Icon ,int range,Color_t txt_color,bool low_charge_red_color)
+void SEDHOM_Icons::Battery_Icon(Icon_t Icon ,int range,Color_t txt_color,bool low_charge_red_color)
 {
     int txt_x=0;
     int txt_y_index = Icon.coordinate.y+22;
-    uint16_t color_Battary;
+    uint16_t color_Battery;
     if(low_charge_red_color==1)
     {
-        if(range<20){color_Battary=RED; txt_x=(range>=10)?Icon.coordinate.x-60:Icon.coordinate.x-45;txt_color= ((Icon.Background == Color_Black)?Color_White : Color_Black );}
-        else if(range>=20){color_Battary=Icon.color;txt_x=(range==100)?Icon.coordinate.x-65:Icon.coordinate.x-58;}
+        if(range<20){color_Battery=RED; txt_x=(range>=10)?Icon.coordinate.x-60:Icon.coordinate.x-45;txt_color= ((Icon.Background == Color_Black)?Color_White : Color_Black );}
+        else if(range>=20){color_Battery=Icon.color;txt_x=(range==100)?Icon.coordinate.x-65:Icon.coordinate.x-58;}
     }
     else if(low_charge_red_color==0)
     {
-        if(range<20){color_Battary=GREEN; txt_x=(range>=10)?Icon.coordinate.x-53:Icon.coordinate.x-45;}
-        else if(range>=20){color_Battary=GREEN;txt_x=(range==100)?Icon.coordinate.x-65:Icon.coordinate.x-58;}
+        if(range<20){color_Battery=GREEN; txt_x=(range>=10)?Icon.coordinate.x-53:Icon.coordinate.x-45;}
+        else if(range>=20){color_Battery=GREEN;txt_x=(range==100)?Icon.coordinate.x-65:Icon.coordinate.x-58;}
     }
     int rangeB=map(range,0,100,5,45);
-    Rectangle({{Icon.coordinate.x, Icon.coordinate.y}, {50,30}, 5,Shape_Fill, color_Battary});
+    Rectangle({{Icon.coordinate.x, Icon.coordinate.y}, {50,30}, 5,Shape_Fill, color_Battery});
     Rectangle({{Icon.coordinate.x+3, Icon.coordinate.y+3}, {50-6,30-6}, 5,Shape_Fill, Icon.Background});
-    Rectangle({{Icon.coordinate.x+50-1,Icon.coordinate.y+10},{10,10},0,Shape_Fill,color_Battary});
-    Rectangle({{Icon.coordinate.x+2,Icon.coordinate.y+3},{rangeB,30-6},5,Shape_Fill,color_Battary});
+    Rectangle({{Icon.coordinate.x+50-1,Icon.coordinate.y+10},{10,10},0,Shape_Fill,color_Battery});
+    Rectangle({{Icon.coordinate.x+2,Icon.coordinate.y+3},{rangeB,30-6},5,Shape_Fill,color_Battery});
     Text({txt_x+60,txt_y_index},FONT_BIG,txt_color,String(range) + "%");
 }
 void SEDHOM_Icons::Home_Icon(Icon_t Icon)
@@ -229,8 +229,8 @@ void SEDHOM_Icons::Display_Time_Icon(Icon_t Icon,Time_t time)
     //hour
     Text({Icon.coordinate.x,Icon.coordinate.y+35},FONT_SEVENSEGMENT,Icon.color,(time.hour < 10) ? ("0" + String(time.hour)) : String(time.hour));
     // minutes
-    Text({Icon.coordinate.x+83,Icon.coordinate.y+35},FONT_SEVENSEGMENT,Icon.color,(time.minut < 10) ? ("0" + String(time.minut)) : String(time.minut));
-    // seprator
+    Text({Icon.coordinate.x+83,Icon.coordinate.y+35},FONT_SEVENSEGMENT,Icon.color,(time.minute < 10) ? ("0" + String(time.minute)) : String(time.minute));
+    // separator
     Circle({{Icon.coordinate.x+73,Icon.coordinate.y},5,Shape_Fill,Icon.color});
     Circle({{Icon.coordinate.x+73,Icon.coordinate.y+20},5,Shape_Fill,Icon.color});
     //sec
@@ -393,13 +393,13 @@ void SEDHOM_Icons::folder_Icon(Icon_t Icon)
     Rectangle({{Icon.coordinate.x,Icon.coordinate.y+20},{68,35},5,Shape_Fill,Icon.color});
     Rectangle({{Icon.coordinate.x,Icon.coordinate.y+20},{69,1},0,Shape_Fill,BLACK});
 }
-void SEDHOM_Icons::Divider_vertical(Icon_t Icon,int length,int thikness)
+void SEDHOM_Icons::Divider_vertical(Icon_t Icon,int length,int thickness)
 {
-    Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{length,thikness},1,Shape_Fill,Icon.color});
+    Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{length,thickness},1,Shape_Fill,Icon.color});
 }
-void SEDHOM_Icons::Divider_Horezontal(Icon_t Icon ,int length , int thikness)
+void SEDHOM_Icons::Divider_Horizontal(Icon_t Icon ,int length , int thickness)
 {
-    Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{thikness,length},1,Shape_Fill,Icon.color});
+    Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{thickness,length},1,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_font_color,Color_t font_color)
 {
@@ -415,15 +415,15 @@ void SEDHOM_Icons::ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_f
     else  color_id = Icon.color;
     Rectangle({{x1-3,y1-3},{w1+6,h1+6},20,Shape_Fill,color_id});
     Rectangle({{x1,y1},{w1,h1},20,Shape_Fill,Icon.color});
-    Text_C({((User.is_professser)?x1+60:x1+80),y1+20},FONT_BIG,main_font_color,((User.is_professser)?"PROFESSER":"STUDENT"));
+    Text_C({((User.is_professor)?x1+60:x1+80),y1+20},FONT_BIG,main_font_color,((User.is_professor)?"PROFESSOR":"STUDENT"));
     Divider_vertical({x1+10,y1+35,main_font_color,Icon.Background},w1-20,3);
     Text_C({x1+30,y1+55},FONT_SMALL,font_color,"IDENTITY CARD");
 
-    Text_C({x1+10,y1+70},FONT_SMALL,main_font_color,((User.is_professser)?"Dr Name":"Nmae"));
+    Text_C({x1+10,y1+70},FONT_SMALL,main_font_color,((User.is_professor)?"Dr Name":"Name"));
     Text_C({x1+10,y1+85},FONT_SMALL,font_color,User.user_name);
 
-    Text_C({x1+10,y1+100},FONT_SMALL,main_font_color,((User.is_professser)?"Unversity":"Stadies at"));
-    Text_C({x1+10,y1+115},FONT_SMALL,font_color,User.universty);
+    Text_C({x1+10,y1+100},FONT_SMALL,main_font_color,((User.is_professor)?"University":"Studies at"));
+    Text_C({x1+10,y1+115},FONT_SMALL,font_color,User.university);
 
     Text_C({x1+10,y1+130},FONT_SMALL,main_font_color,"Department");
     Text_C({x1+10,y1+145},FONT_SMALL,font_color,User.department_1);
@@ -454,14 +454,14 @@ void SEDHOM_Icons::ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_f
     Rectangle({{x1+150,y1+155},{120,45},15,Shape_Fill,Icon.color});
     Text_C({x1+157,y1+175},FONT_SMALL,font_color,User.number);
 }
-void SEDHOM_Icons::Joy_Stick_Icon(Icon_t Icon ,Coordenate_t thumb ,int thumb_size,Color_t Border_color,Color_t thumb_color,Color_t Color_insde_arrow)
+void SEDHOM_Icons::Joy_Stick_Icon(Icon_t Icon ,Coordinate_t thumb ,int thumb_size,Color_t Border_color,Color_t thumb_color,Color_t Color_inside_arrow)
 {
   Circle({{Icon.coordinate.x,Icon.coordinate.y},50,Shape_Fill,Border_color});
   Circle({{Icon.coordinate.x,Icon.coordinate.y},50-3,Shape_Fill,Icon.color});
-  Equilateral_Triangle({{Icon.coordinate.x,Icon.coordinate.y-35},10,Shape_Fill,Direction_Up,Color_insde_arrow});
-  Equilateral_Triangle({{Icon.coordinate.x,Icon.coordinate.y+35},10,Shape_Fill,Direction_Down,Color_insde_arrow});
-  Equilateral_Triangle({{Icon.coordinate.x+35,Icon.coordinate.y},10,Shape_Fill,Direction_Right,Color_insde_arrow});
-  Equilateral_Triangle({{Icon.coordinate.x-35,Icon.coordinate.y},10,Shape_Fill,Direction_Left,Color_insde_arrow});
+  Equilateral_Triangle({{Icon.coordinate.x,Icon.coordinate.y-35},10,Shape_Fill,Direction_Up,Color_inside_arrow});
+  Equilateral_Triangle({{Icon.coordinate.x,Icon.coordinate.y+35},10,Shape_Fill,Direction_Down,Color_inside_arrow});
+  Equilateral_Triangle({{Icon.coordinate.x+35,Icon.coordinate.y},10,Shape_Fill,Direction_Right,Color_inside_arrow});
+  Equilateral_Triangle({{Icon.coordinate.x-35,Icon.coordinate.y},10,Shape_Fill,Direction_Left,Color_inside_arrow});
   int dx = thumb.x - Icon.coordinate.x;
   int dy = thumb.y - Icon.coordinate.y;
   if ((dx*dx + dy*dy) <= (50/2)*(50/2))
@@ -507,12 +507,12 @@ void SEDHOM_Icons::Tone_Icon(Icon_t Icon,bool is_muted_or_not)
      Line({{Icon.coordinate.x-5,Icon.coordinate.y-20+1},{Icon.coordinate.x+32,Icon.coordinate.y-5+1},Icon.color});    
    }
 }
-void SEDHOM_Icons::Sound_value_Icon(Icon_t Icon,int value,Color_t thikness_color,bool thikness_or_not)
+void SEDHOM_Icons::Sound_value_Icon(Icon_t Icon,int value,Color_t thickness_color,bool thickness_or_not)
 {
   int val = value;
   value = constrain(value,0,100);
   value = map(value,0,100,150,0);
-  Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{50,150},40,Shape_Fill,thikness_or_not?thikness_color:Icon.color});
+  Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{50,150},40,Shape_Fill,thickness_or_not?thickness_color:Icon.color});
   Rectangle({{Icon.coordinate.x+5,Icon.coordinate.y+5},{50-10,150-10},40,Shape_Fill,Icon.Background});
   Rectangle({{Icon.coordinate.x+5,(Icon.coordinate.y+value+5)},{50-10,((val<15)?(0):(150-value-10))},40,Shape_Fill,Icon.color});
   Tone_Icon({Icon.coordinate.x+12,Icon.coordinate.y+130,(val<20)?Icon.color:Icon.Background,(val<20)?Icon.Background:Icon.color},(val==0)?true:false);
@@ -708,10 +708,10 @@ void SEDHOM_Icons::Radio_Button_Icon(Icon_t Icon,bool status,Color_t check_color
    // status
   if(status) Circle({{Icon.coordinate.x,Icon.coordinate.y},5,Shape_Fill,check_color});
 }
-void SEDHOM_Icons::Text_Feild_Icon( Icon_t Icon,Text_t Txt ,int lenght,int max_char)
+void SEDHOM_Icons::Text_Feild_Icon( Icon_t Icon,Text_t Txt ,int length,int max_char)
 {
-   Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{lenght,40},20,Shape_Fill,Icon.color});
-   Rectangle({{Icon.coordinate.x+3,Icon.coordinate.y+3},{lenght-6,40-6},20,Shape_Fill,Icon.Background});
+   Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{length,40},20,Shape_Fill,Icon.color});
+   Rectangle({{Icon.coordinate.x+3,Icon.coordinate.y+3},{length-6,40-6},20,Shape_Fill,Icon.Background});
    if( Txt.txt.length() > max_char)
    {
       String word = "...";
@@ -745,7 +745,7 @@ void SEDHOM_Icons::Smart_TV_Icon(Icon_t Icon,Color_t WIFI_icon)
   // Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{60,50},7,Shape_Fill,Icon.color});
   // Rectangle({{Icon.coordinate.x+3,Icon.coordinate.y+3},{60-6,50-6},7,Shape_Fill,Icon.Background});
   Border_Rectangle({Icon.coordinate.x,Icon.coordinate.y,Icon.color,Icon.Background},{60,50},7,3);
-  WIFI_Icon({Icon.coordinate.x+30,Icon.coordinate.y+33,WIFI_icon,Icon.Background},WIFI_icon,WIFI_Status_conected_level_4_full);
+  WIFI_Icon({Icon.coordinate.x+30,Icon.coordinate.y+33,WIFI_icon,Icon.Background},WIFI_icon,WIFI_Status_connected_level_4_full);
   Rectangle({{Icon.coordinate.x+8,Icon.coordinate.y+50-3},{50-6,3},5,Shape_Fill,Icon.color});
   Rectangle({{Icon.coordinate.x+22,Icon.coordinate.y+50-3},{15,10},0,Shape_Fill,Icon.color});
   Rectangle({{Icon.coordinate.x+10,Icon.coordinate.y+50-3+10},{40,5},5,Shape_Fill,Icon.color});

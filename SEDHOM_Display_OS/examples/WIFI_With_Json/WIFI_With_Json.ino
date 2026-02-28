@@ -29,7 +29,7 @@ void setup()
     .Secured = true ,
     .channel = 5 ,
     .Encryption_Type = WIFI_AUTH_WPA2_ENTERPRISE ,
-    .wifi_status = WIFI_Status_conected_level_2_half ,
+    .wifi_status = WIFI_Status_connected_level_2_half ,
   };
   StaticJsonDocument<256> Wifi_setting;
   Wifi_setting["SSID"] = my_WIFI.SSID;
@@ -42,8 +42,8 @@ void setup()
   Wifi_setting["WIFI_status"] = my_WIFI.wifi_status;
   // serializeJsonPretty(doc,Serial);
   ///////////////////////////////////////////////////////////////////////////////////////////////////
-  Icons.Text_C_Feild_Icon(50,100,300,50,BLUE,GREEN,FONT_BIG,OS.Mode(),Wifi_setting["SSID"].as<String>());
-  Icons.Text_C_Feild_Icon(50,200,300,50,BLUE,GREEN,FONT_BIG,OS.Mode(),Wifi_setting["Password"].as<String>());
+  Icons.Text_C_Field_Icon(50,100,300,50,BLUE,GREEN,FONT_BIG,OS.Mode(),Wifi_setting["SSID"].as<String>());
+  Icons.Text_C_Field_Icon(50,200,300,50,BLUE,GREEN,FONT_BIG,OS.Mode(),Wifi_setting["Password"].as<String>());
   Icons.WIFI_Icon(70,50,Wifi_setting["WIFI_status"].as<WIFI_STATUS_t>(),Color_Green,Color_DarkGrey,OS.Mode());
   ///////////////////////////////////////////////////////////////////////////////////////////////////
 }

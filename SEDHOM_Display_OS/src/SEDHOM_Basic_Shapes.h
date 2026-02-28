@@ -18,10 +18,10 @@ class SEDHOM_Basic_Shapes
         void Triangle(Triangle_t tri); 
         void Equilateral_Triangle(Triangle_special_t tri);
         void Right_Triangle(Icon_t Icon,Area_t area,Shape_filled_t filled);
-        void Border_Rectangle(Icon_t Border_Rect,Area_t area,int Raduis,int Border_size);
+        void Border_Rectangle(Icon_t Border_Rect,Area_t area,int Radius,int Border_size);
         void Container(Rectangle_t container);
         // custom image or font
-        void Draw_Custom_int_shap(Icon_t Icon,Area_t area,int arr[]);
+        void Draw_Custom_int_shape(Icon_t Icon,Area_t area,int arr[]);
         void Draw_Custom_Char(Icon_t Icon,Area_t area,char arr[]);
         
 };
@@ -30,38 +30,38 @@ class SEDHOM_Basic_Shapes
 // Basic shapes function  
 void SEDHOM_Basic_Shapes::Pixel(Pixel_t pixel)
 {
-    Draw_Pixel(pixel.coordenate_Point.x,pixel.coordenate_Point.y,pixel.color);
+    Draw_Pixel(pixel.coordinate_Point.x,pixel.coordinate_Point.y,pixel.color);
 }
 void SEDHOM_Basic_Shapes::Line(Line_t line)
 {
-    Draw_Line(line.coordenate_Start_Point.x,line.coordenate_Start_Point.y,line.coordenate_End_Point.x,line.coordenate_End_Point.y,line.color);
+    Draw_Line(line.coordinate_Start_Point.x,line.coordinate_Start_Point.y,line.coordinate_End_Point.x,line.coordinate_End_Point.y,line.color);
 }                                     
 void SEDHOM_Basic_Shapes::Rectangle(Rectangle_t rect)
 {
     switch (rect.Filled)
     {
     case Shape_Fill:
-      Fill_Rectangle(rect.coordenate.x,rect.coordenate.y,rect.area.w,rect.area.h,rect.Raduis,rect.color);
+      Fill_Rectangle(rect.coordinate.x,rect.coordinate.y,rect.area.w,rect.area.h,rect.Radius,rect.color);
       break;
     case Shape_Draw:
-      Draw_Rectangle(rect.coordenate.x,rect.coordenate.y,rect.area.w,rect.area.h,rect.Raduis,rect.color);
+      Draw_Rectangle(rect.coordinate.x,rect.coordinate.y,rect.area.w,rect.area.h,rect.Radius,rect.color);
       break;
     }
 
 }    
 void SEDHOM_Basic_Shapes::Square(Square_t sqrt)
 {
-  Rectangle({{sqrt.coordenate.x,sqrt.coordenate.y},{sqrt.length,sqrt.length},sqrt.Raduis,sqrt.Filled,sqrt.color});
+  Rectangle({{sqrt.coordinate.x,sqrt.coordinate.y},{sqrt.length,sqrt.length},sqrt.Radius,sqrt.Filled,sqrt.color});
 }  
 void SEDHOM_Basic_Shapes::Circle(Circle_t circle)
 {
     switch (circle.Filled)
     {
     case Shape_Fill:
-      Fill_Circle(circle.coordenate.x,circle.coordenate.y,circle.Raduis,circle.color);
+      Fill_Circle(circle.coordinate.x,circle.coordinate.y,circle.Radius,circle.color);
       break;
     case Shape_Draw:
-      Draw_Circle(circle.coordenate.x,circle.coordenate.y,circle.Raduis,circle.color);
+      Draw_Circle(circle.coordinate.x,circle.coordinate.y,circle.Radius,circle.color);
       break;
     }
 }      
@@ -70,10 +70,10 @@ void SEDHOM_Basic_Shapes::Triangle(Triangle_t tri)
     switch (tri.Filled)
     {
     case Shape_Fill:
-      Fill_Triangle(tri.coordenate_Point_1.x,tri.coordenate_Point_1.y,tri.coordenate_Point_2.x,tri.coordenate_Point_2.y,tri.coordenate_Point_3.x,tri.coordenate_Point_3.y,tri.color);
+      Fill_Triangle(tri.coordinate_Point_1.x,tri.coordinate_Point_1.y,tri.coordinate_Point_2.x,tri.coordinate_Point_2.y,tri.coordinate_Point_3.x,tri.coordinate_Point_3.y,tri.color);
       break;
     case Shape_Draw:
-      Draw_Triangle(tri.coordenate_Point_1.x,tri.coordenate_Point_1.y,tri.coordenate_Point_2.x,tri.coordenate_Point_2.y,tri.coordenate_Point_3.x,tri.coordenate_Point_3.y,tri.color);
+      Draw_Triangle(tri.coordinate_Point_1.x,tri.coordinate_Point_1.y,tri.coordinate_Point_2.x,tri.coordinate_Point_2.y,tri.coordinate_Point_3.x,tri.coordinate_Point_3.y,tri.color);
       break;
     }  
 }    
@@ -84,7 +84,7 @@ void SEDHOM_Basic_Shapes::Right_Triangle(Icon_t Icon,Area_t area,Shape_filled_t 
 void SEDHOM_Basic_Shapes::Equilateral_Triangle(Triangle_special_t tri) 
 {
   int x_0,y_0,x_1,y_1,x_2,y_2 ;
-  float height  = tri.lenght * sqrt(3) / 2.0; ;
+  float height  = tri.length * sqrt(3) / 2.0; ;
 
   switch (tri.Dir)
   {
@@ -93,10 +93,10 @@ void SEDHOM_Basic_Shapes::Equilateral_Triangle(Triangle_special_t tri)
         x_0 = tri.coordinate.x;              
         y_0 = tri.coordinate.y - (2.0/3.0)*height;
 
-        x_1 = tri.coordinate.x - tri.lenght/2;        
+        x_1 = tri.coordinate.x - tri.length/2;        
         y_1 = tri.coordinate.y + (1.0/3.0)*height;
 
-        x_2 = tri.coordinate.x + tri.lenght/2;        
+        x_2 = tri.coordinate.x + tri.length/2;        
         y_2 = tri.coordinate.y + (1.0/3.0)*height;
       }
       break;
@@ -105,34 +105,34 @@ void SEDHOM_Basic_Shapes::Equilateral_Triangle(Triangle_special_t tri)
         x_0 = tri.coordinate.x;               
         y_0 = tri.coordinate.y + (2.0/3.0)*height;  
 
-        x_1 = tri.coordinate.x -  tri.lenght/2;        
+        x_1 = tri.coordinate.x -  tri.length/2;        
         y_1 = tri.coordinate.y - (1.0/3.0)*height;  
 
-        x_2 = tri.coordinate.x +  tri.lenght/2;        
+        x_2 = tri.coordinate.x +  tri.length/2;        
         y_2 = tri.coordinate.y - (1.0/3.0)*height; 
       }
       break;
     case Direction_Right:
       {
-        x_0 = tri.coordinate.x + (2.0/3.0)* tri.lenght; 
+        x_0 = tri.coordinate.x + (2.0/3.0)* tri.length; 
         y_0 = tri.coordinate.y;
 
-        x_1 = tri.coordinate.x - (1.0/3.0)* tri.lenght; 
+        x_1 = tri.coordinate.x - (1.0/3.0)* tri.length; 
         y_1 = tri.coordinate.y - height/2;
 
-        x_2 = tri.coordinate.x - (1.0/3.0)* tri.lenght; 
+        x_2 = tri.coordinate.x - (1.0/3.0)* tri.length; 
         y_2 = tri.coordinate.y + height/2;
       }
       break;
     case Direction_Left:
       {
-        x_0 = tri.coordinate.x - (2.0/3.0)* tri.lenght; 
+        x_0 = tri.coordinate.x - (2.0/3.0)* tri.length; 
         y_0 = tri.coordinate.y;
 
-        x_1 = tri.coordinate.x + (1.0/3.0)* tri.lenght; 
+        x_1 = tri.coordinate.x + (1.0/3.0)* tri.length; 
         y_1 = tri.coordinate.y - height/2;
 
-        x_2 = tri.coordinate.x + (1.0/3.0)* tri.lenght;
+        x_2 = tri.coordinate.x + (1.0/3.0)* tri.length;
         y_2 = tri.coordinate.y + height/2;        
       }
       break;
@@ -153,7 +153,7 @@ void SEDHOM_Basic_Shapes::Draw_Custom_Char(Icon_t Icon,Area_t area,char arr[])
     }
   }
 }
-void SEDHOM_Basic_Shapes::Draw_Custom_int_shap(Icon_t Icon,Area_t area,int arr[])
+void SEDHOM_Basic_Shapes::Draw_Custom_int_shape(Icon_t Icon,Area_t area,int arr[])
 {
       for(int i=0; i<area.w; i++) 
   {
@@ -166,10 +166,10 @@ void SEDHOM_Basic_Shapes::Draw_Custom_int_shap(Icon_t Icon,Area_t area,int arr[]
     }
   }
 }
-void SEDHOM_Basic_Shapes::Border_Rectangle(Icon_t Border_Rect,Area_t area,int Raduis,int Border_size)
+void SEDHOM_Basic_Shapes::Border_Rectangle(Icon_t Border_Rect,Area_t area,int Radius,int Border_size)
 {
-  Rectangle({{Border_Rect.coordinate.x,Border_Rect.coordinate.y},{area.w,area.h},Raduis,Shape_Fill,Border_Rect.color});
-  Rectangle({{Border_Rect.coordinate.x+Border_size,Border_Rect.coordinate.y+Border_size},{area.w-(2*Border_size),area.h-(2*Border_size)},Raduis,Shape_Fill,Border_Rect.Background});
+  Rectangle({{Border_Rect.coordinate.x,Border_Rect.coordinate.y},{area.w,area.h},Radius,Shape_Fill,Border_Rect.color});
+  Rectangle({{Border_Rect.coordinate.x+Border_size,Border_Rect.coordinate.y+Border_size},{area.w-(2*Border_size),area.h-(2*Border_size)},Radius,Shape_Fill,Border_Rect.Background});
 }
 void SEDHOM_Basic_Shapes::Container(Rectangle_t container)
 {

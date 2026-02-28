@@ -31,16 +31,16 @@ typedef enum
     Rotate_90_Degree,
     Rotate_180_Degree,
     Rotate_270_Degree
-}ROTATION_STASTUS_t;
+}ROTATION_STATUS_t;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef enum 
 {
     WIFI_Status_not_connected,
     WIFI_Status_no_internet,
-    WIFI_Status_conected_level_1,
-    WIFI_Status_conected_level_2_half,
-    WIFI_Status_conected_level_3,
-    WIFI_Status_conected_level_4_full
+    WIFI_Status_connected_level_1,
+    WIFI_Status_connected_level_2_half,
+    WIFI_Status_connected_level_3,
+    WIFI_Status_connected_level_4_full
 }WIFI_STATUS_t;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef enum 
@@ -71,9 +71,9 @@ typedef enum
 // data type of Id icon
 typedef struct 
 {
-    bool is_professser;
+    bool is_professor;
     string_t user_name;
-    string_t universty;
+    string_t university;
     string_t department_1;
     string_t department_2;
     string_t Born;
@@ -88,22 +88,22 @@ typedef struct
 typedef struct 
 {
     int hour;
-    int minut;
+    int minute;
     int sec;
     word_t time_name;
 }Time_t;
 ///////////////////////////////////////////////////////////////////////////
-// data type of coordenate
+// data type of coordinate
 typedef struct 
 {
     int x;
     int y;
-}Coordenate_t;
+}Coordinate_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of all icon
 typedef struct 
 {
-    Coordenate_t coordinate;
+    Coordinate_t coordinate;
     Color_t color;
     Color_t Background;
 }Icon_t;
@@ -140,7 +140,7 @@ typedef enum
 }Shapes_t;
 
 ///////////////////////////////////////////////////////////////////////////
-// data type of WiFi network Encytption type
+// data type of WiFi network Encryption type
 typedef enum
 {
     WIFI_Encryption_OPEN,             // Open
@@ -217,9 +217,9 @@ typedef enum
 // data type of  Square_t shape
 typedef struct 
 {
-   Coordenate_t coordenate;
+   Coordinate_t coordinate;
     int length;
-    int Raduis;
+    int Radius;
     Shape_filled_t Filled ;
     Color_t color;
 }Square_t;
@@ -227,9 +227,9 @@ typedef struct
 // data type of  Rectangle_t shape
 typedef struct 
 {
-    Coordenate_t coordenate;
+    Coordinate_t coordinate;
     Area_t area;
-    int Raduis;
+    int Radius;
     Shape_filled_t Filled ;
     Color_t color;
 }Rectangle_t;
@@ -237,8 +237,8 @@ typedef struct
 // data type of  Circle_t shape
 typedef struct 
 {
-    Coordenate_t coordenate;
-    int Raduis;
+    Coordinate_t coordinate;
+    int Radius;
     Shape_filled_t Filled ;
     Color_t color;
 }Circle_t;
@@ -246,9 +246,9 @@ typedef struct
 // data type of  Triangle_t shape
 typedef struct 
 {
-    Coordenate_t coordenate_Point_1;
-    Coordenate_t coordenate_Point_2;
-    Coordenate_t coordenate_Point_3;
+    Coordinate_t coordinate_Point_1;
+    Coordinate_t coordinate_Point_2;
+    Coordinate_t coordinate_Point_3;
     Shape_filled_t Filled ;
     Color_t color;
 }Triangle_t;
@@ -256,15 +256,15 @@ typedef struct
 // data type of  Line_t shape
 typedef struct 
 {
-    Coordenate_t coordenate_Start_Point;
-    Coordenate_t coordenate_End_Point;
+    Coordinate_t coordinate_Start_Point;
+    Coordinate_t coordinate_End_Point;
     Color_t color;
 }Line_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of  Pixel_t shape
 typedef struct 
 {
-    Coordenate_t coordenate_Point;
+    Coordinate_t coordinate_Point;
     Color_t color;
 }Pixel_t;
 ///////////////////////////////////////////////////////////////////////////
@@ -287,8 +287,8 @@ typedef enum
 // data type of  Special_Triangle_t
 typedef struct  
 {
-    Coordenate_t coordinate ;
-    int lenght ;
+    Coordinate_t coordinate ;
+    int length ;
     Shape_filled_t filled ;
     Direction_t Dir ;
     Color_t color ;
@@ -297,7 +297,7 @@ typedef struct
 // data type of  touch point
 typedef struct  
 {
-    Coordenate_t coordinate ;
+    Coordinate_t coordinate ;
     Area_t area;
 }Touch_t;
 
