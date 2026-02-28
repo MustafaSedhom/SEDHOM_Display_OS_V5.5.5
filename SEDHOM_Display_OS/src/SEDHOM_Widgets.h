@@ -20,8 +20,9 @@ class SEDHOM_Widgets
     void APP_Bar_Widget(bool show_back_arrow = true,WIFI_STATUS_t WIFI_state = WIFI_Status_connected_level_2_half,BLUETOOTH_STATUS_t Bluetooth_state = BLuetooth_Status_open_and_not_connected,int Battery_Value = 22,Time_t time = {12,33,17,"Am"},Color_t Wifi_on = Color_Blue,Color_t Wifi_off= Color_DarkGrey,Color_t BLE_color= Color_Yellow,Color_t Battery_color = Color_Green,Color_t Time_color = Color_Magenta,Color_t Reverse_color = Color_Blue,Color_t Background=Color_Black);
     void Big_frame_widget(Color_t color = Color_White,Color_t Background = Color_Black);
     void ERROR_Massage_Widget(String massage = "SEDHOM Display OS Error",Color_t Background = Color_Black,Color_t color=MAGENTA,Color_t color_txt=WHITE,Color_t ERROR_Massage_color = RED,Color_t title_Massage_color = BLUE,String title="ERROR",Shape_filled_t filled = Shape_Fill,int x = 100,int y = 70,int w = 240,int h = 160,int max_lines_of_massage_error =5,int max_char_in_one_line = 20);
-    void Drawer_Widget(String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_Blue,Color_t exit_button_color = Color_Red);
-    void Handle_Drawer_Widget(Icon_t Icon = {{30,90},Color_Blue,Color_Black},int menu_icon_number = 5,String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_Blue,Color_t exit_button_color = Color_Red);
+    void Drawer_Widget(String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_White,Color_t exit_button_color = Color_Red);
+    void Delete_Drawer_Widget();
+    void Handle_Drawer_Widget(Icon_t Icon_menu = {{30,90},Color_Blue,Color_Black},int menu_icon_number = 5,String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_White,Color_t exit_button_color = Color_Red);
 
 
 
@@ -128,18 +129,23 @@ void SEDHOM_Widgets::Drawer_Widget(String Drawer_name,bool show_exit_icon ,Color
   Icons.Text({pos_x+15,pos_y+98},FONT_BIG,Drawer_name_color,Drawer_name);
   Icons.Divider({{pos_x+25,pos_y+110},Drawer_border_color,Drawer_color},VERTICAL,100,2);
   // Drawer content
-  Icons.Control_Icon({{60,125},Color_Red,Drawer_color});
+  #define Icon_color Color_Blue
+  Icons.Control_Icon({{60,125},Icon_color,Drawer_color});
   Icons.Divider({{pos_x+25,pos_y+170},Drawer_border_color,Drawer_color},VERTICAL,100,2);
-  Icons.Home_Icon({{50,190},Color_Red,Drawer_color});
+  Icons.Home_Icon({{50,190},Icon_color,Drawer_color});
   Icons.Divider({{pos_x+25,pos_y+255},Drawer_border_color,Drawer_color},VERTICAL,100,2);
-  Icons.Setting_Icon({{90,280},Color_Red,Drawer_color});
+  Icons.Setting_Icon({{90,280},Icon_color,Drawer_color});
 }
-void SEDHOM_Widgets::Handle_Drawer_Widget(Icon_t Icon , int menu_icon_number,String Drawer_name,bool show_exit_icon ,Color_t Drawer_color,Color_t Drawer_border_color,Color_t Drawer_name_color,Color_t exit_button_color)
+void SEDHOM_Widgets::Delete_Drawer_Widget()
+{
+  Icons.Rectangle({{4,67},{160,250},10,Shape_Fill,Color_Black});
+}
+void SEDHOM_Widgets::Handle_Drawer_Widget(Icon_t Icon_menu,int menu_icon_number,String Drawer_name,bool show_exit_icon ,Color_t Drawer_color,Color_t Drawer_border_color,Color_t Drawer_name_color,Color_t exit_button_color)
 {
   static bool var = false;
     if(!var)
     {
-     if(Touch.onTap({{Icon.coordinate.x-10,Icon.coordinate.y-10},{40,40}}))
+     if(Touch.onTap({{Icon_menu.coordinate.x-10,Icon_menu.coordinate.y-10},{40,40}}))
       {
        Drawer_Widget(Drawer_name,show_exit_icon,Drawer_color,Drawer_border_color,Drawer_name_color,exit_button_color);
       var = true;
@@ -149,25 +155,25 @@ void SEDHOM_Widgets::Handle_Drawer_Widget(Icon_t Icon , int menu_icon_number,Str
     {
       if(Touch.onTap({{110,70},{40,40}}))
       {
-          Icons.Rectangle({{4,67},{160,250},10,Shape_Fill,Color_Black});
+          Delete_Drawer_Widget();
           var = false;
           switch (menu_icon_number)
           {
           case 1:
-            Icons.Menu_Icon_1(Icon);
+            Icons.Menu_Icon_1(Icon_menu);
             break;
           case 2:
-            Icons.Menu_Icon_2(Icon);
+            Icons.Menu_Icon_2(Icon_menu);
             break;
           case 3:
-            Icons.Menu_Icon_3(Icon);
+            Icons.Menu_Icon_3(Icon_menu);
             break;
           case 4:
-            Icons.Menu_Icon_4(Icon);
+            Icons.Menu_Icon_4(Icon_menu);
             break;
           
           default:
-           Icons.Menu_Icon_5(Icon);
+           Icons.Menu_Icon_5(Icon_menu);
             break;
           }
       }
