@@ -21,7 +21,7 @@ class SEDHOM_Widgets
     void Big_frame_widget(Color_t color = Color_White,Color_t Background = Color_Black);
     void ERROR_Massage_Widget(String massage = "SEDHOM Display OS Error",Color_t Background = Color_Black,Color_t color=MAGENTA,Color_t color_txt=WHITE,Color_t ERROR_Massage_color = RED,Color_t title_Massage_color = BLUE,String title="ERROR",Shape_filled_t filled = Shape_Fill,int x = 100,int y = 70,int w = 240,int h = 160,int max_lines_of_massage_error =5,int max_char_in_one_line = 20);
     void Drawer_Widget(String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_Blue,Color_t exit_button_color = Color_Red);
-    void Handle_Drawer_Widget(Icon_t Icon = {{30,90},Color_Blue,Color_Black},int menu_icon_number = 5);
+    void Handle_Drawer_Widget(Icon_t Icon = {{30,90},Color_Blue,Color_Black},int menu_icon_number = 5,String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_Blue,Color_t exit_button_color = Color_Red);
 
 
 
@@ -127,21 +127,25 @@ void SEDHOM_Widgets::Drawer_Widget(String Drawer_name,bool show_exit_icon ,Color
   // draw Drawer_name text
   Icons.Text({pos_x+15,pos_y+98},FONT_BIG,Drawer_name_color,Drawer_name);
   Icons.Divider_vertical({{pos_x+25,pos_y+110},Drawer_border_color,Drawer_color},100,2);
+  // Drawer content
+  Icons.Control_Icon({{55,125},Color_Green,Drawer_color});
+  Icons.Home_Icon({{50,180},Color_Green,Drawer_color});
+  Icons.Setting_Icon({{90,280},Color_Green,Drawer_color});
 }
-void SEDHOM_Widgets::Handle_Drawer_Widget(Icon_t Icon , int menu_icon_number)
+void SEDHOM_Widgets::Handle_Drawer_Widget(Icon_t Icon , int menu_icon_number,String Drawer_name,bool show_exit_icon ,Color_t Drawer_color,Color_t Drawer_border_color,Color_t Drawer_name_color,Color_t exit_button_color)
 {
   static bool var = false;
-     if(!var)
+    if(!var)
     {
-     if(Touch.onTap({{30,90},{40,40}}))
+     if(Touch.onTap({{Icon.coordinate.x-10,Icon.coordinate.y-10},{40,40}}))
       {
-       Drawer_Widget();
+       Drawer_Widget(Drawer_name,show_exit_icon,Drawer_color,Drawer_border_color,Drawer_name_color,exit_button_color);
       var = true;
       }
     }
     if(var)
     {
-      if(Touch.onTap({{120,80},{40,40}}))
+      if(Touch.onTap({{110,70},{40,40}}))
       {
           Icons.Rectangle({{4,67},{160,250},10,Shape_Fill,Color_Black});
           var = false;

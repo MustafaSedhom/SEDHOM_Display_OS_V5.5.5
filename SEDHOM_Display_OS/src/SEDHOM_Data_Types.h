@@ -300,6 +300,12 @@ typedef struct
     Coordinate_t coordinate ;
     Area_t area;
 }Touch_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of  Orientation
+typedef enum{
+    HORIZONTAL,
+    VERTICAL,
+}Orientation_t;
 
 
 //**********************************************************************************************************************
