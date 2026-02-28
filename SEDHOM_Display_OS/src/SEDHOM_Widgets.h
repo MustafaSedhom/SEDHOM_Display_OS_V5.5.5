@@ -126,11 +126,13 @@ void SEDHOM_Widgets::Drawer_Widget(String Drawer_name,bool show_exit_icon ,Color
   }
   // draw Drawer_name text
   Icons.Text({pos_x+15,pos_y+98},FONT_BIG,Drawer_name_color,Drawer_name);
-  Icons.Divider_vertical({{pos_x+25,pos_y+110},Drawer_border_color,Drawer_color},100,2);
+  Icons.Divider({{pos_x+25,pos_y+110},Drawer_border_color,Drawer_color},VERTICAL,100,2);
   // Drawer content
-  Icons.Control_Icon({{55,125},Color_Green,Drawer_color});
-  Icons.Home_Icon({{50,180},Color_Green,Drawer_color});
-  Icons.Setting_Icon({{90,280},Color_Green,Drawer_color});
+  Icons.Control_Icon({{60,125},Color_Red,Drawer_color});
+  Icons.Divider({{pos_x+25,pos_y+170},Drawer_border_color,Drawer_color},VERTICAL,100,2);
+  Icons.Home_Icon({{50,190},Color_Red,Drawer_color});
+  Icons.Divider({{pos_x+25,pos_y+255},Drawer_border_color,Drawer_color},VERTICAL,100,2);
+  Icons.Setting_Icon({{90,280},Color_Red,Drawer_color});
 }
 void SEDHOM_Widgets::Handle_Drawer_Widget(Icon_t Icon , int menu_icon_number,String Drawer_name,bool show_exit_icon ,Color_t Drawer_color,Color_t Drawer_border_color,Color_t Drawer_name_color,Color_t exit_button_color)
 {

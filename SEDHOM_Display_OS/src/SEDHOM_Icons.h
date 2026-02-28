@@ -45,8 +45,7 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
         void slider_Icon(Icon_t Icon = default_parameter_for_icon,int h = 200,byte_t range =50 ,Color_t color_not_active = Color_DarkGrey ,Color_t ball_color = WHITE,Color_t box_color = RED,Color_t range_in_box_color = BLUE);
         void file_Icon(Icon_t Icon = default_parameter_for_icon,Color_t Border_color = RED,Color_t file_extend_color = Color_Blue,String file_extend = "txt");
         void folder_Icon(Icon_t Icon = default_parameter_for_icon);
-        void Divider_vertical(Icon_t Icon = default_parameter_for_icon ,int length =50 , int thickness = 5);
-        void Divider_Horizontal(Icon_t Icon = default_parameter_for_icon ,int length =50 , int thickness = 5);
+        void Divider(Icon_t Icon = default_parameter_for_icon,Orientation_t orientation = VERTICAL,int length = 50,int thickness = 5);
         void ID_Card_Icon(Icon_t Icon = default_parameter_for_icon, User_ID_Data_t User = {} ,Color_t main_font_color = RED,Color_t font_color = Blue);
         void Joy_Stick_Icon(Icon_t Icon = default_parameter_for_icon ,Coordinate_t thumb = {150,80} ,int thumb_size = 15,Color_t Border_color = BLUE,Color_t thumb_color = white,Color_t Color_inside_arrow = BLACK);
         void Temperature_Meter_Icon(Icon_t Icon = default_parameter_for_icon,Color_t Border = WHITE,int value = 50,bool show_val_dashes = true);
@@ -393,13 +392,22 @@ void SEDHOM_Icons::folder_Icon(Icon_t Icon)
     Rectangle({{Icon.coordinate.x,Icon.coordinate.y+20},{68,35},5,Shape_Fill,Icon.color});
     Rectangle({{Icon.coordinate.x,Icon.coordinate.y+20},{69,1},0,Shape_Fill,BLACK});
 }
-void SEDHOM_Icons::Divider_vertical(Icon_t Icon,int length,int thickness)
+void SEDHOM_Icons::Divider(Icon_t Icon,Orientation_t orientation,int length,int thickness)
 {
-    Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{length,thickness},1,Shape_Fill,Icon.color});
-}
-void SEDHOM_Icons::Divider_Horizontal(Icon_t Icon ,int length , int thickness)
-{
-    Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{thickness,length},1,Shape_Fill,Icon.color});
+  int local_length;
+  int local_thickness;
+  if(orientation==VERTICAL)
+  {
+    local_length = length;
+    local_thickness = thickness;
+  }
+  else
+  {
+    local_length = thickness;
+    local_thickness = length;
+  }
+  
+    Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{local_length,local_thickness},1,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_font_color,Color_t font_color)
 {
@@ -416,7 +424,7 @@ void SEDHOM_Icons::ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_f
     Rectangle({{x1-3,y1-3},{w1+6,h1+6},20,Shape_Fill,color_id});
     Rectangle({{x1,y1},{w1,h1},20,Shape_Fill,Icon.color});
     Text_C({((User.is_professor)?x1+60:x1+80),y1+20},FONT_BIG,main_font_color,((User.is_professor)?"PROFESSOR":"STUDENT"));
-    Divider_vertical({x1+10,y1+35,main_font_color,Icon.Background},w1-20,3);
+    Divider({x1+10,y1+35,main_font_color,Icon.Background},VERTICAL,w1-20,3);
     Text_C({x1+30,y1+55},FONT_SMALL,font_color,"IDENTITY CARD");
 
     Text_C({x1+10,y1+70},FONT_SMALL,main_font_color,((User.is_professor)?"Dr Name":"Name"));
@@ -443,12 +451,12 @@ void SEDHOM_Icons::ID_Card_Icon(Icon_t Icon, User_ID_Data_t User ,Color_t main_f
             Circle({{x1+220,y1+97},7,Shape_Fill,BLACK});
             Circle({{x1+220,y1+97},5,Shape_Fill,DARKGREY});
             Circle({{x1+220,y1+97},1,Shape_Fill,BLACK});//eye
-            Divider_vertical({x1+205,y1+97,Black,Icon.Background},10,2);
+            Divider({x1+205,y1+97,Black,Icon.Background},VERTICAL,10,2);
             Circle({{x1+200,y1+97},7,Shape_Fill,BLACK});
             Circle({{x1+200,y1+97},5,Shape_Fill,DARKGREY});
             Circle({{x1+200,y1+97},1,Shape_Fill,BLACK});//eye
-            Divider_vertical({x1+225,y1+97,Black,Icon.Background},10,2);
-            Divider_vertical({x1+185,y1+97,Black,Icon.Background},10,2);
+            Divider({x1+225,y1+97,Black,Icon.Background},VERTICAL,10,2);
+            Divider({x1+185,y1+97,Black,Icon.Background},VERTICAL,10,2);
         }
     }
     Rectangle({{x1+150,y1+155},{120,45},15,Shape_Fill,Icon.color});

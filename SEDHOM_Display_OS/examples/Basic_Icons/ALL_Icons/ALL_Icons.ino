@@ -52,7 +52,7 @@ void setup()
   // Icons.slider_Icon();
   // Icons.file_Icon();
   // Icons.folder_Icon();
-  // Icons.Divider_vertical();
+  // Icons.Divider();
   // Icons.ID_Card_Icon();
   // Icons.Joy_Stick_Icon();
   // Icons.Temperature_Meter_Icon();

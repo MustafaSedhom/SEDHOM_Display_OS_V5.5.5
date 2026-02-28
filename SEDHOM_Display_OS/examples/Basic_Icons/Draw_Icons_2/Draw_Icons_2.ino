@@ -39,7 +39,7 @@ void setup()
   Icons.slider_Icon({170,140,Color_Blue,OS.Mode()});
   Icons.file_Icon({160,190,Color_Blue,OS.Mode()});
   Icons.folder_Icon({280,190,Color_Blue,OS.Mode()});
-  Icons.Divider_vertical({20,280,Color_Blue,OS.Mode()},200,5);  
+  Icons.Divider({20,280,Color_Blue,OS.Mode()},VERTICAL,200,5);  
 }
 //=======================================================================================
 void loop() 

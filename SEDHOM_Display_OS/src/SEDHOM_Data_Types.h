@@ -9,9 +9,6 @@
 #define Light_Mode       WHITE
 #define Normal_Mode      WHITE
 
-#define Vertical         0 
-#define Horizontal       1
-
 #define yes               1
 #define no                0
 #define ON                1

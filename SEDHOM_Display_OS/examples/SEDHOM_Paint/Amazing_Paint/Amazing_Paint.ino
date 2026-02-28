@@ -41,8 +41,8 @@ void setup()
   {
      Icons.fill_Rectangle(450,65+(i*35),(i*(2)),20,0,OS.Not_Mode());
   }
-  Icons.Divider_vertical(5,63,OS.Screen_Height()-10,2,OS.Not_Mode());
-  Icons.Divider_Horezontal(434,5,OS.Screen_Width()-10,2,OS.Not_Mode());
+  // Icons.Divider_vertical(5,63,OS.Screen_Height()-10,2,OS.Not_Mode());
+  // Icons.Divider_Horezontal(434,5,OS.Screen_Width()-10,2,OS.Not_Mode());
   Icons.Text_C(445,40,FONT_FREESANSBOLD_BIG,RED,"X");
 }
 void loop() 
