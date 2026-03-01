@@ -4,19 +4,24 @@
 //=======================================================================================
 // object from library
 SEDHOM_Display_OS OS;
+// SEDHOM_Shapes_OS Shapes(OS);
+// SEDHOM_Text_OS Texts(OS);
+// SEDHOM_Colors_OS colors(OS);
 SEDHOM_Icon_OS Icons(OS);
 // SEDHOM_Widgets_OS Widgets(OS);
-SEDHOM_Touch_OS Touch(OS);
-// SEDHOM_Time_OS Time(OS);
 // SEDHOM_Windows_OS Windows(OS);
-// SEDHOM_Data_Structure_OS Handling_Data(OS);
 // SEDHOM_Pages_OS Pages(OS);
 // SEDHOM_Handling_Pages_OS Handling_pages(OS);
+// SEDHOM_Data_Structure_OS Handling_Data(OS);
+// SEDHOM_Effects_OS effect(OS);
+SEDHOM_Touch_OS Touch(OS);
+// SEDHOM_Time_OS Time(OS);
 // SEDHOM_Communications_OS Call(OS);
+// SEDHOM_Animations_OS Animates(OS);
 //=======================================================================================
 //======================================================================================= OS;
 
-int pin_thikness =3;
+int pin_thickness =3;
 Color_t pin_color = RED ;
 // list of colors
 Color_t colors[]={
@@ -42,7 +47,7 @@ void setup()
      Icons.fill_Rectangle(450,65+(i*35),(i*(2)),20,0,OS.Not_Mode());
   }
   // Icons.Divider_vertical(5,63,OS.Screen_Height()-10,2,OS.Not_Mode());
-  // Icons.Divider_Horezontal(434,5,OS.Screen_Width()-10,2,OS.Not_Mode());
+  // Icons.Divider(434,5,OS.Screen_Width()-10,2,OS.Not_Mode());
   Icons.Text_C(445,40,FONT_FREESANSBOLD_BIG,RED,"X");
 }
 void loop() 

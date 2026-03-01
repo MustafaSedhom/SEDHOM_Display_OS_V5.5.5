@@ -119,7 +119,7 @@ class SEDHOM_Pages_OS : public SEDHOM_Pages
   public:
     SEDHOM_Pages_OS(SEDHOM_Display_OS & OS)
     {
-      SEDHOM_Pages::set_pages_mode(OS.Mode());
+      SEDHOM_Pages::set_Pages_mode(OS.Mode());
     }
 };
 class SEDHOM_Communications_OS : public SEDHOM_Communications_UART

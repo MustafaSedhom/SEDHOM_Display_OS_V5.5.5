@@ -4,33 +4,53 @@
 //=======================================================================================
 // object from library
 SEDHOM_Display_OS OS;
-// SEDHOM_Icon_OS Icons(OS);
+// SEDHOM_Shapes_OS Shapes(OS);
+// SEDHOM_Text_OS Texts(OS);
+// SEDHOM_Colors_OS colors(OS);
+SEDHOM_Icon_OS Icons(OS);
 SEDHOM_Widgets_OS Widgets(OS);
+// SEDHOM_Windows_OS Windows(OS);
+SEDHOM_Pages_OS Pages(OS);
+// SEDHOM_Handling_Pages_OS Handling_pages(OS);
+// SEDHOM_Data_Structure_OS Handling_Data(OS);
+// SEDHOM_Effects_OS effect(OS);
 // SEDHOM_Touch_OS Touch(OS);
 // SEDHOM_Time_OS Time(OS);
-// SEDHOM_Windows_OS Windows(OS);
-// SEDHOM_Data_Structure_OS Handling_Data(OS);
-// SEDHOM_Pages_OS Pages(OS);
-// SEDHOM_Handling_Pages_OS Handling_pages(OS);
 // SEDHOM_Communications_OS Call(OS);
+// SEDHOM_Animations_OS Animates(OS);
 //=======================================================================================
+Icon_Data_t menu_Icon;
 //=======================================================================================
 void setup()
 {
   OS.Init_Screen(OS.Rotate_90,OS.Night_mode);
   ///////////////////////////////////////////////////////////////////////////////////////////////////
-  // Icons.Text_C_Field_Icon(100,100,260,22,GREEN,Blue,FONT_FREEMONO_SMALL,OS.Mode(),"mustafa SEDggggHOhM Mg");
-  Widgets.ERROR_Massage_Widget("Undefinjjjmmmmmmmmmj Behaviogngjngjgkgggggtrddedrhuhi8njgngjjjjjjjjjjgnjgngjnhguhghhhhhhgjngjgngjgnr",OS.Mode());
-
+  Pages.Start_new_Page();
   ///////////////////////////////////////////////////////////////////////////////////////////////////
+  Widgets.Drawer_Widget();
+  Widgets.Delete_Drawer_Widget();
   ///////////////////////////////////////////////////////////////////////////////////////////////////
+  Icons.Menu_Icon_5({{30,90},Color_Blue,OS.Mode()});
 }
 //=======================================================================================
 void loop() 
 {
-
+  Widgets.Handle_Drawer_Widget();
 }
 //=======================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
