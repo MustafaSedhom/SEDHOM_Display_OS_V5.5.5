@@ -12,11 +12,12 @@ class SEDHOM_Basic_Shapes
         // define Basic shapes
         void Pixel(Pixel_Data_t pixel);
         void Line(Line_Data_t line);    
-        void Rectangle(Rectangle_Data_t rect);
+        static void Rectangle(Rectangle_Data_t rect);
         void Square(Square_Data_t sqrt);  
         void Circle(Circle_Data_t circle); 
-        void Arc(Circle_Data_t Arc,int arc_number);
         void Triangle(Triangle_Data_t tri); 
+        // shapes derivative
+        void Arc(Circle_Data_t Arc,int arc_number);
         void Equilateral_Triangle(Triangle_special_Data_t tri);
         void Right_Triangle(Icon_Data_t Icon,Area_t area,Shape_filled_t filled);
         void Border_Rectangle(Icon_Data_t Border_Rect,Area_t area,int Radius,int Border_size);

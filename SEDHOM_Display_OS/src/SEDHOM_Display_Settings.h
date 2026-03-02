@@ -113,33 +113,33 @@ const int TS_LEFT = 954, TS_RT = 88, TS_TOP = 908, TS_BOT = 125;
 //*************************************************************************************************
 // define draw picture to display it on tft     
 //*************************************************************************************************
-#define Draw_RGB_Picture(x_,y_,h_,w_,picture_array_)                        Display.drawRGBBitmap(x_, y_, picture_array_, w_, h_);
-#define Draw_Single_Color_Picture(x_,y_,h_,w_,color_,picture_array_)        Display.drawBitmap(x_, y_, picture_array_, w_, h_, color_);
+// #define Draw_RGB_Picture(x_,y_,h_,w_,picture_array_)                        Display.drawRGBBitmap(x_, y_, picture_array_, w_, h_);
+// #define Draw_Single_Color_Picture(x_,y_,h_,w_,color_,picture_array_)        Display.drawBitmap(x_, y_, picture_array_, w_, h_, color_);
 //============================================================================================================================================
 //*************************************************************************************************
 // define draw string 
 //*************************************************************************************************
-#define Text_Normal(x_,y_,size_,color_,txt_)     Display.setCursor(x_,y_);Display.setTextSize(size_);Display.setTextColor(color_);Display.print(txt_);
+// #define Text_Normal(x_,y_,size_,color_,txt_)     Display.setCursor(x_,y_);Display.setTextSize(size_);Display.setTextColor(color_);Display.print(txt_);
 #define Text_Driver(x_,y_,font_,color_,txt_)            Display.setCursor(x_,y_);Display.setFont(font_);Display.setTextColor(color_);Display.print(txt_);
-#define Text_Add(str_)                           Display.print(str_);
+// #define Text_Add(str_)                           Display.print(str_);
 // #define Text_C(x,y,font,color,txt)         Display.setCursor(x,y);Display.setFont(font);Display.setText_CColor(color);Display.write(txt);
 // #define Text_C(x,y,size,color,txt)         Display.setText_CColor(color);Display.print(txt,x,y);
 //============================================================================================================================================
 //*************************************************************************************************
 // fill all screen with color
 //*************************************************************************************************
-#define FillScreen(color_)                       Display.fillScreen(color_);
+// #define FillScreen(color_)                       Display.fillScreen(color_);
 //============================================================================================================================================
 //*************************************************************************************************
 // set Display Color 
 //*************************************************************************************************
-#define Set_Color(r_,g_,b_)                      Display.color565(r_,g_,b_)
+// #define Set_Color(r_,g_,b_)                      Display.color565(r_,g_,b_)
 //*************************************************************************************************
 // time to calc it
-#define wait_time(time_)                       delay(time_);   
-// #define wait_time(time_)                    _delay_ms(time_);   
-#define millis_func()                          millis();   
-#define micros_func()                         micros();   
+// #define wait_time(time_)                     _delay_ms(time_);   
+#define wait_time(time_)                        delay(time_);   
+#define millis_func()                           millis();   
+#define micros_func()                           micros();   
 //============================================================================================================================================
 //============================================================================================================================================
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

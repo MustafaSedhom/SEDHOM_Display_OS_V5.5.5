@@ -235,7 +235,13 @@ Color_t SEDHOM_Display_OS::Not_Mode()
 }
 void SEDHOM_Display_OS::Fill_Screen(Color_t color)
 {
-   FillScreen(color); 
+  SEDHOM_Basic_Shapes::Rectangle({
+      {0,0},
+      {Screen_Height(),Screen_Width()},
+      0,
+      Shape_Fill,
+      color
+  });
 }
 Coordinate_t SEDHOM_Display_OS::Convert_Coordinates_to_Center(Coordinate_t new_point)
 {
