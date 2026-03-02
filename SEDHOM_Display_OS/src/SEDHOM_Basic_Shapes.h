@@ -15,11 +15,14 @@ class SEDHOM_Basic_Shapes
         void Rectangle(Rectangle_Data_t rect);
         void Square(Square_Data_t sqrt);  
         void Circle(Circle_Data_t circle); 
+        void Arc(Circle_Data_t Arc,int arc_number);
         void Triangle(Triangle_Data_t tri); 
         void Equilateral_Triangle(Triangle_special_Data_t tri);
         void Right_Triangle(Icon_Data_t Icon,Area_t area,Shape_filled_t filled);
         void Border_Rectangle(Icon_Data_t Border_Rect,Area_t area,int Radius,int Border_size);
         void Container(Rectangle_Data_t container);
+        // SEDHOM Shapes
+        void SEDHOM_Circle(Circle_Data_t circle);
         // custom image or font
         void Draw_Custom_int_shape(Icon_Data_t Icon,Area_t area,int arr[]);
         void Draw_Custom_Char(Icon_Data_t Icon,Area_t area,char arr[]);
@@ -138,6 +141,168 @@ void SEDHOM_Basic_Shapes::Equilateral_Triangle(Triangle_special_Data_t tri)
       break;
   }
   Triangle({{ x_0,  y_0},{  x_1,  y_1},{  x_2,  y_2},tri.filled, tri.color});
+}
+void SEDHOM_Basic_Shapes::SEDHOM_Circle(Circle_Data_t circle)
+{
+    int x_point = 0;
+    int y_point = circle.Radius;
+    int d = 1 - circle.Radius;
+
+    while (x_point <= y_point)
+    {
+      if (circle.Filled == Shape_Draw)
+      {
+        // drew
+        Pixel({{circle.coordinate.x + x_point, circle.coordinate.y - y_point}, circle.color});
+        Pixel({{circle.coordinate.x + y_point, circle.coordinate.y - x_point}, circle.color});
+        Pixel({{circle.coordinate.x + x_point, circle.coordinate.y + y_point}, circle.color});
+        Pixel({{circle.coordinate.x + y_point, circle.coordinate.y + x_point}, circle.color});
+        Pixel({{circle.coordinate.x - x_point, circle.coordinate.y + y_point}, circle.color});
+        Pixel({{circle.coordinate.x - y_point, circle.coordinate.y + x_point}, circle.color});
+        Pixel({{circle.coordinate.x - x_point, circle.coordinate.y - y_point}, circle.color});
+        Pixel({{circle.coordinate.x - y_point, circle.coordinate.y - x_point}, circle.color});
+      }
+      else if (circle.Filled == Shape_Fill)
+      {
+        // filled
+        for(int i = circle.coordinate.x - x_point; i <= circle.coordinate.x + x_point; i++) 
+        {
+          Pixel({{i, circle.coordinate.y + y_point}, circle.color});
+          Pixel({{i, circle.coordinate.y - y_point}, circle.color});
+        }
+        for(int i = circle.coordinate.x - y_point; i <= circle.coordinate.x + y_point; i++) 
+        {
+            Pixel({{i, circle.coordinate.y + x_point}, circle.color});
+            Pixel({{i, circle.coordinate.y - x_point}, circle.color});
+        }
+      }
+        if (d < 0)
+        {
+            d +=  (2 * x_point) + 3;
+        }
+        else
+        {
+            d += (2 * (x_point - y_point)) + 5;
+            y_point--;
+        }
+        x_point++;
+    }
+}
+void SEDHOM_Basic_Shapes::Arc(Circle_Data_t Arc, int arc_number)
+{
+    int x_point = 0;
+    int y_point = Arc.Radius;
+    int d = 1 - Arc.Radius;
+
+    while (x_point <= y_point)
+    {
+        if (Arc.Filled == Shape_Draw)
+        {
+            switch (arc_number)
+            {
+                case 1: Pixel({{Arc.coordinate.x + x_point, Arc.coordinate.y - y_point}, Arc.color}); break;
+                case 2: Pixel({{Arc.coordinate.x + y_point, Arc.coordinate.y - x_point}, Arc.color}); break;
+                case 3: Pixel({{Arc.coordinate.x + x_point, Arc.coordinate.y + y_point}, Arc.color}); break;
+                case 4: Pixel({{Arc.coordinate.x + y_point, Arc.coordinate.y + x_point}, Arc.color}); break;
+                case 5: Pixel({{Arc.coordinate.x - x_point, Arc.coordinate.y + y_point}, Arc.color}); break;
+                case 6: Pixel({{Arc.coordinate.x - y_point, Arc.coordinate.y + x_point}, Arc.color}); break;
+                case 7: Pixel({{Arc.coordinate.x - x_point, Arc.coordinate.y - y_point}, Arc.color}); break;
+                case 8: Pixel({{Arc.coordinate.x - y_point, Arc.coordinate.y - x_point}, Arc.color}); break;
+                case 0: // كل الـ Octants
+                    Pixel({{Arc.coordinate.x + x_point, Arc.coordinate.y - y_point}, Arc.color});
+                    Pixel({{Arc.coordinate.x + y_point, Arc.coordinate.y - x_point}, Arc.color});
+                    Pixel({{Arc.coordinate.x + x_point, Arc.coordinate.y + y_point}, Arc.color});
+                    Pixel({{Arc.coordinate.x + y_point, Arc.coordinate.y + x_point}, Arc.color});
+                    Pixel({{Arc.coordinate.x - x_point, Arc.coordinate.y + y_point}, Arc.color});
+                    Pixel({{Arc.coordinate.x - y_point, Arc.coordinate.y + x_point}, Arc.color});
+                    Pixel({{Arc.coordinate.x - x_point, Arc.coordinate.y - y_point}, Arc.color});
+                    Pixel({{Arc.coordinate.x - y_point, Arc.coordinate.y - x_point}, Arc.color});
+                    break;
+            }
+        }
+        else if (Arc.Filled == Shape_Fill)
+        {
+        switch(arc_number)
+        {
+            case 1: // Octant 1
+                for(int i = Arc.coordinate.x; i <= Arc.coordinate.x + x_point; i++)
+                {
+                    Pixel({{i, Arc.coordinate.y - y_point}, Arc.color});
+                }
+                break;
+
+            case 2: // Octant 2
+                for(int i = Arc.coordinate.x; i <= Arc.coordinate.x + y_point; i++)
+                {
+                    Pixel({{i, Arc.coordinate.y - x_point}, Arc.color});
+                }
+                break;
+
+            case 3: // Octant 3
+                for(int i = Arc.coordinate.x; i <= Arc.coordinate.x + x_point; i++)
+                {
+                    Pixel({{i, Arc.coordinate.y + y_point}, Arc.color});
+                }
+                break;
+
+            case 4: // Octant 4
+                for(int i = Arc.coordinate.x; i <= Arc.coordinate.x + y_point; i++)
+                {
+                    Pixel({{i, Arc.coordinate.y + x_point}, Arc.color});
+                }
+                break;
+
+            case 5: // Octant 5
+                for(int i = Arc.coordinate.x - x_point; i <= Arc.coordinate.x; i++)
+                {
+                    Pixel({{i, Arc.coordinate.y + y_point}, Arc.color});
+                }
+                break;
+
+            case 6: // Octant 6
+                for(int i = Arc.coordinate.x - y_point; i <= Arc.coordinate.x; i++)
+                {
+                    Pixel({{i, Arc.coordinate.y + x_point}, Arc.color});
+                }
+                break;
+
+            case 7: // Octant 7
+                for(int i = Arc.coordinate.x - x_point; i <= Arc.coordinate.x; i++)
+                {
+                    Pixel({{i, Arc.coordinate.y - y_point}, Arc.color});
+                }
+                break;
+
+            case 8: // Octant 8
+                for(int i = Arc.coordinate.x - y_point; i <= Arc.coordinate.x; i++)
+                {
+                    Pixel({{i, Arc.coordinate.y - x_point}, Arc.color});
+                }
+                break;
+
+            case 0: 
+                for(int i = Arc.coordinate.x - x_point; i <= Arc.coordinate.x + x_point; i++)
+                {
+                    Pixel({{i, Arc.coordinate.y + y_point}, Arc.color});
+                    Pixel({{i, Arc.coordinate.y - y_point}, Arc.color});
+                }
+                for(int i = Arc.coordinate.x - y_point; i <= Arc.coordinate.x + y_point; i++)
+                {
+                    Pixel({{i, Arc.coordinate.y + x_point}, Arc.color});
+                    Pixel({{i, Arc.coordinate.y - x_point}, Arc.color});
+                }
+                break;
+        }
+        }
+        if (d < 0)
+            d += (2 * x_point) + 3;
+        else
+        {
+            d += 2 * (x_point - y_point) + 5;
+            y_point--;
+        }
+        x_point++;
+    }
 }
 // Draw custom image or font
 void SEDHOM_Basic_Shapes::Draw_Custom_Char(Icon_Data_t Icon,Area_t area,char arr[])

@@ -78,7 +78,7 @@ void SEDHOM_Pages::Handling_Paint_Page()
   // check if color pressed or not
   for(int i=0;i < 7;i++)
   {
-    if(Touch.onTap({{10+(60*i),10},{50,50}})) pin_color = colors[i];
+    if(Touch.onTap({{10+(60*i),10},{50,40}})) pin_color = colors[i];
   }
   // check if font thickness pressed or not
   for(int i=0;i < 7;i++)
