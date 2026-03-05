@@ -69,6 +69,7 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
         void Chandelier_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Smart_TV_Icon(Icon_Data_t Icon = default_parameter_for_icon,Color_t WIFI_icon = White);
         void Air_Conditioner_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+        void Close_Icon(Icon_Data_t Icon = default_parameter_for_icon);
 };
 // define all functions and Draw all Widgets and icons
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -765,6 +766,11 @@ void SEDHOM_Icons::Air_Conditioner_Icon(Icon_Data_t Icon)
   Border_Rectangle({Icon.coordinate.x +15 , Icon.coordinate.y +25 ,Icon.color , Icon.Background},{50,20},10,3);
   Rectangle({{Icon.coordinate.x+12,Icon.coordinate.y+37},{53,3},5,Shape_Fill,Icon.color});
   Rectangle({{Icon.coordinate.x+12,Icon.coordinate.y+40},{55,8},5,Shape_Fill,Icon.Background});
+}
+void SEDHOM_Icons::Close_Icon(Icon_Data_t Icon)
+{
+  Border_Rectangle(Icon,{40,40},20,3);
+  Text_C({Icon.coordinate.x+13,Icon.coordinate.y+28},FONT_BIG,Icon.color,"X");
 }
 
 

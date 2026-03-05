@@ -321,7 +321,7 @@ void SEDHOM_Basic_Shapes::Draw_Custom_Char(Icon_Data_t Icon,Area_t area,char arr
 }
 void SEDHOM_Basic_Shapes::Draw_Custom_int_shape(Icon_Data_t Icon,Area_t area,int arr[])
 {
-      for(int i=0; i<area.w; i++) 
+  for(int i=0; i<area.w; i++) 
   {
     for(int j=0; j<area.h; j++) 
     {
