@@ -70,6 +70,7 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
         void Smart_TV_Icon(Icon_Data_t Icon = default_parameter_for_icon,Color_t WIFI_icon = White);
         void Air_Conditioner_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Close_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+        void Star_Icon(Icon_Data_t Icon = default_parameter_for_icon);
 };
 // define all functions and Draw all Widgets and icons
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -772,7 +773,11 @@ void SEDHOM_Icons::Close_Icon(Icon_Data_t Icon)
   Border_Rectangle(Icon,{40,40},20,3);
   Text_C({Icon.coordinate.x+13,Icon.coordinate.y+28},FONT_BIG,Icon.color,"X");
 }
-
+void SEDHOM_Icons::Star_Icon(Icon_Data_t Icon)
+{
+  Equilateral_Triangle({{Icon.coordinate},30,Shape_Fill,Direction_Up,Icon.color});
+  Equilateral_Triangle({{Icon.coordinate.x+10,Icon.coordinate.y},30,Shape_Fill,Direction_Down,Icon.color});
+}
 
 
 
