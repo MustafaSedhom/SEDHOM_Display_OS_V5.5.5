@@ -20,7 +20,7 @@ class SEDHOM_Windows
       void set_windows_mode(Color_t mode = Color_Black);
       //drawing window functions 
       void Start_new_Window(String title = "  New Window",Color_t title_color = Color_Blue,Icon_Data_t window = {{50,90},Color_White,Color_Black}, Area_t window_area = {300,200},bool show_Divider = false);
-      void Color_Window(Icon_Data_t Color_window = {{50,90},Color_White,Color_Black}, Area_t Color_window_area = {300,200});
+      void Color_Window(Icon_Data_t Color_window = {{50,90},Color_White,Color_Black});
       //#########################################################################################################################################
 };
 //;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -37,10 +37,22 @@ void SEDHOM_Windows::Start_new_Window(String title,Color_t title_color,Icon_Data
 
    if(show_Divider) Icons.Divider({{window.coordinate.x+35,window.coordinate.y+55},window.color,window.Background},VERTICAL,window_area.w-75,2);
 }
-void SEDHOM_Windows::Color_Window(Icon_Data_t Color_Window,Area_t Color_Window_area)
+void SEDHOM_Windows::Color_Window(Icon_Data_t Color_Window)
 {
-  Start_new_Window(" Color Setting",Color_White,Color_Window,Color_Window_area,true);
-  // Icons.Square({{90,150},50,15,Shape_Fill,Color_Green});
+  Color_t colors_array [2][4]
+  {
+    {Color_Red,Color_Green,Color_Blue,Color_Magenta},
+    {Color_Yellow,Color_Cyan,Color_DarkGrey,Color_Maroon},
+  };
+  Start_new_Window(" Color Setting",Color_Window.color,Color_Window,{300,200},true);
+  for (int i = 0; i < 4; i++)
+  {
+    for (int j = 0; j < 2; j++)
+    {
+      Icons.Square({{(Color_Window.coordinate.x+20)+((70*i)),((Color_Window.coordinate.y+70)+(j*65))},50,10,Shape_Fill,colors_array[j][i]});
+    }
+  }
+  
 }
 
 
