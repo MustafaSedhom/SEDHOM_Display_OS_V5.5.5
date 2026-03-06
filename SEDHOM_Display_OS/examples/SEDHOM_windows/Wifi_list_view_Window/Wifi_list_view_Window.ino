@@ -24,16 +24,16 @@ void setup()
 {
   OS.Init_Screen(OS.Rotate_90,OS.Night_mode);
   ///////////////////////////////////////////////////////////////////////////////////////
-    WIFI_Data_Simple_t wifi_names[]=
+    WIFI_Data_Simple_t mywifi[]=
   {
-    {"mustafa Sedhom",99,WIFI_Status_connected_level_4_full},
+    {"mustafa Sedhom",100,WIFI_Status_connected_level_4_full},
     {"Ali-wifi-125",67,WIFI_Status_connected_level_3},
     {"Bon_24680",48,WIFI_Status_connected_level_2_half},
     {"Esp8266-12E",24,WIFI_Status_connected_level_1},
     {"we-Ed321H",13,WIFI_Status_no_internet},
   };
   ///////////////////////////////////////////////////////////////////////////////////////
-  Windows.WIFI_Setting_Window(wifi_names); 
+  Windows.WIFI_ListView_Window(mywifi,2);
   ////////////////////////////////////////////////////////////////////////////////////////
   
   ////////////////////////////////////////////////////////////////////////////////////////

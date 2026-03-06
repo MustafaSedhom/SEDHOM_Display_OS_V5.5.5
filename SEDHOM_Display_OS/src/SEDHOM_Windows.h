@@ -15,14 +15,14 @@ class SEDHOM_Windows
     // make object to use touch functions
     SEDHOM_Touch Touch;
     //
-    void WIFI_node(Icon_Data_t Wifi_node,String name,int range,Color_t name_color,Color_t WIFI_on,WIFI_STATUS_t status,byte_t max_char_in_name);
+    void WIFI_node(Icon_Data_t Wifi_node,String name,int range,Color_t name_color,Color_t WIFI_on,WIFI_STATUS_t status,byte_t max_char_in_name = 12);
     //#########################################################################################################################################
     public:
       void set_windows_mode(Color_t mode = Color_Black);
       //drawing window functions 
       void Start_new_Window(String title = "  New Window",Color_t title_color = Color_Blue,Icon_Data_t window = {{50,90},Color_White,Color_Black}, Area_t window_area = {300,200},bool show_Divider = false);
       void Color_Setting_Window(Icon_Data_t Color_window = {{50,90},Color_White,Color_Black});
-      void WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[5], Icon_Data_t Wifi_Window =  {{30,30},Color_White,Color_Black},byte_t page_number = 1);
+      void WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[5],byte_t listview_number = 1, Icon_Data_t Wifi_Window =  {{30,30},Color_White,Color_Black});
       //#########################################################################################################################################
 };
 //;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -56,11 +56,11 @@ void SEDHOM_Windows::Color_Setting_Window(Icon_Data_t Color_Window)
   }
   
 }
-void SEDHOM_Windows::WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[], Icon_Data_t Wifi_Window , byte_t page_number)
+void SEDHOM_Windows::WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[], byte_t listview_number, Icon_Data_t Wifi_Window )
 {
   Color_t arrow_down ,arrow_up ;
   Color_t Wifi_Window_1 ,Wifi_Window_2 ,Wifi_Window_3 ;
-  switch (page_number)
+  switch (listview_number)
   {
   case 1:
     {
