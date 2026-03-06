@@ -97,7 +97,7 @@ void SEDHOM_Icons::WIFI_Icon(Icon_Data_t Icon,Color_t color_off,WIFI_STATUS_t st
         Circle({{Icon.coordinate.x,Icon.coordinate.y},20-18,Shape_Fill,four});
         if(state==WIFI_Status_no_internet)
         {
-        Text_C({Icon.coordinate.x+8,Icon.coordinate.y},FONT_BIG,color_off,"!");
+        Text_C({Icon.coordinate.x+8,Icon.coordinate.y+6},FONT_BIG,color_off,"!");
         }
     }
     else if(state==WIFI_Status_not_connected)

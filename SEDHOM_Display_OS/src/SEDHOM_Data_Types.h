@@ -163,6 +163,14 @@ typedef struct
     WIFI_STATUS_t wifi_status;     
 } WIFI_Data_t;
 ///////////////////////////////////////////////////////////////////////////
+// data type of WiFi network configuration
+typedef struct 
+{
+    String name;                                
+    int range;                    
+    WIFI_STATUS_t wifi_status;     
+} WIFI_Data_Simple_t;
+///////////////////////////////////////////////////////////////////////////
 // data type of Date
 typedef struct 
 {

@@ -22,7 +22,7 @@ class SEDHOM_Windows
       //drawing window functions 
       void Start_new_Window(String title = "  New Window",Color_t title_color = Color_Blue,Icon_Data_t window = {{50,90},Color_White,Color_Black}, Area_t window_area = {300,200},bool show_Divider = false);
       void Color_Setting_Window(Icon_Data_t Color_window = {{50,90},Color_White,Color_Black});
-      void WIFI_Setting_Window(String wifi_names[5], Icon_Data_t Wifi_Window =  {{30,30},Color_White,Color_Black},byte_t page_number = 1);
+      void WIFI_Setting_Window(WIFI_Data_Simple_t wifi_Data[5], Icon_Data_t Wifi_Window =  {{30,30},Color_White,Color_Black},byte_t page_number = 1);
       //#########################################################################################################################################
 };
 //;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -56,7 +56,7 @@ void SEDHOM_Windows::Color_Setting_Window(Icon_Data_t Color_Window)
   }
   
 }
-void SEDHOM_Windows::WIFI_Setting_Window(String wifi_names[5], Icon_Data_t Wifi_Window , byte_t page_number)
+void SEDHOM_Windows::WIFI_Setting_Window(WIFI_Data_Simple_t wifi_Data[], Icon_Data_t Wifi_Window , byte_t page_number)
 {
   Color_t arrow_down ,arrow_up ;
   Color_t Wifi_Window_1 ,Wifi_Window_2 ,Wifi_Window_3 ;
@@ -92,7 +92,7 @@ void SEDHOM_Windows::WIFI_Setting_Window(String wifi_names[5], Icon_Data_t Wifi_
     for (int i = 0; i < 5; i++)
     {
       WIFI_node({{Wifi_Window.coordinate.x+10,(Wifi_Window.coordinate.y+82+(30*i))},Wifi_Window.color,Wifi_Window.Background},
-         wifi_names[i],40,Color_Magenta,Color_Green,WIFI_Status_connected_level_2_half,12);
+         wifi_Data[i].name,wifi_Data[i].range,Color_Magenta,Color_Green,wifi_Data[i].wifi_status,12);
     }
 }
 
