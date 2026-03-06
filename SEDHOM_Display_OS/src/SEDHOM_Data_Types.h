@@ -161,7 +161,7 @@ typedef struct
     int channel;                  
     WIFI_Encryption_Type_t Encryption_Type; 
     WIFI_STATUS_t wifi_status;     
-} WIFI_Config_t;
+} WIFI_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of Date
 typedef struct 

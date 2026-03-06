@@ -15,14 +15,14 @@ class SEDHOM_Windows
     // make object to use touch functions
     SEDHOM_Touch Touch;
     //
-    void WIFI_node(Icon_Data_t Wifi_node,String name,int value,Color_t WIFI_on,WIFI_STATUS_t status);
+    void WIFI_node(Icon_Data_t Wifi_node,String name,int value,Color_t name_color,Color_t WIFI_on,WIFI_STATUS_t status,byte_t max_char_in_name);
     //#########################################################################################################################################
     public:
       void set_windows_mode(Color_t mode = Color_Black);
       //drawing window functions 
       void Start_new_Window(String title = "  New Window",Color_t title_color = Color_Blue,Icon_Data_t window = {{50,90},Color_White,Color_Black}, Area_t window_area = {300,200},bool show_Divider = false);
       void Color_Setting_Window(Icon_Data_t Color_window = {{50,90},Color_White,Color_Black});
-      void WIFI_Setting_Window(Icon_Data_t Wifi_Window =  {{30,30},Color_White,Color_Black});
+      void WIFI_Setting_Window(String wifi_names[5], Icon_Data_t Wifi_Window =  {{30,30},Color_White,Color_Black},byte_t page_number = 1);
       //#########################################################################################################################################
 };
 //;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -56,35 +56,64 @@ void SEDHOM_Windows::Color_Setting_Window(Icon_Data_t Color_Window)
   }
   
 }
-void SEDHOM_Windows::WIFI_Setting_Window(Icon_Data_t Wifi_Window)
+void SEDHOM_Windows::WIFI_Setting_Window(String wifi_names[5], Icon_Data_t Wifi_Window , byte_t page_number)
 {
+  Color_t arrow_down ,arrow_up ;
+  Color_t Wifi_Window_1 ,Wifi_Window_2 ,Wifi_Window_3 ;
+  switch (page_number)
+  {
+  case 1:
+    {
+      arrow_down = Color_Green,arrow_up = Color_DarkGrey;
+      Wifi_Window_1 = Color_Blue,Wifi_Window_2 = Color_DarkGrey,Wifi_Window_3 = Color_DarkGrey;
+    }
+    break;
+  case 2:
+    {
+      arrow_down = Color_Green,arrow_up = Color_Green;
+      Wifi_Window_1 = Color_DarkGrey,Wifi_Window_2 = Color_Blue,Wifi_Window_3 = Color_DarkGrey;
+    }
+    break;
+  case 3:
+    {
+      arrow_down = Color_DarkGrey,arrow_up = Color_Green;
+      Wifi_Window_1 = Color_DarkGrey,Wifi_Window_2 = Color_DarkGrey,Wifi_Window_3 = Color_Blue;
+    }
+    break;
+  }
   Start_new_Window("     WiFi Setting",Wifi_Window.color,Wifi_Window,{400,230},true);
   Icons.Divider({{Wifi_Window.coordinate.x+330,Wifi_Window.coordinate.y+60},Wifi_Window.color,Wifi_Window.Background},HORIZONTAL,160,2);
-  Icons.Equilateral_Triangle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+90},30,Shape_Fill,Direction_Up,Color_DarkGrey});
-  Icons.Equilateral_Triangle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+200},30,Shape_Fill,Direction_Down,Color_Green});
-  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+120},8,Shape_Fill,Color_Blue});
-  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+145},8,Shape_Fill,Color_DarkGrey});
-  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+170},8,Shape_Fill,Color_DarkGrey});
+  Icons.Equilateral_Triangle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+90},30,Shape_Fill,Direction_Up,arrow_up});
+  Icons.Equilateral_Triangle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+200},30,Shape_Fill,Direction_Down,arrow_down});
+  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+120},8,Shape_Fill,Wifi_Window_1});
+  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+145},8,Shape_Fill,Wifi_Window_2});
+  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+170},8,Shape_Fill,Wifi_Window_3});
   
-  WIFI_node({{Wifi_Window.coordinate.x+10,Wifi_Window.coordinate.y+82},Wifi_Window.color,Wifi_Window.Background},
-    "Mustafa 123",80,Color_Green,WIFI_Status_connected_level_1);
-  WIFI_node({{Wifi_Window.coordinate.x+10,Wifi_Window.coordinate.y+110},Wifi_Window.color,Wifi_Window.Background},
-    "name_wifi",40,Color_Green,WIFI_Status_connected_level_2_half);
-  WIFI_node({{Wifi_Window.coordinate.x+10,Wifi_Window.coordinate.y+140},Wifi_Window.color,Wifi_Window.Background},
-    "we_fg975",40,Color_Green,WIFI_Status_connected_level_2_half);
-  WIFI_node({{Wifi_Window.coordinate.x+10,Wifi_Window.coordinate.y+170},Wifi_Window.color,Wifi_Window.Background},
-    "Bon 24680_uy",40,Color_Green,WIFI_Status_connected_level_2_half);
-  WIFI_node({{Wifi_Window.coordinate.x+10,Wifi_Window.coordinate.y+200},Wifi_Window.color,Wifi_Window.Background},
-    "Egypt_Keda",40,Color_Green,WIFI_Status_connected_level_2_half);
-
-  
+    for (int i = 0; i < 5; i++)
+    {
+      WIFI_node({{Wifi_Window.coordinate.x+10,(Wifi_Window.coordinate.y+82+(30*i))},Wifi_Window.color,Wifi_Window.Background},
+         wifi_names[i],40,Color_Magenta,Color_Green,WIFI_Status_connected_level_2_half,12);
+    }
 }
 
-void SEDHOM_Windows::WIFI_node(Icon_Data_t Wifi_node,String name,int value,Color_t WIFI_on,WIFI_STATUS_t status)
+void SEDHOM_Windows::WIFI_node(Icon_Data_t Wifi_node,String name,int value,Color_t name_color,Color_t WIFI_on,WIFI_STATUS_t status,byte_t max_char_in_name)
 {
   static int number = 1;
-  Icons.Text({Wifi_node.coordinate.x,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(number++)+String(">"));
-  Icons.Text({Wifi_node.coordinate.x+30,Wifi_node.coordinate.y},FONT_BIG,Color_Magenta,name);
+  String all_name;
+   if( name.length() > max_char_in_name)
+   {
+      String word = "...";
+      String part = name.substring(0, max_char_in_name-3);
+      all_name = part + word ;
+    }
+    else
+    {
+      all_name = name;
+    }
+    
+    
+    Icons.Text({Wifi_node.coordinate.x,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(number++)+String(">"));
+    Icons.Text({Wifi_node.coordinate.x+30,Wifi_node.coordinate.y},FONT_BIG,name_color,all_name);
   Icons.WIFI_Icon({{Wifi_node.coordinate.x+250,Wifi_node.coordinate.y},WIFI_on,Wifi_node.Background},Color_DarkGrey,status);
   Icons.Text({Wifi_node.coordinate.x+270,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(value)+String("%"));
 }
