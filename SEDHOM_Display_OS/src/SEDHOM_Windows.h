@@ -56,46 +56,6 @@ void SEDHOM_Windows::Color_Setting_Window(Icon_Data_t Color_Window)
   }
   
 }
-void SEDHOM_Windows::WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[], byte_t listview_number, Icon_Data_t Wifi_Window )
-{
-  Color_t arrow_down ,arrow_up ;
-  Color_t Wifi_Window_1 ,Wifi_Window_2 ,Wifi_Window_3 ;
-  switch (listview_number)
-  {
-  case 1:
-    {
-      arrow_down = Color_Green,arrow_up = Color_DarkGrey;
-      Wifi_Window_1 = Color_Blue,Wifi_Window_2 = Color_DarkGrey,Wifi_Window_3 = Color_DarkGrey;
-    }
-    break;
-  case 2:
-    {
-      arrow_down = Color_Green,arrow_up = Color_Green;
-      Wifi_Window_1 = Color_DarkGrey,Wifi_Window_2 = Color_Blue,Wifi_Window_3 = Color_DarkGrey;
-    }
-    break;
-  case 3:
-    {
-      arrow_down = Color_DarkGrey,arrow_up = Color_Green;
-      Wifi_Window_1 = Color_DarkGrey,Wifi_Window_2 = Color_DarkGrey,Wifi_Window_3 = Color_Blue;
-    }
-    break;
-  }
-  Start_new_Window("     WiFi Setting",Wifi_Window.color,Wifi_Window,{400,230},true);
-  Icons.Divider({{Wifi_Window.coordinate.x+330,Wifi_Window.coordinate.y+60},Wifi_Window.color,Wifi_Window.Background},HORIZONTAL,160,2);
-  Icons.Equilateral_Triangle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+90},30,Shape_Fill,Direction_Up,arrow_up});
-  Icons.Equilateral_Triangle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+200},30,Shape_Fill,Direction_Down,arrow_down});
-  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+120},8,Shape_Fill,Wifi_Window_1});
-  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+145},8,Shape_Fill,Wifi_Window_2});
-  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+170},8,Shape_Fill,Wifi_Window_3});
-  
-    for (int i = 0; i < 5; i++)
-    {
-      WIFI_node({{Wifi_Window.coordinate.x+10,(Wifi_Window.coordinate.y+82+(30*i))},Wifi_Window.color,Wifi_Window.Background},
-         wifi_Data[i].name,wifi_Data[i].range,Color_Magenta,Color_Green,wifi_Data[i].wifi_status,12);
-    }
-}
-
 void SEDHOM_Windows::WIFI_node(Icon_Data_t Wifi_node,String name,int range,Color_t name_color,Color_t WIFI_on,WIFI_STATUS_t status,byte_t max_char_in_name)
 {
   static int number = 1;
@@ -116,6 +76,46 @@ void SEDHOM_Windows::WIFI_node(Icon_Data_t Wifi_node,String name,int range,Color
   Icons.WIFI_Icon({{Wifi_node.coordinate.x+250,Wifi_node.coordinate.y},WIFI_on,Wifi_node.Background},Color_DarkGrey,status);
   Icons.Text({Wifi_node.coordinate.x+270,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(range)+String("%"));
 }
+void SEDHOM_Windows::WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[], byte_t listview_number, Icon_Data_t Wifi_Window )
+{
+  Color_t arrow_down ,arrow_up ;
+  Color_t Wifi_Window_1 ,Wifi_Window_2 ,Wifi_Window_3 ;
+  switch (listview_number)
+  {
+  case 1:
+    {
+      arrow_down = Color_Green,arrow_up = Color_DarkGrey;
+      Wifi_Window_1 = Color_Magenta,Wifi_Window_2 = Color_DarkGrey,Wifi_Window_3 = Color_DarkGrey;
+    }
+    break;
+  case 2:
+    {
+      arrow_down = Color_Green,arrow_up = Color_Green;
+      Wifi_Window_1 = Color_DarkGrey,Wifi_Window_2 = Color_Magenta,Wifi_Window_3 = Color_DarkGrey;
+    }
+    break;
+  case 3:
+    {
+      arrow_down = Color_DarkGrey,arrow_up = Color_Green;
+      Wifi_Window_1 = Color_DarkGrey,Wifi_Window_2 = Color_DarkGrey,Wifi_Window_3 = Color_Magenta;
+    }
+    break;
+  }
+  Start_new_Window("     WiFi Setting",Wifi_Window.color,Wifi_Window,{400,230},true);
+  Icons.Divider({{Wifi_Window.coordinate.x+330,Wifi_Window.coordinate.y+60},Wifi_Window.color,Wifi_Window.Background},HORIZONTAL,160,2);
+  Icons.Equilateral_Triangle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+90},30,Shape_Fill,Direction_Up,arrow_up});
+  Icons.Equilateral_Triangle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+200},30,Shape_Fill,Direction_Down,arrow_down});
+  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+120},8,Shape_Fill,Wifi_Window_1});
+  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+145},8,Shape_Fill,Wifi_Window_2});
+  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+170},8,Shape_Fill,Wifi_Window_3});
+  
+    for (int i = 0; i < 5; i++)
+    {
+      WIFI_node({{Wifi_Window.coordinate.x+10,(Wifi_Window.coordinate.y+82+(30*i))},Wifi_Window.color,Wifi_Window.Background},
+         wifi_Data[i].name,wifi_Data[i].range,Color_Magenta,Color_Green,wifi_Data[i].wifi_status,12);
+    }
+}
+
 
 
 //;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
