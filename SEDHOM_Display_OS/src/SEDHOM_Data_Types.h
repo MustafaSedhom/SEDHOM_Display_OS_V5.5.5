@@ -314,11 +314,11 @@ typedef enum{
 ///////////////////////////////////////////////////////////////////////////
 // data type of  Icon Size
 typedef enum{
-    Size_1,
-    Size_2,
-    Size_3,
-    Size_4,
-    Size_5,
+    Size_1=1,
+    Size_2=2,
+    Size_3=3,
+    Size_4=4,
+    Size_5=5,
 }Icon_Size_t;
 
 

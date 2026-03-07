@@ -143,6 +143,7 @@ void SEDHOM_Windows::WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[],Icon_Da
     WIFI_node({{Wifi_listview_window.coordinate.x+10,(Wifi_listview_window.coordinate.y+82+(30*i))},Wifi_listview_window.color,
     Wifi_listview_window.Background},wifi_Data[i].name,wifi_Data[i].range,wifi_name_color,Wifi_active_color,not_active,wifi_Data[i].wifi_status,12);
   }
+  if(listview_number == 1 || listview_number ==2) Icons.Rectangle({{Wifi_listview_window.coordinate.x+50,Wifi_listview_window.coordinate.y+WIFI_listView_W-15},{WIFI_listView_H-150,10},40,Shape_Fill,Color_DarkGrey});
 }
 
 
