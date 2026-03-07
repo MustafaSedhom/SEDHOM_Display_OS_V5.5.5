@@ -21,8 +21,9 @@ class SEDHOM_Windows
       void set_windows_mode(Color_t mode = Color_Black);
       //drawing window functions 
       void Start_new_Window(String title = "  New Window",Color_t title_color = Color_Blue,Icon_Data_t window = {{50,90},Color_White,Color_Black}, Area_t window_area = {300,200},bool show_Divider = false);
+      void ListView_Window(String title,Icon_Data_t listview,Area_t listview_area, byte_t listview_number);
       void Color_Setting_Window(Icon_Data_t Color_window = {{50,90},Color_White,Color_Black});
-      void WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[5],byte_t listview_number = 1, Icon_Data_t Wifi_Window =  {{30,30},Color_White,Color_Black});
+      void WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[5],byte_t listview_number = 1, Icon_Data_t Wifi_listview_window =  {{30,30},Color_White,Color_Black});
       //#########################################################################################################################################
 };
 //;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -36,8 +37,52 @@ void SEDHOM_Windows::Start_new_Window(String title,Color_t title_color,Icon_Data
    Icons.Border_Rectangle(window,window_area,20,3);
    Icons.Close_Icon({window.coordinate.x+window_area.w-50,window.coordinate.y+10,window.color,Color_Red});
    Icons.Text({window.coordinate.x+15,window.coordinate.y+35},FONT_BIG,title_color,title);
-
    if(show_Divider) Icons.Divider({{window.coordinate.x+35,window.coordinate.y+55},window.color,window.Background},VERTICAL,window_area.w-75,2);
+}
+void SEDHOM_Windows::ListView_Window(String title,Icon_Data_t listview,Area_t listview_area, byte_t listview_number)
+{
+  Color_t arrow_down ,arrow_up ;
+  Color_t Wifi_Window_1 ,Wifi_Window_2 ,Wifi_Window_3 ;
+  switch (listview_number)
+  {
+  case 1:
+    {
+      arrow_down = Color_Green,arrow_up = Color_DarkGrey;
+      Wifi_Window_1 = Color_Magenta,Wifi_Window_2 = Color_DarkGrey,Wifi_Window_3 = Color_DarkGrey;
+    }
+    break;
+  case 2:
+    {
+      arrow_down = Color_Green,arrow_up = Color_Green;
+      Wifi_Window_1 = Color_DarkGrey,Wifi_Window_2 = Color_Magenta,Wifi_Window_3 = Color_DarkGrey;
+    }
+    break;
+  case 3:
+    {
+      arrow_down = Color_DarkGrey,arrow_up = Color_Green;
+      Wifi_Window_1 = Color_DarkGrey,Wifi_Window_2 = Color_DarkGrey,Wifi_Window_3 = Color_Magenta;
+    }
+    break;
+  }
+  Start_new_Window(title,listview.color,listview,listview_area,true);
+  Icons.Divider({{listview.coordinate.x+listview_area.w-70,listview.coordinate.y+60},listview.color,listview.Background},HORIZONTAL,listview_area.h-70,2);
+  if (listview_area.h>130)
+  {
+    Icons.Equilateral_Triangle({{listview.coordinate.x+listview_area.w-40,listview.coordinate.y+80},25,Shape_Fill,Direction_Up,arrow_up});
+    Icons.Equilateral_Triangle({{listview.coordinate.x+listview_area.w-40,listview.coordinate.y+listview_area.h-30},25,Shape_Fill,Direction_Down,arrow_down});
+  }
+  if (listview_area.h>170)
+  {
+    Icons.Circle({{listview.coordinate.x+listview_area.w-40, 
+        ((listview_area.h<240) ?  ((listview_area.h<200) ? listview.coordinate.y+100 : listview.coordinate.y+110) : listview.coordinate.y+120 )},
+         ((listview_area.h<240) ?  ((listview_area.h<200) ? 3 : 5) : 7 ),Shape_Fill,Wifi_Window_1});
+    Icons.Circle({{listview.coordinate.x+listview_area.w-40,
+        (( ((listview_area.h<240) ?  ((listview_area.h<200) ? listview.coordinate.y+100 : listview.coordinate.y+110) : listview.coordinate.y+120 )+(listview.coordinate.y+listview_area.h-60))/2)},
+        ((listview_area.h<240) ?  ((listview_area.h<200) ? 3 : 5) : 7 ),Shape_Fill,Wifi_Window_2});
+    Icons.Circle({{listview.coordinate.x+listview_area.w-40,
+        listview.coordinate.y+listview_area.h-60},
+        ((listview_area.h<240) ?  ((listview_area.h<200) ? 3 : 5) : 7 ),Shape_Fill,Wifi_Window_3});
+  }
 }
 void SEDHOM_Windows::Color_Setting_Window(Icon_Data_t Color_Window)
 {
@@ -76,44 +121,18 @@ void SEDHOM_Windows::WIFI_node(Icon_Data_t Wifi_node,String name,int range,Color
   Icons.WIFI_Icon({{Wifi_node.coordinate.x+250,Wifi_node.coordinate.y},WIFI_on,Wifi_node.Background},Color_DarkGrey,status);
   Icons.Text({Wifi_node.coordinate.x+270,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(range)+String("%"));
 }
-void SEDHOM_Windows::WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[], byte_t listview_number, Icon_Data_t Wifi_Window )
+void SEDHOM_Windows::WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[], byte_t listview_number, Icon_Data_t Wifi_listview_window )
 {
-  Color_t arrow_down ,arrow_up ;
-  Color_t Wifi_Window_1 ,Wifi_Window_2 ,Wifi_Window_3 ;
-  switch (listview_number)
+  #define WIFI_listView_H    400
+  #define WIFI_listView_W    230
+  // Draw List view
+  ListView_Window("    WiFi Setting",Wifi_listview_window,{WIFI_listView_H,WIFI_listView_W},listview_number);
+  // containet of list view
+  for (int i = 0; i < 5; i++)
   {
-  case 1:
-    {
-      arrow_down = Color_Green,arrow_up = Color_DarkGrey;
-      Wifi_Window_1 = Color_Magenta,Wifi_Window_2 = Color_DarkGrey,Wifi_Window_3 = Color_DarkGrey;
-    }
-    break;
-  case 2:
-    {
-      arrow_down = Color_Green,arrow_up = Color_Green;
-      Wifi_Window_1 = Color_DarkGrey,Wifi_Window_2 = Color_Magenta,Wifi_Window_3 = Color_DarkGrey;
-    }
-    break;
-  case 3:
-    {
-      arrow_down = Color_DarkGrey,arrow_up = Color_Green;
-      Wifi_Window_1 = Color_DarkGrey,Wifi_Window_2 = Color_DarkGrey,Wifi_Window_3 = Color_Magenta;
-    }
-    break;
+    WIFI_node({{Wifi_listview_window.coordinate.x+10,(Wifi_listview_window.coordinate.y+82+(30*i))},Wifi_listview_window.color,
+    Wifi_listview_window.Background},wifi_Data[i].name,wifi_Data[i].range,Color_Magenta,Color_Green,wifi_Data[i].wifi_status,12);
   }
-  Start_new_Window("     WiFi Setting",Wifi_Window.color,Wifi_Window,{400,230},true);
-  Icons.Divider({{Wifi_Window.coordinate.x+330,Wifi_Window.coordinate.y+60},Wifi_Window.color,Wifi_Window.Background},HORIZONTAL,160,2);
-  Icons.Equilateral_Triangle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+90},30,Shape_Fill,Direction_Up,arrow_up});
-  Icons.Equilateral_Triangle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+200},30,Shape_Fill,Direction_Down,arrow_down});
-  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+120},8,Shape_Fill,Wifi_Window_1});
-  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+145},8,Shape_Fill,Wifi_Window_2});
-  Icons.Circle({{Wifi_Window.coordinate.x+360,Wifi_Window.coordinate.y+170},8,Shape_Fill,Wifi_Window_3});
-  
-    for (int i = 0; i < 5; i++)
-    {
-      WIFI_node({{Wifi_Window.coordinate.x+10,(Wifi_Window.coordinate.y+82+(30*i))},Wifi_Window.color,Wifi_Window.Background},
-         wifi_Data[i].name,wifi_Data[i].range,Color_Magenta,Color_Green,wifi_Data[i].wifi_status,12);
-    }
 }
 
 
