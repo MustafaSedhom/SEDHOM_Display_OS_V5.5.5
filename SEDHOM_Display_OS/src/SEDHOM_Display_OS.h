@@ -50,6 +50,8 @@ class SEDHOM_Display_OS
     int Convert_Coordinates_to_Center_X_Point(int x);
     int Convert_Coordinates_to_Center_Y_Point(int y);
     Coordinate_t Convert_Coordinates_to_Center(Coordinate_t new_point);
+    void Restart_OS();
+    // define all variables
     Color_t Night_mode = Night_Mode ;
     Color_t Light_mode = Light_Mode ;
     ROTATION_STATUS_t Rotate_0 = Rotate_0_Degree;
@@ -258,5 +260,10 @@ int SEDHOM_Display_OS::Convert_Coordinates_to_Center_Y_Point(int y)
 {
   return (Screen_Width()/2) - y;
 }
+void SEDHOM_Display_OS::Restart_OS()
+{
+  Init_Screen();
+}
+
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif /*SEDHOM_DISPLAY_OS_H_*/

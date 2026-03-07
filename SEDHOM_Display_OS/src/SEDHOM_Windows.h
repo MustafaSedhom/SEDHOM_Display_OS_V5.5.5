@@ -117,7 +117,7 @@ void SEDHOM_Windows::WIFI_node(Icon_Data_t Wifi_node,String name,int range,Color
   }
   if(range>=100) range=99;
   Icons.Text({Wifi_node.coordinate.x,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(number++)+String(">"));
-  Icons.Text({Wifi_node.coordinate.x+30,Wifi_node.coordinate.y},FONT_BIG,name_color,all_name);
+  Icons.Text({(number>10)?Wifi_node.coordinate.x+43 : Wifi_node.coordinate.x+30 ,Wifi_node.coordinate.y},FONT_BIG,name_color,all_name);
   Icons.WIFI_Icon({{Wifi_node.coordinate.x+250,Wifi_node.coordinate.y},WIFI_on,Wifi_node.Background},Color_DarkGrey,status);
   Icons.Text({Wifi_node.coordinate.x+270,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(range)+String("%"));
 }
@@ -127,11 +127,11 @@ void SEDHOM_Windows::WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[],Icon_Da
   #define WIFI_listView_W    230
   //
     WIFI_Data_Simple_t defaultNames[5] = {
+      {"mustafa Sedhom",0,WIFI_Status_no_internet},
       {"None",0,WIFI_Status_no_internet},
       {"None",0,WIFI_Status_no_internet},
       {"None",0,WIFI_Status_no_internet},
-      {"None",0,WIFI_Status_no_internet},
-      {"None",0,WIFI_Status_no_internet},
+      {"mustafa Sed",0,WIFI_Status_no_internet},
   };
     if(wifi_Data == nullptr)
         wifi_Data = defaultNames;
