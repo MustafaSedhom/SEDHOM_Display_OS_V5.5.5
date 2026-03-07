@@ -20,8 +20,8 @@ class SEDHOM_Windows
     public:
       void set_windows_mode(Color_t mode = Color_Black);
       //drawing window functions 
-      void Start_new_Window(String title = "  New Window",Color_t title_color = Color_Blue,Icon_Data_t window = {{50,90},Color_White,Color_Black}, Area_t window_area = {300,200},bool show_Divider = false);
-      void ListView_Window(String title="List",Icon_Data_t listview={{30,30},Color_White,Color_Black},Area_t listview_area={400,200}, byte_t listview_number=1,bool show_Divideres = true,Color_t choose_active_ball=Color_Magenta,Color_t triangle_choose = Color_Green,Color_t not_active = Color_DarkGrey);
+      void Start_new_Window(String title = "",Color_t title_color = Color_Blue,Icon_Data_t window = {{50,90},Color_White,Color_Black}, Area_t window_area = {300,200},bool show_Divider = false,bool show_close_icon= true);
+      void ListView_Window(String title="",Icon_Data_t listview={{30,30},Color_White,Color_Black},Area_t listview_area={400,200}, byte_t listview_number=1,bool show_Divideres = true,bool show_close_icon=true, Color_t choose_active_ball=Color_Magenta,Color_t triangle_choose = Color_Green,Color_t not_active = Color_DarkGrey);
       void Color_Setting_Window(Icon_Data_t Color_window = {{50,90},Color_White,Color_Black});
       void WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[5] = nullptr,Icon_Data_t Wifi_listview_window={{30,30},Color_White,Color_Black}, byte_t listview_number=1,bool show_Divideres = true,Color_t wifi_name_color = Color_Magenta ,Color_t Wifi_active_color = Color_Green,Color_t choose_active_ball=Color_Magenta,Color_t triangle_choose = Color_Green,Color_t not_active = Color_DarkGrey);
       //#########################################################################################################################################
@@ -32,14 +32,14 @@ void SEDHOM_Windows::set_windows_mode(Color_t mode = Color_Black)
 {
   Icons.Set_Mode(mode);
 }
-void SEDHOM_Windows::Start_new_Window(String title,Color_t title_color,Icon_Data_t window, Area_t window_area , bool show_Divider)
+void SEDHOM_Windows::Start_new_Window(String title,Color_t title_color,Icon_Data_t window, Area_t window_area , bool show_Divider,bool show_close_icon)
 {
    Icons.Border_Rectangle(window,window_area,20,3);
-   Icons.Close_Icon({window.coordinate.x+window_area.w-50,window.coordinate.y+10,window.color,Color_Red});
+   if(show_close_icon) Icons.Close_Icon({window.coordinate.x+window_area.w-50,window.coordinate.y+10,window.color,Color_Red});
    Icons.Text({window.coordinate.x+15,window.coordinate.y+35},FONT_BIG,title_color,title);
    if(show_Divider) Icons.Divider({{window.coordinate.x+35,window.coordinate.y+55},window.color,window.Background},VERTICAL,window_area.w-75,2);
 }
-void SEDHOM_Windows::ListView_Window(String title,Icon_Data_t listview,Area_t listview_area, byte_t listview_number, bool show_Divideres, Color_t choose_active_ball , Color_t triangle_choose,Color_t not_active)
+void SEDHOM_Windows::ListView_Window(String title,Icon_Data_t listview,Area_t listview_area, byte_t listview_number, bool show_Divideres , bool show_close_icon, Color_t choose_active_ball , Color_t triangle_choose,Color_t not_active)
 {
   Color_t arrow_down ,arrow_up ;
   Color_t Wifi_Window_1 ,Wifi_Window_2 ,Wifi_Window_3 ;
@@ -64,7 +64,7 @@ void SEDHOM_Windows::ListView_Window(String title,Icon_Data_t listview,Area_t li
     }
     break;
   }
-  Start_new_Window(title,listview.color,listview,listview_area,show_Divideres);
+  Start_new_Window(title,listview.color,listview,listview_area,show_Divideres,show_close_icon);
   if(show_Divideres) Icons.Divider({{listview.coordinate.x+listview_area.w-70,listview.coordinate.y+60},listview.color,listview.Background},HORIZONTAL,listview_area.h-70,2);
   if (listview_area.h>130)
   {
@@ -136,7 +136,7 @@ void SEDHOM_Windows::WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[],Icon_Da
     if(wifi_Data == nullptr)
         wifi_Data = defaultNames;
   // Draw List view
-  ListView_Window("    WiFi Setting",Wifi_listview_window,{WIFI_listView_H,WIFI_listView_W},listview_number,show_Divideres,choose_active_ball,triangle_choose,not_active);
+  ListView_Window("    WiFi Setting",Wifi_listview_window,{WIFI_listView_H,WIFI_listView_W},listview_number,show_Divideres,true,choose_active_ball,triangle_choose,not_active);
   // containet of list view
   for (int i = 0; i < 5; i++)
   {
