@@ -22,7 +22,7 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
         void Set_Mode(Color_t Mode){mode = Mode;}
         // Draw SEDHOM Icons
         void WIFI_Icon(Icon_Data_t Icon = default_parameter_for_icon ,Color_t color_off = DarkGrey,WIFI_STATUS_t state = WIFI_Status_connected_level_4_full);
-        void Battery_Icon(Icon_Data_t Icon = default_parameter_for_icon  ,int range = 50 ,Color_t txt_color = White ,bool low_charge_red_color = true);
+        void Battery_Icon(Icon_Data_t Icon = default_parameter_for_icon  ,int range = 50 ,Color_t txt_color = White ,bool low_charge_control_color = true);
         void Home_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Setting_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Add_Icon(Icon_Data_t Icon = default_parameter_for_icon);
@@ -106,20 +106,21 @@ void SEDHOM_Icons::WIFI_Icon(Icon_Data_t Icon,Color_t color_off,WIFI_STATUS_t st
     }
     Rectangle({{Icon.coordinate.x-10,Icon.coordinate.y+13},{20,10},0,Shape_Fill,Icon.Background});
 } 
-void SEDHOM_Icons::Battery_Icon(Icon_Data_t Icon ,int range,Color_t txt_color,bool low_charge_red_color)
+void SEDHOM_Icons::Battery_Icon(Icon_Data_t Icon ,int range,Color_t txt_color,bool low_charge_control_color)
 {
     int txt_x=0;
     int txt_y_index = Icon.coordinate.y+22;
     uint16_t color_Battery;
-    if(low_charge_red_color==1)
+    if(low_charge_control_color==1)
     {
-        if(range<20){color_Battery=RED; txt_x=(range>=10)?Icon.coordinate.x-60:Icon.coordinate.x-45;txt_color= ((Icon.Background == Color_Black)?Color_White : Color_Black );}
+        if(range<20 && range>=10){color_Battery=Color_Orange; txt_x=(range>=10)?Icon.coordinate.x-60:Icon.coordinate.x-45;txt_color= ((Icon.Background == Color_Black)?Color_White : Color_Black );}
+        else if(range<10){color_Battery=Color_Red; txt_x=(range>=10)?Icon.coordinate.x-60:Icon.coordinate.x-45;txt_color= ((Icon.Background == Color_Black)?Color_White : Color_Black );}
         else if(range>=20){color_Battery=Icon.color;txt_x=(range==100)?Icon.coordinate.x-65:Icon.coordinate.x-58;}
     }
-    else if(low_charge_red_color==0)
+    else if(low_charge_control_color==0)
     {
-        if(range<20){color_Battery=GREEN; txt_x=(range>=10)?Icon.coordinate.x-53:Icon.coordinate.x-45;}
-        else if(range>=20){color_Battery=GREEN;txt_x=(range==100)?Icon.coordinate.x-65:Icon.coordinate.x-58;}
+        if(range<20){color_Battery=Color_Green; txt_x=(range>=10)?Icon.coordinate.x-53:Icon.coordinate.x-45;}
+        else if(range>=20){color_Battery=Color_Green;txt_x=(range==100)?Icon.coordinate.x-65:Icon.coordinate.x-58;}
     }
     int rangeB=map(range,0,100,5,45);
     Rectangle({{Icon.coordinate.x, Icon.coordinate.y}, {50,30}, 5,Shape_Fill, color_Battery});
@@ -153,15 +154,15 @@ void SEDHOM_Icons::Add_Icon(Icon_Data_t Icon)
 }
 void SEDHOM_Icons::SD_Card_Icon(Icon_Data_t Icon)
 {
-    Rectangle({{Icon.coordinate.x-5, Icon.coordinate.y-5},{40,45},5,Shape_Fill,WHITE});
-    Rectangle({{Icon.coordinate.x, Icon.coordinate.y},{30,35},5,Shape_Fill,BLACK});
-    Rectangle({{Icon.coordinate.x+15,Icon.coordinate.y},{17,8},5,Shape_Fill,WHITE});
+    Rectangle({{Icon.coordinate.x-5, Icon.coordinate.y-5},{40,45},5,Shape_Fill,Color_White});
+    Rectangle({{Icon.coordinate.x, Icon.coordinate.y},{30,35},5,Shape_Fill,Color_Black});
+    Rectangle({{Icon.coordinate.x+15,Icon.coordinate.y},{17,8},5,Shape_Fill,Color_White});
     Triangle({{Icon.coordinate.x+30,Icon.coordinate.y+8},{Icon.coordinate.x+17,Icon.coordinate.y+8},{Icon.coordinate.x+17,Icon.coordinate.y},Shape_Fill,BLACK});
-    Rectangle({{Icon.coordinate.x+4,Icon.coordinate.y+20},{2,10},5,Shape_Fill,YELLOW});
-    Rectangle({{Icon.coordinate.x+11,Icon.coordinate.y+20},{2,10},5,Shape_Fill,YELLOW});
-    Rectangle({{Icon.coordinate.x+18,Icon.coordinate.y+20},{2,10},5,Shape_Fill,YELLOW});
-    Rectangle({{Icon.coordinate.x+25,Icon.coordinate.y+20},{2,10},5,Shape_Fill,YELLOW});
-    Rectangle({{Icon.coordinate.x+12,Icon.coordinate.y+1},{5,8},0,Shape_Fill,BLACK});
+    Rectangle({{Icon.coordinate.x+4,Icon.coordinate.y+20},{2,10},5,Shape_Fill,Color_Yellow});
+    Rectangle({{Icon.coordinate.x+11,Icon.coordinate.y+20},{2,10},5,Shape_Fill,Color_Yellow});
+    Rectangle({{Icon.coordinate.x+18,Icon.coordinate.y+20},{2,10},5,Shape_Fill,Color_Yellow});
+    Rectangle({{Icon.coordinate.x+25,Icon.coordinate.y+20},{2,10},5,Shape_Fill,Color_Yellow});
+    Rectangle({{Icon.coordinate.x+12,Icon.coordinate.y+1},{5,8},0,Shape_Fill,Color_Black});
 }
 void SEDHOM_Icons::Control_Icon(Icon_Data_t Icon)
 {
@@ -214,15 +215,15 @@ void SEDHOM_Icons::Bluetooth_Icon(Icon_Data_t Icon,BLUETOOTH_STATUS_t connect_st
 }
 void SEDHOM_Icons::Button_Icon(Icon_Data_t Icon,bool print_on_and_off)
 {
-    Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{50,20} ,30,Shape_Fill,GREEN});
-    Circle({{Icon.coordinate.x+39,Icon.coordinate.y+10},7,Shape_Fill,WHITE});
-    Rectangle({{Icon.coordinate.x,Icon.coordinate.y+25},{50,20},30,Shape_Fill,RED});
-    Circle({{Icon.coordinate.x+10,Icon.coordinate.y+35},7,Shape_Fill,WHITE});
+    Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{50,20} ,30,Shape_Fill,Color_Green});
+    Circle({{Icon.coordinate.x+39,Icon.coordinate.y+10},7,Shape_Fill,Color_White});
+    Rectangle({{Icon.coordinate.x,Icon.coordinate.y+25},{50,20},30,Shape_Fill,Color_Red});
+    Circle({{Icon.coordinate.x+10,Icon.coordinate.y+35},7,Shape_Fill,Color_White});
 
     if(print_on_and_off)
     {
-        Text_C({Icon.coordinate.x+8, Icon.coordinate.y+16},FONT_SMALL,WHITE,"ON");
-        Text_C({Icon.coordinate.x+23, Icon.coordinate.y+41},FONT_SMALL,WHITE,"OFF");
+        Text_C({Icon.coordinate.x+8, Icon.coordinate.y+16},FONT_SMALL,Color_White,"ON");
+        Text_C({Icon.coordinate.x+23, Icon.coordinate.y+41},FONT_SMALL,Color_White,"OFF");
     }
 }
 void SEDHOM_Icons::Display_Time_Icon(Icon_Data_t Icon,Time_Data_t time)
@@ -241,9 +242,9 @@ void SEDHOM_Icons::Display_Time_Icon(Icon_Data_t Icon,Time_Data_t time)
 }
 void SEDHOM_Icons::Terminal_Icon(Icon_Data_t Icon)
 {
-    Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{50,50},5,Shape_Fill,WHITE});
-    Rectangle({{Icon.coordinate.x+3,Icon.coordinate.y+3},{44,44},5,Shape_Fill,BLACK});
-    Text_C({Icon.coordinate.x+10,Icon.coordinate.y+30},FONT_BIG,GREEN,">_");
+    Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{50,50},5,Shape_Fill,Color_White});
+    Rectangle({{Icon.coordinate.x+3,Icon.coordinate.y+3},{44,44},5,Shape_Fill,Color_Black});
+    Text_C({Icon.coordinate.x+10,Icon.coordinate.y+30},FONT_BIG,Color_Green,">_");
 }
 void SEDHOM_Icons::About_Icon(Icon_Data_t Icon)
 {
@@ -314,10 +315,10 @@ void SEDHOM_Icons::Arrow_Icon(Icon_Data_t Icon,Direction_t Dir,Color_t border_co
 }
 void SEDHOM_Icons::Color_Icon(Icon_Data_t Icon)
 {
-    Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{30,30},5,Shape_Fill,MAGENTA});
-    Rectangle({{Icon.coordinate.x+5,Icon.coordinate.y+5},{30,30},5,Shape_Fill,RED});
-    Rectangle({{Icon.coordinate.x+10,Icon.coordinate.y+10},{30,30},5,Shape_Fill,BLUE});
-    Rectangle({{Icon.coordinate.x+15,Icon.coordinate.y+15},{30,30},5,Shape_Fill,GREEN});
+    Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{30,30},5,Shape_Fill,Color_Magenta});
+    Rectangle({{Icon.coordinate.x+5,Icon.coordinate.y+5},{30,30},5,Shape_Fill,Color_Red});
+    Rectangle({{Icon.coordinate.x+10,Icon.coordinate.y+10},{30,30},5,Shape_Fill,Color_Blue});
+    Rectangle({{Icon.coordinate.x+15,Icon.coordinate.y+15},{30,30},5,Shape_Fill,Color_Green});
 }
 void SEDHOM_Icons::Time_Icon(Icon_Data_t Icon)
 {
@@ -357,7 +358,7 @@ void SEDHOM_Icons::label_Icon(Icon_Data_t Icon ,Area_t area,int Border,Color_t c
     Color_t label_color_in_func = Icon.color;
     float num = 1;
 
-    if(string_in_label == "OFF" || string_in_label == "off" || num == 0){label_color_in_func = RED;}
+    if(string_in_label == "OFF" || string_in_label == "off" || num == 0){label_color_in_func = Color_Red;}
     else if(string_in_label == "ON" || string_in_label == "on" || num >= 1){label_color_in_func = Icon.color;}
     if(string_in_label == "ON" || string_in_label == "on" || num >= 1){label_color_in_func = Icon.color;}
 
@@ -390,9 +391,9 @@ void SEDHOM_Icons::folder_Icon(Icon_Data_t Icon)
 {
     Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{30,40},5,Shape_Fill,Icon.color});
     Rectangle({{Icon.coordinate.x+28,Icon.coordinate.y+5},{40,20},5,Shape_Fill,Icon.color});
-    Border_Rectangle({Icon.coordinate.x+5,Icon.coordinate.y+10,BLACK,WHITE},{60,20},5,1);
+    Border_Rectangle({Icon.coordinate.x+5,Icon.coordinate.y+10,Color_Black,Color_White},{60,20},5,1);
     Rectangle({{Icon.coordinate.x,Icon.coordinate.y+20},{68,35},5,Shape_Fill,Icon.color});
-    Rectangle({{Icon.coordinate.x,Icon.coordinate.y+20},{69,1},0,Shape_Fill,BLACK});
+    Rectangle({{Icon.coordinate.x,Icon.coordinate.y+20},{69,1},0,Shape_Fill,Color_Black});
 }
 void SEDHOM_Icons::Divider(Icon_Data_t Icon,Orientation_t orientation,int length,int thickness)
 {
@@ -420,8 +421,8 @@ void SEDHOM_Icons::ID_Card_Icon(Icon_Data_t Icon, User_ID_Data_t User ,Color_t m
     #define h1    200
 
     Color_t color_id =0;
-    if(Icon.color == WHITE) color_id = BLACK;
-    else if(Icon.color == BLACK) color_id = WHITE;
+    if(Icon.color == Color_White) color_id = Color_Black;
+    else if(Icon.color == Color_Black) color_id = Color_White;
     else  color_id = Icon.color;
     Rectangle({{x1-3,y1-3},{w1+6,h1+6},20,Shape_Fill,color_id});
     Rectangle({{x1,y1},{w1,h1},20,Shape_Fill,Icon.color});
@@ -446,17 +447,17 @@ void SEDHOM_Icons::ID_Card_Icon(Icon_Data_t Icon, User_ID_Data_t User ,Color_t m
     
     if(User.default_image)
     {
-        Circle({{x1+210,y1+160},40,Shape_Fill,DARKGREY});
-        Circle({{x1+210,y1+100},25,Shape_Fill,DARKGREY});
+        Circle({{x1+210,y1+160},40,Shape_Fill,Color_DarkGrey});
+        Circle({{x1+210,y1+100},25,Shape_Fill,Color_DarkGrey});
         if(User.eye)
         {
-            Circle({{x1+220,y1+97},7,Shape_Fill,BLACK});
-            Circle({{x1+220,y1+97},5,Shape_Fill,DARKGREY});
-            Circle({{x1+220,y1+97},1,Shape_Fill,BLACK});//eye
+            Circle({{x1+220,y1+97},7,Shape_Fill,Color_Black});
+            Circle({{x1+220,y1+97},5,Shape_Fill,Color_DarkGrey});
+            Circle({{x1+220,y1+97},1,Shape_Fill,Color_Black});//eye
             Divider({x1+205,y1+97,Black,Icon.Background},VERTICAL,10,2);
-            Circle({{x1+200,y1+97},7,Shape_Fill,BLACK});
-            Circle({{x1+200,y1+97},5,Shape_Fill,DARKGREY});
-            Circle({{x1+200,y1+97},1,Shape_Fill,BLACK});//eye
+            Circle({{x1+200,y1+97},7,Shape_Fill,Color_Black});
+            Circle({{x1+200,y1+97},5,Shape_Fill,Color_DarkGrey});
+            Circle({{x1+200,y1+97},1,Shape_Fill,Color_Black});//eye
             Divider({x1+225,y1+97,Black,Icon.Background},VERTICAL,10,2);
             Divider({x1+185,y1+97,Black,Icon.Background},VERTICAL,10,2);
         }
@@ -492,12 +493,12 @@ void SEDHOM_Icons::Temperature_Meter_Icon(Icon_Data_t Icon,Color_t Border,int va
   Rectangle({{Icon.coordinate.x+12,Icon.coordinate.y + 150 - levelHeight},{50-24,levelHeight},5,Shape_Fill,Icon.color});
   if(show_val_dashes)
   {
-   Text_C({Icon.coordinate.x+55,Icon.coordinate.y+10},FONT_BIG,red,"-100");
-    Text_C({Icon.coordinate.x+55,Icon.coordinate.y+135},FONT_BIG,Blue,"-0");
+   Text_C({Icon.coordinate.x+55,Icon.coordinate.y+10},FONT_BIG,Color_Red,"-100");
+    Text_C({Icon.coordinate.x+55,Icon.coordinate.y+135},FONT_BIG,Color_Blue,"-0");
     for (int i=0;i<=10; i++) 
     {
-      if(i==3) color_dash = Orange;
-      else if(i==8) color_dash = blue;
+      if(i==3) color_dash = Color_Orange;
+      else if(i==8) color_dash = Color_Blue;
       Text_C({Icon.coordinate.x+55,Icon.coordinate.y+25+i*10},FONT_BIG,color_dash,"-");
     }
   }
