@@ -63,7 +63,8 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
 - OS
     ```cpp
     // functions
-    void Init_Screen(ROTATION_STATUS_t Rotate = Rotate_90_Degree,Color_t Mode = Night_Mode);
+    void Init_OS(ROTATION_STATUS_t Rotate = Rotate_90_Degree,Color_t Mode = Night_Mode);
+    void Restart_OS();
     void Set_Device_Mode(Color_t Mode = Night_Mode);
     int Screen_Height();
     int Screen_Width();
@@ -73,7 +74,6 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     int Convert_Coordinates_to_Center_X_Point(int x);
     int Convert_Coordinates_to_Center_Y_Point(int y);
     Coordinate_t Convert_Coordinates_to_Center(Coordinate_t new_point);
-    void Restart_OS();
     // variables
     Color_t Night_mode = Night_Mode ;
     Color_t Light_mode = Light_Mode ;
