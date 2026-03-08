@@ -175,9 +175,9 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     ```cpp
     static void Text_C(Coordinate_t coordinate,const GFXfont* font,Color_t color,string_t txt);
     void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,String str);
-    void Text(Coordinate_t coordinate,Text_t str);
     void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,float value);
     void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,int value);
+    void Text(Coordinate_t coordinate,Text_Data_t str);
 
     ```
 - Fonts 
@@ -246,23 +246,27 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     ```
 - Widgets
     ```cpp
+    // set mode of widgets
     void set_widgets_mode(Color_t mode = Color_Black);
-    void APP_Bar_Widget(bool show_back_arrow = true,WIFI_STATUS_t WIFI_state = WIFI_Status_connected_level_2_half,BLUETOOTH_STATUS_t Bluetooth_state = BLuetooth_Status_open_and_not_connected,int Battery_Value = 22,Time_t time = {12,33,17,"Am"},Color_t Wifi_on = Color_Blue,Color_t Wifi_off= Color_DarkGrey,Color_t BLE_color= Color_Yellow,Color_t Battery_color = Color_Green,Color_t Time_color = Color_Magenta,Color_t Reverse_color = Color_Blue,Color_t Background=Color_Black);
+    // Draw Widgets Function
+    void APP_Bar_Widget(bool show_back_arrow = true,WIFI_STATUS_t WIFI_state = WIFI_Status_connected_level_2_half,BLUETOOTH_STATUS_t Bluetooth_state = BLuetooth_Status_open_and_not_connected,int Battery_Value = 22,Time_Data_t time = {12,33,17,"Am"},Color_t Wifi_on = Color_Blue,Color_t Wifi_off= Color_DarkGrey,Color_t BLE_color= Color_Yellow,Color_t Battery_color = Color_Green,Color_t Time_color = Color_Magenta,Color_t Reverse_color = Color_Blue,Color_t Background=Color_Black);
     void Big_frame_widget(Color_t color = Color_White,Color_t Background = Color_Black);
     void ERROR_Massage_Widget(String massage = "SEDHOM Display OS Error",Color_t Background = Color_Black,Color_t color=MAGENTA,Color_t color_txt=WHITE,Color_t ERROR_Massage_color = RED,Color_t title_Massage_color = BLUE,String title="ERROR",Shape_filled_t filled = Shape_Fill,int x = 100,int y = 70,int w = 240,int h = 160,int max_lines_of_massage_error =5,int max_char_in_one_line = 20);
     void Drawer_Widget(String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_White,Color_t exit_button_color = Color_Red);
     void Delete_Drawer_Widget();
-    void Handle_Drawer_Widget(Icon_t Icon_menu = {{30,90},Color_Blue,Color_Black},int menu_icon_number = 5,String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_White,Color_t exit_button_color = Color_Red);
+    void Handle_Drawer_Widget(Icon_Data_t Icon_menu = {{30,90},Color_Blue,Color_Black},int menu_icon_number = 5,String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_White,Color_t exit_button_color = Color_Red);
     
     ```
 - Windows
     ```cpp
+    // set mode of windows
     void set_windows_mode(Color_t mode = Color_Black);
-    //drawing window functions 
+    // Drawing window functions 
     void Start_new_Window(String title = "",Color_t title_color = Color_Blue,Icon_Data_t window = {{50,90},Color_White,Color_Black}, Area_t window_area = {300,200},bool show_Divider = false,bool show_close_icon= true);
     void ListView_Window(String title="",Icon_Data_t listview={{30,30},Color_White,Color_Black},Area_t listview_area={400,200}, byte_t listview_number=1,bool show_Divideres = true,bool show_close_icon=true, Color_t choose_active_ball=Color_Magenta,Color_t triangle_choose = Color_Green,Color_t not_active = Color_DarkGrey);
     void Color_Setting_Window(Icon_Data_t Color_window = {{50,90},Color_White,Color_Black});
     void WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[5] = nullptr,Icon_Data_t Wifi_listview_window={{30,30},Color_White,Color_Black}, byte_t listview_number=1,bool show_Divideres = true,Color_t wifi_name_color = Color_Magenta ,Color_t Wifi_active_color = Color_Green,Color_t choose_active_ball=Color_Magenta,Color_t triangle_choose = Color_Green,Color_t not_active = Color_DarkGrey);
+ 
 
     ```
 - Touch

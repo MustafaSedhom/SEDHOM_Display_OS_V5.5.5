@@ -18,8 +18,9 @@ class SEDHOM_Windows
     void WIFI_node(Icon_Data_t Wifi_node,String name,int range,Color_t name_color,Color_t WIFI_on , Color_t not_active,WIFI_STATUS_t status,byte_t max_char_in_name = 12);
     //#########################################################################################################################################
     public:
+      // set mode of windows
       void set_windows_mode(Color_t mode = Color_Black);
-      //drawing window functions 
+      // Drawing window functions 
       void Start_new_Window(String title = "",Color_t title_color = Color_Blue,Icon_Data_t window = {{50,90},Color_White,Color_Black}, Area_t window_area = {300,200},bool show_Divider = false,bool show_close_icon= true);
       void ListView_Window(String title="",Icon_Data_t listview={{30,30},Color_White,Color_Black},Area_t listview_area={400,200}, byte_t listview_number=1,bool show_Divideres = true,bool show_close_icon=true, Color_t choose_active_ball=Color_Magenta,Color_t triangle_choose = Color_Green,Color_t not_active = Color_DarkGrey);
       void Color_Setting_Window(Icon_Data_t Color_window = {{50,90},Color_White,Color_Black});

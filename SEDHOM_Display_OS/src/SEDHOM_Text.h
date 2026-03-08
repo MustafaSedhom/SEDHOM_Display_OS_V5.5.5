@@ -15,9 +15,9 @@ class SEDHOM_Text
         // Text
         static void Text_C(Coordinate_t coordinate,const GFXfont* font,Color_t color,string_t txt);
         void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,String str);
-        void Text(Coordinate_t coordinate,Text_Data_t str);
         void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,float value);
         void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,int value);
+        void Text(Coordinate_t coordinate,Text_Data_t str);
 };
 //ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 // Text_C
