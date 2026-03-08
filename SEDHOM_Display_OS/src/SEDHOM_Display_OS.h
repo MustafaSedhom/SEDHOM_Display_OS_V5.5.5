@@ -40,7 +40,8 @@ class SEDHOM_Display_OS
     // my name is Mustafa SEDHOM i wrote this lib to make easy way to use TFT Display in embedded projects
   public:
     /// define all functions
-    void Init_Screen(ROTATION_STATUS_t Rotate = Rotate_90_Degree,Color_t Mode = Night_Mode);
+    void Init_OS(ROTATION_STATUS_t Rotate = Rotate_90_Degree,Color_t Mode = Night_Mode);
+    void Restart_OS();
     void Set_Device_Mode(Color_t Mode = Night_Mode);
     int Screen_Height();
     int Screen_Width();
@@ -50,7 +51,6 @@ class SEDHOM_Display_OS
     int Convert_Coordinates_to_Center_X_Point(int x);
     int Convert_Coordinates_to_Center_Y_Point(int y);
     Coordinate_t Convert_Coordinates_to_Center(Coordinate_t new_point);
-    void Restart_OS();
     // define all variables
     Color_t Night_mode = Night_Mode ;
     Color_t Light_mode = Light_Mode ;
@@ -205,12 +205,16 @@ class SEDHOM_Animations_OS : public SEDHOM_Animations
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // define all functions
-void SEDHOM_Display_OS::Init_Screen(ROTATION_STATUS_t Rotate,Color_t Mode)
+void SEDHOM_Display_OS::Init_OS(ROTATION_STATUS_t Rotate,Color_t Mode)
 {
   init_Screen(Rotate);
   OS_Mode = Mode;
   Set_Device_Mode(Mode);
   SEDHOM_Icon_OS::Text_C({0,0},FONT_BIG,0," ");
+}
+void SEDHOM_Display_OS::Restart_OS()
+{
+  Init_OS();
 }
 void SEDHOM_Display_OS::Set_Device_Mode(Color_t Mode)
 {
@@ -259,10 +263,6 @@ int SEDHOM_Display_OS::Convert_Coordinates_to_Center_X_Point(int x)
 int SEDHOM_Display_OS::Convert_Coordinates_to_Center_Y_Point(int y)
 {
   return (Screen_Width()/2) - y;
-}
-void SEDHOM_Display_OS::Restart_OS()
-{
-  Init_Screen();
 }
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

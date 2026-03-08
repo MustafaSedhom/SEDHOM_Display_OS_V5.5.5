@@ -127,11 +127,11 @@ void SEDHOM_Windows::WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[],Icon_Da
   #define WIFI_listView_W    230
   //
     WIFI_Data_Simple_t defaultNames[5] = {
-      {"mustafa Sedhom",0,WIFI_Status_no_internet},
       {"None",0,WIFI_Status_no_internet},
       {"None",0,WIFI_Status_no_internet},
       {"None",0,WIFI_Status_no_internet},
-      {"mustafa Sed",0,WIFI_Status_no_internet},
+      {"None",0,WIFI_Status_no_internet},
+      {"None",0,WIFI_Status_no_internet},
   };
     if(wifi_Data == nullptr)
         wifi_Data = defaultNames;
