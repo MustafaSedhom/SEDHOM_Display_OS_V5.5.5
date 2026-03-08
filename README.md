@@ -62,6 +62,7 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
 ## **properites of Library**
 - OS
     ```cpp
+    // functions
     void Init_Screen(ROTATION_STATUS_t Rotate = Rotate_90_Degree,Color_t Mode = Night_Mode);
     void Set_Device_Mode(Color_t Mode = Night_Mode);
     int Screen_Height();
@@ -72,6 +73,8 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     int Convert_Coordinates_to_Center_X_Point(int x);
     int Convert_Coordinates_to_Center_Y_Point(int y);
     Coordinate_t Convert_Coordinates_to_Center(Coordinate_t new_point);
+    void Restart_OS();
+    // variables
     Color_t Night_mode = Night_Mode ;
     Color_t Light_mode = Light_Mode ;
     ROTATION_STATUS_t Rotate_0 = Rotate_0_Degree;
@@ -90,19 +93,23 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
 - Shapes
     ```cpp
     // define Basic shapes
-    void Pixel(Pixel_t pixel);
-    void Line(Line_t line);    
-    void Rectangle(Rectangle_t rect);
-    void Square(Square_t sqrt);  
-    void Circle(Circle_t circle); 
-    void Triangle(Triangle_t tri); 
-    void Equilateral_Triangle(Triangle_special_t tri);
-    void Right_Triangle(Icon_t Icon,Area_t area,Shape_filled_t filled);
-    void Border_Rectangle(Icon_t Border_Rect,Area_t area,int Radius,int Border_size);
-    void Container(Rectangle_t container);
-    // custom image or font
-    void Draw_Custom_int_shape(Icon_t Icon,Area_t area,int arr[]);
-    void Draw_Custom_Char(Icon_t Icon,Area_t area,char arr[]);
+    void Pixel(Pixel_Data_t pixel);
+    void Line(Line_Data_t line);    
+    static void Rectangle(Rectangle_Data_t rect);
+    void Square(Square_Data_t sqrt);  
+    void Circle(Circle_Data_t circle); 
+    void Triangle(Triangle_Data_t tri); 
+    // shapes derivative
+    void Arc(Circle_Data_t Arc,int arc_number);
+    void Equilateral_Triangle(Triangle_special_Data_t tri);
+    void Right_Triangle(Icon_Data_t Icon,Area_t area,Shape_filled_t filled);
+    void Border_Rectangle(Icon_Data_t Border_Rect,Area_t area,int Radius,int Border_size);
+    void Container(Rectangle_Data_t container);
+    // SEDHOM Shapes
+    void SEDHOM_Circle(Circle_Data_t circle);
+    // custom image or fonts
+    void Draw_Custom_int_shape(Icon_Data_t Icon,Area_t area,int arr[]);
+    void Draw_Custom_Char(Icon_Data_t Icon,Area_t area,char arr[]);
 
     ```
 - Icons 
@@ -160,6 +167,8 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     void Chandelier_Icon(Icon_t Icon = default_parameter_for_icon);
     void Smart_TV_Icon(Icon_t Icon = default_parameter_for_icon,Color_t WIFI_icon = White);
     void Air_Conditioner_Icon(Icon_t Icon = default_parameter_for_icon);
+    void Close_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Star_Icon(Icon_Data_t Icon = default_parameter_for_icon);
 
     ```
 - Text 
@@ -244,16 +253,16 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     void Drawer_Widget(String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_White,Color_t exit_button_color = Color_Red);
     void Delete_Drawer_Widget();
     void Handle_Drawer_Widget(Icon_t Icon_menu = {{30,90},Color_Blue,Color_Black},int menu_icon_number = 5,String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_White,Color_t exit_button_color = Color_Red);
-
-
+    
     ```
 - Windows
     ```cpp
-    void set_windows_mode(Color_t mode);
-    String Full_KeyBoard_window_user_input_TXT = "";
+    void set_windows_mode(Color_t mode = Color_Black);
     //drawing window functions 
-    void Full_Key_Board_Window(Color_t color,Color_t Background,Color_t char_color = WHITE,Color_t text_field_color = -1,bool caps_or_not=true,bool special_char_or_not=false);
-    //bool Handling_Touch_Full_Key_Board_Window();
+    void Start_new_Window(String title = "",Color_t title_color = Color_Blue,Icon_Data_t window = {{50,90},Color_White,Color_Black}, Area_t window_area = {300,200},bool show_Divider = false,bool show_close_icon= true);
+    void ListView_Window(String title="",Icon_Data_t listview={{30,30},Color_White,Color_Black},Area_t listview_area={400,200}, byte_t listview_number=1,bool show_Divideres = true,bool show_close_icon=true, Color_t choose_active_ball=Color_Magenta,Color_t triangle_choose = Color_Green,Color_t not_active = Color_DarkGrey);
+    void Color_Setting_Window(Icon_Data_t Color_window = {{50,90},Color_White,Color_Black});
+    void WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[5] = nullptr,Icon_Data_t Wifi_listview_window={{30,30},Color_White,Color_Black}, byte_t listview_number=1,bool show_Divideres = true,Color_t wifi_name_color = Color_Magenta ,Color_t Wifi_active_color = Color_Green,Color_t choose_active_ball=Color_Magenta,Color_t triangle_choose = Color_Green,Color_t not_active = Color_DarkGrey);
 
     ```
 - Touch
@@ -262,8 +271,8 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     int get_X_point();
     int get_Y_point();
     int get_Z_point();
-    bool onTap(Touch_t pressed_space);
-    void onTap(Touch_t pressed_space,void (*Do_Function)());
+    bool onTap(Touch_Data_t pressed_space);
+    void onTap(Touch_Data_t pressed_space,void (*Do_Function)());
     ```
 - SD Card 
     ```cpp
@@ -276,6 +285,7 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
 - Handle pages
     ```cpp
     // input SEDHOM_Handling_pages_parameters instead of void (*pages_array[])(void), int size
+    // like this -> Handle_all_pages(SEDHOM_Handling_pages_parameters);
     void Handle_all_pages(void (*pages_array[])(void), int size);
     void goto_page(int number);
     void push_page();
@@ -349,7 +359,8 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     Shapes_type_t                   // enum
     Coordinate_t                    // struct
     WIFI_Encryption_Type_t          // enum
-    WIFI_Config_t                   // struct
+    WIFI_Data_t                     // struct
+    WIFI_Data_Simple_t              // struct
     Position_t                      // enum
     Shapes_t                        // struct
     Text_Data_t                     // struct
@@ -368,6 +379,7 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     Direction_t                     // enum
     Touch_Data_t                    // struct
     Orientation_t                   // enum
+    Icon_Size_t                     // enum
 
     ```
 #
@@ -389,12 +401,14 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
  # <img src="images/mustafa_13.jpeg" style="border-radius:5%;">
  # <img src="images/mustafa_14.jpeg" style="border-radius:5%;">
  # <img src="images/mustafa_16.jpeg" style="border-radius:5%;">
+ # <img src="images/wifi_list_view_5.jpeg" style="border-radius:5%;">
+ # <img src="images/wifi_list_view_1.jpeg" style="border-radius:5%;">
 #
 
 ## if you want install it in arduino ide 
 1. download this folder in your pc
-2. put this folder in (~/Documentos/Arduino/libraries) between your arduino libraries .
-3. you should install some library becuose this lib is a top layer of drivers 
+2. put this folder in (~/Documents/Arduino/libraries) between your arduino libraries .
+3. you should install some library because this lib is a top layer of drivers 
     - MCUFreind_kbv  <- or choose any driver do you want and adding some setting in SEDHOM_Display_Settings.h file .
     - Adarfruit Touch <- this lib for touch you can use it and edit all setting touch in SEDHOM_Display_Settings.h file .
     - Adafruit GFX <- for drawing basic shapes .
