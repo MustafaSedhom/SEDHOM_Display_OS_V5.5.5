@@ -71,6 +71,7 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
         void Air_Conditioner_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Close_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Star_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+        void Gap_Icon(Coordinate_t coordinate = {50,90},int Gap_size = 10,Orientation_t orientation = VERTICAL);
 };
 // define all functions and Draw all Widgets and icons
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -779,7 +780,26 @@ void SEDHOM_Icons::Star_Icon(Icon_Data_t Icon)
   Equilateral_Triangle({{Icon.coordinate},30,Shape_Fill,Direction_Up,Icon.color});
   Equilateral_Triangle({{Icon.coordinate.x+10,Icon.coordinate.y},30,Shape_Fill,Direction_Down,Icon.color});
 }
-
+void SEDHOM_Icons::Gap_Icon(Coordinate_t coordinate,int Gap_size,Orientation_t orientation)
+{
+  String gap;
+  if(orientation == HORIZONTAL)
+  {
+    for (int i = 0; i < Gap_size; i++)
+    {
+      Text({coordinate.x,coordinate.y+(i*18)},FONT_BIG,Color_White," ");
+    }
+  }
+  else if (orientation == VERTICAL)
+  {
+    for (int i = 0; i < Gap_size; i++)
+    {
+      gap += " ";
+    }
+    Text(coordinate,FONT_BIG,Color_White,gap);
+  } 
+    
+}
 
 
 

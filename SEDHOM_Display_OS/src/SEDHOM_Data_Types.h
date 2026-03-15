@@ -22,6 +22,86 @@
 typedef unsigned char  byte_t;   
 typedef uint16_t Color_t;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// make Data type of Data Types names and value put it
+typedef enum 
+{
+    DataType_Char,
+    DataType_Int,
+    DataType_Float,
+    DataType_Array,
+    DataType_String,
+    DataType_Pointer,
+}DataType_t;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// make Dynamic data type to can change Data type in my code at run time and put on it many different Value
+class Dynamic
+{
+private:
+    DataType_t Data_name;
+    String value_val;
+public:
+    Dynamic();
+    ~Dynamic();
+    void Set_kindof_DataType(DataType_t DataType_name)
+    {
+        Data_name = DataType_name;
+    }
+    void Set_value(String val)
+    {
+        switch (Data_name)
+        {
+            case DataType_Char:
+                char var0 = val.toInt();
+                break;
+            case DataType_Int:
+                int var1 = val.toInt();
+                break;
+            case DataType_Float:
+                float var2 = val.toFloat();
+                break;
+            case DataType_String:
+                String var3 = val;
+                break;
+            case DataType_Array:
+                break;
+            case DataType_Pointer:
+                break;
+        }
+    }
+    // String Get_value()
+    // {
+    //     switch (Data_name)
+    //     {
+    //         case DataType_Char:
+    //             char var0 = val.toInt();
+    //             break;
+    //         case DataType_Int:
+    //             int var1 = val.toInt();
+    //             break;
+    //         case DataType_Float:
+    //             float var2 = val.toFloat();
+    //             break;
+    //         case DataType_String:
+    //             String var3 = val;
+    //             break;
+    //         case DataType_Array:
+    //             break;
+    //         case DataType_Pointer:
+    //             break;
+    //         }
+    //     return "";
+    // }
+};
+
+Dynamic::Dynamic()
+{
+}
+
+Dynamic::~Dynamic()
+{
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef enum 
 {
     Rotate_0_Degree,

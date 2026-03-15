@@ -10,6 +10,7 @@
 // 4-> sizeof(var);
 // 5-> pinMode(pin,mode);
 // 6-> digitalWrite(pin,value);
+// 6-> var = digitalRead(pin);
 //*************************************************************************************************
 // include you lib driver here for TFT display
 //*************************************************************************************************
@@ -28,18 +29,6 @@
 //////////////////////////////////////
 #include <ArduinoJson.h>
 //////////////////////////////////////
-// #include <LittleFS.h>
-//////////////////////////////////////
-#if defined(ESP32)
-  // #include <WiFi.h>
-  // #include <Preferences.h>
-#elif defined(ESP8266)
-  // #include <ESP8266WiFi.h>
-  // #include <EEPROM.h>
-#else
-  // #include <EEPROM.h>
-#endif
-
 //============================================================================================================================================
 //*************************************************************************************************
 // define your object for you Display here but you should name Display Like a do  
@@ -65,7 +54,6 @@ MCUFRIEND_kbv Display;
 #define YM 33
 #define YP 35
 #else
-
   #define YP A3  // must be an analog pin, use "An" notation!
   #define XM A2  // must be an analog pin, use "An" notation!
   #define YM 9   // can be a digital pin
