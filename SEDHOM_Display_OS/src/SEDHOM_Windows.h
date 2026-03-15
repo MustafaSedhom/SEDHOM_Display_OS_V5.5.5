@@ -15,7 +15,7 @@ class SEDHOM_Windows
     // make object to use touch functions
     SEDHOM_Touch Touch;
     //
-    void WIFI_node(Icon_Data_t Wifi_node,String name,int range,Color_t name_color,Color_t WIFI_on , Color_t not_active,WIFI_STATUS_t status,byte_t max_char_in_name = 12);
+    void WIFI_node(Icon_Data_t Wifi_node,String name,int range,Color_t name_color,Color_t WIFI_on , Color_t not_active,WIFI_STATUS_t status,byte_t max_char_in_name = 10);
     //#########################################################################################################################################
     public:
       // set mode of windows
@@ -105,21 +105,9 @@ void SEDHOM_Windows::Color_Setting_Window(Icon_Data_t Color_Window)
 void SEDHOM_Windows::WIFI_node(Icon_Data_t Wifi_node,String name,int range,Color_t name_color,Color_t WIFI_on,Color_t not_active,WIFI_STATUS_t status,byte_t max_char_in_name)
 {
   static int number = 1;
-  String all_name;
-  // if( name.length() > max_char_in_name)
-  // {
-  //   String word = "...";
-  //   String part = name.substring(0, max_char_in_name-3);
-  //   all_name = part + word ;
-  // }
-  // else
-  // {
-  //   all_name = name;
-  // }
   if(range>=100) range=99;
-  Icons.Text_OverFlow({Wifi_node.coordinate.x,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(number++)+String(">"),max_char_in_name,"...");
-  // Icons.Text({Wifi_node.coordinate.x,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(number++)+String(">"));
-  Icons.Text({(number>10)?Wifi_node.coordinate.x+43 : Wifi_node.coordinate.x+30 ,Wifi_node.coordinate.y},FONT_BIG,name_color,all_name);
+  Icons.Text({Wifi_node.coordinate.x,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(number++)+String(">"));
+  Icons.Text_OverFlow({(number>10)?Wifi_node.coordinate.x+43 : Wifi_node.coordinate.x+30 ,Wifi_node.coordinate.y},FONT_BIG,name_color,name,max_char_in_name,"...");
   Icons.WIFI_Icon({{Wifi_node.coordinate.x+250,Wifi_node.coordinate.y},WIFI_on,Wifi_node.Background},Color_DarkGrey,status);
   Icons.Text({Wifi_node.coordinate.x+270,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(range)+String("%"));
 }
@@ -143,7 +131,7 @@ void SEDHOM_Windows::WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[],Icon_Da
   for (int i = 0; i < 5; i++)
   {
     WIFI_node({{Wifi_listview_window.coordinate.x+10,(Wifi_listview_window.coordinate.y+82+(30*i))},Wifi_listview_window.color,
-    Wifi_listview_window.Background},wifi_Data[i].name,wifi_Data[i].range,wifi_name_color,Wifi_active_color,not_active,wifi_Data[i].wifi_status,12);
+    Wifi_listview_window.Background},wifi_Data[i].name,wifi_Data[i].range,wifi_name_color,Wifi_active_color,not_active,wifi_Data[i].wifi_status,10);
   }
   if(listview_number == 1 || listview_number ==2) Icons.Rectangle({{Wifi_listview_window.coordinate.x+50,Wifi_listview_window.coordinate.y+WIFI_listView_W-15},{WIFI_listView_H-150,10},40,Shape_Fill,Color_DarkGrey});
 }
