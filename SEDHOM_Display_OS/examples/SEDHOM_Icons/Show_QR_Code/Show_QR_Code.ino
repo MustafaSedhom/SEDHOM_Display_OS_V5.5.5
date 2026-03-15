@@ -17,7 +17,7 @@ SEDHOM_Icon_OS Icons(OS);
 //=======================================================================================
 void setup()
 {
-  OS.Init_Screen(OS.Rotate_90,OS.Night_mode);
+  OS.Init_OS(OS.Rotate_90,OS.Night_mode);
   ///////////////////////////////////////////////////////////////////////////////////////////////////
   // Icons.QRCode_Icon(5,5,5,Yellow,BLUE,5,"https://drive.google.com/drive/folders/16Hg8dgcBH3FalRkK8SDBWj2221bd8Fue?usp=sharing");
 }

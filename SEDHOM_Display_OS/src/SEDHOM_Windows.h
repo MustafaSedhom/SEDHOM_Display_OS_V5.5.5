@@ -106,18 +106,19 @@ void SEDHOM_Windows::WIFI_node(Icon_Data_t Wifi_node,String name,int range,Color
 {
   static int number = 1;
   String all_name;
-  if( name.length() > max_char_in_name)
-  {
-    String word = "...";
-    String part = name.substring(0, max_char_in_name-3);
-    all_name = part + word ;
-  }
-  else
-  {
-    all_name = name;
-  }
+  // if( name.length() > max_char_in_name)
+  // {
+  //   String word = "...";
+  //   String part = name.substring(0, max_char_in_name-3);
+  //   all_name = part + word ;
+  // }
+  // else
+  // {
+  //   all_name = name;
+  // }
   if(range>=100) range=99;
-  Icons.Text({Wifi_node.coordinate.x,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(number++)+String(">"));
+  Icons.Text_OverFlow({Wifi_node.coordinate.x,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(number++)+String(">"),max_char_in_name,"...");
+  // Icons.Text({Wifi_node.coordinate.x,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(number++)+String(">"));
   Icons.Text({(number>10)?Wifi_node.coordinate.x+43 : Wifi_node.coordinate.x+30 ,Wifi_node.coordinate.y},FONT_BIG,name_color,all_name);
   Icons.WIFI_Icon({{Wifi_node.coordinate.x+250,Wifi_node.coordinate.y},WIFI_on,Wifi_node.Background},Color_DarkGrey,status);
   Icons.Text({Wifi_node.coordinate.x+270,Wifi_node.coordinate.y},FONT_BIG,Wifi_node.color,String(range)+String("%"));

@@ -17,7 +17,7 @@ SEDHOM_Widgets_OS Widgets(OS);
 //=======================================================================================
 void setup()
 {
-  OS.Init_Screen(OS.Rotate_90,OS.Night_mode);
+  OS.Init_OS(OS.Rotate_90,OS.Night_mode);
   ///////////////////////////////////////////////////////////////////////////////////////////////////
   // Icons.Text_C_Field_Icon(100,100,260,22,GREEN,Blue,FONT_FREEMONO_SMALL,OS.Mode(),"mustafa SEDggggHOhM Mg");
   Widgets.ERROR_Massage_Widget("Undefinjjjmmmmmmmmmj Behaviogngjngjgkgggggtrddedrhuhi8njgngjjjjjjjjjjgnjgngjnhguhghhhhhhgjngjgngjgnr",OS.Mode());

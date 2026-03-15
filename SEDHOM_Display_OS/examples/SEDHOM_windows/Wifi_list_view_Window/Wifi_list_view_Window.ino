@@ -22,7 +22,7 @@ SEDHOM_Windows_OS Windows(OS);
 //======================================================================================= 
 void setup()
 {
-  OS.Init_Screen(OS.Rotate_90,OS.Night_mode);
+  OS.Init_OS(OS.Rotate_90,OS.Night_mode);
   ///////////////////////////////////////////////////////////////////////////////////////
   WIFI_Data_Simple_t mywifi[]=
   {
