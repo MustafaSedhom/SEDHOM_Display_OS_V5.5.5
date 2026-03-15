@@ -724,17 +724,18 @@ void SEDHOM_Icons::Text_Feild_Icon( Icon_Data_t Icon,Text_Data_t Txt ,int length
 {
    Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{length,40},20,Shape_Fill,Icon.color});
    Rectangle({{Icon.coordinate.x+3,Icon.coordinate.y+3},{length-6,40-6},20,Shape_Fill,Icon.Background});
-   if( Txt.txt.length() > max_char)
-   {
-      String word = "...";
-      String part = Txt.txt.substring(0, max_char-3);
-      String all = part + word ;
-      Text({Icon.coordinate.x+10,Icon.coordinate.y+25},Txt.txt_font,Txt.txt_color,all);
-   }
-   else
-   {
-    Text({Icon.coordinate.x+10,Icon.coordinate.y+25},Txt.txt_font,Txt.txt_color,Txt.txt);
-   }
+  //  if( Txt.txt.length() > max_char)
+  //  {
+  //     String word = "...";
+  //     String part = Txt.txt.substring(0, max_char-3);
+  //     String all = part + word ;
+  //     Text({Icon.coordinate.x+10,Icon.coordinate.y+25},Txt.txt_font,Txt.txt_color,all);
+  //  }
+  //  else
+  //  {
+    //   Text({Icon.coordinate.x+10,Icon.coordinate.y+25},Txt.txt_font,Txt.txt_color,Txt.txt);
+    //  }
+  Text_OverFlow({Icon.coordinate.x+10,Icon.coordinate.y+25},Txt.txt_font,Txt.txt_color,Txt.txt,max_char,"...");
 }
 void SEDHOM_Icons::Warning_Icon( Icon_Data_t Icon,Color_t txt_color,Shape_filled_t filled )
 {
