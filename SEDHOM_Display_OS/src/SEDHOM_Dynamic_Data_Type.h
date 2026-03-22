@@ -14,6 +14,8 @@ typedef enum
     Data_Type_string,
 }Data_Type_t;
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+#define max_Dynamic_variable_size_by_byte      50
+//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 class SEDHOM_Dynamic_Data_Type
 {
 private:
@@ -26,7 +28,7 @@ private:
        float f;
        double d;
        bool b;
-       char s[50]; // String
+       char s[max_Dynamic_variable_size_by_byte]; // String
    }value;
 public:
     
@@ -51,13 +53,29 @@ public:
     SEDHOM_Dynamic_Data_Type& operator=(double val);
     SEDHOM_Dynamic_Data_Type& operator=(bool val);
     SEDHOM_Dynamic_Data_Type& operator=(const char* val);
+    bool operator==( SEDHOM_Dynamic_Data_Type& other);
+    bool operator!=( SEDHOM_Dynamic_Data_Type& other);
     // functions for can change from data type to another
     int    to_Int();
     float  to_Float();
     double to_Double();
     bool   to_Bool();
     char*  to_String();
+    // functions for can change from data type to another
+    template<typename T>
+    T get_Value();
 };
+
+// // =========================
+// // Template Specializations
+// // =========================
+// template<> int DynamicVar::getValue<int>() const { return toInt(); }
+// template<> float DynamicVar::getValue<float>() const { return toFloat(); }
+// template<> double DynamicVar::getValue<double>() const { return toDouble(); }
+// template<> char DynamicVar::getValue<char>() const { return (type == CHAR) ? value.c : '\0'; }
+// template<> bool DynamicVar::getValue<bool>() const { return toBool(); }
+// template<> const char* DynamicVar::getValue<const char*>() const { return toString(); }
+// };
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // define all variables
 SEDHOM_Dynamic_Data_Type::SEDHOM_Dynamic_Data_Type()
@@ -140,6 +158,14 @@ SEDHOM_Dynamic_Data_Type& SEDHOM_Dynamic_Data_Type::operator=(const char* val)
 {
     set_Value(val);
     return *this;
+}
+bool SEDHOM_Dynamic_Data_Type::operator==( SEDHOM_Dynamic_Data_Type& other)
+{
+    return strcmp(this->to_String(), other.to_String()) == 0;
+}
+bool SEDHOM_Dynamic_Data_Type::operator!=( SEDHOM_Dynamic_Data_Type& other)
+{
+    return !(*this == other);
 }
 int SEDHOM_Dynamic_Data_Type::to_Int() 
 {
