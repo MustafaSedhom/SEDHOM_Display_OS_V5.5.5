@@ -32,10 +32,10 @@ public:
     
     SEDHOM_Dynamic_Data_Type();
     ~SEDHOM_Dynamic_Data_Type();
+    // functions to set Data type for this Dynamic variable
+    void set_Data_Type(Data_Type_t type) { Data_Type = type; }
     // functions to get Data type for this Dynamic variable
-    void set_Type(Data_Type_t type) { Data_Type = type; }
-    // functions to get Data type for this Dynamic variable
-    Data_Type_t get_Type()  { return Data_Type; }
+    Data_Type_t get_Data_Type()  { return Data_Type; }
     // functions to set value for this Dynamic variable
     void set_Value(char val);
     void set_Value(int val);
@@ -51,6 +51,12 @@ public:
     SEDHOM_Dynamic_Data_Type& operator=(double val);
     SEDHOM_Dynamic_Data_Type& operator=(bool val);
     SEDHOM_Dynamic_Data_Type& operator=(const char* val);
+    // functions for can change from data type to another
+    int    to_Int();
+    float  to_Float();
+    double to_Double();
+    bool   to_Bool();
+    char*  to_String();
 };
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 // define all variables
@@ -135,5 +141,77 @@ SEDHOM_Dynamic_Data_Type& SEDHOM_Dynamic_Data_Type::operator=(const char* val)
     set_Value(val);
     return *this;
 }
+int SEDHOM_Dynamic_Data_Type::to_Int() 
+{
+    switch(Data_Type) 
+    {
+        case Data_Type_char: return value.c;
+        case Data_Type_int: return value.i;
+        case Data_Type_float: return (int)value.f;
+        case Data_Type_double: return (int)value.d;
+        case Data_Type_bool: return value.b ? 1 : 0;
+        case Data_Type_string: return atoi(value.s);
+        default: return 0;
+    }
+    
+}
+float SEDHOM_Dynamic_Data_Type::to_Float() 
+{
+
+    switch(Data_Type) 
+    {
+        case Data_Type_char: return (float)value.c;
+        case Data_Type_int: return  (float)value.i;
+        case Data_Type_float: return value.f;
+        case Data_Type_double: return (float)value.d;
+        case Data_Type_bool: return value.b ? 1.0f : 0.0f;
+        case Data_Type_string: return atof(value.s);
+        default: return 0.0f;
+    }
+}
+
+double SEDHOM_Dynamic_Data_Type::to_Double() 
+{
+
+    switch(Data_Type) 
+    {
+        case Data_Type_char: return (double)value.c;
+        case Data_Type_int: return (double)value.i;
+        case Data_Type_float: return (double)value.f;
+        case Data_Type_double: return value.d;
+        case Data_Type_bool: return value.b ? 1.0 : 0.0;
+        case Data_Type_string: return atof(value.s);
+        default: return 0.0;
+    }
+}
+bool SEDHOM_Dynamic_Data_Type::to_Bool()  
+{
+    switch(Data_Type) 
+    {
+        case Data_Type_int: return value.i != 0;
+        case Data_Type_float: return value.f != 0;
+        case Data_Type_double: return value.d != 0;
+        case Data_Type_bool: return value.b;
+        case Data_Type_string: return strcmp(value.s,"true") == 0;
+        default: return false;
+    }
+}
+
+char* SEDHOM_Dynamic_Data_Type::to_String() 
+{
+    static char buffer[50];
+    switch(Data_Type)
+    {
+        case Data_Type_int:    snprintf(buffer, sizeof(buffer), "%d", value.i); break;
+        case Data_Type_float:  snprintf(buffer, sizeof(buffer), "%.2f", value.f); break;
+        case Data_Type_double: snprintf(buffer, sizeof(buffer), "%.2lf", value.d); break;
+        case Data_Type_char:   snprintf(buffer, sizeof(buffer), "%c", value.c); break;
+        case Data_Type_bool:   snprintf(buffer, sizeof(buffer), "%s", value.b ? "true" : "false"); break;
+        case Data_Type_string: return value.s;
+        default: return "";
+    }
+    return buffer;
+}
+
 //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 #endif // !SEDHOM_DYNAMIC_DATA_TYPE_H_
