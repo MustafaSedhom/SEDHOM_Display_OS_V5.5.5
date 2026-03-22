@@ -33,6 +33,7 @@ private:
 public:
     
     SEDHOM_Dynamic_Data_Type();
+    SEDHOM_Dynamic_Data_Type(Data_Type_t init_type);
     ~SEDHOM_Dynamic_Data_Type();
     // functions to set Data type for this Dynamic variable
     void set_Data_Type(Data_Type_t type) { Data_Type = type; }
@@ -61,9 +62,6 @@ public:
     double to_Double();
     bool   to_Bool();
     char*  to_String();
-    // functions for can change from data type to another
-    template<typename T>
-    T get_Value();
 };
 
 // // =========================
@@ -81,6 +79,10 @@ public:
 SEDHOM_Dynamic_Data_Type::SEDHOM_Dynamic_Data_Type()
 {
     Data_Type = Data_Type_none;
+}
+SEDHOM_Dynamic_Data_Type::SEDHOM_Dynamic_Data_Type(Data_Type_t init_type)
+{
+    Data_Type = init_type;
 }
 SEDHOM_Dynamic_Data_Type::~SEDHOM_Dynamic_Data_Type()
 {
@@ -161,7 +163,9 @@ SEDHOM_Dynamic_Data_Type& SEDHOM_Dynamic_Data_Type::operator=(const char* val)
 }
 bool SEDHOM_Dynamic_Data_Type::operator==( SEDHOM_Dynamic_Data_Type& other)
 {
+    if (Data_Type == Data_Type_string || other.Data_Type == Data_Type_string)
     return strcmp(this->to_String(), other.to_String()) == 0;
+    return this->to_Double() == other.to_Double();
 }
 bool SEDHOM_Dynamic_Data_Type::operator!=( SEDHOM_Dynamic_Data_Type& other)
 {
@@ -225,7 +229,7 @@ bool SEDHOM_Dynamic_Data_Type::to_Bool()
 
 char* SEDHOM_Dynamic_Data_Type::to_String() 
 {
-    static char buffer[50];
+    char buffer[50];
     switch(Data_Type)
     {
         case Data_Type_int:    snprintf(buffer, sizeof(buffer), "%d", value.i); break;

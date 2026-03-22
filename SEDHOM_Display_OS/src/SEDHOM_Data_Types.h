@@ -28,6 +28,14 @@ class Dynamic : public SEDHOM_Dynamic_Data_Type
 {
     public:
         using SEDHOM_Dynamic_Data_Type::operator=;
+        // Constructors
+        Dynamic() {}
+        Dynamic(int value) { *this = value; }
+        Dynamic(float value) { *this = value; }
+        Dynamic(double value) { *this = value; }
+        Dynamic(bool value) { *this = value; }
+        Dynamic(char value) { *this = value; }
+        Dynamic(const char* value) { *this = value; }
 };
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef enum 
