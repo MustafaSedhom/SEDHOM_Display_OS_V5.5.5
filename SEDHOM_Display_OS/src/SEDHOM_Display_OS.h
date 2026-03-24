@@ -31,6 +31,10 @@
 #include "SEDHOM_Comminucations.h"
 // include communications file to use communication protocols in your projects
 #include "SEDHOM_Animations.h"
+// include math file to use math equations in your projects
+#include "SEDHOM_Math.h"
+// include rotation file to use rotate methods in your projects
+#include "SEDHOM_Rotations.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class SEDHOM_Display_OS
 {
@@ -196,6 +200,32 @@ class SEDHOM_Animations_OS : public SEDHOM_Animations
     // SEDHOM_Animations::set_widgets_mode(OS.Mode());
   }
 
+};
+class SEDHOM_Math_OS : public SEDHOM_Math
+{
+private:
+public:
+  SEDHOM_Math_OS()
+  {
+
+  }
+  SEDHOM_Math_OS(SEDHOM_Display_OS & OS)
+  {
+
+  }
+};
+class SEDHOM_Rotation_OS : public SEDHOM_Rotations
+{
+private:
+public:
+  SEDHOM_Rotation_OS()
+  {
+
+  }
+  SEDHOM_Rotation_OS(SEDHOM_Display_OS & OS)
+  {
+
+  }
 };
 
 
