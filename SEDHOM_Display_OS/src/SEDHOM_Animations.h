@@ -70,7 +70,7 @@ class SEDHOM_Animations : public Text_Animator //, public Shapes_Animations
       
     public:
     // void Text_change_color(Coordinate_t co,GFXfont* Font,int time_ms,String txt);
-    void Rotate_Rectangle_Animation(Rectangle_Data_t Rect,Color_t erase_color,int Animation_time_ms);
+    void Rotate_Rectangle_Animation(Rectangle_Data_t Rect,Color_t erase_color,int Animation_time_ms,int step = 20);
 };
 
 //GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
@@ -83,7 +83,7 @@ class SEDHOM_Animations : public Text_Animator //, public Shapes_Animations
 //       t_change = Time.Calc_time_ms();
 //    }
 // }
-void SEDHOM_Animations::Rotate_Rectangle_Animation(Rectangle_Data_t Rect,Color_t erase_color,int Animation_time_ms)
+void SEDHOM_Animations::Rotate_Rectangle_Animation(Rectangle_Data_t Rect,Color_t erase_color,int Animation_time_ms,int step)
 {
   static int angle = 0;
   static int prev_angle = 0;
@@ -92,7 +92,7 @@ void SEDHOM_Animations::Rotate_Rectangle_Animation(Rectangle_Data_t Rect,Color_t
   {
     Icon.Rotated_Rect({Rect.coordinate,Rect.area,Rect.Radius,Rect.Filled,erase_color}, angle);
     prev_angle = angle;
-    angle += 10;
+    angle += step;
     if (angle >= 360) angle = 0;
     Icon.Rotated_Rect(Rect, angle);
     t_1 = Time.Calc_time_ms();
