@@ -70,7 +70,9 @@ class SEDHOM_Animations : public Text_Animator //, public Shapes_Animations
       
     public:
     // void Text_change_color(Coordinate_t co,GFXfont* Font,int time_ms,String txt);
+    // Rotation Animation
     void Rotate_Rectangle_Animation(Rectangle_Data_t Rect,Color_t erase_color,int Animation_time_ms,int step = 20);
+    void Rotate_Cube_Animation(Coordinate_t coordinate,int size,Color_t color,Color_t erase_color,int Animation_time_ms,int step = 20);
 };
 
 //GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
@@ -96,6 +98,25 @@ void SEDHOM_Animations::Rotate_Rectangle_Animation(Rectangle_Data_t Rect,Color_t
     if (angle >= 360) angle = 0;
     Icon.Rotated_Rect(Rect, angle);
     t_1 = Time.Calc_time_ms();
+  }
+}
+void SEDHOM_Animations::Rotate_Cube_Animation(Coordinate_t coordinate,int size,Color_t color,Color_t erase_color,int Animation_time_ms,int step)
+{
+  static int angle = 0;
+  static int prev_angle = 0;
+  static unsigned long t_cube = 0;
+
+  if (Time.Calc_time_ms() - t_cube >Animation_time_ms ) 
+  {
+      Icon.Cube(coordinate,size,prev_angle,erase_color);
+
+      Icon.Cube(coordinate,size,angle,color);
+      prev_angle = angle;
+      angle += step;
+
+      if (angle >= 360)
+          angle = 0;
+      t_cube = Time.Calc_time_ms();
   }
 }
 //GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG

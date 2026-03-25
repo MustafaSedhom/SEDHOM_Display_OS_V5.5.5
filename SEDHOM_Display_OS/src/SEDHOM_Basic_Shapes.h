@@ -29,7 +29,7 @@ class SEDHOM_Basic_Shapes
         void Draw_Custom_int_shape(Icon_Data_t Icon,Area_t area,int arr[]);
         void Draw_Custom_Char(Icon_Data_t Icon,Area_t area,char arr[]);
         // 3D shapes
-        void Cube(Coordinate_t coordinate,int size,int Degree_angle,Color_t color);
+        void Cube(Coordinate_t coordinate,int size,int Degree_angle_View,Color_t color);
         
 };
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -344,7 +344,7 @@ void SEDHOM_Basic_Shapes::Container(Rectangle_Data_t container)
 {
     Rectangle(container);
 }
-void SEDHOM_Basic_Shapes::Cube(Coordinate_t coordinate,int size,int Degree_angle,Color_t color)
+void SEDHOM_Basic_Shapes::Cube(Coordinate_t coordinate,int size,int Degree_angle_View,Color_t color)
 {
     int cube[8][3] = {
         {-size,-size,-size}, {size,-size,-size},
@@ -358,7 +358,7 @@ void SEDHOM_Basic_Shapes::Cube(Coordinate_t coordinate,int size,int Degree_angle
         {0,4},{1,5},{2,6},{3,7}
     };
     Coordinate_t projected[8];
-    float rad = SEDHOM_Math::Degree_to_Radian(Degree_angle);
+    float rad = SEDHOM_Math::Degree_to_Radian(Degree_angle_View);
     for(int i = 0; i < 8; i++)
     {
         float x = cube[i][0];
