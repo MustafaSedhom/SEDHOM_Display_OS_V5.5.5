@@ -22,11 +22,11 @@ class Text_Animator
             interval = t;
         }
 
-        void Change_Text_Color(Coordinate_t co, GFXfont* Font,int Animation_time, String txt);
-        void Scrolling_Text(Icon_Data_t Icon,GFXfont* Font,int time_ms,String txt ,Coordinate_t min_max);
+        void Change_Text_Color_Animation(Coordinate_t co, GFXfont* Font,int Animation_time, String txt);
+        void Scrolling_Text_Animation(Icon_Data_t Icon,GFXfont* Font,int time_ms,String txt ,Coordinate_t min_max);
 };
 //GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-void Text_Animator::Change_Text_Color(Coordinate_t co, GFXfont* Font,int Animation_time, String txt)
+void Text_Animator::Change_Text_Color_Animation(Coordinate_t co, GFXfont* Font,int Animation_time, String txt)
 {
     interval = Animation_time ;
     unsigned long time_now = Time.Calc_time_ms();
@@ -37,7 +37,7 @@ void Text_Animator::Change_Text_Color(Coordinate_t co, GFXfont* Font,int Animati
         lastTime = time_now;
     }
 }
-void Text_Animator::Scrolling_Text(Icon_Data_t myIcon,GFXfont* Font,int time_ms,String txt ,Coordinate_t min_max)
+void Text_Animator::Scrolling_Text_Animation(Icon_Data_t myIcon,GFXfont* Font,int time_ms,String txt ,Coordinate_t min_max)
 {
   static Coordinate_t co = min_max ;
   static unsigned long t = 0;
@@ -60,6 +60,7 @@ void Text_Animator::Scrolling_Text(Icon_Data_t myIcon,GFXfont* Font,int time_ms,
           dir = -dir;  
   }
 }
+
 //GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 
 //GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
@@ -69,6 +70,7 @@ class SEDHOM_Animations : public Text_Animator //, public Shapes_Animations
       
     public:
     // void Text_change_color(Coordinate_t co,GFXfont* Font,int time_ms,String txt);
+    void Rotate_Rectangle_Animation(Rectangle_Data_t Rect,Color_t erase_color,int Animation_time_ms);
 };
 
 //GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
@@ -81,6 +83,21 @@ class SEDHOM_Animations : public Text_Animator //, public Shapes_Animations
 //       t_change = Time.Calc_time_ms();
 //    }
 // }
+void SEDHOM_Animations::Rotate_Rectangle_Animation(Rectangle_Data_t Rect,Color_t erase_color,int Animation_time_ms)
+{
+  static int angle = 0;
+  static int prev_angle = 0;
+  static unsigned long t_1 = 0;
+  if (Time.Calc_time_ms() - t_1 > Animation_time_ms) 
+  {
+    Icon.Rotated_Rect({Rect.coordinate,Rect.area,Rect.Radius,Rect.Filled,erase_color}, angle);
+    prev_angle = angle;
+    angle += 10;
+    if (angle >= 360) angle = 0;
+    Icon.Rotated_Rect(Rect, angle);
+    t_1 = Time.Calc_time_ms();
+  }
+}
 //GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 
 

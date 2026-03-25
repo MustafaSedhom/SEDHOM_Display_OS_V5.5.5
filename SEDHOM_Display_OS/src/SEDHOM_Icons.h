@@ -26,7 +26,6 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
         void Battery_Icon(Icon_Data_t Icon = default_parameter_for_icon  ,int range = 50 ,Color_t txt_color = White ,bool low_charge_control_color = true);
         void Home_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Setting_Icon(Icon_Data_t Icon = default_parameter_for_icon);
-        void Add_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void SD_Card_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Control_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Sensor_Icon(Icon_Data_t Icon = default_parameter_for_icon);
@@ -75,6 +74,7 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
         void Gap_Icon(Coordinate_t coordinate = {50,90},int Gap_size = 10,Orientation_t orientation = VERTICAL);
         void X_Icon(Icon_Data_t Icon = default_parameter_for_icon,Shape_filled_t filled = Shape_Fill,Icon_Size_t size = Size_3 );
         void Plus_Icon(Icon_Data_t Icon = default_parameter_for_icon,Shape_filled_t filled = Shape_Fill,Icon_Size_t size = Size_3);
+        void Add_Icon(Icon_Data_t Icon = default_parameter_for_icon,Shape_filled_t filled = Shape_Fill,Icon_Size_t size = Size_3);
 };
 // define all functions and Draw all Widgets and icons
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -150,11 +150,6 @@ void SEDHOM_Icons::Setting_Icon(Icon_Data_t Icon)
     Circle({{Icon.coordinate.x-20, Icon.coordinate.y-5}, 3,Shape_Fill, Icon.color});
     Circle({{Icon.coordinate.x-20, Icon.coordinate.y+5}, 3,Shape_Fill, Icon.color});
     Circle({{Icon.coordinate.x-10, Icon.coordinate.y}, 5,Shape_Fill, Icon.Background});
-}
-void SEDHOM_Icons::Add_Icon(Icon_Data_t Icon)
-{
-    Rectangle({{Icon.coordinate.x+15,Icon.coordinate.y-2+15},{30,5},5,Shape_Fill,Icon.color});
-    Rectangle({{Icon.coordinate.x+13+15,Icon.coordinate.y-14+15},{5,30},5,Shape_Fill,Icon.color});
 }
 void SEDHOM_Icons::SD_Card_Icon(Icon_Data_t Icon)
 {
@@ -312,7 +307,7 @@ void SEDHOM_Icons::Arrow_Icon(Icon_Data_t Icon,Direction_t Dir,Color_t border_co
     Triangle({{Icon.coordinate.x+6+50,Icon.coordinate.y},{Icon.coordinate.x+25-3,Icon.coordinate.y-15-6},{Icon.coordinate.x+25-3,Icon.coordinate.y+15+6},Shape_Fill,border_color});
     Triangle({{Icon.coordinate.x+50,Icon.coordinate.y},{Icon.coordinate.x+25,Icon.coordinate.y-15},{Icon.coordinate.x+25,Icon.coordinate.y+15},Shape_Fill,Icon.color});
     Border_Rectangle({Icon.coordinate.x,Icon.coordinate.y-8-1,border_color,Icon.color},{25,18},5,3);
-    Rectangle({{Icon.coordinate.x+15,Icon.coordinate.y-8+3-1},{12,13},5,Shape_Fill,Icon.color});
+    Rectangle({{Icon.coordinate.x+15,Icon.coordinate.y-8+3-1},{12,12},2,Shape_Fill,Icon.color});
     break;
 
   }
@@ -838,7 +833,35 @@ void SEDHOM_Icons::Plus_Icon(Icon_Data_t Icon,Shape_filled_t filled,Icon_Size_t 
   Rotated_Rect({Icon.coordinate,area,0,filled,Icon.color},0);
   Rotated_Rect({Icon.coordinate,area,0,filled,Icon.color},90);
 }
+void SEDHOM_Icons::Add_Icon(Icon_Data_t Icon,Shape_filled_t filled,Icon_Size_t size)
+{
+  Area_t area = {50, 10}; 
+  switch (size)
+  {
+    case Size_1: area = {15,2};  break;
+    case Size_2: area = {20,4};  break;
+    case Size_3: area = {30,6};  break;
+    case Size_4: area = {40,10}; break;
+    case Size_5: area = {50,12}; break;
+    case Size_6: area = {60,13}; break;
+    case Size_7: area = {70,16}; break;
+    case Size_8: area = {80,20}; break;
+  }
+  Coordinate_t center;
+  center.x = Icon.coordinate.x + area.w / 2;
+  center.y = Icon.coordinate.y + area.w / 2;
 
+  Rectangle({
+      {Icon.coordinate.x, center.y - area.h / 2},
+      {area.w, area.h},
+      10,filled, Icon.color
+  });
+  Rectangle({
+      {center.x - area.h / 2, Icon.coordinate.y},
+      {area.h, area.w},
+      10, filled, Icon.color
+  });
+}
 
 
 
