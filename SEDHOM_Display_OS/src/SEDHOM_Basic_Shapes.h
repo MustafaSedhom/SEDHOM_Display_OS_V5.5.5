@@ -3,6 +3,7 @@
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 #include "SEDHOM_Display_Settings.h"
 #include "SEDHOM_Data_Types.h"
+#include "SEDHOM_Math.h"
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 class SEDHOM_Basic_Shapes
 {
@@ -27,6 +28,8 @@ class SEDHOM_Basic_Shapes
         // custom image or font
         void Draw_Custom_int_shape(Icon_Data_t Icon,Area_t area,int arr[]);
         void Draw_Custom_Char(Icon_Data_t Icon,Area_t area,char arr[]);
+        // 3D shapes
+        void Cube(Coordinate_t coordinate,int size,int Degree_angle,Color_t color);
         
 };
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -340,6 +343,43 @@ void SEDHOM_Basic_Shapes::Border_Rectangle(Icon_Data_t Border_Rect,Area_t area,i
 void SEDHOM_Basic_Shapes::Container(Rectangle_Data_t container)
 {
     Rectangle(container);
+}
+void SEDHOM_Basic_Shapes::Cube(Coordinate_t coordinate,int size,int Degree_angle,Color_t color)
+{
+    int cube[8][3] = {
+        {-size,-size,-size}, {size,-size,-size},
+        {size,size,-size},   {-size,size,-size},
+        {-size,-size,size},  {size,-size,size},
+        {size,size,size},    {-size,size,size}
+    };
+    int edges[12][2] = {
+        {0,1},{1,2},{2,3},{3,0},
+        {4,5},{5,6},{6,7},{7,4},
+        {0,4},{1,5},{2,6},{3,7}
+    };
+    Coordinate_t projected[8];
+    float rad = SEDHOM_Math::Degree_to_Radian(Degree_angle);
+    for(int i = 0; i < 8; i++)
+    {
+        float x = cube[i][0];
+        float y = cube[i][1];
+        float z = cube[i][2];
+        float rx = x * cos(rad) - z * sin(rad);
+        float rz = x * sin(rad) + z * cos(rad);
+        int distance = 200;
+        int px = (rx * distance) / (rz + distance);
+        int py = (y  * distance) / (rz + distance);
+        projected[i].x = px + size + 20 + coordinate.x;
+        projected[i].y = py + size + 10 + coordinate.y;
+    }
+    for(int i = 0; i < 12; i++)
+    {
+        Line({
+            projected[edges[i][0]],
+            projected[edges[i][1]],
+            color
+        });
+    }
 }
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 #endif // !SEDHOM_BASIC_SHAPES_H_
