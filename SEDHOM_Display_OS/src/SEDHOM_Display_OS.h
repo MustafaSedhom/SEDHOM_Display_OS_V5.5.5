@@ -47,14 +47,11 @@ class SEDHOM_Display_OS
     void Init_OS(ROTATION_STATUS_t Rotate = Rotate_90_Degree,Color_t Mode = Night_Mode);
     void Restart_OS();
     void Set_Device_Mode(Color_t Mode = Night_Mode);
-    int Screen_Height();
-    int Screen_Width();
+    static int Screen_Height();
+    static int Screen_Width();
     Color_t Mode();
     Color_t Not_Mode();
     void Fill_Screen(Color_t color = Night_Mode);
-    int Convert_Coordinates_to_Center_X_Point(int x);
-    int Convert_Coordinates_to_Center_Y_Point(int y);
-    Coordinate_t Convert_Coordinates_to_Center(Coordinate_t new_point);
     // define all variables
     Color_t Night_mode = Night_Mode ;
     Color_t Light_mode = Light_Mode ;
@@ -203,15 +200,15 @@ class SEDHOM_Animations_OS : public SEDHOM_Animations
 };
 class SEDHOM_Math_OS : public SEDHOM_Math
 {
-private:
 public:
   SEDHOM_Math_OS()
+  : SEDHOM_Math({SEDHOM_Display_OS::Screen_Width(), SEDHOM_Display_OS::Screen_Height()})
   {
-
   }
-  SEDHOM_Math_OS(SEDHOM_Display_OS & OS)
-  {
 
+  SEDHOM_Math_OS(SEDHOM_Display_OS & OS)
+  : SEDHOM_Math({SEDHOM_Display_OS::Screen_Width(), SEDHOM_Display_OS::Screen_Height()})
+  {
   }
 };
 class SEDHOM_Rotation_OS : public SEDHOM_Rotations
@@ -275,21 +272,5 @@ void SEDHOM_Display_OS::Fill_Screen(Color_t color)
       color
   });
 }
-Coordinate_t SEDHOM_Display_OS::Convert_Coordinates_to_Center(Coordinate_t new_point)
-{
-  Coordinate_t old_coordinate ;
-  old_coordinate.x = Convert_Coordinates_to_Center_X_Point(new_point.x);
-  old_coordinate.y = Convert_Coordinates_to_Center_Y_Point(new_point.y);
-   return old_coordinate;
-}
-int SEDHOM_Display_OS::Convert_Coordinates_to_Center_X_Point(int x)
-{
-  return x + (Screen_Height()/2);
-}
-int SEDHOM_Display_OS::Convert_Coordinates_to_Center_Y_Point(int y)
-{
-  return (Screen_Width()/2) - y;
-}
-
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif /*SEDHOM_DISPLAY_OS_H_*/
