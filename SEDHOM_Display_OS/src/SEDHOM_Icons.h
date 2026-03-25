@@ -5,9 +5,10 @@
 #include "SEDHOM_Basic_Shapes.h"
 #include "SEDHOM_Text.h"
 #include "SEDHOM_Effects.h"
+#include "SEDHOM_Rotations.h"
 ///////////////////////////////////////////////////////////////////////////
 // Icons class
-class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SEDHOM_Effects , public SEDHOM_Colors
+class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SEDHOM_Effects , public SEDHOM_Colors ,public SEDHOM_Rotations
 {
   private:
         uint16_t mode;
@@ -72,6 +73,8 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
         void Close_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Star_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Gap_Icon(Coordinate_t coordinate = {50,90},int Gap_size = 10,Orientation_t orientation = VERTICAL);
+        void X_Icon(Icon_Data_t Icon = default_parameter_for_icon,Shape_filled_t filled = Shape_Fill,Icon_Size_t size = Size_3 );
+        void Plus_Icon(Icon_Data_t Icon = default_parameter_for_icon,Shape_filled_t filled = Shape_Fill,Icon_Size_t size = Size_3);
 };
 // define all functions and Draw all Widgets and icons
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -801,8 +804,40 @@ void SEDHOM_Icons::Gap_Icon(Coordinate_t coordinate,int Gap_size,Orientation_t o
   } 
     
 }
-
-
+void SEDHOM_Icons::X_Icon(Icon_Data_t Icon,Shape_filled_t filled,Icon_Size_t size)
+{
+  Area_t area = {20,2};
+  switch (size)
+  {
+    case Size_1: area = {15,2};  break;
+    case Size_2: area = {20,4};  break;
+    case Size_3: area = {30,6};  break;
+    case Size_4: area = {40,10}; break;
+    case Size_5: area = {50,12}; break;
+    case Size_6: area = {60,13}; break;
+    case Size_7: area = {70,16}; break;
+    case Size_8: area = {80,20}; break;
+  }
+  Rotated_Rect({Icon.coordinate,area,0,filled,Icon.color},45);
+  Rotated_Rect({Icon.coordinate,area,0,filled,Icon.color},135);
+}
+void SEDHOM_Icons::Plus_Icon(Icon_Data_t Icon,Shape_filled_t filled,Icon_Size_t size)
+{
+  Area_t area = {20,2};
+  switch (size)
+  {
+    case Size_1: area = {15,2};  break;
+    case Size_2: area = {20,4};  break;
+    case Size_3: area = {30,6};  break;
+    case Size_4: area = {40,10}; break;
+    case Size_5: area = {50,12}; break;
+    case Size_6: area = {60,13}; break;
+    case Size_7: area = {70,16}; break;
+    case Size_8: area = {80,20}; break;
+  }
+  Rotated_Rect({Icon.coordinate,area,0,filled,Icon.color},0);
+  Rotated_Rect({Icon.coordinate,area,0,filled,Icon.color},90);
+}
 
 
 

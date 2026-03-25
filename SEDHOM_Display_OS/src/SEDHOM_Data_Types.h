@@ -335,6 +335,9 @@ typedef enum{
     Size_3=3,
     Size_4=4,
     Size_5=5,
+    Size_6=6,
+    Size_7=7,
+    Size_8=8,
 }Icon_Size_t;
 
 
