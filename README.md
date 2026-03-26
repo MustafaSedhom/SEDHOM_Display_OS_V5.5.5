@@ -66,29 +66,24 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     void Init_OS(ROTATION_STATUS_t Rotate = Rotate_90_Degree,Color_t Mode = Night_Mode);
     void Restart_OS();
     void Set_Device_Mode(Color_t Mode = Night_Mode);
-    int Screen_Height();
-    int Screen_Width();
+    static int Screen_Height();
+    static int Screen_Width();
     Color_t Mode();
     Color_t Not_Mode();
     void Fill_Screen(Color_t color = Night_Mode);
-    int Convert_Coordinates_to_Center_X_Point(int x);
-    int Convert_Coordinates_to_Center_Y_Point(int y);
-    Coordinate_t Convert_Coordinates_to_Center(Coordinate_t new_point);
-    // variables
+    // define all variables
     Color_t Night_mode = Night_Mode ;
     Color_t Light_mode = Light_Mode ;
     ROTATION_STATUS_t Rotate_0 = Rotate_0_Degree;
     ROTATION_STATUS_t Rotate_90 = Rotate_90_Degree;
     ROTATION_STATUS_t Rotate_180 = Rotate_180_Degree;
     ROTATION_STATUS_t Rotate_270 = Rotate_270_Degree;
-
     ```
 - Data Structure
     ```cpp
     Stack<Data Type> stack ;
     Queue<Data Type> queue ;
     LinkedList<Data Type> linkedlist = new LinkedList<Data Type>() ;
-
     ```
 - Shapes
     ```cpp
@@ -107,10 +102,11 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     void Container(Rectangle_Data_t container);
     // SEDHOM Shapes
     void SEDHOM_Circle(Circle_Data_t circle);
-    // custom image or fonts
+    // custom image or font
     void Draw_Custom_int_shape(Icon_Data_t Icon,Area_t area,int arr[]);
     void Draw_Custom_Char(Icon_Data_t Icon,Area_t area,char arr[]);
-
+    // 3D shapes
+    void Cube(Coordinate_t coordinate,int size,int Degree_angle_View,Color_t color);
     ```
 - Icons 
     ```Cpp
@@ -119,66 +115,69 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     // to set and handling mode
     void Set_Mode(Color_t Mode){mode = Mode;}
     // Draw SEDHOM Icons
-    void WIFI_Icon(Icon_t Icon = default_parameter_for_icon ,Color_t color_off = DarkGrey,WIFI_STATUS_t state = WIFI_Status_connected_level_4_full);
-    void Battery_Icon(Icon_t Icon = default_parameter_for_icon  ,int range = 50 ,Color_t txt_color = White ,bool low_charge_red_color = true);
-    void Home_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Setting_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Add_Icon(Icon_t Icon = default_parameter_for_icon);
-    void SD_Card_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Control_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Sensor_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Power_off_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Bluetooth_Icon(Icon_t Icon = default_parameter_for_icon ,BLUETOOTH_STATUS_t connect_status = BLuetooth_Status_open_and_connected);
-    void Button_Icon(Icon_t Icon = default_parameter_for_icon,bool print_on_and_off = 0);
-    void Display_Time_Icon(Icon_t Icon = default_parameter_for_icon , Time_t time = {5,13,42,"AM"});
-    void Terminal_Icon(Icon_t Icon = default_parameter_for_icon);
-    void About_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Display_Date_Icon(Icon_t Icon =default_parameter_for_icon,Date_t Date = {2026,2,16,"Feb","Mon"},Color_t Text_color = BLUE);
-    void Arrow_Icon(Icon_t Icon = default_parameter_for_icon,Direction_t Dir = Direction_Right,Color_t border_color = -1);
-    void Color_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Time_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Date_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Switch_Icon(Icon_t Icon = default_parameter_for_icon,Color_t color_off = RED,Color_t thumb_color = WHITE,Color_t txt_color = WHITE,SWITCH_STATUS_t state = SWITCH_State_ON);
-    void label_Icon(Icon_t Icon = default_parameter_for_icon ,Area_t area = {100,50},int Border = 3,Color_t color_str_in_label = Magenta,String string_in_label = "Label");
-    void slider_Icon(Icon_t Icon = default_parameter_for_icon,int h = 200,byte_t range =50 ,Color_t color_not_active = Color_DarkGrey ,Color_t ball_color = WHITE,Color_t box_color = RED,Color_t range_in_box_color = BLUE);
-    void file_Icon(Icon_t Icon = default_parameter_for_icon,Color_t Border_color = RED,Color_t file_extend_color = Color_Blue,String file_extend = "txt");
-    void folder_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Divider(Icon_t Icon = default_parameter_for_icon,Orientation_t orientation = VERTICAL,int length = 50,int thickness = 5);
-    void ID_Card_Icon(Icon_t Icon = default_parameter_for_icon, User_ID_Data_t User = {} ,Color_t main_font_color = RED,Color_t font_color = Blue);
-    void Joy_Stick_Icon(Icon_t Icon = default_parameter_for_icon ,Coordinate_t thumb = {150,80} ,int thumb_size = 15,Color_t Border_color = BLUE,Color_t thumb_color = white,Color_t Color_inside_arrow = BLACK);
-    void Temperature_Meter_Icon(Icon_t Icon = default_parameter_for_icon,Color_t Border = WHITE,int value = 50,bool show_val_dashes = true);
-    void Tone_Icon(Icon_t Icon = default_parameter_for_icon,bool is_muted_or_not = false);
-    void Sound_value_Icon(Icon_t Icon = default_parameter_for_icon,int value = 50,Color_t thickness_color = GREEN,bool thickness_or_not = false);
-    void Video_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Block_Icon(Icon_t Icon = default_parameter_for_icon,bool open_or_closed = false);
-    void Signal_Icon(Icon_t Icon = default_parameter_for_icon,SIGNAL_STATUS_t state = Signal_Status_Signal_level_3,Color_t color_off = DarkGrey);
-    void Bell_Icon(Icon_t Icon = default_parameter_for_icon,bool mute_or_not = false,bool filled_or_not = true);
-    void Menu_Icon_1(Icon_t Icon = default_parameter_for_icon); // : : :
-    void Menu_Icon_2(Icon_t Icon = default_parameter_for_icon); // ...
-    void Menu_Icon_3(Icon_t Icon = default_parameter_for_icon); // :
-    void Menu_Icon_4(Icon_t Icon = default_parameter_for_icon); // : :
-    void Menu_Icon_5(Icon_t Icon = default_parameter_for_icon); // = 
-    void Moon_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Sun_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Check_Box_Icon(Icon_t Icon = default_parameter_for_icon,bool status = true,Color_t check_color = GREEN,Color_t checked_fill_color = Black);
-    void Radio_Button_Icon(Icon_t Icon = default_parameter_for_icon,bool status = true,Color_t check_color = Green);
-    void Text_Field_Icon(  Icon_t Icon = default_parameter_for_icon,Text_t Text = {} ,int length = 200,int max_char = 10);
-    void Warning_Icon( Icon_t Icon = default_parameter_for_icon,Color_t txt_color = RED,Shape_filled_t filled = Shape_Draw );
-    void Chandelier_Icon(Icon_t Icon = default_parameter_for_icon);
-    void Smart_TV_Icon(Icon_t Icon = default_parameter_for_icon,Color_t WIFI_icon = White);
-    void Air_Conditioner_Icon(Icon_t Icon = default_parameter_for_icon);
+    void WIFI_Icon(Icon_Data_t Icon = default_parameter_for_icon ,Color_t color_off = DarkGrey,WIFI_STATUS_t state = WIFI_Status_connected_level_4_full);
+    void Battery_Icon(Icon_Data_t Icon = default_parameter_for_icon  ,int range = 50 ,Color_t txt_color = White ,bool low_charge_control_color = true);
+    void Home_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Setting_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void SD_Card_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Control_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Sensor_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Power_off_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Bluetooth_Icon(Icon_Data_t Icon = default_parameter_for_icon ,BLUETOOTH_STATUS_t connect_status = BLuetooth_Status_open_and_connected);
+    void Button_Icon(Icon_Data_t Icon = default_parameter_for_icon,bool print_on_and_off = 0);
+    void Display_Time_Icon(Icon_Data_t Icon = default_parameter_for_icon , Time_Data_t time = {5,13,42,"AM"});
+    void Terminal_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void About_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Display_Date_Icon(Icon_Data_t Icon =default_parameter_for_icon,Date_Data_t Date = {2026,2,16,"Feb","Mon"},Color_t Text_color = BLUE);
+    void Arrow_Icon(Icon_Data_t Icon = default_parameter_for_icon,Direction_t Dir = Direction_Right,Color_t border_color = -1);
+    void Color_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Time_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Date_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Switch_Icon(Icon_Data_t Icon = default_parameter_for_icon,Color_t color_off = RED,Color_t thumb_color = WHITE,Color_t txt_color = WHITE,SWITCH_STATUS_t state = SWITCH_State_ON);
+    void label_Icon(Icon_Data_t Icon = default_parameter_for_icon ,Area_t area = {100,50},int Border = 3,Color_t color_str_in_label = Magenta,String string_in_label = "Label");
+    void slider_Icon(Icon_Data_t Icon = default_parameter_for_icon,int h = 200,byte_t range =50 ,Color_t color_not_active = Color_DarkGrey ,Color_t ball_color = WHITE,Color_t box_color = RED,Color_t range_in_box_color = BLUE);
+    void file_Icon(Icon_Data_t Icon = default_parameter_for_icon,Color_t Border_color = RED,Color_t file_extend_color = Color_Blue,String file_extend = "txt");
+    void folder_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Divider(Icon_Data_t Icon = default_parameter_for_icon,Orientation_t orientation = VERTICAL,int length = 50,int thickness = 5);
+    void ID_Card_Icon(Icon_Data_t Icon = default_parameter_for_icon, User_ID_Data_t User = {} ,Color_t main_font_color = RED,Color_t font_color = Blue);
+    void Joy_Stick_Icon(Icon_Data_t Icon = default_parameter_for_icon ,Coordinate_t thumb = {150,80} ,int thumb_size = 15,Color_t Border_color = BLUE,Color_t thumb_color = white,Color_t Color_inside_arrow = BLACK);
+    void Temperature_Meter_Icon(Icon_Data_t Icon = default_parameter_for_icon,Color_t Border = WHITE,int value = 50,bool show_val_dashes = true);
+    void Tone_Icon(Icon_Data_t Icon = default_parameter_for_icon,bool is_muted_or_not = false);
+    void Sound_value_Icon(Icon_Data_t Icon = default_parameter_for_icon,int value = 50,Color_t thickness_color = GREEN,bool thickness_or_not = false);
+    void Video_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Block_Icon(Icon_Data_t Icon = default_parameter_for_icon,bool open_or_closed = false);
+    void Signal_Icon(Icon_Data_t Icon = default_parameter_for_icon,SIGNAL_STATUS_t state = Signal_Status_Signal_level_3,Color_t color_off = DarkGrey);
+    void Bell_Icon(Icon_Data_t Icon = default_parameter_for_icon,bool mute_or_not = false,bool filled_or_not = true);
+    void Menu_Icon_1(Icon_Data_t Icon = default_parameter_for_icon); // : : :
+    void Menu_Icon_2(Icon_Data_t Icon = default_parameter_for_icon); // ...
+    void Menu_Icon_3(Icon_Data_t Icon = default_parameter_for_icon); // :
+    void Menu_Icon_4(Icon_Data_t Icon = default_parameter_for_icon); // : :
+    void Menu_Icon_5(Icon_Data_t Icon = default_parameter_for_icon); // = 
+    void Moon_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Sun_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Check_Box_Icon(Icon_Data_t Icon = default_parameter_for_icon,bool status = true,Color_t check_color = GREEN,Color_t checked_fill_color = Black);
+    void Radio_Button_Icon(Icon_Data_t Icon = default_parameter_for_icon,bool status = true,Color_t check_color = Green);
+    void Text_Feild_Icon(  Icon_Data_t Icon = default_parameter_for_icon,Text_Data_t Text = {} ,int length = 200,int max_char = 10);
+    void Warning_Icon( Icon_Data_t Icon = default_parameter_for_icon,Color_t txt_color = RED,Shape_filled_t filled = Shape_Draw );
+    void Chandelier_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+    void Smart_TV_Icon(Icon_Data_t Icon = default_parameter_for_icon,Color_t WIFI_icon = White);
+    void Air_Conditioner_Icon(Icon_Data_t Icon = default_parameter_for_icon);
     void Close_Icon(Icon_Data_t Icon = default_parameter_for_icon);
     void Star_Icon(Icon_Data_t Icon = default_parameter_for_icon);
-
+    void Gap_Icon(Coordinate_t coordinate = {50,90},int Gap_size = 10,Orientation_t orientation = VERTICAL);
+    void X_Icon(Icon_Data_t Icon = default_parameter_for_icon,Shape_filled_t filled = Shape_Fill,Icon_Size_t size = Size_3 );
+    void Plus_Icon(Icon_Data_t Icon = default_parameter_for_icon,Shape_filled_t filled = Shape_Fill,Icon_Size_t size = Size_3);
+    void Add_Icon(Icon_Data_t Icon = default_parameter_for_icon,Shape_filled_t filled = Shape_Fill,Icon_Size_t size = Size_3);
     ```
 - Text 
     ```cpp
+    // Text
     static void Text_C(Coordinate_t coordinate,const GFXfont* font,Color_t color,string_t txt);
     void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,String str);
     void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,float value);
     void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,int value);
     void Text(Coordinate_t coordinate,Text_Data_t str);
-
+    void Text_OverFlow(Coordinate_t coordinate,const GFXfont* font,Color_t color,String txt,int number_overFlow=10,string_t overFlow_chars="...");
     ```
 - Fonts 
     ```cpp
@@ -242,7 +241,6 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
      FONT_FREEMONOBOLDOBLIQUE_MEDIUM      
      FONT_FREEMONOBOLDOBLIQUE_BIG         
      FONT_FREEMONOBOLDOBLIQUE_VERYBIG     
-
     ```
 - Widgets
     ```cpp
@@ -255,7 +253,6 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     void Drawer_Widget(String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_White,Color_t exit_button_color = Color_Red);
     void Delete_Drawer_Widget();
     void Handle_Drawer_Widget(Icon_Data_t Icon_menu = {{30,90},Color_Blue,Color_Black},int menu_icon_number = 5,String Drawer_name = "Drawer",bool show_exit_icon = true,Color_t Drawer_color = Color_Magenta,Color_t Drawer_border_color = Color_White,Color_t Drawer_name_color = Color_White,Color_t exit_button_color = Color_Red);
-    
     ```
 - Windows
     ```cpp
@@ -266,8 +263,6 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     void ListView_Window(String title="",Icon_Data_t listview={{30,30},Color_White,Color_Black},Area_t listview_area={400,200}, byte_t listview_number=1,bool show_Divideres = true,bool show_close_icon=true, Color_t choose_active_ball=Color_Magenta,Color_t triangle_choose = Color_Green,Color_t not_active = Color_DarkGrey);
     void Color_Setting_Window(Icon_Data_t Color_window = {{50,90},Color_White,Color_Black});
     void WIFI_ListView_Window(WIFI_Data_Simple_t wifi_Data[5] = nullptr,Icon_Data_t Wifi_listview_window={{30,30},Color_White,Color_Black}, byte_t listview_number=1,bool show_Divideres = true,Color_t wifi_name_color = Color_Magenta ,Color_t Wifi_active_color = Color_Green,Color_t choose_active_ball=Color_Magenta,Color_t triangle_choose = Color_Green,Color_t not_active = Color_DarkGrey);
- 
-
     ```
 - Touch
     ``` Cpp
@@ -301,21 +296,23 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     void Wait(int time);
     unsigned long Calc_time_ms();
     unsigned long Calc_time_us();
-
     ```
 - Effects
     ```cpp
     // effects 
-    Color_t Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape = Shape_Rectangle);
-    Color_t Color_Blur(Icon_t Icon,Area_t area,int r,int Blur_value,Shapes_t shape = Shape_Rectangle);
-    Color_t Shadow_effect(Icon_t shadow = {} , Shapes_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Radius = 20 , Position_t pos = Position_Right_and_Bottom, Color_t Shadow_color = Color_DarkGrey);
-
+    Color_t Blur_Effect(Icon_Data_t Icon,Area_t area,int Radius,int Blur_value/* 0 -> 20 */,Shapes_type_t shape = Shape_Rectangle);
+    Color_t Color_Blur_Effect(Icon_Data_t Icon,Area_t area,int Radius,int Blur_value/* 0 -> 20 */,Shapes_type_t shape = Shape_Rectangle);
+    Color_t Shadow_Effect(Icon_Data_t shadow = {} , Shapes_type_t shape = Shape_Rectangle, int shadow_size = 5 , int shadow_h = 120 , int shadow_w = 200 ,int shadow_Radius = 20 , Position_t pos = Position_Right_and_Bottom, Color_t Shadow_color = Color_DarkGrey);
     ```
 - Animation
     ```cpp
+    // Text Animation
     void Change_Text_Color(Coordinate_t co, GFXfont* Font,int Animation_time, String txt);
     void Scrolling_Text(Icon_t Icon,GFXfont* Font,int time_ms,String txt ,Coordinate_t min_max);
-
+    void Text_change_color(Coordinate_t co,GFXfont* Font,int time_ms,String txt);
+    // Rotation Animation
+    void Rotate_Rectangle_Animation(Rectangle_Data_t Rect,Color_t erase_color,int Animation_time_ms,int step = 20);
+    void Rotate_Cube_Animation(Coordinate_t coordinate,int size,Color_t color,Color_t erase_color,int Animation_time_ms,int step = 20);
     ```
 - Colors
     ```cpp
@@ -346,6 +343,7 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     ```
 - SEDHOM Data Types
     ```cpp
+    Dynamic                         // class (none - char - int - float - double - bool - String)
     string_t                        // char *
     word_t                          // char *
     byte_t                          // uint8_t
@@ -384,7 +382,6 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     Touch_Data_t                    // struct
     Orientation_t                   // enum
     Icon_Size_t                     // enum
-
     ```
 #
 
