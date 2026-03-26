@@ -29,12 +29,14 @@
 #include "SEDHOM_Arabic_Font.h"
 // include communications file to use communication protocols in your projects
 #include "SEDHOM_Comminucations.h"
-// include communications file to use communication protocols in your projects
+// include Animation file to use actions in your projects
 #include "SEDHOM_Animations.h"
 // include math file to use math equations in your projects
 #include "SEDHOM_Math.h"
 // include rotation file to use rotate methods in your projects
 #include "SEDHOM_Rotations.h"
+// include controls file to use Buttons in your projects
+#include "SEDHOM_Controls.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class SEDHOM_Display_OS
 {
@@ -220,6 +222,16 @@ public:
 
   }
   SEDHOM_Rotation_OS(SEDHOM_Display_OS & OS)
+  {
+
+  }
+};
+class SEDHOM_Control_OS : public SEDHOM_Controls
+{
+private:
+  /* data */
+public:
+  SEDHOM_Control_OS(SEDHOM_Display_OS & OS)
   {
 
   }

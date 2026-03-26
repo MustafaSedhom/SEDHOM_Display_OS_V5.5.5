@@ -20,6 +20,9 @@
 #define string_t       char*
 #define word_t         char*
 
+#define lambda_none         [](){}
+#define lambda_func_none    [](){}
+
 typedef unsigned char  byte_t;   
 typedef uint16_t Color_t;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
