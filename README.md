@@ -314,6 +314,13 @@ you can see most project i made with this library and arduino uno and tft 3.5 in
     void Rotate_Rectangle_Animation(Rectangle_Data_t Rect,Color_t erase_color,int Animation_time_ms,int step = 20);
     void Rotate_Cube_Animation(Coordinate_t coordinate,int size,Color_t color,Color_t erase_color,int Animation_time_ms,int step = 20);
     ```
+- Control
+    ```cpp
+    // Button
+    void Button_Control(bool* state,Rectangle_Data_t Button_shape_off,Rectangle_Data_t Button_shape_on,Function onTap,int Time_between_clicks_ms = 250);
+    void Button_Control(bool* state,Circle_Data_t Button_shape_off,Circle_Data_t Button_shape_on,Function onTap,int Time_between_clicks_ms = 250);
+
+    ```
 - Colors
     ```cpp
     // colors functions
