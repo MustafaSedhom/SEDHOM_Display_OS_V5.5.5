@@ -345,7 +345,7 @@ typedef enum
     Size_8=8,
 }Icon_Size_t;
 ///////////////////////////////////////////////////////////////////////////
-// data type of  Icon Size
+// data type of  touch state
 typedef struct  
 {
     unsigned long startTime = 0;
@@ -356,18 +356,39 @@ typedef struct
     bool waitingDouble = false;
 }Touch_State_t;
 ///////////////////////////////////////////////////////////////////////////
-// data type of  Icon Size
-typedef struct  
-{
+// data type of  Button
+struct Button_Data_t {
     bool state = false;
-    Touch_State_t touchState;
+    Touch_State_t touch_state;
+    Shapes_type_t shape;
     Rectangle_Data_t rectangle_shape_off;
     Rectangle_Data_t rectangle_shape_on;
     Circle_Data_t circle_shape_off;
     Circle_Data_t circle_shape_on;
     int longPressTime = 1000;
     int doublePressTime = 500;
-}Button_Data_t;
+
+    // Constructor
+    Button_Data_t(
+        bool button_state = false,
+        Shapes_type_t shape_type = Shape_Rectangle,
+        Rectangle_Data_t off_Rect = {{0,0},{0,0},0,Shape_Fill,0},
+        Rectangle_Data_t on_Rect = {{0,0},{0,0},0,Shape_Fill,0},
+        Circle_Data_t off_Circle = {{0,0},0,Shape_Fill,0},
+        Circle_Data_t on_Circle = {{0,0},0,Shape_Fill,0},
+        int long_Press = 1000,
+        int double_Press = 500
+    ) {
+        state = button_state;
+        shape = shape_type;
+        rectangle_shape_off = off_Rect;
+        rectangle_shape_on  = on_Rect;
+        circle_shape_off    = off_Circle;
+        circle_shape_on     = on_Circle;
+        longPressTime       = long_Press;
+        doublePressTime     = double_Press;
+    }
+};
 
 //**********************************************************************************************************************
 #endif /* SEDHOM_DATA_TYPES_H_ */

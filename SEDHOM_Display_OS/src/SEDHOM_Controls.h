@@ -6,58 +6,129 @@
 #include "SEDHOM_Time.h"
 #include "SEDHOM_Display_Touch.h"
 //QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+class Button : private SEDHOM_Icons , private SEDHOM_Touch , private SEDHOM_Time
+{
+    private:
+        Button_Data_t button;
+    public:
+        Button(Button_Data_t& button) : button(button){}
+        ~Button(){}
+        // function for Draw it
+        Button& Draw();
+        Button& Update(Button_Data_t new_button);
+        template<typename Function>
+        Button& Single_Press(Function To_Do);
+        template<typename Function>
+        Button& Double_Press(Function To_Do);
+        template<typename Function>
+        Button& Long_Press(Function To_Do);
+};
+//QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+Button& Button::Draw()
+{
+    if(button.shape == Shape_Circle)
+    {
+        Circle(button.state ? button.circle_shape_on : button.circle_shape_off);
+    }
+    else
+    {
+        Rectangle(button.state ? button.rectangle_shape_on : button.rectangle_shape_off);
+    }
+    return *this;
+}
+//=======================================================================================
+Button& Button::Update(Button_Data_t new_button) 
+{
+    button = new_button;
+    Draw();
+}
+template<typename Function>
+Button& Button::Single_Press(Function To_Do)
+{
+    if(button.shape == Shape_Circle)
+    {
+        Circle_Data_t activeShape = button.state ? button.circle_shape_on : button.circle_shape_off;
+        if(Single_Pressed({{activeShape.coordinate.x - activeShape.Radius,
+                            activeShape.coordinate.y - activeShape.Radius},
+                        {activeShape.Radius*2 , activeShape.Radius*2}}))
+        {
+            To_Do();
+        }
+    }
+    else
+    {
+        Rectangle_Data_t activeShape = button.state ? button.rectangle_shape_on : button.rectangle_shape_off;
+        if(Single_Pressed({activeShape.coordinate, activeShape.area}))
+        {
+            To_Do();
+        }
+    }
+    return *this;
+}
+template<typename Function>
+Button& Button::Double_Press(Function To_Do)
+{ 
+    if(button.shape == Shape_Circle)
+    {
+        Circle_Data_t activeShape = button.state ? button.circle_shape_on : button.circle_shape_off;
+        if(Double_Pressed(button.touch_state,
+                            {{activeShape.coordinate.x - activeShape.Radius,
+                            activeShape.coordinate.y - activeShape.Radius},
+                            {activeShape.Radius*2 , activeShape.Radius*2}},
+                            button.doublePressTime))
+        {
+            To_Do();
+        }
+    }
+    else
+    {
+        Rectangle_Data_t activeShape = button.state ? button.rectangle_shape_on : button.rectangle_shape_off;
+        if(Double_Pressed(button.touch_state,{activeShape.coordinate, activeShape.area},button.doublePressTime))
+        {
+            To_Do();
+        }
+    }
+    return *this;
+}
+template<typename Function>
+Button& Button::Long_Press(Function To_Do)
+{
+    if(button.shape == Shape_Circle)
+    {
+        Circle_Data_t activeShape = button.state ? button.circle_shape_on : button.circle_shape_off;
+        if(Long_Pressed(button.touch_state,
+                        {{activeShape.coordinate.x - activeShape.Radius,
+                            activeShape.coordinate.y - activeShape.Radius},
+                            {activeShape.Radius*2 , activeShape.Radius*2}},
+                        button.longPressTime))
+        {
+            To_Do();
+        }
+    }
+    else
+    {
+        Rectangle_Data_t activeShape = button.state ? button.rectangle_shape_on : button.rectangle_shape_off;
+        if(Long_Pressed(button.touch_state,
+                        {activeShape.coordinate, activeShape.area},
+                        button.longPressTime))
+        {
+            To_Do();
+        }
+    }
+    return *this;
+}
+//QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 //QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 class SEDHOM_Controls
 {
 private:
-    SEDHOM_Icons Icon;
-    SEDHOM_Touch Touch;
-    SEDHOM_Time Time;
-public:
-    SEDHOM_Controls();
-    ~SEDHOM_Controls();
 
-    // Button
-    template<typename Function>
-    void Button_Control(bool* state,Rectangle_Data_t Button_shape_off,Rectangle_Data_t Button_shape_on,Function onTap,int Time_between_clicks_ms = 250);
-    template<typename Function>
-    void Button_Control(bool* state,Circle_Data_t Button_shape_off,Circle_Data_t Button_shape_on,Function onTap,int Time_between_clicks_ms = 250);
-    // 
+public:
+    SEDHOM_Controls(){}
+    ~SEDHOM_Controls(){}
+
 };
 //QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
-SEDHOM_Controls::SEDHOM_Controls()
-{
-}
-SEDHOM_Controls::~SEDHOM_Controls()
-{
-}
-template<typename Function>
-void SEDHOM_Controls::Button_Control(bool* state,Rectangle_Data_t Button_shape_off,Rectangle_Data_t Button_shape_on,Function onTap,int Time_between_clicks_ms )
-{
-    static unsigned long lastPressTime = 0;    
-    unsigned long currentTime = Time.Calc_time_ms();     
-    Rectangle_Data_t activeShape = *state ? Button_shape_on : Button_shape_off;
-    Icon.Rectangle(activeShape);
-    // bool pressed = Touch.onTap({activeShape.coordinate, activeShape.area});      
-    // if (pressed && (currentTime - lastPressTime > Time_between_clicks_ms))
-    // {
-    //     onTap();                  
-    //     lastPressTime = currentTime; 
-    // }
-}
-template<typename Function>
-void SEDHOM_Controls::Button_Control(bool* state,Circle_Data_t Button_shape_off,Circle_Data_t Button_shape_on,Function onTap,int Time_between_clicks_ms )
-{
-    static unsigned long lastPressTime = 0;    
-    unsigned long currentTime = Time.Calc_time_ms();     
-    Circle_Data_t activeShape = *state ? Button_shape_on : Button_shape_off;
-    Icon.Circle(activeShape);
-    // bool pressed = Touch.onTap({{activeShape.coordinate.x - activeShape.Radius,activeShape.coordinate.y - activeShape.Radius},{activeShape.Radius*2,activeShape.Radius*2}});      
-    // if (pressed && (currentTime - lastPressTime > Time_between_clicks_ms))
-    // {
-    //     onTap();                       
-    //     lastPressTime = currentTime; 
-    // }
-}
+
 //QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 #endif // !SEDHOM_CONTROLE_H_
