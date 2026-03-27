@@ -59,6 +59,7 @@ MCUFRIEND_kbv Display;
   #define YM 9   // can be a digital pin
   #define XP 8   // can be a digital pin
 #endif
+#define set_pins_for_touch()     pinMode(YP, OUTPUT);pinMode(XM, OUTPUT);digitalWrite(YP, HIGH);digitalWrite(XM, HIGH);
 // touch screen dimensions
 const int TS_LEFT = 954, TS_RT = 88, TS_TOP = 908, TS_BOT = 125;
 #define MINPRESSURE 10

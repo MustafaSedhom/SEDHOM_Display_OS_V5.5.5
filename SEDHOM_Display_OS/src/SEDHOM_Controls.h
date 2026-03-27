@@ -22,6 +22,7 @@ public:
     void Button_Control(bool* state,Rectangle_Data_t Button_shape_off,Rectangle_Data_t Button_shape_on,Function onTap,int Time_between_clicks_ms = 250);
     template<typename Function>
     void Button_Control(bool* state,Circle_Data_t Button_shape_off,Circle_Data_t Button_shape_on,Function onTap,int Time_between_clicks_ms = 250);
+    // 
 };
 //QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
 SEDHOM_Controls::SEDHOM_Controls()
