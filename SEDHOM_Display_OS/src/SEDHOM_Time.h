@@ -17,6 +17,7 @@ class SEDHOM_Time
     void Wait(int time);
     unsigned long Calc_time_ms();
     unsigned long Calc_time_us();
+
 };
 //"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 // define all functions

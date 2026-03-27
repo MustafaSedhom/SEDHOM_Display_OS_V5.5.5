@@ -11,6 +11,7 @@ class Button : private SEDHOM_Icons , private SEDHOM_Touch , private SEDHOM_Time
     private:
         Button_Data_t button;
     public:
+        Button(){}
         Button(Button_Data_t& button) : button(button){}
         ~Button(){}
         // function for Draw it

@@ -226,7 +226,7 @@ public:
 
   }
 };
-class SEDHOM_Control_OS : public SEDHOM_Controls
+class SEDHOM_Control_OS : public SEDHOM_Controls , public Button
 {
 private:
   /* data */
@@ -236,6 +236,32 @@ public:
 
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

@@ -19,6 +19,12 @@ public:
     int Convert_Coordinates_to_Center_X_Point(int x);
     int Convert_Coordinates_to_Center_Y_Point(int y);
     Coordinate_t Convert_Coordinates_to_Center(Coordinate_t new_point);
+    long Convert_Millis_to_Micros(long millis);
+    long Convert_Micros_to_Millis(long micros);
+    long Convert_Second_to_Millis(long second);
+    long Convert_Millis_to_Second(long millis);
+    long Convert_Second_to_Micros(long second);
+    long Convert_Micros_to_Second(long micros);
 };
 
 SEDHOM_Math::SEDHOM_Math()
@@ -62,6 +68,35 @@ Coordinate_t SEDHOM_Math::Convert_Coordinates_to_Center(Coordinate_t new_point)
   old_coordinate.x = Convert_Coordinates_to_Center_X_Point(new_point.x);
   old_coordinate.y = Convert_Coordinates_to_Center_Y_Point(new_point.y);
    return old_coordinate;
+}
+long SEDHOM_Math::Convert_Millis_to_Micros(long millis)
+{
+    return millis * 1000;
+}
+
+long SEDHOM_Math::Convert_Micros_to_Millis(long micros)
+{
+    return micros / 1000;
+}
+
+long SEDHOM_Math::Convert_Second_to_Millis(long second)
+{
+    return second * 1000;
+}
+
+long SEDHOM_Math::Convert_Millis_to_Second(long millis)
+{
+    return millis / 1000;
+}
+
+long SEDHOM_Math::Convert_Second_to_Micros(long second)
+{
+    return second * 1000000;
+}
+
+long SEDHOM_Math::Convert_Micros_to_Second(long micros)
+{
+    return micros / 1000000;
 }
 //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
