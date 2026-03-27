@@ -2,6 +2,7 @@
 #define SEDHOM_DISPLAY_TOUCH_H_
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #include "SEDHOM_Display_Settings.h"
+#include "SEDHOM_Time.h"
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 TouchScreen ts = TouchScreen(XP, YP, XM, YM, 300);
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -9,6 +10,7 @@ class SEDHOM_Touch
 {
   private:
       // variables
+      SEDHOM_Time Time;
       int pixel_x=0;
       int pixel_y=0;
       int pixel_z=0;
@@ -21,7 +23,9 @@ class SEDHOM_Touch
       int get_Z_point();
       bool onTap(Touch_Data_t pressed_space);
       void onTap(Touch_Data_t pressed_space,void (*Do_Function)());
-
+      bool Single_Pressed(Touch_Data_t pressed_space);
+      bool Double_Pressed(Touch_State_t &state,Touch_Data_t pressed_space , int Time_ms_between_clicks = 1000);
+      bool Long_Pressed(Touch_State_t &state,Touch_Data_t pressed_space, int Time_ms_long_time = 800);
 };
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -70,6 +74,63 @@ void SEDHOM_Touch::onTap(Touch_Data_t pressed_space,void (*Do_Function)())
   {
     Do_Function();
   }
+}
+bool SEDHOM_Touch::Single_Pressed(Touch_Data_t pressed_space)
+{
+  return onTap(pressed_space);
+}
+bool SEDHOM_Touch::Double_Pressed(Touch_State_t &state,Touch_Data_t pressed_space,int Time_ms_between_clicks)
+{
+    unsigned long currentTime = Time.Calc_time_ms();
+
+    if (onTap(pressed_space))
+    {
+        if (state.waitingDouble &&
+            (currentTime - state.lastTapTime <= Time_ms_between_clicks))
+        {
+            state.waitingDouble = false;
+            return true;
+        }
+        else
+        {
+            state.waitingDouble = true;
+            state.lastTapTime = currentTime;
+        }
+    }
+    if (state.waitingDouble &&
+        (currentTime - state.lastTapTime > Time_ms_between_clicks))
+    {
+        state.waitingDouble = false;
+    }
+
+    return false;
+}
+bool SEDHOM_Touch::Long_Pressed(Touch_State_t &state,Touch_Data_t pressed_space, int Time_ms_long_time)
+{
+    unsigned long currentTime = Time.Calc_time_ms();
+
+    if (Is_Pressed())
+    {
+        if (!state.isPressing)
+        {
+            state.isPressing = true;
+            state.startTime = currentTime;
+            state.longTriggered = false;
+        }
+
+        if (!state.longTriggered && (currentTime - state.startTime >= Time_ms_long_time))
+        {
+            state.longTriggered = true;
+            return true;
+        }
+    }
+    else
+    {
+        state.isPressing = false;
+        state.longTriggered = false;
+    }
+
+    return false;
 }
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 #endif /*SEDHOM_DISPLAY_TOUCH_H_*/

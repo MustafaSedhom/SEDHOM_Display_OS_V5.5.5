@@ -326,13 +326,15 @@ typedef struct
 }Touch_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of  Orientation
-typedef enum{
+typedef enum
+{
     HORIZONTAL,
     VERTICAL,
 }Orientation_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of  Icon Size
-typedef enum{
+typedef enum
+{
     Size_1=1,
     Size_2=2,
     Size_3=3,
@@ -342,7 +344,30 @@ typedef enum{
     Size_7=7,
     Size_8=8,
 }Icon_Size_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of  Icon Size
+typedef struct  
+{
+    unsigned long startTime = 0;
+    unsigned long lastTapTime = 0;
 
+    bool isPressing = false;
+    bool longTriggered = false;
+    bool waitingDouble = false;
+}Touch_State_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of  Icon Size
+typedef struct  
+{
+    bool state = false;
+    Touch_State_t touchState;
+    Rectangle_Data_t rectangle_shape_off;
+    Rectangle_Data_t rectangle_shape_on;
+    Circle_Data_t circle_shape_off;
+    Circle_Data_t circle_shape_on;
+    int longPressTime = 1000;
+    int doublePressTime = 500;
+}Button_Data_t;
 
 //**********************************************************************************************************************
 #endif /* SEDHOM_DATA_TYPES_H_ */
