@@ -33,12 +33,8 @@
 //============================================================================================================================================
 //*************************************************************************************************
 // define your object for you Display here but you should name Display Like a do  
-//*************************************************************************************************
-// static UTFTGLUE Display(0,A2,A1,A3,A4,A0); 
-#define Display_t MCUFRIEND_kbv
-#define my_display  Display
+//************************************************************************************************* 
 MCUFRIEND_kbv Display;
-#define init_Display_variable()      extern MCUFRIEND_kbv Display;
 // #define LCD_CS A3 // Chip Select goes to Analog 3
 // #define LCD_CD A2 // Command/Data goes to Analog 2
 // #define LCD_WR A1 // LCD Write goes to Analog 1
@@ -141,17 +137,6 @@ const int TS_LEFT = 954, TS_RT = 88, TS_TOP = 908, TS_BOT = 125;
 // #include "Settings.h"
 
 // add all functions to this file in future and add RTOS OS for this operating system and make it OS
-
-// class SEDHOM_Display_OS {
-// public:
-//     static uint32_t micros() {
-//         return OS_MICROS(); 
-//     }
-
-//     static uint32_t millis() {
-//         return OS_MICROS() / 1000UL;
-//     }
-// };
 // // Delay in milliseconds
 // static void delay(uint32_t ms) {
 //     uint32_t start = millis();
