@@ -43,7 +43,7 @@ class SEDHOM_Display_OS
   private:
   // SEDHOM_Icons Icon;
   Color_t OS_Mode;
-    // my name is Mustafa SEDHOM i wrote this lib to make easy way to use TFT Display in embedded projects
+  // my name is Mustafa SEDHOM i wrote this lib to make easy way to use TFT Display in embedded projects
   public:
     /// define all functions
     void Init_OS(ROTATION_STATUS_t Rotate = Rotate_90_Degree,Color_t Mode = Night_Mode);
@@ -62,6 +62,7 @@ class SEDHOM_Display_OS
     ROTATION_STATUS_t Rotate_180 = Rotate_180_Degree;
     ROTATION_STATUS_t Rotate_270 = Rotate_270_Degree;
 };
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class SEDHOM_Shapes_OS : public SEDHOM_Basic_Shapes
 {
   public:

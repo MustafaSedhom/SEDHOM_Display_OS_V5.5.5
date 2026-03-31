@@ -22,6 +22,8 @@
 
 #define lambda_none         [](){}
 #define lambda_func_none    [](){}
+#define lambda()            []()
+// #define ()=>{}              []()
 
 typedef unsigned char  byte_t;   
 typedef uint16_t Color_t;
