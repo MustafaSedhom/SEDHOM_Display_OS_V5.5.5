@@ -95,6 +95,10 @@ const int TS_LEFT = 954, TS_RT = 88, TS_TOP = 908, TS_BOT = 125;
 #define Draw_Triangle(x0_,y0_,x1_,y1_,x2_,y2_,color_)          Display.drawTriangle(x0_,y0_,x1_,y1_,x2_,y2_,color_);
 #define Draw_Line(x0_,y0_,x1_,y1_,color_)                      Display.drawLine(x0_,y0_,x1_,y1_,color_);
 #define Draw_Pixel(x_,y_,color_)                               Display.drawPixel(x_,y_,color_);
+#define Fill_Rotated_Rect(x_,y_,h_,w_,angle,color_)            Display.fillRotatedRect(x_,y_,h_,w_,angle,color_);
+#define Draw_Rotated_Rect(x_,y_,h_,w_,angle,color_)            Display.drawRotatedRect(x_,y_,h_,w_,angle,color_);
+#define Draw_Image_one_color(x_,y_,image_,w_,h_,color_)        Display.drawBitmap(x_,y_,image_,w_,h_,color_);
+#define Draw_Image_RGB(x_,y_,image_,w_,h_)                     Display.drawRGBBitmap(x_,y_,image_,w_,h_);
 //============================================================================================================================================
 //*************************************************************************************************
 // define draw picture to display it on tft     

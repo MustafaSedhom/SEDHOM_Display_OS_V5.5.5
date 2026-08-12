@@ -25,6 +25,7 @@ typedef uint16_t Color_t ;
 #define ORANGE      0xFDA0      /* 255, 180,   0 */
 #define GREENYELLOW 0xB7E0      /* 180, 255,   0 */
 #define PINK        0xFC9F      /* 255, 192, 203 */
+#define very_dark_grey 0x2104   /*  33,  33,  33 */
 /////////////////////////////end colors//////////////////////////////
 #define black       BLACK    
 #define navy        NAVY    
@@ -84,6 +85,7 @@ typedef uint16_t Color_t ;
 #define Color_Orange       ORANGE      
 #define Color_GreenYellow GREENYELLOW 
 #define Color_Pink        PINK 
+#define Color_Very_DarkGrey   very_dark_grey
 /////////////////////////////end colors//////////////////////////////
 //{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
 class SEDHOM_Colors
@@ -92,22 +94,58 @@ class SEDHOM_Colors
 
     public:
         // colors
-        Color_t set_Color(Color_RGB_t color);
-        Color_t Set_Hex_Color(uint16_t Hex_code); 
+        Color_t Set_Color(Color_RGB_t color);
+        Color_t Set_Color(uint16_t Hex_code); 
+        Color_t Set_Color(String Hex_Html_color_code);
 };
 //{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
 // colors
-Color_t SEDHOM_Colors::set_Color(Color_RGB_t color)
+Color_t SEDHOM_Colors::Set_Color(Color_RGB_t RGB_color)
 {
-    uint16_t rgb565 = ((color.R & 0xF8) << 8) |
-                  ((color.G & 0xFC) << 3) |
-                  (color.B >> 3);
+    uint16_t rgb565 = ((RGB_color.R & 0xF8) << 8) |
+                  ((RGB_color.G & 0xFC) << 3) |
+                  (RGB_color.B >> 3);
 
    return(rgb565);
 }
-Color_t SEDHOM_Colors::Set_Hex_Color(uint16_t Hex_code)
+Color_t SEDHOM_Colors::Set_Color(uint16_t RGB565_Hex_code)
 {
-    return Hex_code;
+    return RGB565_Hex_code;
 }
+Color_t SEDHOM_Colors::Set_Color(String Html_Hex_color_code)
+{
+    // Remove '#'
+    if (Html_Hex_color_code.charAt(0) == '#')
+    {
+        Html_Hex_color_code.remove(0, 1);
+    }
+
+    // Validate HEX length
+    if (Html_Hex_color_code.length() != 6)
+    {
+        return 0x0000; // Black
+    }
+
+    // Convert HEX string to RGB888
+    uint32_t RGB888 = strtoul(
+        Html_Hex_color_code.c_str(),
+        NULL,
+        16
+    );
+
+    // Extract RGB components
+    uint8_t R = (RGB888 >> 16) & 0xFF;
+    uint8_t G = (RGB888 >> 8)  & 0xFF;
+    uint8_t B = RGB888 & 0xFF;
+
+    // Convert RGB888 -> RGB565
+    uint16_t RGB565 =
+        ((R & 0xF8) << 8) |
+        ((G & 0xFC) << 3) |
+        (B >> 3);
+
+    return (Color_t)RGB565;
+}
+
 //{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
 #endif // !SEDHOM_COLORS

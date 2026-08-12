@@ -23,16 +23,18 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
         void Set_Mode(Color_t Mode){mode = Mode;}
         // Draw SEDHOM Icons
         void WIFI_Icon(Icon_Data_t Icon = default_parameter_for_icon ,Color_t color_off = DarkGrey,WIFI_STATUS_t state = WIFI_Status_connected_level_4_full);
-        void Battery_Icon(Icon_Data_t Icon = default_parameter_for_icon  ,int range = 50 ,Color_t txt_color = White ,bool low_charge_control_color = true);
+        void Battery_Icon(Icon_Data_t Icon = default_parameter_for_icon  ,int range = 50 ,Color_t txt_color = White ,bool low_charge_control_color = true,bool Draw_percentage = true);
         void Home_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Setting_Icon(Icon_Data_t Icon = default_parameter_for_icon);
-        void SD_Card_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+        void Setting_2_Icon(Icon_Data_t Icon = default_parameter_for_icon);
+        void SD_Card_Icon(Icon_Data_t Icon = default_parameter_for_icon,bool SD_card_inserted = true);
+        void SD_Card_2_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Control_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Sensor_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Power_off_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Bluetooth_Icon(Icon_Data_t Icon = default_parameter_for_icon ,BLUETOOTH_STATUS_t connect_status = BLuetooth_Status_open_and_connected);
         void Button_Icon(Icon_Data_t Icon = default_parameter_for_icon,bool print_on_and_off = 0);
-        void Display_Time_Icon(Icon_Data_t Icon = default_parameter_for_icon , Time_Data_t time = {5,13,42,"AM"});
+        void Display_Time_Icon(Icon_Data_t Icon = default_parameter_for_icon , Time_Data_t time = {5,13,42,"AM"},bool show_time_name = false,bool show_seconds = false);
         void Terminal_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void About_Icon(Icon_Data_t Icon = default_parameter_for_icon);
         void Display_Date_Icon(Icon_Data_t Icon =default_parameter_for_icon,Date_Data_t Date = {2026,2,16,"Feb","Mon"},Color_t Text_color = BLUE);
@@ -75,7 +77,12 @@ class SEDHOM_Icons : public SEDHOM_Basic_Shapes , public SEDHOM_Text ,public SED
         void X_Icon(Icon_Data_t Icon = default_parameter_for_icon,Shape_filled_t filled = Shape_Fill,Icon_Size_t size = Size_3 );
         void Plus_Icon(Icon_Data_t Icon = default_parameter_for_icon,Shape_filled_t filled = Shape_Fill,Icon_Size_t size = Size_3);
         void Add_Icon(Icon_Data_t Icon = default_parameter_for_icon,Shape_filled_t filled = Shape_Fill,Icon_Size_t size = Size_3);
-};
+        void Display_Date_Data_Icon(Icon_Data_t Icon = default_parameter_for_icon,Date_Data_t Date = {},Color_t Text_color = Color_White,bool Is_Slash_Separator = false,bool show_month_name = false,bool show_week_day = false);
+        void Draw_Days_Name_Icon(Coordinate_t coordinate = {150,80},Color_t no_selected_color = Color_DarkGrey,Color_t selected_color = Color_Magenta,Days_t selected_day = Day_Sunday);
+        void Draw_Month_Name_Icon(Coordinate_t coordinate = {150,80},Color_t no_selected_color = Color_DarkGrey,Color_t selected_color = Color_Cyan,bool show_hijri = false,Months_t selected_month = Month_January);
+
+
+      };
 // define all functions and Draw all Widgets and icons
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 // SEDHOM Icons
@@ -110,7 +117,7 @@ void SEDHOM_Icons::WIFI_Icon(Icon_Data_t Icon,Color_t color_off,WIFI_STATUS_t st
     }
     Rectangle({{Icon.coordinate.x-10,Icon.coordinate.y+13},{20,10},0,Shape_Fill,Icon.Background});
 } 
-void SEDHOM_Icons::Battery_Icon(Icon_Data_t Icon ,int range,Color_t txt_color,bool low_charge_control_color)
+void SEDHOM_Icons::Battery_Icon(Icon_Data_t Icon ,int range,Color_t txt_color,bool low_charge_control_color,bool Draw_percentage)
 {
     int txt_x=0;
     int txt_y_index = Icon.coordinate.y+22;
@@ -123,15 +130,18 @@ void SEDHOM_Icons::Battery_Icon(Icon_Data_t Icon ,int range,Color_t txt_color,bo
     }
     else if(low_charge_control_color==0)
     {
-        if(range<20){color_Battery=Color_Green; txt_x=(range>=10)?Icon.coordinate.x-53:Icon.coordinate.x-45;}
-        else if(range>=20){color_Battery=Color_Green;txt_x=(range==100)?Icon.coordinate.x-65:Icon.coordinate.x-58;}
+        if(range<20){color_Battery=Icon.color; txt_x=(range>=10)?Icon.coordinate.x-53:Icon.coordinate.x-45;}
+        else if(range>=20){color_Battery=Icon.color;txt_x=(range==100)?Icon.coordinate.x-65:Icon.coordinate.x-58;}
     }
     int rangeB=map(range,0,100,5,45);
     Rectangle({{Icon.coordinate.x, Icon.coordinate.y}, {50,30}, 5,Shape_Fill, color_Battery});
     Rectangle({{Icon.coordinate.x+3, Icon.coordinate.y+3}, {50-6,30-6}, 5,Shape_Fill, Icon.Background});
     Rectangle({{Icon.coordinate.x+50-1,Icon.coordinate.y+10},{10,10},0,Shape_Fill,color_Battery});
     Rectangle({{Icon.coordinate.x+2,Icon.coordinate.y+3},{rangeB,30-6},5,Shape_Fill,color_Battery});
-    Text({txt_x+60,txt_y_index},FONT_BIG,txt_color,String(range) + "%");
+    if(Draw_percentage)
+    {
+        Text({txt_x+60,txt_y_index},FONT_BIG,txt_color,String(range) + "%");
+    }
 }
 void SEDHOM_Icons::Home_Icon(Icon_Data_t Icon)
 {
@@ -140,18 +150,23 @@ void SEDHOM_Icons::Home_Icon(Icon_Data_t Icon)
     Rectangle({{Icon.coordinate.x+10, Icon.coordinate.y+12},{40,25},5,Shape_Fill,Icon.color});
     Rectangle({{Icon.coordinate.x+23, Icon.coordinate.y+20},{15,20},5,Shape_Fill,Icon.Background});
 }
+void SEDHOM_Icons::Setting_2_Icon(Icon_Data_t Icon)
+{
+  Circle({{Icon.coordinate.x-10, Icon.coordinate.y},10,Shape_Fill, Icon.color});
+  Circle({{Icon.coordinate.x-10, Icon.coordinate.y-10}, 3,Shape_Fill, Icon.color});
+  Circle({{Icon.coordinate.x-10, Icon.coordinate.y+10}, 3,Shape_Fill, Icon.color});
+  Circle({{Icon.coordinate.x, Icon.coordinate.y-5}, 3,Shape_Fill, Icon.color});
+  Circle({{Icon.coordinate.x, Icon.coordinate.y+5}, 3,Shape_Fill, Icon.color});
+  Circle({{Icon.coordinate.x-20, Icon.coordinate.y-5}, 3,Shape_Fill, Icon.color});
+  Circle({{Icon.coordinate.x-20, Icon.coordinate.y+5}, 3,Shape_Fill, Icon.color});
+  Circle({{Icon.coordinate.x-10, Icon.coordinate.y}, 5,Shape_Fill, Icon.Background});
+}
 void SEDHOM_Icons::Setting_Icon(Icon_Data_t Icon)
 {
-    Circle({{Icon.coordinate.x-10, Icon.coordinate.y},10,Shape_Fill, Icon.color});
-    Circle({{Icon.coordinate.x-10, Icon.coordinate.y-10}, 3,Shape_Fill, Icon.color});
-    Circle({{Icon.coordinate.x-10, Icon.coordinate.y+10}, 3,Shape_Fill, Icon.color});
-    Circle({{Icon.coordinate.x, Icon.coordinate.y-5}, 3,Shape_Fill, Icon.color});
-    Circle({{Icon.coordinate.x, Icon.coordinate.y+5}, 3,Shape_Fill, Icon.color});
-    Circle({{Icon.coordinate.x-20, Icon.coordinate.y-5}, 3,Shape_Fill, Icon.color});
-    Circle({{Icon.coordinate.x-20, Icon.coordinate.y+5}, 3,Shape_Fill, Icon.color});
-    Circle({{Icon.coordinate.x-10, Icon.coordinate.y}, 5,Shape_Fill, Icon.Background});
-}
-void SEDHOM_Icons::SD_Card_Icon(Icon_Data_t Icon)
+    Image_t image_settings_57_57[] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x3f,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xff,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0xff,0xc0,0x00,0x00,0x00,0x00,0x00,0x01,0xff,0xe0,0x00,0x00,0x00,0x00,0x00,0x01,0xff,0xe0,0x00,0x00,0x00,0x00,0x03,0xe3,0xf3,0xf3,0xf0,0x00,0x00,0x00,0x0f,0xff,0xe3,0xff,0xf8,0x00,0x00,0x00,0x1f,0xff,0xe1,0xff,0xfc,0x00,0x00,0x00,0x1f,0xff,0xc1,0xff,0xfe,0x00,0x00,0x00,0x3f,0xff,0xc0,0xff,0xff,0x00,0x00,0x00,0x3f,0x3f,0x00,0x3f,0x3f,0x00,0x00,0x00,0x3e,0x00,0x00,0x00,0x1f,0x00,0x00,0x00,0x3e,0x00,0x00,0x00,0x3f,0x00,0x00,0x00,0x3f,0x00,0x00,0x00,0x3f,0x00,0x00,0x00,0x1f,0x00,0x1e,0x00,0x3e,0x00,0x00,0x00,0x1f,0x00,0xff,0xc0,0x7e,0x00,0x00,0x00,0x1f,0x01,0xff,0xe0,0x7e,0x00,0x00,0x00,0x3f,0x03,0xff,0xf0,0x3f,0x00,0x00,0x00,0xff,0x07,0xff,0xf8,0x3f,0xc0,0x00,0x03,0xfe,0x0f,0xf3,0xfc,0x1f,0xe0,0x00,0x03,0xfe,0x0f,0xc0,0xfc,0x1f,0xf0,0x00,0x07,0xf8,0x0f,0x80,0x7c,0x0f,0xf8,0x00,0x07,0xe0,0x1f,0x80,0x7c,0x01,0xf8,0x00,0x07,0xc0,0x1f,0x00,0x7c,0x00,0xf8,0x00,0x07,0xc0,0x1f,0x00,0x7c,0x01,0xf8,0x00,0x07,0xf0,0x1f,0x80,0x7c,0x03,0xf8,0x00,0x07,0xfc,0x0f,0x80,0x7c,0x0f,0xf0,0x00,0x03,0xfe,0x0f,0xc0,0xfc,0x1f,0xf0,0x00,0x01,0xfe,0x0f,0xff,0xfc,0x3f,0xe0,0x00,0x00,0xff,0x07,0xff,0xf8,0x3f,0xc0,0x00,0x00,0x3f,0x03,0xff,0xf0,0x3e,0x00,0x00,0x00,0x1f,0x01,0xff,0xe0,0x7e,0x00,0x00,0x00,0x1f,0x00,0xff,0xc0,0x7e,0x00,0x00,0x00,0x3f,0x00,0x00,0x00,0x3e,0x00,0x00,0x00,0x3f,0x00,0x00,0x00,0x3f,0x00,0x00,0x00,0x3e,0x00,0x00,0x00,0x3f,0x00,0x00,0x00,0x3e,0x0c,0x00,0x0c,0x1f,0x00,0x00,0x00,0x3f,0x7f,0x00,0x7f,0xbf,0x00,0x00,0x00,0x3f,0xff,0xc0,0xff,0xfe,0x00,0x00,0x00,0x1f,0xff,0xe1,0xff,0xfe,0x00,0x00,0x00,0x0f,0xff,0xe1,0xff,0xfc,0x00,0x00,0x00,0x07,0xff,0xe3,0xff,0xf8,0x00,0x00,0x00,0x03,0xe3,0xf7,0xf1,0xe0,0x00,0x00,0x00,0x00,0x01,0xff,0xe0,0x00,0x00,0x00,0x00,0x00,0x01,0xff,0xe0,0x00,0x00,0x00,0x00,0x00,0x00,0xff,0xc0,0x00,0x00,0x00,0x00,0x00,0x00,0x7f,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x3e,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
+    Image_Single_Color({Icon.coordinate,{57,57},Icon.color,image_settings_57_57});
+  }
+void SEDHOM_Icons::SD_Card_2_Icon(Icon_Data_t Icon)
 {
     Rectangle({{Icon.coordinate.x-5, Icon.coordinate.y-5},{40,45},5,Shape_Fill,Color_White});
     Rectangle({{Icon.coordinate.x, Icon.coordinate.y},{30,35},5,Shape_Fill,Color_Black});
@@ -162,6 +177,24 @@ void SEDHOM_Icons::SD_Card_Icon(Icon_Data_t Icon)
     Rectangle({{Icon.coordinate.x+18,Icon.coordinate.y+20},{2,10},5,Shape_Fill,Color_Yellow});
     Rectangle({{Icon.coordinate.x+25,Icon.coordinate.y+20},{2,10},5,Shape_Fill,Color_Yellow});
     Rectangle({{Icon.coordinate.x+12,Icon.coordinate.y+1},{5,8},0,Shape_Fill,Color_Black});
+}
+void SEDHOM_Icons::SD_Card_Icon(Icon_Data_t Icon,bool SD_card_inserted)
+{
+  Image_t Icon_SD_card_inserted_32_32 []  = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x7f, 0xff, 0xc0, 0x00, 0xff, 0xff, 0xc0, 0x00, 0xc0, 0x00, 0x60, 0x00, 0xc0, 0x00, 0x60, 0x00, 0xd9, 0xb6, 0x60, 0x00, 0xd9, 0xb6, 0x60, 0x00, 0xd9, 0xb6, 0x60, 0x00, 0xc9, 0x02, 0x60, 0x00, 0xc0, 0x00, 0x60, 0x00, 0xc0, 0x00, 0x60, 0x01, 0xc0, 0x00, 0x60, 0x03, 0x80, 0x00, 0x60, 0x03, 0x00, 0x00, 0x60, 0x06, 0x00, 0x00, 0x60, 0x06, 0x00, 0x00, 0x60, 0x07, 0x00, 0x00, 0x60, 0x07, 0x80, 0x00, 0x60, 0x07, 0x80, 0x00, 0x60, 0x07, 0x00, 0x00, 0x60, 0x06, 0x00, 0x00, 0x60, 0x06, 0x00, 0x00, 0x60, 0x06, 0x00, 0x00, 0x60, 0x06, 0x00, 0x00, 0x60, 0x06, 0x00, 0x00, 0x60, 0x03, 0xff, 0xff, 0xc0, 0x03, 0xff, 0xff, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
+  Image_t Icon_SD_card_not_inserted_35_43[] = {0x07,0xff,0xff,0xff,0x00,0x0f,0xff,0xff,0xff,0x80,0x0f,0xff,0x3c,0xff,0x80,0x0e,0x49,0x24,0x93,0x80,0x0e,0x49,0x24,0x93,0x80,0x0e,0x49,0x24,0x93,0x80,0x0e,0x49,0x24,0x93,0x80,0x0e,0x49,0x24,0x93,0x80,0x0f,0xff,0xff,0xff,0x80,0x0f,0xff,0xff,0xff,0x80,0x0f,0xff,0xff,0xff,0x80,0x0f,0xff,0xff,0xff,0x80,0x0f,0xfe,0x03,0xff,0x80,0x0f,0xfc,0x01,0xff,0x80,0x0f,0xf8,0x00,0xff,0x80,0x0f,0xf0,0xf8,0x7f,0x80,0x17,0xe1,0xfc,0x3f,0x80,0x2f,0xe3,0xfe,0x3f,0x80,0x5f,0xe3,0xfe,0x3f,0x80,0x7f,0xe3,0xfe,0x3f,0x80,0x7f,0xe3,0xfe,0x3f,0x80,0x7f,0xf7,0xfc,0x3f,0x80,0x7f,0xff,0xf8,0x7f,0x80,0x7f,0xff,0xf0,0xff,0x80,0x1f,0xff,0xe1,0xff,0x80,0x1f,0xff,0xc3,0xff,0x80,0x1f,0xff,0xc7,0xff,0x80,0x1f,0xff,0x8f,0xff,0x80,0x17,0xff,0x8f,0xff,0x80,0x2f,0xff,0x8f,0xff,0x80,0x5f,0xff,0x8f,0xff,0x80,0x7f,0xff,0xdf,0xff,0x80,0x7f,0xff,0xff,0xff,0x80,0x7f,0xff,0xff,0xff,0x80,0x7f,0xff,0x8f,0xff,0x80,0x7f,0xff,0x8f,0xff,0x80,0x7f,0xff,0x8f,0xff,0x80,0x7f,0xff,0xff,0xff,0x80,0x7f,0xff,0xff,0xff,0x80,0x7f,0xff,0xff,0xff,0x80,0x7f,0xff,0xff,0xff,0x80,0x7f,0xff,0xff,0xff,0x80,0x3f,0xff,0xff,0xff,0x00};
+  Image_Single_Color({
+      Icon.coordinate,
+
+      SD_card_inserted
+      ? Area_t{32, 32} 
+      : Area_t{35, 43},
+
+      Icon.color,
+
+      SD_card_inserted
+      ? Icon_SD_card_inserted_32_32
+      : Icon_SD_card_not_inserted_35_43
+  });
 }
 void SEDHOM_Icons::Control_Icon(Icon_Data_t Icon)
 {
@@ -225,7 +258,134 @@ void SEDHOM_Icons::Button_Icon(Icon_Data_t Icon,bool print_on_and_off)
         Text_C({Icon.coordinate.x+23, Icon.coordinate.y+41},FONT_SMALL,Color_White,"OFF");
     }
 }
-void SEDHOM_Icons::Display_Time_Icon(Icon_Data_t Icon,Time_Data_t time)
+void SEDHOM_Icons::Draw_Days_Name_Icon(Coordinate_t coordinate,Color_t no_selected_color,Color_t selected_color,Days_t selected_day)
+{
+    const char* Days[] =
+    {
+        "Sat",
+        "Sun",
+        "Mon",
+        "Tue",
+        "Wed",
+        "Thu",
+        "Fri"
+    };
+
+    for (int i = 0; i < 7; i++)
+    {
+        if (i == (int)selected_day)
+        {
+            // Selected Day
+            Text(
+                {coordinate.x + (i * 58), coordinate.y},
+                FONT_FREESANS_MEDIUM,
+                selected_color,
+                Days[i]
+            );
+        }
+        else
+        {
+            // Not Selected
+            Text(
+                {coordinate.x + (i * 58), coordinate.y},
+                FONT_BIG,
+                no_selected_color,
+                Days[i]
+            );
+        }
+    }
+}
+void SEDHOM_Icons::Draw_Month_Name_Icon(Coordinate_t coordinate,Color_t no_selected_color,Color_t selected_color,bool show_hijri,Months_t selected_month)
+{
+    // =========================
+    // Gregorian Months
+    // =========================
+
+    const char* Gregorian_Months[] =
+    {
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+    };
+
+    // =========================
+    // Hijri Months
+    // =========================
+
+    const char* Hijri_Months[] =
+    {
+        "Muh",
+        "Saf",
+        "Rab1",
+        "Rab2",
+        "Jum1",
+        "Jum2",
+        "Raj",
+        "Sha",
+        "Ram",
+        "Shaw",
+        "DhuQ",
+        "DhuH"
+    };
+
+    int SelectedMonth = (int)selected_month;
+
+    // Validate month
+    if (SelectedMonth < 0 || SelectedMonth >= 12)
+        return;
+
+    // Select month list
+    const char** Months;
+
+    if (show_hijri)
+        Months = Hijri_Months;
+    else
+        Months = Gregorian_Months;
+
+    // =========================
+    // Draw all 12 months
+    // =========================
+
+    for (int i = 0; i < 12; i++)
+    {
+        int row    = i / 6;
+        int column = i % 6;
+
+        int Month_X = coordinate.x + (column * 68);
+        int Month_Y = coordinate.y + (row * 30);
+
+        if (i == SelectedMonth)
+        {
+            // Selected Month
+            Text(
+                {Month_X, Month_Y},
+                FONT_FREESANS_MEDIUM,
+                selected_color,
+                Months[i]
+            );
+        }
+        else
+        {
+            // Not Selected
+            Text(
+                {Month_X, Month_Y},
+                FONT_BIG,
+                no_selected_color,
+                Months[i]
+            );
+        }
+    }
+}
+void SEDHOM_Icons::Display_Time_Icon(Icon_Data_t Icon,Time_Data_t time,bool show_time_name,bool show_seconds)
 {
     //hour
     Text({Icon.coordinate.x,Icon.coordinate.y+35},FONT_SEVENSEGMENT,Icon.color,(time.hour < 10) ? ("0" + String(time.hour)) : String(time.hour));
@@ -235,9 +395,15 @@ void SEDHOM_Icons::Display_Time_Icon(Icon_Data_t Icon,Time_Data_t time)
     Circle({{Icon.coordinate.x+73,Icon.coordinate.y},5,Shape_Fill,Icon.color});
     Circle({{Icon.coordinate.x+73,Icon.coordinate.y+20},5,Shape_Fill,Icon.color});
     //sec
-    Text({Icon.coordinate.x+146,Icon.coordinate.y},FONT_BIG,Icon.color,String(time.sec));
+    if(show_seconds)
+    {
+        Text({Icon.coordinate.x+146,Icon.coordinate.y},FONT_BIG,Icon.color,String(time.sec));
+    }
     // time name
-    Text({Icon.coordinate.x+146,Icon.coordinate.y+38},FONT_BIG,Icon.color,String(time.time_name));
+    if(show_time_name)
+    {
+        Text({Icon.coordinate.x+146,Icon.coordinate.y+38},FONT_BIG,Icon.color,String(time.time_name));
+    }
 }
 void SEDHOM_Icons::Terminal_Icon(Icon_Data_t Icon)
 {
@@ -778,6 +944,135 @@ void SEDHOM_Icons::Star_Icon(Icon_Data_t Icon)
 {
   Equilateral_Triangle({{Icon.coordinate},30,Shape_Fill,Direction_Up,Icon.color});
   Equilateral_Triangle({{Icon.coordinate.x+10,Icon.coordinate.y},30,Shape_Fill,Direction_Down,Icon.color});
+}
+void SEDHOM_Icons::Display_Date_Data_Icon(Icon_Data_t Icon,Date_Data_t Date,Color_t Text_color,bool Is_Slash_Separator = false,bool show_month_name = false,bool show_week_day = false)
+{
+    int x = Icon.coordinate.x;
+    int y = Icon.coordinate.y;
+
+    char Day_Text[3];
+    char Month_Text[3];
+    char Year_Text[5];
+
+    snprintf(
+        Day_Text,
+        sizeof(Day_Text),
+        "%02d",
+        Date.Day
+    );
+
+    snprintf(
+        Month_Text,
+        sizeof(Month_Text),
+        "%02d",
+        Date.month
+    );
+
+    snprintf(
+        Year_Text,
+        sizeof(Year_Text),
+        "%04d",
+        Date.year
+    );
+
+    // =========================
+    // Day
+    // =========================
+
+    Text(
+        {x, y},
+        FONT_SEVENSEGMENT,
+        Text_color,
+        String(Day_Text)
+    );
+
+    // =========================
+    // First separator
+    // =========================
+    if(!Is_Slash_Separator)
+    {
+        Rectangle({
+            {x + 70, y -25}, {15, 5},
+            1,
+            Shape_Fill,
+            Text_color
+        });
+    }
+    else
+    {
+        Rotated_Rectangle({
+            {x + 77, y -25}, {50, 5},
+            1,
+            Shape_Fill,
+            Text_color
+        },-70);
+    }
+    // =========================
+    // Month
+    // =========================
+
+    Text(
+        {x + 95, y},
+        FONT_SEVENSEGMENT,
+        Text_color,
+        String(Month_Text)
+    );
+
+    // =========================
+    // Second separator
+    // =========================
+if(!Is_Slash_Separator)
+    {
+        Rectangle({
+            {x + 165, y -25}, {15, 5},
+            1,
+            Shape_Fill,
+            Text_color
+        });
+    }
+    else
+    {
+        Rotated_Rectangle({
+            {x + 172, y -25}, {50, 5},
+            1,
+            Shape_Fill,
+            Text_color
+        },-70);
+    }
+    // =========================
+    // Year
+    // =========================
+
+    Text(
+        {x + 185, y},
+        FONT_SEVENSEGMENT,
+        Text_color,
+        String(Year_Text)
+    );
+    // =========================
+    // month name
+    // =========================
+    if(show_month_name)
+    {
+        Text(
+            {x + 315, y-40},
+            FONT_BIG,
+            Text_color,
+            String(Date.month_name)
+        );
+    }
+    // =========================
+    // week day name
+    // =========================
+    if(show_week_day)
+    {
+        Text(
+            {x + 315, y},
+            FONT_BIG,
+            Text_color,
+            String(Date.week_day_name)
+        );
+    }
 }
 void SEDHOM_Icons::Gap_Icon(Coordinate_t coordinate,int Gap_size,Orientation_t orientation)
 {

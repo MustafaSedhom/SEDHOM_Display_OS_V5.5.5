@@ -25,6 +25,8 @@
 #define lambda()            []()
 // #define ()=>{}              []()
 
+#define Image_t        static const unsigned char PROGMEM
+
 typedef unsigned char  byte_t;   
 typedef uint16_t Color_t;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -103,13 +105,24 @@ typedef struct
 }User_ID_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of time icon
-typedef struct 
+typedef struct Time_Data_t
 {
     int hour;
     int minute;
     int sec;
     word_t time_name;
-}Time_Data_t;
+    bool operator==(const Time_Data_t& other) const
+    {
+        return (hour == other.hour) &&
+               (minute == other.minute) &&
+               (sec == other.sec) &&
+               (time_name == other.time_name);
+    }
+    bool operator!=(const Time_Data_t& other) const
+    {
+        return !(*this == other);
+    }
+} Time_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of coordinate
 typedef struct 
@@ -156,7 +169,52 @@ typedef enum
     Shape_Line,
     Shape_Square,
 }Shapes_type_t;
-
+///////////////////////////////////////////////////////////////////////////
+// data type of Days
+typedef enum 
+{
+    Day_Saturday,
+    Day_Sunday,
+    Day_Monday,
+    Day_Tuesday,
+    Day_Wednesday,
+    Day_Thursday,
+    Day_Friday
+}Days_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of Hijri Months
+typedef enum
+{
+    Hijri_Month_Muharram,
+    Hijri_Month_Safar,
+    Hijri_Month_Rabi_Al_Awwal,
+    Hijri_Month_Rabi_Al_Thani,
+    Hijri_Month_Jumada_Al_Awwal,
+    Hijri_Month_Jumada_Al_Thani,
+    Hijri_Month_Rajab,
+    Hijri_Month_Shaaban,
+    Hijri_Month_Ramadan,
+    Hijri_Month_Shawwal,
+    Hijri_Month_Dhul_Qadah,
+    Hijri_Month_Dhul_Hijjah
+}Hijri_Months_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of Months
+typedef enum 
+{
+    Month_January,
+    Month_February,
+    Month_March,
+    Month_April,
+    Month_May,
+    Month_June,
+    Month_July,
+    Month_August,
+    Month_September,
+    Month_October,
+    Month_November,
+    Month_December
+}Months_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of WiFi network Encryption type
 typedef enum
@@ -346,6 +404,23 @@ typedef enum
     Size_7=7,
     Size_8=8,
 }Icon_Size_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of Image
+typedef struct 
+{
+    Coordinate_t coordinate;
+    Area_t area;
+    Color_t color;
+    const uint8_t *image;
+}Image_Data_t;
+///////////////////////////////////////////////////////////////////////////
+// data type of Image
+typedef struct 
+{
+    Coordinate_t coordinate;
+    Area_t area;
+    const uint16_t *image;
+}Image_RGB_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of  touch state
 typedef struct  

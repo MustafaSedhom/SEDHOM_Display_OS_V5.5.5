@@ -14,6 +14,7 @@ class SEDHOM_Basic_Shapes
         void Pixel(Pixel_Data_t pixel);
         void Line(Line_Data_t line);    
         static void Rectangle(Rectangle_Data_t rect);
+        void Rotated_Rectangle(Rectangle_Data_t rect,int angle);
         void Square(Square_Data_t sqrt);  
         void Circle(Circle_Data_t circle); 
         void Triangle(Triangle_Data_t tri); 
@@ -23,6 +24,8 @@ class SEDHOM_Basic_Shapes
         void Right_Triangle(Icon_Data_t Icon,Area_t area,Shape_filled_t filled);
         void Border_Rectangle(Icon_Data_t Border_Rect,Area_t area,int Radius,int Border_size);
         void Container(Rectangle_Data_t container);
+        void Image_Single_Color(Image_Data_t image);
+        void Image_RGB(Image_RGB_Data_t image);
         // SEDHOM Shapes
         void SEDHOM_Circle(Circle_Data_t circle);
         // custom image or font
@@ -56,6 +59,26 @@ void SEDHOM_Basic_Shapes::Rectangle(Rectangle_Data_t rect)
     }
 
 }    
+void SEDHOM_Basic_Shapes::Rotated_Rectangle(Rectangle_Data_t rect,int angle)
+{
+    switch (rect.Filled)
+    {
+    case Shape_Fill:
+      Fill_Rotated_Rect(rect.coordinate.x,rect.coordinate.y,rect.area.w,rect.area.h,angle,rect.color);
+      break;
+    case Shape_Draw:
+      Draw_Rotated_Rect(rect.coordinate.x,rect.coordinate.y,rect.area.w,rect.area.h,angle,rect.color);
+      break;
+    }
+}
+void SEDHOM_Basic_Shapes::Image_Single_Color(Image_Data_t image)
+{
+    Draw_Image_one_color(image.coordinate.x,image.coordinate.y,image.image,image.area.w,image.area.h,image.color);
+}
+void SEDHOM_Basic_Shapes::Image_RGB(Image_RGB_Data_t image)
+{
+    Draw_Image_RGB(image.coordinate.x,image.coordinate.y,image.image,image.area.w,image.area.h);
+}
 void SEDHOM_Basic_Shapes::Square(Square_Data_t sqrt)
 {
   Rectangle({{sqrt.coordinate.x,sqrt.coordinate.y},{sqrt.length,sqrt.length},sqrt.Radius,sqrt.Filled,sqrt.color});
@@ -91,7 +114,7 @@ void SEDHOM_Basic_Shapes::Right_Triangle(Icon_Data_t Icon,Area_t area,Shape_fill
 void SEDHOM_Basic_Shapes::Equilateral_Triangle(Triangle_special_Data_t tri) 
 {
   int x_0,y_0,x_1,y_1,x_2,y_2 ;
-  float height  = tri.length * sqrt(3) / 2.0; ;
+  float height  = tri.length * sqrt(3) / 2.0 ; 
 
   switch (tri.Dir)
   {

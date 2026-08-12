@@ -22,7 +22,7 @@ Color_t SEDHOM_Effects::Blur_Effect(Icon_Data_t Icon,Area_t area,int Radius,int 
 {
   Color_t color_value = map(Blur_value,Icon.color?20:0,Icon.color?0:20,0,255);
 
-  Color_t color = Colors.set_Color({color_value,color_value,color_value});
+  Color_t color = Colors.Set_Color({color_value,color_value,color_value});
   if(shape == Shape_Rectangle)
   {
     Shape.Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{area.w,area.h},Radius,Shape_Fill,color});
