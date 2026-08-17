@@ -327,6 +327,15 @@ typedef struct
     Color_t color;
 }Circle_Data_t;
 ///////////////////////////////////////////////////////////////////////////
+typedef struct 
+{
+    Coordinate_t coordinate;
+    String content;
+    uint8_t scale;
+    Color_t Background_color;
+    Color_t foreground_color;
+}QRCode_Data_t;
+///////////////////////////////////////////////////////////////////////////
 // data type of  Pie_Data_t shape
 typedef struct 
 {

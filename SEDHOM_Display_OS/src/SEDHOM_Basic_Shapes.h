@@ -6,7 +6,7 @@
 #include "SEDHOM_Math.h"
 #include "SEDHOM_GUI_Core.h"
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-class SEDHOM_Basic_Shapes : private virtual SEDHOM_GUI_Core
+class SEDHOM_Basic_Shapes : public virtual SEDHOM_GUI_Core
 {
     private:
         
@@ -32,6 +32,8 @@ class SEDHOM_Basic_Shapes : private virtual SEDHOM_GUI_Core
         void Image_RGB(Image_RGB_Data_t image);
         // 3D shapes
         void Cube(Coordinate_t coordinate,int size,int Degree_angle_View,Color_t color);
+        // QR Code
+        void QR(QRCode_Data_t qr);
         
 };
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -253,6 +255,10 @@ void SEDHOM_Basic_Shapes::Ellipse(Ellipse_Data_t ellipse)
         drawEllipse(ellipse.coordinate.x,ellipse.coordinate.y,ellipse.Radius.w,ellipse.Radius.h,ellipse.color);
         break;
     }
+}
+void SEDHOM_Basic_Shapes::QR(QRCode_Data_t qr)
+{
+  drawQRCode(qr.coordinate.x,qr.coordinate.y,qr.content.c_str(),qr.scale,qr.Background_color,qr.foreground_color);
 }
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 #endif // !SEDHOM_BASIC_SHAPES_H_

@@ -3,10 +3,10 @@
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 #include "SEDHOM_Display_Settings.h"
 #include "Imports/Adafruit_GFX_Library/Adafruit_GFX.h"
+#include "Imports/QRCodeGFX/src/QRCodeGFX.h"
+#include "Imports/BarcodeGFX/src/BarcodeGFX.h"
 // #include "Imports/U8g2_for_Adafruit_GFX/src/U8g2_for_Adafruit_GFX.h"
 // #include "Imports/U8g2_for_Adafruit_GFX/src/u8g2_fonts.h"
-// #include "Imports/BarcodeGFX/src/BarcodeGFX.h"
-// #include "Imports/QRCodeGFX/src/QRCodeGFX.h"
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 class SEDHOM_GUI_Core : public Adafruit_GFX
@@ -70,6 +70,22 @@ public:
 
     void invertDisplay(bool i) override {
         API_Invert_Display(i);
+    }
+    // =========================================================================
+    // QR Code Functions (Takes Coordinates and Text)
+    // =========================================================================
+    void drawQRCode(int16_t x, int16_t y, const char* text, uint8_t scale = 3, uint16_t bg = 0xFFFF , uint16_t fg = 0x0000 ) {
+        QRCodeGFX qrcode(*this); 
+        static uint8_t qrcodeBuffer[175];
+        static uint8_t tempBuffer[175];
+        qrcode.getGenerator().setBuffers(qrcodeBuffer, tempBuffer, sizeof(qrcodeBuffer));
+        qrcode.setScale(scale).setColors(bg, fg);
+        qrcode.draw(text, x, y);
+    }
+    void drawBarcode(int16_t x,int16_t y,const char* codeText, uint16_t height,BarcodeType type,uint8_t scale,bool showDigits, uint16_t bg, uint16_t fg) {
+        BarcodeGFX barcode(*this);
+        barcode.setShowDigits(showDigits).setScale(scale).setColors(bg, fg);
+       barcode.draw(codeText, x, y, height, type);
     }
 };
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
