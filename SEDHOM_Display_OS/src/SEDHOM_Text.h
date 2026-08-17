@@ -6,14 +6,17 @@
 #include "SEDHOM_Arabic_Font.h"
 #include "SEDHOM_Data_Types.h"
 #include "SEDHOM_Colors.h"
+#include "SEDHOM_GUI_Core.h"
 //ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
-class SEDHOM_Text
+// class SEDHOM_Text : private virtual SEDHOM_GUI_Core
+class SEDHOM_Text : private virtual SEDHOM_GUI_Core
 {
     private:
     
     public:
         // Text
-        static void Text_C(Coordinate_t coordinate,const GFXfont* font,Color_t color,string_t txt);
+        void static __Text_init_OS();
+        void Text_C(Coordinate_t coordinate,const GFXfont* font,Color_t color,const char* txt);
         void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,String str);
         void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,float value);
         void Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,int value);
@@ -22,25 +25,59 @@ class SEDHOM_Text
 };
 //ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt
 // Text_C
-void SEDHOM_Text::Text_C(Coordinate_t coordinate,const GFXfont* font,Color_t color,string_t txt) 
+void SEDHOM_Text::Text_C(Coordinate_t coordinate, const GFXfont* font, Color_t color, const char* txt) 
 {
-    Text_Driver(coordinate.x,coordinate.y,font,color,txt);
+    if (txt == nullptr) return;
+    setCursor(coordinate.x, coordinate.y);
+    setTextColor(color);
+    setFont(font);
+    setTextWrap(false);
+    uint16_t len = strlen(txt);
+    for (uint16_t i = 0; i < len; i++) 
+    {
+        write(txt[i]);
+    }
 }
-void SEDHOM_Text::Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,String str) 
+
+void SEDHOM_Text::Text(Coordinate_t coordinate, const GFXfont* font, Color_t color, String str) 
 {
-    Text_Driver(coordinate.x,coordinate.y,font,color,str);
+    setCursor(coordinate.x, coordinate.y);
+    setTextColor(color);
+    setFont(font);
+    setTextWrap(false);
+    for (uint16_t i = 0; i < str.length(); i++) 
+    {
+        write(str[i]);
+    }
 }
-void SEDHOM_Text::Text(Coordinate_t coordinate,Text_Data_t str)
+void SEDHOM_Text::__Text_init_OS()
 {
-    Text_Driver(coordinate.x,coordinate.y,str.txt_font,str.txt_color,str.txt);
+    SEDHOM_Text Text; 
+    Text.Text({0,0}, FONT_BIG, Color_Black, " ");
 }
-void SEDHOM_Text::Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,float value)
+void SEDHOM_Text::Text(Coordinate_t coordinate, Text_Data_t str)
 {
-    Text_Driver(coordinate.x,coordinate.y,font,color,String(value));
+    setCursor(coordinate.x, coordinate.y);
+    setFont(str.txt_font);
+    setTextColor(str.txt_color);
+    setTextWrap(false);
+    String txt_obj = String(str.txt);
+    for (uint16_t i = 0; i < txt_obj.length(); i++) 
+    {
+        write(txt_obj[i]);
+    }
 }
-void SEDHOM_Text::Text(Coordinate_t coordinate,const GFXfont* font,Color_t color,int value)
+
+void SEDHOM_Text::Text(Coordinate_t coordinate, const GFXfont* font, Color_t color, float value)
 {
-    Text_Driver(coordinate.x,coordinate.y,font,color,String(value));
+    String str = String(value, 2);
+    Text(coordinate, font, color, str);
+}
+
+void SEDHOM_Text::Text(Coordinate_t coordinate, const GFXfont* font, Color_t color, int value)
+{
+    String str = String(value);
+    Text(coordinate, font, color, str);
 }
 void SEDHOM_Text::Text_OverFlow(Coordinate_t coordinate,const GFXfont* font,Color_t color,String txt,int number_overFlow,string_t overFlow_chars)
 {

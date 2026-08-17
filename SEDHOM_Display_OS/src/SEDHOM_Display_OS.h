@@ -38,7 +38,7 @@
 // include controls file to use Buttons in your projects
 #include "SEDHOM_Controls.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-class SEDHOM_Display_OS
+class SEDHOM_Display_OS : private SEDHOM_GUI_Core
 {
   private:
   // SEDHOM_Icons Icon;
@@ -269,10 +269,11 @@ public:
 // define all functions
 void SEDHOM_Display_OS::Init_OS(ROTATION_STATUS_t Rotate,Color_t Mode)
 {
-  init_Screen(Rotate);
+  API_Init_Screen();
+  API_Set_Rotation(Rotate);
   OS_Mode = Mode;
   Set_Device_Mode(Mode);
-  SEDHOM_Icon_OS::Text_C({0,0},FONT_BIG,0," ");
+  SEDHOM_Text::__Text_init_OS();
 }
 void SEDHOM_Display_OS::Restart_OS()
 {
@@ -285,11 +286,11 @@ void SEDHOM_Display_OS::Set_Device_Mode(Color_t Mode)
 }
 int SEDHOM_Display_OS::Screen_Height()
 {
-    return Screen_height ;
+    return API_Screen_height();
 }
 int SEDHOM_Display_OS::Screen_Width()
 {
-    return Screen_width;
+    return API_Screen_width();
 }
 Color_t SEDHOM_Display_OS::Mode()
 {
@@ -297,19 +298,13 @@ Color_t SEDHOM_Display_OS::Mode()
 }
 Color_t SEDHOM_Display_OS::Not_Mode()
 {
-  if(OS_Mode == BLACK) return WHITE;
-  else return BLACK;
+  if(OS_Mode == Color_Black) return Color_White;
+  else return Color_Black;
 
 }
 void SEDHOM_Display_OS::Fill_Screen(Color_t color)
 {
-  SEDHOM_Basic_Shapes::Rectangle({
-      {0,0},
-      {Screen_Height(),Screen_Width()},
-      0,
-      Shape_Fill,
-      color
-  });
+  fillScreen(color);
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif /*SEDHOM_DISPLAY_OS_H_*/

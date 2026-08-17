@@ -327,6 +327,26 @@ typedef struct
     Color_t color;
 }Circle_Data_t;
 ///////////////////////////////////////////////////////////////////////////
+// data type of  Pie_Data_t shape
+typedef struct 
+{
+    Coordinate_t coordinate;  
+    int Radius;               
+    uint16_t start_angle;     
+    uint16_t end_angle;      
+    uint8_t corners;          
+    Shape_filled_t Filled;    
+    Color_t color;           
+} Pie_Data_t;
+///////////////////////////////////////////////////////////////////////////
+typedef struct 
+{
+    Coordinate_t coordinate; 
+    Area_t Radius;             
+    Shape_filled_t Filled;    
+    Color_t color;           
+} Ellipse_Data_t;
+///////////////////////////////////////////////////////////////////////////
 // data type of  Triangle_Data_t shape
 typedef struct 
 {

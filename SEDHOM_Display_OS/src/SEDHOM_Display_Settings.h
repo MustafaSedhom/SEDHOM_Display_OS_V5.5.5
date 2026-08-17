@@ -15,9 +15,7 @@
 //*************************************************************************************************
 // include you lib driver here for TFT display
 //*************************************************************************************************
-////////////////////////////////////////
-#include <Adafruit_GFX.h>   
-#include <SPI.h>
+//////////////////////////////////////// 
 #include <SD.h>
 ///////////////////////////////////////
 // #include <UTFTGLUE.h>    
@@ -26,9 +24,7 @@
 ///////////////////////////////////////
 #include <TouchScreen.h>
 //////////////////////////////////////
-// #include <QRCodeGFX.h>
 //////////////////////////////////////
-#include <ArduinoJson.h>
 //////////////////////////////////////
 //============================================================================================================================================
 //*************************************************************************************************
@@ -42,7 +38,6 @@ MCUFRIEND_kbv Display;
 // #define LCD_RESET A4 // Can alternately just connect to Arduino's reset pin
 // static Adafruit_TFTLCD Display(LCD_CS, LCD_CD, LCD_WR, LCD_RD, LCD_RESET);
 ///////////////////////////////////////////////////
-// for Qrcode lib
 //////////////////////////////////////////////////
 // for touch
 #if defined(ESP32)
@@ -69,61 +64,33 @@ const int TS_LEFT = 954, TS_RT = 88, TS_TOP = 908, TS_BOT = 125;
 //*************************************************************************************************
 // define init_screen to prepare screen to draw shapes
 //*************************************************************************************************
-// #define init_Screen()                                    Display.InitLCD();
-#define init_Screen(Rotate_)                                 Display.begin(Display.readID());Display.setRotation(Rotate_);
-// #define init_Screen()                                    Display.begin(Display.readID());
+#define API_Init_Screen()                            Display.begin(Display.readID());
 //============================================================================================================================================
-//*************************************************************************************************
-// set Rotation of screen
-//*************************************************************************************************
-#define Rotate_screen(x_)                                    Display.setRotation(x_); 
 //============================================================================================================================================
 //*************************************************************************************************
 // define screen width and height (per pixels) like width = 320 && Height = 480
 //*************************************************************************************************
-#define Screen_height      480
-#define Screen_width       320
+#define API_Screen_height()                 480
+#define API_Screen_width()                  320
 //============================================================================================================================================
 //*************************************************************************************************
 // define Basic shapes for draw Icons & widgets & screens & windows and pages
 //*************************************************************************************************
-#define Fill_Rectangle(x_,y_,h_,w_,r_,color_)                  Display.fillRoundRect(x_,y_,h_,w_,r_,color_);
-#define Draw_Rectangle(x_,y_,h_,w_,r_,color_)                  Display.drawRoundRect(x_,y_,h_,w_,r_,color_);
-#define Fill_Circle(x_,y_,r_,color_)                           Display.fillCircle(x_,y_,r_,color_);
-#define Draw_Circle(x_,y_,r_,color_)                           Display.drawCircle(x_,y_,r_,color_);
-#define Fill_Triangle(x0_,y0_,x1_,y1_,x2_,y2_,color_)          Display.fillTriangle(x0_,y0_,x1_,y1_,x2_,y2_,color_);
-#define Draw_Triangle(x0_,y0_,x1_,y1_,x2_,y2_,color_)          Display.drawTriangle(x0_,y0_,x1_,y1_,x2_,y2_,color_);
-#define Draw_Line(x0_,y0_,x1_,y1_,color_)                      Display.drawLine(x0_,y0_,x1_,y1_,color_);
-#define Draw_Pixel(x_,y_,color_)                               Display.drawPixel(x_,y_,color_);
-#define Fill_Rotated_Rect(x_,y_,h_,w_,angle,color_)            Display.fillRotatedRect(x_,y_,h_,w_,angle,color_);
-#define Draw_Rotated_Rect(x_,y_,h_,w_,angle,color_)            Display.drawRotatedRect(x_,y_,h_,w_,angle,color_);
-#define Draw_Image_one_color(x_,y_,image_,w_,h_,color_)        Display.drawBitmap(x_,y_,image_,w_,h_,color_);
-#define Draw_Image_RGB(x_,y_,image_,w_,h_)                     Display.drawRGBBitmap(x_,y_,image_,w_,h_);
+//>>>> APIs
+#define API_Start_Write()                                        Display.startWrite()
+#define API_End_Write()                                          Display.endWrite()
+#define API_Invert_Display(__state__)                            Display.invertDisplay(__state__)
+#define API_Draw_Pixel(__x__,__y__,__color__)                    Display.drawPixel(__x__,__y__,__color__)
+#define API_Write_Pixel(__x__,__y__,__color__)                   Display.writePixel(__x__,__y__,__color__)
+#define API_Write_Fast_VLine(__x__,__y__,__h__,__color__)        Display.writeFastVLine(__x__,__y__,__h__,__color__)
+#define API_Write_Fast_HLine(__x__,__y__,__w__,__color__)        Display.writeFastHLine(__x__,__y__,__w__,__color__)
+#define API_Write_Fill_Rect(__x__,__y__,__w__,__h__,__color__)   Display.writeFillRect(__x__,__y__,__w__,__h__,__color__)
+#define API_Draw_Fast_VLine(__x__,__y__,__h__,__color__)         Display.drawFastVLine(__x__,__y__,__h__,__color__)
+#define API_Draw_Fast_HLine(__x__,__y__,__w__,__color__)         Display.drawFastHLine(__x__,__y__,__w__,__color__)
+#define API_Fill_Rect(__x__,__y__,__w__,__h__,__color__)         Display.fillRect(__x__,__y__,__w__,__h__,__color__)
+#define API_Fill_Screen(__color__)                               Display.fillScreen(__color__)
+#define API_Set_Rotation(__r__)                                  Display.setRotation(__r__)
 //============================================================================================================================================
-//*************************************************************************************************
-// define draw picture to display it on tft     
-//*************************************************************************************************
-// #define Draw_RGB_Picture(x_,y_,h_,w_,picture_array_)                        Display.drawRGBBitmap(x_, y_, picture_array_, w_, h_);
-// #define Draw_Single_Color_Picture(x_,y_,h_,w_,color_,picture_array_)        Display.drawBitmap(x_, y_, picture_array_, w_, h_, color_);
-//============================================================================================================================================
-//*************************************************************************************************
-// define draw string 
-//*************************************************************************************************
-// #define Text_Normal(x_,y_,size_,color_,txt_)     Display.setCursor(x_,y_);Display.setTextSize(size_);Display.setTextColor(color_);Display.print(txt_);
-#define Text_Driver(x_,y_,font_,color_,txt_)            Display.setCursor(x_,y_);Display.setFont(font_);Display.setTextColor(color_);Display.print(txt_);
-// #define Text_Add(str_)                           Display.print(str_);
-// #define Text_C(x,y,font,color,txt)         Display.setCursor(x,y);Display.setFont(font);Display.setText_CColor(color);Display.write(txt);
-// #define Text_C(x,y,size,color,txt)         Display.setText_CColor(color);Display.print(txt,x,y);
-//============================================================================================================================================
-//*************************************************************************************************
-// fill all screen with color
-//*************************************************************************************************
-// #define FillScreen(color_)                       Display.fillScreen(color_);
-//============================================================================================================================================
-//*************************************************************************************************
-// set Display Color 
-//*************************************************************************************************
-// #define Set_Color(r_,g_,b_)                      Display.color565(r_,g_,b_)
 //*************************************************************************************************
 // time to calc it
 #define wait_time(time_)                        delay(time_);   
