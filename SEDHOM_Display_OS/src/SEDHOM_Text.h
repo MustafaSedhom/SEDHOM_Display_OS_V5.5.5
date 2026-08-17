@@ -30,7 +30,7 @@ void SEDHOM_Text::Text_C(Coordinate_t coordinate, const GFXfont* font, Color_t c
     if (txt == nullptr) return;
     setCursor(coordinate.x, coordinate.y);
     setTextColor(color);
-    setFont(font);
+    Adafruit_GFX::setFont(font);
     setTextWrap(false);
     uint16_t len = strlen(txt);
     for (uint16_t i = 0; i < len; i++) 
@@ -43,7 +43,7 @@ void SEDHOM_Text::Text(Coordinate_t coordinate, const GFXfont* font, Color_t col
 {
     setCursor(coordinate.x, coordinate.y);
     setTextColor(color);
-    setFont(font);
+    Adafruit_GFX::setFont(font);
     setTextWrap(false);
     for (uint16_t i = 0; i < str.length(); i++) 
     {
@@ -58,7 +58,7 @@ void SEDHOM_Text::__Text_init_OS()
 void SEDHOM_Text::Text(Coordinate_t coordinate, Text_Data_t str)
 {
     setCursor(coordinate.x, coordinate.y);
-    setFont(str.txt_font);
+    Adafruit_GFX::setFont(str.txt_font);
     setTextColor(str.txt_color);
     setTextWrap(false);
     String txt_obj = String(str.txt);

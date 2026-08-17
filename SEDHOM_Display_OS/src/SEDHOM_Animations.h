@@ -29,7 +29,7 @@ class Text_Animator
 void Text_Animator::Change_Text_Color_Animation(Coordinate_t co, GFXfont* Font,int Animation_time, String txt)
 {
     interval = Animation_time ;
-    unsigned long time_now = Time.Calc_time_ms();
+    unsigned long time_now = Time.Now_Time();
 
     if (time_now - lastTime > Animation_time)
     {
@@ -45,7 +45,7 @@ void Text_Animator::Scrolling_Text_Animation(Icon_Data_t myIcon,GFXfont* Font,in
   static int dir = 1;   
   static int last_i = 0;
 
-  unsigned long now = Time.Calc_time_ms();
+  unsigned long now = Time.Now_Time();
 
   if (now - t > time_ms)
   {
@@ -90,14 +90,14 @@ void SEDHOM_Animations::Rotate_Rectangle_Animation(Rectangle_Data_t Rect,Color_t
   static int angle = 0;
   static int prev_angle = 0;
   static unsigned long t_1 = 0;
-  if (Time.Calc_time_ms() - t_1 > Animation_time_ms) 
+  if (Time.Now_Time() - t_1 > Animation_time_ms) 
   {
     Icon.Rotated_Rect({Rect.coordinate,Rect.area,Rect.Radius,Rect.Filled,erase_color}, angle);
     prev_angle = angle;
     angle += step;
     if (angle >= 360) angle = 0;
     Icon.Rotated_Rect(Rect, angle);
-    t_1 = Time.Calc_time_ms();
+    t_1 = Time.Now_Time();
   }
 }
 void SEDHOM_Animations::Rotate_Cube_Animation(Coordinate_t coordinate,int size,Color_t color,Color_t erase_color,int Animation_time_ms,int step)
@@ -106,7 +106,7 @@ void SEDHOM_Animations::Rotate_Cube_Animation(Coordinate_t coordinate,int size,C
   static int prev_angle = 0;
   static unsigned long t_cube = 0;
 
-  if (Time.Calc_time_ms() - t_cube >Animation_time_ms ) 
+  if (Time.Now_Time() - t_cube >Animation_time_ms ) 
   {
       Icon.Cube(coordinate,size,prev_angle,erase_color);
 
@@ -116,7 +116,7 @@ void SEDHOM_Animations::Rotate_Cube_Animation(Coordinate_t coordinate,int size,C
 
       if (angle >= 360)
           angle = 0;
-      t_cube = Time.Calc_time_ms();
+      t_cube = Time.Now_Time();
   }
 }
 //GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG

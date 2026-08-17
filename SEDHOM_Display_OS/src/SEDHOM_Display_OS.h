@@ -9,8 +9,6 @@
 #include "SEDHOM_Widgets.h"
 // include touch file
 #include "SEDHOM_Display_Touch.h"
-// include SD Lib
-#include "SEDHOM_SD_Card.h"
 // include Time lib to calc time we OS run
 #include "SEDHOM_Time.h"
 // include Data structure file to use Stack and Queue in my projects
@@ -25,8 +23,6 @@
 #include "SEDHOM_Colors.h"
 // include fonts file to use fonts in your projects
 #include "SEDHOM_Display_Fonts.h"
-// include arabic fonts file to use arabic fonts in your projects
-#include "SEDHOM_Arabic_Font.h"
 // include communications file to use communication protocols in your projects
 #include "SEDHOM_Comminucations.h"
 // include Animation file to use actions in your projects
@@ -124,15 +120,6 @@ class SEDHOM_Pages_OS : public SEDHOM_Pages
       SEDHOM_Pages::set_Pages_mode(OS.Mode());
     }
 };
-class SEDHOM_Communications_OS : public SEDHOM_Communications_UART
-{
-private:
-public:
-  SEDHOM_Communications_OS(SEDHOM_Display_OS & OS)
-  {
-
-  }
-};
 class SEDHOM_Time_OS : public SEDHOM_Time
 {
 private:
@@ -162,15 +149,6 @@ public:
   SEDHOM_Touch_OS(SEDHOM_Display_OS & OS)
   {
     // Touch.set_touch_mode(OS.Mode());
-  }
-};
-class SEDHOM_SD_Card_OS : public SEDHOM_SD_Card
-{
-private:
-public:
-  SEDHOM_SD_Card_OS(SEDHOM_Display_OS & OS)
-  {
-    // SD_Card.set_sd_card_mode(OS.Mode());
   }
 };
 class SEDHOM_Handling_Pages_OS : public SEDHOM_Handling_Pages

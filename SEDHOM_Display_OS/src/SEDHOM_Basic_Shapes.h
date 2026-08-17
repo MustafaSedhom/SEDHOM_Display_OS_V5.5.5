@@ -6,7 +6,7 @@
 #include "SEDHOM_Math.h"
 #include "SEDHOM_GUI_Core.h"
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-class SEDHOM_Basic_Shapes : public virtual SEDHOM_GUI_Core
+class SEDHOM_Basic_Shapes : private virtual SEDHOM_GUI_Core
 {
     private:
         
@@ -33,7 +33,8 @@ class SEDHOM_Basic_Shapes : public virtual SEDHOM_GUI_Core
         // 3D shapes
         void Cube(Coordinate_t coordinate,int size,int Degree_angle_View,Color_t color);
         // QR Code
-        void QR(QRCode_Data_t qr);
+        void QRCode(QRCode_Data_t qr);
+        void BarCode(BarCode_Data_t qr);
         
 };
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -256,9 +257,36 @@ void SEDHOM_Basic_Shapes::Ellipse(Ellipse_Data_t ellipse)
         break;
     }
 }
-void SEDHOM_Basic_Shapes::QR(QRCode_Data_t qr)
+void SEDHOM_Basic_Shapes::QRCode(QRCode_Data_t qr)
 {
   drawQRCode(qr.coordinate.x,qr.coordinate.y,qr.content.c_str(),qr.scale,qr.Background_color,qr.foreground_color);
+}
+void SEDHOM_Basic_Shapes::BarCode(BarCode_Data_t bar)
+{
+  BarcodeType type_barcode = BarcodeType::Unknown;
+  switch (bar.type)
+  {
+  case Barcode_Type_Unknown:
+    type_barcode = BarcodeType::Unknown;
+    break;
+  case Barcode_Type_EAN13:
+    type_barcode = BarcodeType::EAN13;
+    break;
+  case Barcode_Type_EAN8:
+    type_barcode = BarcodeType::EAN8;
+    break;
+  case Barcode_Type_UPCA:
+    type_barcode = BarcodeType::UPCA;
+    break;
+  case Barcode_Type_UPCE:
+    type_barcode = BarcodeType::UPCE;
+    break;
+  
+  default:
+      type_barcode = BarcodeType::Unknown;
+    break;
+  }
+  drawBarcode(bar.coordinate.x,bar.coordinate.y,bar.content.c_str(),bar.height,type_barcode,bar.scale,bar.show_digit,bar.Background_color,bar.foreground_color);
 }
 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 #endif // !SEDHOM_BASIC_SHAPES_H_

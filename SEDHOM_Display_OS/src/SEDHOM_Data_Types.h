@@ -47,6 +47,20 @@ class Dynamic : public SEDHOM_Dynamic_Data_Type
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 typedef enum 
 {
+    Time_Unit_Micros_Second,
+    Time_Unit_Millis_Second,
+    Time_Unit_Second,
+    Time_Unit_Minute,
+    Time_Unit_Hour,
+    Time_Unit_Day,
+    Time_Unit_Week,
+    Time_Unit_Month,
+    Time_Unit_Year,
+    Time_Unit_Count,
+}Time_Unit_t;
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+typedef enum 
+{
     Rotate_0_Degree,
     Rotate_90_Degree,
     Rotate_180_Degree,
@@ -335,6 +349,27 @@ typedef struct
     Color_t Background_color;
     Color_t foreground_color;
 }QRCode_Data_t;
+///////////////////////////////////////////////////////////////////////////
+typedef enum
+{
+    Barcode_Type_Unknown,
+    Barcode_Type_EAN13,
+    Barcode_Type_EAN8,
+    Barcode_Type_UPCA,
+    Barcode_Type_UPCE
+}Barcode_Type_t;
+///////////////////////////////////////////////////////////////////////////
+typedef struct 
+{
+    Coordinate_t coordinate;
+    String content;
+    uint8_t height;
+    uint8_t scale;
+    bool show_digit;
+    Barcode_Type_t type;
+    Color_t Background_color;
+    Color_t foreground_color;
+}BarCode_Data_t;
 ///////////////////////////////////////////////////////////////////////////
 // data type of  Pie_Data_t shape
 typedef struct 

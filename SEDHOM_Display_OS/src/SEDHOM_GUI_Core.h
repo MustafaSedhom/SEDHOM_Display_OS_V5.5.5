@@ -5,8 +5,8 @@
 #include "Imports/Adafruit_GFX_Library/Adafruit_GFX.h"
 #include "Imports/QRCodeGFX/src/QRCodeGFX.h"
 #include "Imports/BarcodeGFX/src/BarcodeGFX.h"
-// #include "Imports/U8g2_for_Adafruit_GFX/src/U8g2_for_Adafruit_GFX.h"
-// #include "Imports/U8g2_for_Adafruit_GFX/src/u8g2_fonts.h"
+#include "Imports/U8g2_for_Adafruit_GFX/src/U8g2_for_Adafruit_GFX.h"
+#include "Imports/U8g2_for_Adafruit_GFX/src/u8g2_fonts.h"
 //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 class SEDHOM_GUI_Core : public Adafruit_GFX
@@ -15,8 +15,9 @@ private:
 
 public:
     // Constructor
-    SEDHOM_GUI_Core(int16_t w = API_Screen_width(), int16_t h = API_Screen_height()) : Adafruit_GFX(w, h) {}
-
+    SEDHOM_GUI_Core(int16_t w = API_Screen_width(), int16_t h = API_Screen_height()) 
+    : Adafruit_GFX(w, h) {
+    }
     // Required Pure Virtual Function
     void drawPixel(int16_t x, int16_t y, uint16_t color) override {
         API_Draw_Pixel(x, y, color);

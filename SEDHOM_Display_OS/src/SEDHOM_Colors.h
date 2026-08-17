@@ -1,5 +1,5 @@
-#ifndef SEDHOM_COLORS
-#define SEDHOM_COLORS
+//{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+#pragma once
 //{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
 #include "SEDHOM_Display_Settings.h"
 #include "SEDHOM_Data_Types.h"
@@ -97,6 +97,7 @@ class SEDHOM_Colors
         Color_t Set_Color(Color_RGB_t color);
         Color_t Set_Color(uint16_t Hex_code); 
         Color_t Set_Color(String Hex_Html_color_code);
+        Color_t RGB_to_Gray(Color_RGB_t RGB_color);
 };
 //{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
 // colors
@@ -146,6 +147,12 @@ Color_t SEDHOM_Colors::Set_Color(String Html_Hex_color_code)
 
     return (Color_t)RGB565;
 }
-
+Color_t SEDHOM_Colors::RGB_to_Gray(Color_RGB_t RGB_color)
+{
+    uint8_t gray = (uint8_t)(((uint32_t)RGB_color.R * 77 + (uint32_t)RGB_color.G * 150 + (uint32_t)RGB_color.B * 29 + 128) >> 8);
+    uint16_t r5 = (gray >> 3) & 0x1F; 
+    uint16_t g6 = (gray >> 2) & 0x3F; 
+    uint16_t b5 = (gray >> 3) & 0x1F;
+    return (Color_t)((r5 << 11) | (g6 << 5) | b5);
+}
 //{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
-#endif // !SEDHOM_COLORS

@@ -69,7 +69,7 @@ int SEDHOM_Touch::get_Z_point()
 bool SEDHOM_Touch::onTap(Touch_Data_t pressed_space)
 {
   static unsigned long lastTapTime = 0;
-  unsigned long now = Time.Calc_time_ms();
+  unsigned long now = Time.Now_Time();
 
   if (now - lastTapTime < 100)     
       return false;
@@ -87,7 +87,7 @@ bool SEDHOM_Touch::Single_Pressed_Circle(Coordinate_t pressed_center,int Radius)
 }
 bool SEDHOM_Touch::Double_Pressed_Circle(Touch_State_t &state,Coordinate_t pressed_center,int Radius,int Time_ms_between_clicks)
 {
-    unsigned long currentTime = Time.Calc_time_ms();
+    unsigned long currentTime = Time.Now_Time();
 
     if (Single_Pressed_Circle(pressed_center,Radius))
     {
@@ -113,7 +113,7 @@ bool SEDHOM_Touch::Double_Pressed_Circle(Touch_State_t &state,Coordinate_t press
 }
 bool SEDHOM_Touch::Long_Pressed_Circle(Touch_State_t &state,Coordinate_t pressed_center,int Radius, int Time_ms_long_time)
 {
-    unsigned long currentTime = Time.Calc_time_ms();
+    unsigned long currentTime = Time.Now_Time();
 
     if (Single_Pressed_Circle(pressed_center,Radius))
     {
@@ -152,7 +152,7 @@ bool SEDHOM_Touch::Single_Pressed(Touch_Data_t pressed_space)
 }
 bool SEDHOM_Touch::Double_Pressed(Touch_State_t &state,Touch_Data_t pressed_space,int Time_ms_between_clicks)
 {
-    unsigned long currentTime = Time.Calc_time_ms();
+    unsigned long currentTime = Time.Now_Time();
 
     if (onTap(pressed_space))
     {
@@ -178,7 +178,7 @@ bool SEDHOM_Touch::Double_Pressed(Touch_State_t &state,Touch_Data_t pressed_spac
 }
 bool SEDHOM_Touch::Long_Pressed(Touch_State_t &state,Touch_Data_t pressed_space, int Time_ms_long_time)
 {
-    unsigned long currentTime = Time.Calc_time_ms();
+    unsigned long currentTime = Time.Now_Time();
 
     if (onTap(pressed_space))
     {
