@@ -16,7 +16,7 @@
 
 <br>
 
-<img src="images/SEDHOM.jpg" width="650" alt="SEDHOM Display OS">
+<img src="images/SEDHOM_png.png" width="300" alt="SEDHOM Display OS">
 
 <br><br>
 
@@ -785,7 +785,7 @@ Light_Mode
 
 ---
 
-# 🧰 Data Structures
+# 📊 Data Structures
 
 The library also exposes common data-structure concepts used by the project:
 
