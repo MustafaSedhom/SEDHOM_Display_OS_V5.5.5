@@ -648,7 +648,6 @@ void SEDHOM_Icons::Joy_Stick_Icon(Icon_Data_t Icon ,Coordinate_t thumb ,int thum
 void SEDHOM_Icons::Temperature_Meter_Icon(Icon_Data_t Icon,Color_t Border,int value,bool show_val_dashes)
 {
   Color_t color_dash =RED;
-  value = constrain(value, 0, 100);
   Circle({{Icon.coordinate.x+50/2,Icon.coordinate.y+150+25},50,Shape_Fill,Border});
   Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{50,150},5,Shape_Fill,Border});
   Rectangle({{Icon.coordinate.x+5,Icon.coordinate.y+5},{50-10,150},5,Shape_Fill,Icon.Background});
@@ -686,7 +685,6 @@ void SEDHOM_Icons::Tone_Icon(Icon_Data_t Icon,bool is_muted_or_not)
 void SEDHOM_Icons::Sound_value_Icon(Icon_Data_t Icon,int value,Color_t thickness_color,bool thickness_or_not)
 {
   int val = value;
-  value = constrain(value,0,100);
   value = map(value,0,100,150,0);
   Rectangle({{Icon.coordinate.x,Icon.coordinate.y},{50,150},40,Shape_Fill,thickness_or_not?thickness_color:Icon.color});
   Rectangle({{Icon.coordinate.x+5,Icon.coordinate.y+5},{50-10,150-10},40,Shape_Fill,Icon.Background});

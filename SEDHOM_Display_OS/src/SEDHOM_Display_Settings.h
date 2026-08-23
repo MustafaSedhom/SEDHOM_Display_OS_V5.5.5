@@ -1,150 +1,80 @@
-#ifndef  SEDHOM_DISPLAY_SETTING_H_
-#define  SEDHOM_DISPLAY_SETTING_H_
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-//                                       write Basic shapes in here and change heder file
 //============================================================================================================================================
-// I use functions like
-// 1-> var = map(var,x0,y0,x1,y1);
-// 2-> var = constrain(var,x,y);
-// 3-> var = sqrt(x);
-// 4-> sizeof(var); // in cPP and c we can use sizeof() to get the size of a variable or data type in bytes. It is a compile-time operator that returns the size of the operand in bytes. For example, sizeof(int) will return the size of an integer variable in bytes, which is typically 4 bytes on most platforms. Similarly, sizeof(var) will return the size of the variable var in bytes. This can be useful for memory management and understanding how much space a variable occupies in memory.
-
-// 5-> pinMode(pin,mode);
-// 6-> digitalWrite(pin,value);     // depends on mcu driver
-// 6-> var = digitalRead(pin);
-//*************************************************************************************************
-// include you lib driver here for TFT display
-//*************************************************************************************************
+#pragma once
+//============================================================================================================================================
+//============================================================================================================================================
+// MCU Settings (Board Settings)
+//============================================================================================================================================
+// include Driver Lib
+#include <Arduino.h>
+// Timers
+#define API_Micros_Function()                                  micros()   
+// Pins
+//>>>>> APIs
+#define API_MCU_Pin_Direction(__pin__,__mode__)                pinMode(__pin__, __mode__)      
+#define API_MCU_Pin_Read(__pin__)                              digitalRead(__pin__)      
+#define API_MCU_Pin_Write(__pin__,__mode__)                    digitalWrite(__pin__, __mode__)      
+#define API_MCU_Pin_Mode_INPUT                                0x0      
+#define API_MCU_Pin_Mode_OUTPUT                                0x1      
+#define API_MCU_Pin_Mode_INPUT_PULLUP                         0x2      
+#define API_MCU_Pin_Mode_INPUT_PULLDOWN                       0x2      
+//============================================================================================================================================
+// Display Settings
+//============================================================================================================================================
+// include Driver Lib
 #include <MCUFRIEND_kbv.h>
-///////////////////////////////////////
+// define APIs from driver
+#define API_Driver_Class_Name                                   MCUFRIEND_kbv      
+#define API_Display_Object_Name                                 SEDHOM_Display  
+#define API_Driver_Parameters                                   
+#define API_Make_New_Display                                    API_Driver_Class_Name  API_Display_Object_Name   API_Driver_Parameters
+// Make Object of Display Driver to Pass APIs
+API_Make_New_Display;
+//>>>>> APIs
+#define API_Init_Screen()                                        API_Display_Object_Name.begin(API_Display_Object_Name.readID());
+#define API_Screen_height()                                      API_Display_Object_Name.height() 
+#define API_Screen_width()                                       API_Display_Object_Name.width()
+#define API_Start_Write()                                        API_Display_Object_Name.startWrite()
+#define API_End_Write()                                          API_Display_Object_Name.endWrite()
+#define API_Invert_Display(__state__)                            API_Display_Object_Name.invertDisplay(__state__)
+#define API_Draw_Pixel(__x__,__y__,__color__)                    API_Display_Object_Name.drawPixel(__x__,__y__,__color__)
+#define API_Write_Pixel(__x__,__y__,__color__)                   API_Display_Object_Name.writePixel(__x__,__y__,__color__)
+#define API_Write_Fast_VLine(__x__,__y__,__h__,__color__)        API_Display_Object_Name.writeFastVLine(__x__,__y__,__h__,__color__)
+#define API_Write_Fast_HLine(__x__,__y__,__w__,__color__)        API_Display_Object_Name.writeFastHLine(__x__,__y__,__w__,__color__)
+#define API_Write_Fill_Rect(__x__,__y__,__w__,__h__,__color__)   API_Display_Object_Name.writeFillRect(__x__,__y__,__w__,__h__,__color__)
+#define API_Draw_Fast_VLine(__x__,__y__,__h__,__color__)         API_Display_Object_Name.drawFastVLine(__x__,__y__,__h__,__color__)
+#define API_Draw_Fast_HLine(__x__,__y__,__w__,__color__)         API_Display_Object_Name.drawFastHLine(__x__,__y__,__w__,__color__)
+#define API_Fill_Rect(__x__,__y__,__w__,__h__,__color__)         API_Display_Object_Name.fillRect(__x__,__y__,__w__,__h__,__color__)
+#define API_Fill_Screen(__color__)                               API_Display_Object_Name.fillScreen(__color__)
+#define API_Set_Rotation(__r__)                                  API_Display_Object_Name.setRotation(__r__)
+//============================================================================================================================================
+// Touch Settings
+//============================================================================================================================================
+// include Driver Lib
 #include <TouchScreen.h>
-//////////////////////////////////////
+// Pins
+#define YP A3  // must be an analog pin, use "An" notation!
+#define XM A2  // must be an analog pin, use "An" notation!
+#define YM 9   // can be a digital pin
+#define XP 8   // can be a digital pin
+// define APIs from driver
+#define API_Touch_Driver_Class_Name                      TouchScreen
+#define API_Touch_Point_Driver_Class_Name                 TSPoint
+#define API_Touch_Object_Name                            SEDHOM_Touch_Driver
+#define API_Touch_Driver_Parameters                      (XP, YP, XM, YM, 300)
+#define API_Make_New_Touch                               API_Touch_Driver_Class_Name  API_Touch_Object_Name  API_Touch_Driver_Parameters
+// Make Object of Touch Driver to Pass APIs
+API_Make_New_Touch;
+//>>>>> APIs
+#define API_Get_Touch_Point()                             API_Touch_Object_Name.getPoint()
+#define API_Set_Touch_Pins_Setting()                      API_MCU_Pin_Direction(YP, API_MCU_Pin_Mode_OUTPUT);API_MCU_Pin_Direction(XM, API_MCU_Pin_Mode_OUTPUT);API_MCU_Pin_Write(YP, 1);API_MCU_Pin_Write(XM, 1);
+// Calibration
+#define API_Touch_X_Raw_Left_Edge()                        954
+#define API_Touch_X_Raw_Right_Edge()                       88
+#define API_Touch_Y_Raw_Top_Edge()                         908
+#define API_Touch_Y_Raw_Bottom_Edge()                      125
+#define API_Touch_Pressure_Min()                           10
+#define API_Touch_Pressure_Max()                           1000
 //============================================================================================================================================
-//*************************************************************************************************
-// define your object for you Display here but you should name Display Like a do  
-//************************************************************************************************* 
-MCUFRIEND_kbv Display;
-///////////////////////////////////////////////////
-// for touch
-#if defined(ESP32)
-#define XM 34  
-#define XP 32
-#define YM 33
-#define YP 35
-#else
-  #define YP A3  // must be an analog pin, use "An" notation!
-  #define XM A2  // must be an analog pin, use "An" notation!
-  #define YM 9   // can be a digital pin
-  #define XP 8   // can be a digital pin
-#endif
-#define set_pins_for_touch()     pinMode(YP, OUTPUT);pinMode(XM, OUTPUT);digitalWrite(YP, HIGH);digitalWrite(XM, HIGH);
-// touch screen dimensions
-const int TS_LEFT = 954, TS_RT = 88, TS_TOP = 908, TS_BOT = 125;
-#define MINPRESSURE 10
-#define MAXPRESSURE 1000
-///////////////////////////////////////////////////
-//============================================================================================================================================
-//*************************************************************************************************
-// define init_screen to prepare screen to draw shapes
-//*************************************************************************************************
-#define API_Init_Screen()                                       Display.begin(Display.readID());
-//============================================================================================================================================
-//============================================================================================================================================
-//*************************************************************************************************
-// define screen width and height (per pixels) like width = 320 && Height = 480
-//*************************************************************************************************
-#define API_Screen_height()                                     480
-#define API_Screen_width()                                      320
-//============================================================================================================================================
-//*************************************************************************************************
-// define Basic shapes for draw Icons & widgets & screens & windows and pages
-//*************************************************************************************************
-//>>>> APIs
-#define API_Start_Write()                                        Display.startWrite()
-#define API_End_Write()                                          Display.endWrite()
-#define API_Invert_Display(__state__)                            Display.invertDisplay(__state__)
-#define API_Draw_Pixel(__x__,__y__,__color__)                    Display.drawPixel(__x__,__y__,__color__)
-#define API_Write_Pixel(__x__,__y__,__color__)                   Display.writePixel(__x__,__y__,__color__)
-#define API_Write_Fast_VLine(__x__,__y__,__h__,__color__)        Display.writeFastVLine(__x__,__y__,__h__,__color__)
-#define API_Write_Fast_HLine(__x__,__y__,__w__,__color__)        Display.writeFastHLine(__x__,__y__,__w__,__color__)
-#define API_Write_Fill_Rect(__x__,__y__,__w__,__h__,__color__)   Display.writeFillRect(__x__,__y__,__w__,__h__,__color__)
-#define API_Draw_Fast_VLine(__x__,__y__,__h__,__color__)         Display.drawFastVLine(__x__,__y__,__h__,__color__)
-#define API_Draw_Fast_HLine(__x__,__y__,__w__,__color__)         Display.drawFastHLine(__x__,__y__,__w__,__color__)
-#define API_Fill_Rect(__x__,__y__,__w__,__h__,__color__)         Display.fillRect(__x__,__y__,__w__,__h__,__color__)
-#define API_Fill_Screen(__color__)                               Display.fillScreen(__color__)
-#define API_Set_Rotation(__r__)                                  Display.setRotation(__r__)
-//============================================================================================================================================
-//*************************************************************************************************
-// time API
-#define API_Micros_Function()                                    micros();   
-//============================================================================================================================================
-
-// // Square function
-// template <typename T>
-// inline T sqr(T value) {
-//     return value * value;
-// }
-    // static long map(long x, long in_min, long in_max, long out_min, long out_max) {
-    //     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-    // }
-
-    // // Map function for float/double values
-    // template <typename T>
-    // static T map(T x, T in_min, T in_max, T out_min, T out_max) {
-    //     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-    // }
-// // Constrain integer values
-// static long constrain(long x, long lower, long upper) {
-//     if (x < lower) return lower;
-//     if (x > upper) return upper;
-//     return x;
-// }
-
-// // Constrain floating-point values
-// template <typename T>
-// static T constrain(T x, T lower, T upper) {
-//     if (x < lower) return lower;
-//     if (x > upper) return upper;
-//     return x;
-// }
-
-// template <typename T>
-// T sqrt_custom(T x) {
-//     if (x <= 0) return 0;
-
-//     T guess = x / 2;
-//     for (int i = 0; i < 20; ++i) {
-//         guess = 0.5 * (guess + x / guess);
-//     }
-
-//     return guess;
-// }
-
-// template <typename T>
-// inline T abs_custom(T value) {
-//     return (value < 0) ? -value : value;
-// }
-
-// template <typename T>
-// T pow_custom(T base, int exp) {
-//     T result = 1;
-//     bool negative = (exp < 0);
-//     if (negative) exp = -exp;
-
-//     while (exp) {
-//         if (exp & 1) result *= base;
-//         base *= base;
-//         exp >>= 1;
-//     }
-
-//     if (negative) return 1 / result;
-//     return result;
-// }
-//============================================================================================================================================
-//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#endif /*SEDHOM_DISPLAY_SETTING_H_*/
-
-
 
 
 
