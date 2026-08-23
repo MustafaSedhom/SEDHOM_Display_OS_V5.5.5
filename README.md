@@ -153,7 +153,6 @@ SEDHOM Display OS is a higher-level layer over display/graphics drivers. The cur
 #include <SEDHOM_Display_OS.h>
 
 SEDHOM_Display_OS GUI_OS;
-SEDHOM_Icon_OS GUI_Icons(GUI_OS);
 ```
 
 Then initialize the OS:
@@ -195,8 +194,8 @@ void setup()
     GUI_Icons.Circle({
         {160, 120},
         40,
-        Color_Blue,
-        Shape_Fill
+        Shape_Fill,
+        Color_Blue
     });
 }
 
@@ -796,7 +795,156 @@ Queue<Data_Type> queue;
 
 LinkedList<Data_Type> linkedlist;
 ```
+---
 
+# 🔧 Driver Configuration (MCU / Display / Touch)
+
+SEDHOM Display OS is built as a **GUI layer on top of a macro abstraction**, not on top of any specific driver library. Every low-level operation the OS needs — pin control, screen drawing, touch reading — is accessed through `API_...` macros defined in a single file:
+
+```text
+SEDHOM_Display_Settings.h
+```
+
+The GUI, widgets, icons, pages, and animations only ever call these `API_...` macros — never the underlying library directly. That means you can swap **any** of the three driver layers below without changing a single line of GUI code, as long as the macros are re-pointed correctly.
+
+`SEDHOM_Display_Settings.h` is split into three configuration blocks:
+
+```text
+1) MCU Settings     → pins, timers
+2) Display Settings → screen driver
+3) Touch Settings   → touch driver
+```
+
+---
+
+## 1️⃣ MCU Settings (Board / Pin Driver)
+
+Controls how the OS reads/writes pins and reads time — useful if you're porting to a different core (ESP32, STM32, etc.) with a different HAL.
+
+```cpp
+#include <Arduino.h>
+
+#define API_Micros_Function()                       micros()
+
+#define API_MCU_Pin_Direction(pin, mode)             pinMode(pin, mode)
+#define API_MCU_Pin_Read(pin)                        digitalRead(pin)
+#define API_MCU_Pin_Write(pin, mode)                 digitalWrite(pin, mode)
+
+#define API_MCU_Pin_Mode_INPUT                       0x0
+#define API_MCU_Pin_Mode_OUTPUT                      0x1
+#define API_MCU_Pin_Mode_INPUT_PULLUP                0x2
+#define API_MCU_Pin_Mode_INPUT_PULLDOWN              0x2
+```
+
+**To port to another MCU core:** replace `pinMode` / `digitalRead` / `digitalWrite` / `micros()` with your platform's equivalents. Everything above them (touch calibration, drawing, GUI) stays unchanged.
+
+---
+
+## 2️⃣ Display Settings (Screen Driver)
+
+Default configuration uses **MCUFRIEND_kbv**:
+
+```cpp
+#include <MCUFRIEND_kbv.h>
+
+#define API_Driver_Class_Name        MCUFRIEND_kbv
+#define API_Display_Object_Name      SEDHOM_Display
+#define API_Driver_Parameters        /* driver constructor args, if any */
+#define API_Make_New_Display         API_Driver_Class_Name  API_Display_Object_Name  API_Driver_Parameters
+
+API_Make_New_Display;
+```
+
+### Display API macros you can re-map:
+
+```cpp
+API_Init_Screen()
+API_Screen_height()
+API_Screen_width()
+API_Start_Write()
+API_End_Write()
+API_Invert_Display(state)
+API_Draw_Pixel(x, y, color)
+API_Write_Pixel(x, y, color)
+API_Write_Fast_VLine(x, y, h, color)
+API_Write_Fast_HLine(x, y, w, color)
+API_Write_Fill_Rect(x, y, w, h, color)
+API_Draw_Fast_VLine(x, y, h, color)
+API_Draw_Fast_HLine(x, y, w, color)
+API_Fill_Rect(x, y, w, h, color)
+API_Fill_Screen(color)
+API_Set_Rotation(r)
+```
+
+### To switch drivers (e.g. `Adafruit_ILI9341`, `TFT_eSPI`, `UTFT`, `Adafruit_ST7789`, etc.):
+
+1. Include the new driver's header instead of `MCUFRIEND_kbv.h`.
+2. Update `API_Driver_Class_Name`, `API_Display_Object_Name`, and `API_Driver_Parameters` to match the new driver's constructor.
+3. Re-map each macro above to the equivalent call on your new driver object.
+
+> 💡 Most **Adafruit-GFX–based** drivers (ILI9341, ST7735, ST7789, HX8357, etc.) already expose matching method names (`drawPixel`, `fillRect`, `fillScreen`, `setRotation`, `writeFastHLine`, etc.), so this is usually a simple 1:1 rename with little to no logic changes.
+
+---
+
+## 3️⃣ Touch Settings (Touch Driver)
+
+Default configuration uses the resistive **`TouchScreen` / `TSPoint`** library:
+
+```cpp
+#include <TouchScreen.h>
+
+#define Touch_Y_Positive_Pin     A3
+#define Touch_X_Negative_Pin     A2
+#define Touch_Y_Negative_Pin     9
+#define Touch_X_Positive_Pin     8
+
+#define API_Touch_Driver_Class_Name         TouchScreen
+#define API_Touch_Point_Driver_Class_Name   TSPoint
+#define API_Touch_Object_Name               SEDHOM_Touch_Driver
+#define API_Touch_Driver_Parameters         (Touch_X_Positive_Pin, Touch_Y_Positive_Pin, Touch_X_Negative_Pin, Touch_Y_Negative_Pin, 300)
+#define API_Make_New_Touch                  API_Touch_Driver_Class_Name  API_Touch_Object_Name  API_Touch_Driver_Parameters
+
+API_Make_New_Touch;
+```
+
+### Touch API macros you can re-map:
+
+```cpp
+API_Get_Touch_Point()
+API_Set_Touch_Pins_Setting()
+```
+
+### Touch calibration macros (adjust per your panel — driver-independent):
+
+```cpp
+API_Touch_X_Raw_Left_Edge()
+API_Touch_X_Raw_Right_Edge()
+API_Touch_Y_Raw_Top_Edge()
+API_Touch_Y_Raw_Bottom_Edge()
+API_Touch_Pressure_Min()
+API_Touch_Pressure_Max()
+```
+
+### To switch to a capacitive or other touch driver (e.g. `XPT2046_Touchscreen`, `FT6236`, `GT911`):
+
+1. Replace `#include <TouchScreen.h>` with your touch library's header.
+2. Update `API_Touch_Driver_Class_Name`, `API_Touch_Object_Name`, and `API_Touch_Driver_Parameters` (pins/I2C address/SPI config as required).
+3. Re-map `API_Get_Touch_Point()` to return an object exposing `.x`, `.y`, `.z` (or adjust the internal touch-handling code if the new driver's return type differs).
+4. Re-calibrate the four raw-edge macros and pressure thresholds for your panel.
+
+---
+
+## ✅ Summary
+
+| Layer | File Section | What You Swap | Macros to Re-map |
+|---|---|---|---|
+| **MCU / Pins** | MCU Settings | Pin & timing HAL | `API_Micros_Function`, `API_MCU_Pin_*` |
+| **Display** | Display Settings | Screen driver library | `API_Init_Screen`, `API_Draw_*`, `API_Fill_*`, `API_Set_Rotation`, `API_Screen_*` |
+| **Touch** | Touch Settings | Touch driver library | `API_Get_Touch_Point`, `API_Set_Touch_Pins_Setting`, calibration macros |
+
+Because every GUI, widget, and page function in SEDHOM Display OS is written **only against these macros**, changing a driver is a configuration change in `SEDHOM_Display_Settings.h` — not a rewrite of your application or the OS internals.
+
+---
 ---
 
 # 📸 Projects
