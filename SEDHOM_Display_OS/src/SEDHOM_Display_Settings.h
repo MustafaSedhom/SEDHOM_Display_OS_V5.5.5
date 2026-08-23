@@ -52,10 +52,10 @@ API_Make_New_Display;
 // include Driver Lib
 #include <TouchScreen.h>
 // Pins
-#define Touch_Y_Positive_Pin A3  // Y+ : reads Y coordinate (analog)
-#define Touch_X_Negative_Pin A2  // X- : reads X coordinate (analog)
-#define Touch_Y_Negative_Pin 9   // Y- : drive pin (digital)
-#define Touch_X_Positive_Pin 8   // X+ : drive pin (digital)  
+#define Touch_Y_Positive_Pin                             A3  // Y+ : reads Y coordinate (analog)
+#define Touch_X_Negative_Pin                             A2  // X- : reads X coordinate (analog)
+#define Touch_Y_Negative_Pin                             9   // Y- : drive pin (digital)
+#define Touch_X_Positive_Pin                             8   // X+ : drive pin (digital)  
 // define APIs from driver
 #define API_Touch_Driver_Class_Name                      TouchScreen
 #define API_Touch_Point_Driver_Class_Name                TSPoint
