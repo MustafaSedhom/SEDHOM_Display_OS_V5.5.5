@@ -66,7 +66,7 @@ API_Make_New_Display;
 API_Make_New_Touch;
 //>>>>> APIs
 #define API_Get_Touch_Point()                             API_Touch_Object_Name.getPoint()
-#define API_Set_Touch_Pins_Setting()                      API_MCU_Pin_Direction(YP, API_MCU_Pin_Mode_OUTPUT);API_MCU_Pin_Direction(XM, API_MCU_Pin_Mode_OUTPUT);API_MCU_Pin_Write(YP, 1);API_MCU_Pin_Write(XM, 1);
+#define API_Set_Touch_Pins_Setting()                      API_MCU_Pin_Direction(Touch_Y_Positive_Pin, API_MCU_Pin_Mode_OUTPUT);API_MCU_Pin_Direction(Touch_X_Negative_Pin, API_MCU_Pin_Mode_OUTPUT);API_MCU_Pin_Write(Touch_Y_Positive_Pin, 1);API_MCU_Pin_Write(Touch_X_Negative_Pin, 1);
 // Calibration
 #define API_Touch_X_Raw_Left_Edge()                       954
 #define API_Touch_X_Raw_Right_Edge()                      88
