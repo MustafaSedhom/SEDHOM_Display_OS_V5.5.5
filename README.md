@@ -182,15 +182,16 @@ SEDHOM_Icon_OS GUI_Icons(GUI_OS);
 
 void setup()
 {
+    ////////////////////////////
     GUI_OS.Init_OS();
-
+    ////////////////////////////
     GUI_Icons.Text(
         {20, 40},
-        FONT_BIG,
-        Color_White,
+        FONT_FREEMONOBOLDOBLIQUE_MEDIUM,
+        Color_Magenta,
         "Hello SEDHOM!"
     );
-
+    
     GUI_Icons.Circle({
         {160, 120},
         40,
@@ -203,7 +204,11 @@ void loop()
 {
 }
 ```
-
+```
+// this Quick code take this size on Arduino Uno and TFT 3.5 inch Shield
+RAM:   [====      ]  40.0% (used 819 bytes from 2048 bytes)
+Flash: [=======   ]  66.6% (used 21478 bytes from 32256 bytes)
+```
 The exact structure of shape data depends on the corresponding `*_Data_t` types used by the library.
 
 ---
