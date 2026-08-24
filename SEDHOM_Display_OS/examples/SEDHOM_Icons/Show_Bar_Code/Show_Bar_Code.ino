@@ -5,20 +5,23 @@
 SEDHOM_Display_OS GUI_OS;
 SEDHOM_Icons GUI_Icons;
 //.........................................................................
-//.........................................................................
 void setup() 
 {
   //#######################################################
    GUI_OS.Init_OS();
   //#######################################################
+  BarCode_Data_t barcode;
 
-  GUI_Icons.QRCode({   
-    {10, 10},
-      "my qr content",
-      2,
-      Color_Black,
-      Color_White,
-    });
+  barcode.coordinate = {50, 50};
+  barcode.content = "5901234123457";
+  barcode.height = 80;
+  barcode.scale = 2;
+  barcode.show_digit = true;
+  barcode.type = Barcode_Type_EAN13;
+  barcode.foreground_color = Color_Black;
+  barcode.Background_color = Color_White;
+
+  GUI_Icons.BarCode(barcode);
 }
 //.........................................................................
 void loop() 

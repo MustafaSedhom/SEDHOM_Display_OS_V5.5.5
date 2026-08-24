@@ -4,17 +4,8 @@
 //=======================================================================================
 // object from library
 SEDHOM_Display_OS OS;
-SEDHOM_Icon_OS Icons(OS);
-// SEDHOM_Widgets_OS Widgets(OS);
-// SEDHOM_Windows_OS Windows(OS);
-// SEDHOM_Pages_OS Pages(OS);
-// SEDHOM_Handling_Pages_OS Handling_pages(OS);
-// SEDHOM_Data_Structure_OS Handling_Data(OS);
-// SEDHOM_Touch_OS Touch(OS);
-// SEDHOM_Time_OS Time(OS);
-// SEDHOM_Communications_OS Call(OS);
-SEDHOM_Animations_OS Animates(OS);
-// SEDHOM_Math_OS Math(OS);
+SEDHOM_Icons Icons;
+SEDHOM_Animations Animates;
 //=======================================================================================
 Color_t effect_color;
 //======================================================================================= 

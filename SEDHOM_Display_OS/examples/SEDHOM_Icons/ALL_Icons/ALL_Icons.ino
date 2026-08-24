@@ -4,20 +4,11 @@
 //=======================================================================================
 // object from library
 SEDHOM_Display_OS OS;
-// SEDHOM_Shapes_OS Shapes(OS);
-// SEDHOM_Text_OS Texts(OS);
-// SEDHOM_Colors_OS colors(OS);
-// SEDHOM_Icon_OS Icons(OS);
-// SEDHOM_Widgets_OS Widgets(OS);
-// SEDHOM_Effects_OS effect(OS);
-// SEDHOM_Touch_OS Touch(OS);
-// SEDHOM_Time_OS Time(OS);
-// SEDHOM_Windows_OS Windows(OS);
-// SEDHOM_Data_Structure_OS Handling_Data(OS);
-// SEDHOM_Pages_OS Pages(OS);
-// SEDHOM_Handling_Pages_OS Handling_pages(OS);
-// SEDHOM_Communications_OS Call(OS);
-// SEDHOM_Animations_OS Animates(OS);
+SEDHOM_Icons Icons;
+SEDHOM_Animations Animates;
+SEDHOM_Pages Page;
+SEDHOM_Widgets Widgets;
+SEDHOM_Windows Windows;
 //=======================================================================================
 //=======================================================================================
 void setup()
@@ -79,10 +70,6 @@ void setup()
   // Icons.Text();
   ///////////////////////////////////////////////////////////////////////////////////////////////////
   // Widgets.ERROR_Massage_Widget("GR",OS.Mode());
-  // Windows.Full_Key_Board_Window(CYAN,OS.Mode());
-  ///////////////////////////////////////////////////////////////////////////////////////////////////
-  // Icons.fill_Square(10,10,200,50,Blue);
-  // Icons.fill_Triangle({{10,10},{10,30},{30,30},GREEN});
   ///////////////////////////////////////////////////////////////////////////////////////////////////
   // Shapes.Rectangle({{10,20},{50,50},10,Shape_Fill,Color_Green});
   // Icons.Right_Triangle(myIcon,{60,60},Shape_Fill);
