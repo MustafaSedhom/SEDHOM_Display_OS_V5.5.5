@@ -36,6 +36,8 @@ class SEDHOM_Time
 // Functions
 // =================================================
 //'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+constexpr double SEDHOM_Time::TIME_UNIT_FACTORS_SEC[];
+//'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 double SEDHOM_Time::Convert_Time(double value,Time_Unit_t Unit,Time_Unit_t Return_Unit = Time_Unit_Millis_Second)
 {
     if (
