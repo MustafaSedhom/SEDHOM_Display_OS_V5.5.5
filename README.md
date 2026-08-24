@@ -178,7 +178,7 @@ A minimal SEDHOM Display OS application can start with:
 #include <SEDHOM_Display_OS.h>
 
 SEDHOM_Display_OS GUI_OS;
-SEDHOM_Icon_OS GUI_Icons(GUI_OS);
+SEDHOM_Icons GUI_Icons;
 
 void setup()
 {
@@ -209,6 +209,50 @@ void loop()
 RAM:   [====      ]  40.0% (used 819 bytes from 2048 bytes)
 Flash: [=======   ]  66.6% (used 21478 bytes from 32256 bytes)
 ```
+```cpp
+#include <SEDHOM_Display_OS.h>
+
+SEDHOM_Display_OS GUI_OS;
+SEDHOM_Icons GUI_Icons;
+
+void setup()
+{
+    ////////////////////////////
+    GUI_OS.Init_OS();
+    ////////////////////////////
+    GUI_Icons.Text(
+        {10, 10},
+        FONT_SMALL ,
+        Color_Green,
+        "\n " + 
+        GUI_OS.SEDHOM_OS_Name() + 
+        " V" + 
+        GUI_OS.SEDHOM_OS_Version() + 
+        "\n \n " + 
+        GUI_OS.CPU_Type_OS() + 
+        "\n \n " + 
+        GUI_OS.CPU_Details_OS() +
+        "\n \n " + 
+        GUI_OS.Mather_Board_Type_OS() +
+        "\n \n " +  
+        GUI_OS.Mather_Board_Details_OS() + 
+        "\n \n " +
+        "Eng.Mustafa Shawky Sedhom" +
+        "\n \n " 
+        "Embedded SoftWare Engineer & Flutter Developer" 
+    );
+}
+
+void loop()
+{
+}
+```
+```
+// this Quick code take this size on Arduino Uno and TFT 3.5 inch Shield
+RAM:   [=====     ]  51.3% (used 1051 bytes from 2048 bytes)
+Flash: [======    ]  62.6% (used 20208 bytes from 32256 bytes)
+```
+
 The exact structure of shape data depends on the corresponding `*_Data_t` types used by the library.
 
 ---

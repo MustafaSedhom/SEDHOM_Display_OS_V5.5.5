@@ -47,6 +47,7 @@ private:
   bool showDigits = true;
   uint16_t backgroundColor = 0xFFFF;
   uint16_t barColor = 0x0000;
+
   bool padWithLeadingZeros = true;
 
   void drawPattern(const char *pattern, int16_t x, int16_t y, int16_t barHeight) const;

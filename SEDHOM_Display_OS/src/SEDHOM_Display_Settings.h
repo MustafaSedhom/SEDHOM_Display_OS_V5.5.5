@@ -6,6 +6,11 @@
 //============================================================================================================================================
 // include Driver Lib
 #include <Arduino.h>
+// MCU 
+#define API_MCU_Type_Name()                                   "Atmega328P"
+#define API_MCU_Type_Details()                                "-> $S:16MHz $F:32KB (0.5KB bootloader)\n -> $R:2KB $EER:1KB $core:1"
+#define API_Board_Type_Name()                                 "Arduino Uno"
+#define API_Board_Type_Details()                              "-> $GPIO:14 digital I/O (6 PWM), 6 analog\n -> $USB:Type-B $P:5V"
 // Timers
 #define API_Micros_Function()                                  micros()   
 // Pins

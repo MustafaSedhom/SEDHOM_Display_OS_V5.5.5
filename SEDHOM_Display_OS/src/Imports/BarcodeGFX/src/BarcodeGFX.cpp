@@ -348,6 +348,7 @@ uint16_t BarcodeGFX::getDigitHeight() const {
 
 void BarcodeGFX::drawDigit(char digit, int16_t x, int16_t y) const {
   if (showDigits) {
+    display.setFont(nullptr);
     display.setTextSize(scale);
     display.setTextColor(barColor);
     display.setCursor(x, y);

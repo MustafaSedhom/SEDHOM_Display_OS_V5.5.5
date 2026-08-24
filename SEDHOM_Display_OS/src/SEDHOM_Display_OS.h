@@ -1,6 +1,7 @@
 #ifndef SEDHOM_DISPLAY_OS_H_
 #define SEDHOM_DISPLAY_OS_H_
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#include "SEDHOM_Display_Settings.h"
 // include data types file to make easy to change data types
 #include "SEDHOM_Data_Types.h"
 // include icons file to draw icon and widgets
@@ -34,6 +35,10 @@
 // include controls file to use Buttons in your projects
 #include "SEDHOM_Controls.h"
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#define API_SEDHOM_Name()           "SEDHOM"
+#define API_SEDHOM_OS_Name()        "SEDHOM OS"
+#define API_SEDHOM_OS_Version()     "5.5.5"
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 class SEDHOM_Display_OS : private SEDHOM_GUI_Core
 {
   private:
@@ -50,6 +55,12 @@ class SEDHOM_Display_OS : private SEDHOM_GUI_Core
     Color_t Mode();
     Color_t Not_Mode();
     void Fill_Screen(Color_t color = Night_Mode);
+    String CPU_Type_OS();
+    String CPU_Details_OS();
+    String Mather_Board_Type_OS();
+    String Mather_Board_Details_OS();
+    String SEDHOM_OS_Version();
+    String SEDHOM_OS_Name();
     // define all variables
     Color_t Night_mode = Night_Mode ;
     Color_t Light_mode = Light_Mode ;
@@ -59,190 +70,6 @@ class SEDHOM_Display_OS : private SEDHOM_GUI_Core
     ROTATION_STATUS_t Rotate_270 = Rotate_270_Degree;
 };
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-class SEDHOM_Shapes_OS : public SEDHOM_Basic_Shapes
-{
-  public:
-    SEDHOM_Shapes_OS(SEDHOM_Display_OS & OS)
-    {
-    }
-
-};
-class SEDHOM_Text_OS : public SEDHOM_Text
-{
-  public:
-    SEDHOM_Text_OS(SEDHOM_Display_OS & OS)
-    {
-    }
-
-};
-class SEDHOM_Colors_OS : public SEDHOM_Colors
-{
-  public:
-    SEDHOM_Colors_OS(SEDHOM_Display_OS & OS)
-    {
-    }
-
-};
-class SEDHOM_Effects_OS : public SEDHOM_Effects
-{
-  public:
-    SEDHOM_Effects_OS(SEDHOM_Display_OS & OS)
-    {
-    }
-
-};
-class SEDHOM_Icon_OS : public SEDHOM_Icons
-{
-private:
-  
-public:
-  SEDHOM_Icon_OS(SEDHOM_Display_OS & OS)
-  {
-    SEDHOM_Icons::Set_Mode(OS.Mode());
-  }
-};
-class SEDHOM_Windows_OS : public SEDHOM_Windows
-{
-private:
-public:
-  SEDHOM_Windows_OS(SEDHOM_Display_OS & OS)
-  {
-   SEDHOM_Windows::set_windows_mode(OS.Mode());
-  }
-
-};
-class SEDHOM_Pages_OS : public SEDHOM_Pages
-{
-  private:
-  public:
-    SEDHOM_Pages_OS(SEDHOM_Display_OS & OS)
-    {
-      SEDHOM_Pages::set_Pages_mode(OS.Mode());
-    }
-};
-class SEDHOM_Time_OS : public SEDHOM_Time
-{
-private:
-public:
-  SEDHOM_Time_OS(SEDHOM_Display_OS & OS)
-  {
-    // Time.set_time_mode(OS.Mode());
-  }
-};
-class SEDHOM_Data_Structure_OS : public Stack<int>, public Queue<int>, public LinkedList<int>
-{
-private:
-public:
-  SEDHOM_Data_Structure_OS(SEDHOM_Display_OS & OS)
-  {
-    // Stack.set_stack_mode(OS.Mode());
-    // Queue.set_queue_mode(OS.Mode());
-  }
-  // Stack<int> Stack;
-  // Queue<int> Queue;
-  // LinkedList<int> LinkedList;
-};
-class SEDHOM_Touch_OS : public SEDHOM_Touch
-{
-private:
-public:
-  SEDHOM_Touch_OS(SEDHOM_Display_OS & OS)
-  {
-    // Touch.set_touch_mode(OS.Mode());
-  }
-};
-class SEDHOM_Handling_Pages_OS : public SEDHOM_Handling_Pages
-{
-private:
-public:
-  SEDHOM_Handling_Pages_OS(SEDHOM_Display_OS & OS)
-  {
-    // Handle_page.set_handling_pages_mode(OS.Mode());
-  }
-};
-class SEDHOM_Widgets_OS : public SEDHOM_Widgets
-{
-  private:
-  public:
-    SEDHOM_Widgets_OS(SEDHOM_Display_OS & OS)
-    {
-      SEDHOM_Widgets::set_widgets_mode(OS.Mode());
-    }
-};
-class SEDHOM_Animations_OS : public SEDHOM_Animations
-{
-  private:
-  public:
-  SEDHOM_Animations_OS(SEDHOM_Display_OS & OS)
-  {
-    // SEDHOM_Animations::set_widgets_mode(OS.Mode());
-  }
-
-};
-class SEDHOM_Math_OS : public SEDHOM_Math
-{
-public:
-  SEDHOM_Math_OS()
-  : SEDHOM_Math({SEDHOM_Display_OS::Screen_Width(), SEDHOM_Display_OS::Screen_Height()})
-  {
-  }
-
-  SEDHOM_Math_OS(SEDHOM_Display_OS & OS)
-  : SEDHOM_Math({SEDHOM_Display_OS::Screen_Width(), SEDHOM_Display_OS::Screen_Height()})
-  {
-  }
-};
-class SEDHOM_Rotation_OS : public SEDHOM_Rotations
-{
-private:
-public:
-  SEDHOM_Rotation_OS()
-  {
-
-  }
-  SEDHOM_Rotation_OS(SEDHOM_Display_OS & OS)
-  {
-
-  }
-};
-class SEDHOM_Control_OS : public SEDHOM_Controls , public Button
-{
-private:
-  /* data */
-public:
-  SEDHOM_Control_OS(SEDHOM_Display_OS & OS)
-  {
-
-  }
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 // define all functions
 void SEDHOM_Display_OS::Init_OS(ROTATION_STATUS_t Rotate,Color_t Mode)
@@ -283,6 +110,30 @@ Color_t SEDHOM_Display_OS::Not_Mode()
 void SEDHOM_Display_OS::Fill_Screen(Color_t color)
 {
   fillScreen(color);
+}
+String SEDHOM_Display_OS::SEDHOM_OS_Name()
+{
+  return String(API_SEDHOM_OS_Name()) ;
+}
+String SEDHOM_Display_OS::SEDHOM_OS_Version()
+{
+  return String(API_SEDHOM_OS_Version()) ;
+}
+String SEDHOM_Display_OS::CPU_Type_OS()
+{
+  return String(API_MCU_Type_Name()) ;
+}
+String SEDHOM_Display_OS::CPU_Details_OS()
+{
+  return String(API_MCU_Type_Details()) ;
+}
+String SEDHOM_Display_OS::Mather_Board_Type_OS()
+{
+  return String(API_Board_Type_Name()) ;
+}
+String SEDHOM_Display_OS::Mather_Board_Details_OS()
+{
+  return String(API_Board_Type_Details()) ;
 }
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #endif /*SEDHOM_DISPLAY_OS_H_*/
