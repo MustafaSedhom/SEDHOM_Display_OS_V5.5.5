@@ -24,8 +24,6 @@
 #include "SEDHOM_Colors.h"
 // include fonts file to use fonts in your projects
 #include "SEDHOM_Display_Fonts.h"
-// include communications file to use communication protocols in your projects
-#include "SEDHOM_Comminucations.h"
 // include Animation file to use actions in your projects
 #include "SEDHOM_Animations.h"
 // include math file to use math equations in your projects

@@ -133,9 +133,9 @@ void SEDHOM_Widgets::Drawer_Widget(String Drawer_name,bool show_exit_icon ,Color
   #define Icon_color Color_Blue
   Icons.Control_Icon({{60,125},Icon_color,Drawer_color});
   Icons.Divider({{pos_x+25,pos_y+170},Drawer_border_color,Drawer_color},VERTICAL,100,2);
-  Icons.Home_Icon({{50,190},Icon_color,Drawer_color});
-  Icons.Divider({{pos_x+25,pos_y+255},Drawer_border_color,Drawer_color},VERTICAL,100,2);
-  Icons.Setting_Icon({{90,280},Icon_color,Drawer_color});
+  Icons.Home_Icon({{50,180},Icon_color,Drawer_color});
+  Icons.Divider({{pos_x+25,pos_y+240},Drawer_border_color,Drawer_color},VERTICAL,100,2);
+  Icons.Setting_Icon({{50,250},Icon_color,Drawer_color});
 }
 void SEDHOM_Widgets::Delete_Drawer_Widget()
 {
